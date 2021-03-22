@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Inicio
+Route::get('/',[InicioCtrl::class,'inicio'])->name("inicio");
+
+// Rutas protegidas
+Route::group(['middleware'=>'auth'],function(){
+
+    // Validación de administrador
+    if ( Auth::check() && !Auth::user()->administrador ) {
+        back();
+    }
+
+    // Inventario
+
+    // Ordenes de compra
+
+    // Ofertas
+
+    // Combos
+
+    // Salir
+    Route::get("/salir",function (){
+        Auth::logout();
+        return redirect("inicio");
+    });
 });
