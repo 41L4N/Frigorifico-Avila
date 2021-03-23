@@ -9,6 +9,6 @@ class InicioCtrl extends Controller
 
     // Inicio
     public function inicio(){
-        return view("welcome");
+        return view("inicio");
     }
 }
