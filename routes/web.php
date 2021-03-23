@@ -23,13 +23,8 @@ Route::get('/',[InicioCtrl::class,'inicio'])->name("inicio");
 // Perfil web
 Route::prefix('')->group(function(){
 
-    // Validación si ya existe usuario
-    if(Auth::check()){
-        return redirect()->route('usuario');
-    }
-
     // Vista de sesión
-    Route::view('/{seccion}','usuarios.sesion')
+    Route::get('/{seccion}',[UsuarioCtrl::class,'sesion'])
     ->where('seccion','(registro|ingresar|recuperar-clave|renovar-clave)')
     ->name('sesion');
 
@@ -53,12 +48,12 @@ Route::group(['middleware'=>'auth'],function(){
     Route::prefix($n='usuario')->name($n)->group(function(){
 
         // Perfil
-        Route::get('/',[UsuarioCtrl::class,'perfil'])->name('');
+        Route::get('/',[UsuarioCtrl::class,'usuario'])->name('');
 
         // Salir
         Route::get("/salir",function (){
             Auth::logout();
-            return redirect("inicio");
+            return redirect()->route("inicio");
         })->name('salir');
     });
 
