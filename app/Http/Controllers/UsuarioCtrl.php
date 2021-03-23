@@ -10,14 +10,16 @@ class UsuarioCtrl extends Controller
 
     // Sesion
     public function sesion(){
-        if (!Auth::check()) {
-            return back();
+        if (Auth::check()) {
+            return redirect()->route('usuario');
         }
-        return redirect('usuario');
+        else {
+            return view('usuarios.sesion');
+        }
     }
 
-    // Ingresar
-    public function ingresar(Request $rq){
+    // Ingreso
+    public function ingreso(Request $rq){
 
         // Validación
 

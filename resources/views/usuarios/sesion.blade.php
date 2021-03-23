@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = str_replace("-", " ", ucfirst( $nombreRuta = Request::route('seccion') ) );
+    $tituloMD = __('textos.formularios.titulos.'. $seccionRuta = Request::route('seccion'));
 @endphp
 
 {{-- Estilos --}}
@@ -50,27 +50,26 @@
 
         {{-- Formulario --}}
         <div class="d-flex align-items-center justify-content-center cont-form-sesion">
-
-            <form action="/{{$nombreRuta}}" method="POST" class="w-100">
+            <form action="/{{$seccionRuta}}" method="POST" class="w-100">
                 @csrf
     
                 {{-- Titulo --}}
-                <div class="titulo-form">{{$tituloMD}}</div>
+                <div class="titulo-form">{{ $tituloMD }}</div>
     
-                @switch($nombreRuta)
+                @switch($seccionRuta)
     
                     {{-- Registro --}}
                     @case('registro')
                         @include('usuarios.campos-basicos',$campos=["claves"])
                     @break
     
-                    {{-- Ingresar --}}
-                    @case('ingresar')
+                    {{-- Ingreso --}}
+                    @case('ingreso')
     
-                        {{-- Correo --}}
+                        {{-- Email --}}
                         <div class="fila-form">
                             <div>
-                                <label>Correo</label>
+                                <label>{{__('textos.formularios.etiquetas.email')}}</label>
                                 <input type="email" class="form-control" name="email" autofocus required>
                             </div>
                         </div>
@@ -78,43 +77,41 @@
                         {{-- Clave --}}
                         <div class="fila-form">
                             <div>
-                                <label>Clave</label>
+                                <label>{{__('textos.formularios.etiquetas.clave')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
     
                         {{-- Enlace --}}
                         <div class="fila-form">
-                            <div>
-                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">Recuperar clave</a>
-                            </div>
+                            <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.formularios.enlaces.recuperar_clave')}}</a>
                         </div>
                     @break
     
                     {{-- Recuperar --}}
-                    @case("recuperar-clave")
+                    @case("recuperacion-clave")
     
-                        {{-- Correo --}}
+                        {{-- Email --}}
                         <div class="fila-form">
                             <div>
-                                <label>Correo</label>
+                                <label>{{__('textos.formularios.etiquetas.email')}}</label>
                                 <input type="email" class="form-control" name="email" autofocus required>
                             </div>
                         </div>
                     @break
     
                     {{-- Renovar clave --}}
-                    @case("renovar-clave")
+                    @case("renovacion-clave")
     
                         {{-- Clave y validacion --}}
                         {{-- <input type="hidden" value="{{Route::current()->parameters('codigo')["codigo"]}}" name="codigo"> --}}
                         <div class="fila-form">
                             <div>
-                                <label>Clave</label>
+                                <label>{{__('textos.formularios.etiquetas.clave')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                             <div>
-                                <label>Repetir clave</label>
+                                <label>{{__('textos.formularios.etiquetas.confirmar_clave')}}</label>
                                 <input type="password" class="form-control" name="password2" minlength="8" maxlength="15" required>
                             </div>
                         </div>
@@ -123,7 +120,7 @@
 
                 {{-- Botones --}}
                 <div class="btns-form">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary">{{__('textos.formularios.botones.enviar')}}</button>
                 </div>
             </form>
         </div>
