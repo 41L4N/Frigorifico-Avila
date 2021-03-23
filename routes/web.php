@@ -30,13 +30,13 @@ Route::prefix('')->group(function(){
 
     // Vista de sesión
     Route::view('/{seccion}','usuarios.sesion')
-    ->where('seccion','(registro|ingreso|recuperar-clave|renovar-clave)')
+    ->where('seccion','(registro|ingresar|recuperar-clave|renovar-clave)')
     ->name('sesion');
 
     // Registro
     Route::post('/registro',[UsuarioCtrl::class,'guardar']);
-    // Ingreso
-    Route::post('/ingreso',[UsuarioCtrl::class,'ingresar']);
+    // Ingresar
+    Route::post('/ingresar',[UsuarioCtrl::class,'ingresar']);
     // Recuperar clave
     Route::post('/recuperar-clave',[UsuarioCtrl::class,'recuperarClave'])->name('recuperar-clave');
     // Renovar clave

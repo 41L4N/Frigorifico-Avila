@@ -12,15 +12,14 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(){
 
         // Administrador
         $u = new Usuario;
         $u->nombre = "Open";
         $u->apellido = "Skies";
-        $u->correo = "desarrolloweb@openskie.com";
-        $u->clave = bcrypt("000000000000000");
+        $u->email = "desarrolloweb@openskie.com";
+        $u->password = bcrypt("000000000000000");
         $u->save();
     }
 }

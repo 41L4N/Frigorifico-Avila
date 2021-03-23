@@ -1,4 +1,54 @@
+/* Variables */
+:root {
+
+    /* Colores de fondo, letra y transparencias */
+    --c-1: #060d37;
+    --c-letra-c-1: white;
+    --c-2: #0a3e5a;
+    --c-letra-c-2: white;
+    --transparencia-c-2: rgba(10,62,90,.75);
+    --c-3: #4facfe;
+    --c-letra-c-3: black;
+
+    /* Plantilla */
+    --c-plantilla: var(--c-2);
+    --t-c-plantilla: var(--transparencia-c-2);
+    --c-l-plantilla: white;
+
+    /* Variaciones */
+    /* Activo */
+    --c-activo: var(--c-1);
+    --c-letra-c-activo: var(--c-letra-c-1);
+    /* Enfoque (focus) */
+    --c-enfoque: var(--c-1);
+    --c-letra-c-enfoque: var(--c-letra-c-1);
+    /* Desenfoque (blur) */
+    --c-desenfoque: grey;
+    --c-letra-c-desenfoque: white;
+}
+
+/* Menú superior */
+.menu-s {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    background: var(--c-plantilla);
+    color: var(--c-l-plantilla);
+}
+
 /* Contenido */
 .contenido {
-    min-height: 100vh;
+    
+}
+
+/* Pie de pagina */
+.pie-pagina {
+    background: var(--c-plantilla);
+    color: var(--c-l-plantilla);
+}
+
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+    
 }

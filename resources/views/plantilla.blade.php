@@ -47,8 +47,28 @@
         <script src="{{asset("/js/bootstrap/bootstrap.min.js")}}"></script>
     </head>
     <body>
-        <div class="container contenido">
-            @yield('contenido')
+
+        {{-- Contenedor principal --}}
+        <div class="d-flex flex-column min-vh-100">
+
+            {{-- Menú superior --}}
+            <div class="menu-s">
+                <div class="container">
+                    Menú superior
+                </div>
+            </div>
+
+            {{-- Contenido --}}
+            <div class="container contenido d-flex justify-content-center flex-fill">
+                @yield('contenido')
+            </div>
+        </div>
+
+        {{-- Pie de página --}}
+        <div class="pie-pagina">
+            <div class="container">
+                Pie de página
+            </div>
         </div>
     </body>
 </html>

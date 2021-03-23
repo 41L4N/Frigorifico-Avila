@@ -8,101 +8,125 @@
 
 {{-- Estilos --}}
 @section('estilos')
-<link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
     <style>
-        .form-sesion {
-            width: 100%;
-            max-width: 750px;
-            margin: 50px 15px;
-            padding: 50px;
-            background: rgba(0,0,0,0.8);
-            color: white;
+
+        /* Imagen */
+        .cont-img-sesion, .cont-form-sesion {
+            width: 50%;
         }
-        .form-sesion h3 { margin-bottom: 50px; }
+        .cont-img-sesion img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Formulario */
+        .cont-form-sesion {
+            color: white;
+            background: rgba(0,0,0,0.8);
+            padding: 5%;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 768px) {
+            .cont-img-sesion, .cont-form-sesion {
+                width: 100%;
+            }
+        }
     </style>
 @endsection
 
 {{-- Contenido --}}
 @section('contenido')
 
-    <div class="d-flex justify-content-center align-items-center min-vh-100">
+    {{-- Contenedor --}}
+    <div class="d-flex flex-wrap w-100">
+
+        {{-- Imagen --}}
+        <div class="cont-img-sesion">
+            <img src="{{asset('/imgs/sesion.jpg')}}" alt="{{config('app.name')}}">
+        </div>
 
         {{-- Formulario --}}
-        <form action="/{{$nombreRuta}}" method="POST" class="form-sesion">
-            @csrf
+        <div class="d-flex align-items-center justify-content-center cont-form-sesion">
 
-            {{-- Titulo --}}
-            <h3>{{$tituloMD}}</h3>
-
-            @switch($nombreRuta)
-
-                {{-- Registro --}}
-                @case('registro')
-                    @include('usuarios.campos-basicos',$campos=["claves"])
-                @break
-
-                {{-- Ingreso --}}
-                @case('ingreso')
-
-                    {{-- Correo --}}
-                    <div class="fila-form">
-                        <div>
-                            <label>Correo</label>
-                            <input type="email" class="form-control" name="correo" autofocus required>
+            <form action="/{{$nombreRuta}}" method="POST" class="w-100">
+                @csrf
+    
+                {{-- Titulo --}}
+                <div class="titulo-form">{{$tituloMD}}</div>
+    
+                @switch($nombreRuta)
+    
+                    {{-- Registro --}}
+                    @case('registro')
+                        @include('usuarios.campos-basicos',$campos=["claves"])
+                    @break
+    
+                    {{-- Ingresar --}}
+                    @case('ingresar')
+    
+                        {{-- Correo --}}
+                        <div class="fila-form">
+                            <div>
+                                <label>Correo</label>
+                                <input type="email" class="form-control" name="email" autofocus required>
+                            </div>
                         </div>
-                    </div>
-
-                    {{-- Clave --}}
-                    <div class="fila-form">
-                        <div>
-                            <label>Clave</label>
-                            <input type="password" class="form-control" name="clave" minlength="8" maxlength="15" required>
+    
+                        {{-- Clave --}}
+                        <div class="fila-form">
+                            <div>
+                                <label>Clave</label>
+                                <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
+                            </div>
                         </div>
-                    </div>
-
-                    {{-- Enlace --}}
-                    <div class="fila-form">
-                        <div>
-                            <a href="" data-toggle="modal" data-target="#vtnRecuperar">Recuperar clave</a>
+    
+                        {{-- Enlace --}}
+                        <div class="fila-form">
+                            <div>
+                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">Recuperar clave</a>
+                            </div>
                         </div>
-                    </div>
-                @break
-
-                {{-- Recuperar --}}
-                @case("recuperar-clave")
-
-                    {{-- Correo --}}
-                    <div class="fila-form">
-                        <div>
-                            <label>Correo</label>
-                            <input type="email" class="form-control" name="correo" autofocus required>
+                    @break
+    
+                    {{-- Recuperar --}}
+                    @case("recuperar-clave")
+    
+                        {{-- Correo --}}
+                        <div class="fila-form">
+                            <div>
+                                <label>Correo</label>
+                                <input type="email" class="form-control" name="email" autofocus required>
+                            </div>
                         </div>
-                    </div>
-                @break
-
-                {{-- Renovar clave --}}
-                @case("renovar-clave")
-
-                    {{-- Clave y validacion --}}
-                    {{-- <input type="hidden" value="{{Route::current()->parameters('codigo')["codigo"]}}" name="codigo"> --}}
-                    <div class="fila-form">
-                        <div>
-                            <label>Clave</label>
-                            <input type="password" class="form-control" name="clave" minlength="8" maxlength="15" required>
+                    @break
+    
+                    {{-- Renovar clave --}}
+                    @case("renovar-clave")
+    
+                        {{-- Clave y validacion --}}
+                        {{-- <input type="hidden" value="{{Route::current()->parameters('codigo')["codigo"]}}" name="codigo"> --}}
+                        <div class="fila-form">
+                            <div>
+                                <label>Clave</label>
+                                <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
+                            </div>
+                            <div>
+                                <label>Repetir clave</label>
+                                <input type="password" class="form-control" name="password2" minlength="8" maxlength="15" required>
+                            </div>
                         </div>
-                        <div>
-                            <label>Repetir clave</label>
-                            <input type="password" class="form-control" name="clave2" minlength="8" maxlength="15" required>
-                        </div>
-                    </div>
-                @break
-            @endswitch
+                    @break
+                @endswitch
 
-            {{-- Botones --}}
-            <div class="btns-form">
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
-        </form>
+                {{-- Botones --}}
+                <div class="btns-form">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     {{-- Ventana modal para recuperar clave --}}
@@ -116,7 +140,7 @@
                 </div>
                 <div class="modal-body">
                     Email
-                    <input type="email" name="correo" class="form-control" maxlength="100" required>
+                    <input type="email" name="email" class="form-control" maxlength="100" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

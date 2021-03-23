@@ -1,0 +1,75 @@
+/* Titulos */
+.titulo-form {
+    font-size: 3.5vh;
+    margin-bottom: .75em;
+}
+
+/* Subtitulos */
+.subtitulo-form:not(:first-of-type) {
+    margin-top: 50px;
+}
+.subtitulo-form-2:not(:first-of-type) {
+    margin-top: 25px;
+}
+
+/* Fila */
+.fila-form {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
+.fila-form:not(:last-of-type) {
+    margin-bottom: 12.5px;
+}
+.fila-form > * {
+    width: 100%;
+}
+.fila-form > *:not(:last-child) {
+    margin-right: 12.5px;
+}
+
+/* Campo */
+/* Icono */
+.fila-form i {
+    margin-right: 5px;
+}
+/* Titulo */
+.fila-form label {
+    margin: 0px;
+}
+
+/* Input tel sin flechitas feas */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Textarea */
+.fila-form textarea {
+    min-height: 100px;
+    max-height: 250px;
+}
+
+/* Botones */
+.btns-form {
+    margin-top: 2.5rem;
+    text-align: right;
+}
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+    .fila-form {
+        flex-direction: column;
+    }
+    .fila-form {
+        margin-bottom: 0px !important;
+    }
+    .fila-form > * {
+        margin-bottom: 12.5px;
+    }
+}
