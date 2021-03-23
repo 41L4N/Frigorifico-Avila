@@ -60,36 +60,42 @@
     
                     {{-- Registro --}}
                     @case('registro')
-                        @include('usuarios.campos-basicos',$campos=["claves"])
+                        @include('usuarios.campos-basicos',$campos=["contraseñas"])
                     @break
     
                     {{-- Ingreso --}}
                     @case('ingreso')
+
+                        @if($errors->any())
+                            {{ implode('', $errors->all('<div>:message</div>')) }}
+                        @endif
     
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
                                 <label>{{__('textos.formularios.etiquetas.email')}}</label>
-                                <input type="email" class="form-control" name="email" autofocus required>
+                                <input type="email" class="form-control" name="email" maxlength="75" autofocus required>
                             </div>
                         </div>
     
-                        {{-- Clave --}}
+                        {{-- Contraseña --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.clave')}}</label>
+                                <label>{{__('textos.formularios.etiquetas.contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
     
                         {{-- Enlace --}}
                         <div class="fila-form">
-                            <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.formularios.enlaces.recuperar_clave')}}</a>
+                            <div>
+                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.formularios.enlaces.recuperar-contraseña')}}</a>
+                            </div>
                         </div>
                     @break
     
                     {{-- Recuperar --}}
-                    @case("recuperacion-clave")
+                    @case("recuperacion-contraseña")
     
                         {{-- Email --}}
                         <div class="fila-form">
@@ -100,18 +106,18 @@
                         </div>
                     @break
     
-                    {{-- Renovar clave --}}
-                    @case("renovacion-clave")
+                    {{-- Renovar contraseña --}}
+                    @case("renovacion-contraseña")
     
-                        {{-- Clave y validacion --}}
+                        {{-- Contraseña y validacion --}}
                         {{-- <input type="hidden" value="{{Route::current()->parameters('codigo')["codigo"]}}" name="codigo"> --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.clave')}}</label>
+                                <label>{{__('textos.formularios.etiquetas.contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.confirmar_clave')}}</label>
+                                <label>{{__('textos.formularios.etiquetas.confirmar-contraseña')}}</label>
                                 <input type="password" class="form-control" name="password2" minlength="8" maxlength="15" required>
                             </div>
                         </div>
@@ -126,22 +132,22 @@
         </div>
     </div>
 
-    {{-- Ventana modal para recuperar clave --}}
+    {{-- Ventana modal para recuperar contraseña --}}
     <div class="modal fade" id="vtnRecuperar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">Recuperar</h5>
+                    <h5 class="modal-title">{{__('textos.formularios.titulos.recuperar-contraseña')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    Email
-                    <input type="email" name="email" class="form-control" maxlength="100" required>
+                    {{__('textos.formularios.etiquetas.email')}}
+                    <input type="email" name="email" class="form-control" maxlength="75" required>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary">Enviar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.formularios.botones.cancelar')}}</button>
+                    <button class="btn btn-primary">{{__('textos.formularios.botones.enviar')}}</button>
                 </div>
             </form>
         </div>

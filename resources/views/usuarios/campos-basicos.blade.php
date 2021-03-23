@@ -1,14 +1,14 @@
-{{-- Contenido --}}
+{{-- Id --}}
 @if (in_array("id",$campos))
     <input type="hidden" name="id">
 @endif
 
-{{-- Nombre y Apellido --}}
+{{-- Datos personales --}}
+{{-- Subtitulo --}}
 @if (in_array("subtitulos",$campos))
     <h4 class="subtitulo-campos-usuario">{{__('textos.formularios.subtitulos.datos_personales')}}</h4>
 @endif
-
-{{-- Nombres --}}
+{{-- Nombre y apellido --}}
 <div class="fila-form">
     <div>
         <label>{{__('textos.formularios.etiquetas.nombre')}}</label>
@@ -18,14 +18,12 @@
         <label>{{__('textos.formularios.etiquetas.apellido')}}</label>
         <input type="text" name="apellido" class="form-control" maxlength="50" required>
     </div>
-    
 </div>
-
 {{-- Email y teléfono --}}
 <div class="fila-form">
     <div>
         <label>{{__('textos.formularios.etiquetas.email')}}</label>
-        <input type="email" name="email" class="form-control" maxlength="50" required>
+        <input type="email" name="email" class="form-control" maxlength="75" required>
     </div>
     @if (in_array("telf",$campos))
         <div>
@@ -38,25 +36,27 @@
     @endif
 </div>
 
-{{-- Claves --}}
-@if (in_array("claves",$campos))
-    @if (in_array("subtitulos",$campos))
-        <h4 class="subtitulo-campos-usuario">{{__('textos.formularios.subtitulos.seguridad')}}</h4>
-    @endif
-    @if (in_array("cambiar_claves",$campos))
-        <label class="cursor-pointer"> <input type="checkbox" name="claves" onchange='claves.disabled = !claves.disabled'>
-            {{__('textos.formularios.etiquetas.cambiar_clave')}}
+{{-- Seguridad --}}
+{{-- Subtitulo --}}
+@if (in_array("subtitulos",$campos))
+    <h4 class="subtitulo-campos-usuario">{{__('textos.formularios.subtitulos.seguridad')}}</h4>
+@endif
+{{-- Contraseñas --}}
+@if (in_array("contraseñas",$campos))
+    @if (in_array("cambiar_contraseñas",$campos))
+        <label class="cursor-pointer"> <input type="checkbox" name="contraseñas" onchange='contraseñas.disabled = !contraseñas.disabled'>
+            {{__('textos.formularios.etiquetas.cambiar_contraseña')}}
         </label>
     @endif
-    <fieldset id="claves" @if (in_array("cambiar_claves",$campos)) disabled @endif>
+    <fieldset id="contraseñas" @if (in_array("cambiar-contraseñas",$campos)) disabled @endif>
         <div class="fila-form">
             <div>
-                <label>{{__('textos.formularios.etiquetas.clave')}}</label>
-                <input type="password" name="clave" class="form-control" minlength="8" maxlength="15" required>
+                <label>{{__('textos.formularios.etiquetas.contraseña')}}</label>
+                <input type="password" name="contraseña" class="form-control" minlength="8" maxlength="15" required>
             </div>
             <div>
-                <label>{{__('textos.formularios.etiquetas.confirmar_clave')}}</label>
-                <input type="password" name="clave2" class="form-control" minlength="8" maxlength="15" required>
+                <label>{{__('textos.formularios.etiquetas.confirmar-contraseña')}}</label>
+                <input type="password" name="contraseña2" class="form-control" minlength="8" maxlength="15" required>
             </div>
         </div>
     </fieldset>

@@ -4,12 +4,15 @@ return [
 
     // Plantilla
     'plantilla' =>  [
-        
+
+        // Menú
+
+        // Pie de página
     ],
 
     // Alertas
     'alertas'   =>  [
-        
+        'bienvenido'    =>  "Bienvenido"
     ],
 
     // Formularios
@@ -17,32 +20,33 @@ return [
 
         // Enlaces
         'enlaces'   =>  [
-            'recuperar_clave'   =>  "Recuperar clave"
+            'recuperar-contraseña'  =>  "Recuperar contraseña"
         ],
     
         // Titulos
         'titulos'   =>  [
-            'registro'              =>  "Registro",
-            'ingreso'               =>  "Ingreso",
-            'recuperacion_clave'    =>  "Recuperación de clave",
-            'renovacion_clave'      =>  "Renovación de clave"
+            'registro'                  =>  "Registro",
+            'ingreso'                   =>  "Ingreso",
+            'recuperar-contraseña'      =>  "Recuperar contraseña",
+            'recuperacion-contraseña'   =>  "Recuperación de contraseña",
+            'renovacion-contraseña'     =>  "Renovación de contraseña"
         ],
     
         // Subtitulos
         'subtitulos'    =>  [
-            'datos_personales'  =>  "Datos personales",
+            'datos-personales'  =>  "Datos personales",
             'seguridad'         =>  "Seguridad"
         ],
     
         // Etiquetas
         'etiquetas'  =>  [
-            'nombre'            =>  "Nombre",
-            'apellido'          =>  "Apellido",
-            'email'             =>  "Email",
-            'telf'              =>  "Teléfono",
-            'cambiar_clave'     =>  "Cambiar clave",
-            'clave'             =>  "Clave",
-            'confirmar_clave'   =>  "Confirmar clave",
+            'nombre'                =>  "Nombre",
+            'apellido'              =>  "Apellido",
+            'email'                 =>  "Email",
+            'telf'                  =>  "Teléfono",
+            'cambiar-contraseña'    =>  "Cambiar contraseña",
+            'contraseña'            =>  "Contraseña",
+            'confirmar-contraseña'  =>  "Confirmar contraseña",
         ],
     
         // Placesholders
@@ -52,6 +56,7 @@ return [
     
         // Botones
         'botones'   =>  [
+            'cancelar'  =>  "Cancelar",
             'enviar'    =>  "Enviar"
         ]
     ]

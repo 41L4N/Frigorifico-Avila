@@ -25,17 +25,17 @@ Route::prefix('')->group(function(){
 
     // Vista de sesión
     Route::get('/{seccion}',[UsuarioCtrl::class,'sesion'])
-    ->where('seccion','(registro|ingreso|recuperacion-clave|renovacion-clave)')
+    ->where('seccion','(registro|ingreso|recuperacion-contraseña|renovacion-contraseña)')
     ->name('sesion');
 
     // Registro
     Route::post('/registro',[UsuarioCtrl::class,'guardar']);
     // Ingreso
     Route::post('/ingreso',[UsuarioCtrl::class,'ingreso']);
-    // Recuperar clave
-    Route::post('/recuperacion-clave',[UsuarioCtrl::class,'recuperarClave'])->name('recuperacion-clave');
-    // Renovar clave
-    Route::post('/renovacion-clave',[UsuarioCtrl::class,'renovarClave']);
+    // Recuperar contraseña
+    Route::post('/recuperacion-contraseña',[UsuarioCtrl::class,'recuperarContraseña'])->name('recuperacion-contraseña');
+    // Renovar contraseña
+    Route::post('/renovacion-contraseña',[UsuarioCtrl::class,'renovarContraseña']);
 });
 
 // Productos

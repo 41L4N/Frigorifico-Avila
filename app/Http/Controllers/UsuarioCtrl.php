@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioCtrl extends Controller
 {
@@ -22,12 +23,18 @@ class UsuarioCtrl extends Controller
     public function ingreso(Request $rq){
 
         // Validación
+        $validacion = $rq->validate([
+            'email'     =>  'required|max:75',
+            'password'  =>  'required|min:8|max:15'
+        ]);
 
         // Respuesta
         if (Auth::attempt($rq->only("email","password"))){
-            return redirect()->route('usuario')->with('alerta',['tipo' => 'success', 'mensaje' => 'Bienvenido']);
+            return redirect()->route('usuario')->with('alerta',['tipo' => 'success', 'mensaje' => 'bienvenido']);
         }
-        return back()->with('alerta',['tipo' => 'danger', 'mensaje' => 'Datos inválidos, por favor intente de nuevo']);
+        return back()->withInput($rq->only('email'))->withErrors([
+            'approve' => 'Wrong password or this account not approved yet.',
+        ]);
     }
 
     // Usuario
