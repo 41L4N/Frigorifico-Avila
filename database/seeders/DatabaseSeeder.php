@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Usuario;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        // Administrador
+        $u = new Usuario;
+        $u->nombre = "Open";
+        $u->apellido = "Skies";
+        $u->correo = "desarrolloweb@openskie.com";
+        $u->clave = bcrypt("000000000000000");
+        $u->save();
     }
 }

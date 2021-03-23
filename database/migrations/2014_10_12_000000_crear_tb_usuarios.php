@@ -17,9 +17,8 @@ class CrearTbUsUarios extends Migration
             $tb->id();
             $tb->string('nombre');
             $tb->string('apellido');
-            $tb->string('email')->unique();
-            $tb->string('password');
-            $tb->rememberToken();
+            $tb->string('correo')->unique();
+            $tb->string('clave');
             $tb->timestamps();
         });
     }
