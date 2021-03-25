@@ -66,11 +66,11 @@ Route::group(['middleware'=>'auth'],function(){
         }
     
         // Inventario
-    
+
         // Ordenes de compra
-    
+
         // Ofertas
-    
+
         // Combos
     });
 });

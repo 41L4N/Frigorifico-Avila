@@ -14,10 +14,15 @@ class CrearTbUsUarios extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $tb) {
+
+            // Identificación
             $tb->id();
             $tb->string('nombre');
             $tb->string('apellido');
+
+            // Acceso
             $tb->string('email')->unique();
+            $tb->string('codigo_acceso')->nullable();
             $tb->string('password');
             $tb->timestamps();
         });

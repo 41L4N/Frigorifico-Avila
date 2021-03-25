@@ -64,11 +64,14 @@ return [
         // Respuestas
         'respuestas'    =>  [
 
-            // Positivas
+            // Registro
+            // Ingreso
             'autenticacion-true'    =>  "Bienvenido",
-
-            // Negativas
-            'autenticacion-false'   =>  "Error al validar sus credenciales"
+            'autenticacion-false'   =>  "Error al validar sus credenciales",
+            // Recuperación
+            'usuario-no-existe'     =>  "El correo ingresado no existe en nuestros registros",
+            'email-repetido'        =>  "El correo ingresado no existe en nuestros registros"
+            // Renovación
         ]
     ]
 ];
