@@ -5,6 +5,6 @@ function iconos($i){
     return [
 
         // Alertas
-        'success'  =>  "fas fa-plus"
+        'success'  =>  "fas fa-check"
     ][$i];
 }

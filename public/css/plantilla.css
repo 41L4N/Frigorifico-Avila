@@ -96,15 +96,22 @@
 }
 
 /* Alertas */
-.alerta {
+.cont-alerta {
     position: fixed;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: flex-end;
     top: 12.5%;
-    right: 0%;
-    margin: 0px 5%;
+    left: 0px;
+    width: 100%;
+    padding: 0px 2.5%;
+}
+.alerta {
     width: 100%;
     max-width: 500px;
-    min-width: 250px;
     cursor: pointer;
+    margin: 0px;
 }
 .alert i {
     margin-right: 7.5px;
