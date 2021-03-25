@@ -98,8 +98,9 @@
 /* Alertas */
 .alerta {
     position: fixed;
-    top: 7.5%;
-    right: 5%;
+    top: 12.5%;
+    right: 0%;
+    margin: 0px 5%;
     width: 100%;
     max-width: 500px;
     min-width: 250px;
@@ -128,8 +129,7 @@
     }
     /* Izquierda */
     .izquierda-menu-s {
-        width: 100%;
-        justify-content: space-between;
+        justify-content: center;
         text-align: center;
     }
     /* Centro */
@@ -149,9 +149,5 @@
     }
     .centro-menu-s .opcion-menu-s, .centro-menu-s .icono-menu-s {
         color: var(--c-l-plantilla);
-    }
-    /* Derecha */
-    .derecha-menu-s {
-        display: none;
     }
 }

@@ -56,23 +56,18 @@
                 <div class="container d-flex align-items-center justify-content-between contenido-menu-s">
 
                     {{-- Lado izquierdo --}}
+                    {{-- Boton de menú responsive --}}
+                    <div class="cont-icono-menu-s">
+                        <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                    </div>
+
                     {{-- Logotipo --}}
                     <div class="d-flex align-items-center izquierda-menu-s">
-
-                        {{-- Boton de menú responsive --}}
-                        <div class="cont-icono-menu-s">
-                            <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
-                        </div>
 
                         {{-- Logotipo --}}
                         <a href="{{route("inicio")}}">
                             <img src="/imgs/plantilla/logotipo-web.png" class="logotipo-menu-s" alt="{{config("app.name")}}">
                         </a>
-
-                        {{-- Boton de buscador --}}
-                        <div class="cont-icono-menu-s">
-                            <i class="fas fa-search icono-menu-s" onclick=""></i>
-                        </div>
                     </div>
 
                     {{-- Lado central --}}
@@ -80,7 +75,7 @@
                         
                         {{-- Boton de menú responsive --}}
                         <div class="cont-icono-menu-s">
-                            <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                            <i class="fas fa-times icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
                         </div>
 
                         {{-- Opciones --}}
@@ -107,7 +102,6 @@
                             </div>
                         @else
                             <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('sesion','ingreso')}}"></a>
-                            <a class="opcion-menu-s enlace-ingreso" href="{{route('sesion','ingreso')}}">{{__('textos.menu.ingreso')}}</a>
                         @endauth
                     </div>
                 </div>
