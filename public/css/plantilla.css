@@ -37,6 +37,18 @@
 }
 
 /* Contenido */
+/* Alertas */
+.alerta {
+    position: fixed;
+    top: 7.5%;
+    right: 5%;
+    width: 100%;
+    max-width: 500px;
+    min-width: 250px;
+    cursor: pointer;
+}
+
+/* Contenido */
 .contenido {
     
 }

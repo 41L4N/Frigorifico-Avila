@@ -12,7 +12,7 @@ return [
 
     // Alertas
     'alertas'   =>  [
-        'bienvenido'    =>  "Bienvenido"
+        
     ],
 
     // Formularios
@@ -58,6 +58,17 @@ return [
         'botones'   =>  [
             'cancelar'  =>  "Cancelar",
             'enviar'    =>  "Enviar"
+        ],
+
+        // Respuestas
+        'respuestas'    =>  [
+
+            // Positivas
+            'autenticacion-true'    =>  "Bienvenido",
+
+            // Negativas
+            'autenticacion-false'   =>  "Error al validar sus credenciales"
+            
         ]
     ]
 ];

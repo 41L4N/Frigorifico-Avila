@@ -62,10 +62,10 @@
             <div class="container contenido d-flex justify-content-center flex-fill">
 
                 {{-- Alertas --}}
-                @if ($alerta = Session::get('alerta'))
-                    <div class="alert alert-{{$alerta['tipo']}}" onclick='this.parentNode.removeChild(this)'>
-                        <header><b>{{__('textos.alertas.titulo')}}</b></header>
-                        <div>{{__('textos.alertas.'.$alerta['mensaje'])}}</div>
+                @if ($a = Session::get('alerta'))
+                    <div class="d-flex align-items-center alert alert-{{$a['tipo']}} alerta" onclick='this.parentNode.removeChild(this)'>
+                        <i class="{{iconos($a['tipo'])}}"></i>
+                        <div>{{__('textos.formularios.respuestas.'.$a['msj'])}}</div>
                     </div>
                 @endif
 

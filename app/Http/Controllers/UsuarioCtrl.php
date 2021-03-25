@@ -30,11 +30,9 @@ class UsuarioCtrl extends Controller
 
         // Respuesta
         if (Auth::attempt($rq->only("email","password"))){
-            return redirect()->route('usuario')->with('alerta',['tipo' => 'success', 'mensaje' => 'bienvenido']);
+            return redirect()->route('usuario')->with('alerta',['tipo' => 'success', 'msj' => 'autenticacion-true']);
         }
-        return back()->withInput($rq->only('email'))->withErrors([
-            'approve' => 'Wrong password or this account not approved yet.',
-        ]);
+        return back()->withInput($rq->only('email'))->withErrors(['autenticacion-false']);
     }
 
     // Usuario

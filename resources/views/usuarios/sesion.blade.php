@@ -52,23 +52,27 @@
         <div class="d-flex align-items-center justify-content-center cont-form-sesion">
             <form action="/{{$seccionRuta}}" method="POST" class="w-100">
                 @csrf
-    
+
                 {{-- Titulo --}}
                 <div class="titulo-form">{{ $tituloMD }}</div>
-    
+
+                @if(count($errors))
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $e)
+                            <b>{{$loop->iteration}}</b> {{__('textos.formularios.respuestas.'.$e)}}<br>
+                        @endforeach
+                    </div>
+                @endif
+
                 @switch($seccionRuta)
-    
+
                     {{-- Registro --}}
                     @case('registro')
                         @include('usuarios.campos-basicos',$campos=["contraseñas"])
                     @break
-    
+
                     {{-- Ingreso --}}
                     @case('ingreso')
-
-                        @if($errors->any())
-                            {{ implode('', $errors->all('<div>:message</div>')) }}
-                        @endif
     
                         {{-- Email --}}
                         <div class="fila-form">
@@ -93,10 +97,10 @@
                             </div>
                         </div>
                     @break
-    
-                    {{-- Recuperar --}}
+
+                    {{-- Recuperar contraseña --}}
                     @case("recuperacion-contraseña")
-    
+
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
@@ -105,7 +109,7 @@
                             </div>
                         </div>
                     @break
-    
+
                     {{-- Renovar contraseña --}}
                     @case("renovacion-contraseña")
     
