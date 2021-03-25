@@ -2,13 +2,14 @@
 
 return [
 
-    // Plantilla
-    'plantilla' =>  [
-
-        // Menú
-
-        // Pie de página
+    // Menú
+    'menu'  =>  [
+        'usuario'   =>  "Usuario",
+        'salir'     =>  "Salir"
     ],
+
+    // Pie de página
+
 
     // Alertas
     'alertas'   =>  [
@@ -22,7 +23,7 @@ return [
         'enlaces'   =>  [
             'recuperar-contraseña'  =>  "Recuperar contraseña"
         ],
-    
+
         // Titulos
         'titulos'   =>  [
             'registro'                  =>  "Registro",
@@ -31,13 +32,13 @@ return [
             'recuperacion-contraseña'   =>  "Recuperación de contraseña",
             'renovacion-contraseña'     =>  "Renovación de contraseña"
         ],
-    
+
         // Subtitulos
         'subtitulos'    =>  [
             'datos-personales'  =>  "Datos personales",
             'seguridad'         =>  "Seguridad"
         ],
-    
+
         // Etiquetas
         'etiquetas'  =>  [
             'nombre'                =>  "Nombre",
@@ -48,12 +49,12 @@ return [
             'contraseña'            =>  "Contraseña",
             'confirmar-contraseña'  =>  "Confirmar contraseña",
         ],
-    
+
         // Placesholders
         'placesholders' =>  [
     
         ],
-    
+
         // Botones
         'botones'   =>  [
             'cancelar'  =>  "Cancelar",
@@ -68,7 +69,6 @@ return [
 
             // Negativas
             'autenticacion-false'   =>  "Error al validar sus credenciales"
-            
         ]
     ]
 ];

@@ -2,29 +2,12 @@
 :root {
 
     /* Colores de fondo, letra y transparencias */
-    --c-1: #060d37;
-    --c-letra-c-1: white;
-    --c-2: #0a3e5a;
-    --c-letra-c-2: white;
-    --transparencia-c-2: rgba(10,62,90,.75);
-    --c-3: #4facfe;
-    --c-letra-c-3: black;
+    --c-1: rgb(148, 2, 2);
+    --c-l-c-1: white;
 
     /* Plantilla */
-    --c-plantilla: var(--c-2);
-    --t-c-plantilla: var(--transparencia-c-2);
-    --c-l-plantilla: white;
-
-    /* Variaciones */
-    /* Activo */
-    --c-activo: var(--c-1);
-    --c-letra-c-activo: var(--c-letra-c-1);
-    /* Enfoque (focus) */
-    --c-enfoque: var(--c-1);
-    --c-letra-c-enfoque: var(--c-letra-c-1);
-    /* Desenfoque (blur) */
-    --c-desenfoque: grey;
-    --c-letra-c-desenfoque: white;
+    --c-plantilla: var(--c-1);
+    --c-l-plantilla: var(--c-l-c-1);
 }
 
 /* Menú superior */
@@ -32,11 +15,86 @@
     position: sticky;
     top: 0px;
     left: 0px;
+    background: white;
+    color: var(--c-plantilla);
+    padding: .75% 0px;
+    box-shadow: 0px 0px 5px black;
+}
+/* Generales */
+/* Contenido del menú superior */
+.contenido-menu-s > * {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+}
+/* Iconos */
+.cont-icono-menu-s {
+    display: none;
+}
+.icono-menu-s {
+    font-size: 25px;
+    color: var(--c-plantilla);
+    cursor: pointer;
+}
+/* Listas */
+.lista-menu-s {
+    position: relative;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+/* Titulo */
+/* Opciones */
+.lista-menu-s:hover .opciones-lista-menu-s {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.opcion-menu-s, .opcion-menu-s:hover {
+    margin: 0px 5%;
+    color: var(--c-plantilla);
+}
+.opciones-lista-menu-s {
+    position: absolute;
+    display: none;
+    top: 100%;
+    right: 0px;
+    min-width: 100%;
+    flex-direction: column;
     background: var(--c-plantilla);
+}
+.opciones-lista-menu-s .opcion-menu-s {
     color: var(--c-l-plantilla);
+    text-align: center;
+    padding: 7.5px 25px;
+    margin: 0px;
+}
+/* Lados */
+.izquierda-menu-s, .derecha-menu-s {
+    /* width: 15%; */
+}
+/* Izquierda */
+.izquierda-menu-s {
+
+}
+/* Logotipo */
+.logotipo-menu-s {
+    width: 100%;
+    max-width: 150px;
+}
+/* Centro */
+.centro-menu-s {
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+}
+/* Derecha */
+.derecha-menu-s {
+    justify-content: flex-end;
+    text-align: right;
 }
 
-/* Contenido */
 /* Alertas */
 .alerta {
     position: fixed;
@@ -47,11 +105,11 @@
     min-width: 250px;
     cursor: pointer;
 }
+.alert i {
+    margin-right: 7.5px;
+}
 
 /* Contenido */
-.contenido {
-    
-}
 
 /* Pie de pagina */
 .pie-pagina {
@@ -59,8 +117,41 @@
     color: var(--c-l-plantilla);
 }
 
-
 /* Responsive */
 @media only screen and (max-width: 768px) {
-    
+
+    /* Menú superior */
+    /* Generales */
+    /* Iconos */
+    .cont-icono-menu-s {
+        display: block;
+    }
+    /* Izquierda */
+    .izquierda-menu-s {
+        width: 100%;
+        justify-content: space-between;
+        text-align: center;
+    }
+    /* Centro */
+    .centro-menu-s {
+        position: fixed;
+        right: 100%;
+        top: 0px;
+        height: 100vh;
+        width: 100vw;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background: var(--c-plantilla);
+        transition: right .5s;
+    }
+    .centro-menu-s-visible {
+        right: 0%;
+    }
+    .centro-menu-s .opcion-menu-s, .centro-menu-s .icono-menu-s {
+        color: var(--c-l-plantilla);
+    }
+    /* Derecha */
+    .derecha-menu-s {
+        display: none;
+    }
 }

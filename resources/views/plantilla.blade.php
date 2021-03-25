@@ -53,23 +53,76 @@
 
             {{-- Menú superior --}}
             <div class="menu-s">
-                <div class="container">
-                    Menú superior
+                <div class="container d-flex align-items-center justify-content-between contenido-menu-s">
+
+                    {{-- Lado izquierdo --}}
+                    {{-- Logotipo --}}
+                    <div class="d-flex align-items-center izquierda-menu-s">
+
+                        {{-- Boton de menú responsive --}}
+                        <div class="cont-icono-menu-s">
+                            <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                        </div>
+
+                        {{-- Logotipo --}}
+                        <a href="{{route("inicio")}}">
+                            <img src="/imgs/plantilla/logotipo-web.png" class="logotipo-menu-s" alt="{{config("app.name")}}">
+                        </a>
+
+                        {{-- Boton de buscador --}}
+                        <div class="cont-icono-menu-s">
+                            <i class="fas fa-search icono-menu-s" onclick=""></i>
+                        </div>
+                    </div>
+
+                    {{-- Lado central --}}
+                    <div class="centro-menu-s" id="menuR">
+                        
+                        {{-- Boton de menú responsive --}}
+                        <div class="cont-icono-menu-s">
+                            <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                        </div>
+
+                        {{-- Opciones --}}
+                        <a class="opcion-menu-s" href="">Opcion</a>
+                        <a class="opcion-menu-s" href="">Opcion</a>
+                        <a class="opcion-menu-s" href="">Opcion</a>
+                    </div>
+
+                    {{-- Lado derecho --}}
+                    {{-- Opciones de usuario --}}
+                    <div class="derecha-menu-s">
+                        @auth
+                            {{-- Lista de menú --}}
+                            <div class="lista-menu-s">
+                                {{-- Titulo --}}
+                                <div class="titulo-lista-menu-s">
+                                    {{Auth::user()->nombre}} <i class="fas fa-caret-down"></i>
+                                </div>
+                                {{-- Opciones --}}
+                                <div class="opciones-lista-menu-s">
+                                    <a class="opcion-menu-s" href="{{route('usuario')}}">{{__('textos.menu.usuario')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.menu.salir')}}</a>
+                                </div>
+                            </div>
+                        @else
+                            <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('sesion','ingreso')}}"></a>
+                            <a class="opcion-menu-s enlace-ingreso" href="{{route('sesion','ingreso')}}">{{__('textos.menu.ingreso')}}</a>
+                        @endauth
+                    </div>
                 </div>
             </div>
 
+            {{-- Alertas --}}
+            @if ($a = Session::get('alerta'))
+                <div class="d-flex align-items-center alert alert-{{$a['tipo']}} alerta" onclick='this.parentNode.removeChild(this)'>
+                    <i class="{{iconos($a['tipo'])}}"></i>
+                    <div>{{__('textos.formularios.respuestas.'.$a['msj'])}}</div>
+                </div>
+            @endif
+
             {{-- Contenido --}}
             <div class="container contenido d-flex justify-content-center flex-fill">
-
-                {{-- Alertas --}}
-                @if ($a = Session::get('alerta'))
-                    <div class="d-flex align-items-center alert alert-{{$a['tipo']}} alerta" onclick='this.parentNode.removeChild(this)'>
-                        <i class="{{iconos($a['tipo'])}}"></i>
-                        <div>{{__('textos.formularios.respuestas.'.$a['msj'])}}</div>
-                    </div>
-                @endif
-
-                {{-- Contenido --}}
                 @yield('contenido')
             </div>
         </div>

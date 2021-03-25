@@ -54,7 +54,7 @@ Route::group(['middleware'=>'auth'],function(){
         Route::get("/salir",function (){
             Auth::logout();
             return redirect()->route("inicio");
-        })->name('salir');
+        })->name('.salir');
     });
 
     // Administrador
