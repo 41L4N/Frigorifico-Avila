@@ -79,9 +79,7 @@
                         </div>
 
                         {{-- Opciones --}}
-                        <a class="opcion-menu-s" href="">Opcion</a>
-                        <a class="opcion-menu-s" href="">Opcion</a>
-                        <a class="opcion-menu-s" href="">Opcion</a>
+                        
                     </div>
 
                     {{-- Lado derecho --}}

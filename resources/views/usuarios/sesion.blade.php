@@ -73,7 +73,7 @@
 
                     {{-- Ingreso --}}
                     @case('ingreso')
-    
+
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
@@ -81,7 +81,7 @@
                                 <input type="email" class="form-control" name="email" maxlength="75" autofocus required>
                             </div>
                         </div>
-    
+
                         {{-- Contraseña --}}
                         <div class="fila-form">
                             <div>
@@ -89,7 +89,7 @@
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
-    
+
                         {{-- Enlace --}}
                         <div class="fila-form">
                             <div>
@@ -112,9 +112,9 @@
 
                     {{-- Renovar contraseña --}}
                     @case("renovacion-contraseña")
-    
+
                         {{-- Contraseña y validacion --}}
-                        {{-- <input type="hidden" value="{{Route::current()->parameters('codigo')["codigo"]}}" name="codigo"> --}}
+                        <input type="hidden" value="{{ Request::route('codigo_acceso') }}" name="codigo_acceso">
                         <div class="fila-form">
                             <div>
                                 <label>{{__('textos.formularios.etiquetas.contraseña')}}</label>
@@ -122,7 +122,7 @@
                             </div>
                             <div>
                                 <label>{{__('textos.formularios.etiquetas.confirmar-contraseña')}}</label>
-                                <input type="password" class="form-control" name="password2" minlength="8" maxlength="15" required>
+                                <input type="password" class="form-control" name="confirmacion_password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
                     @break
@@ -139,7 +139,7 @@
     {{-- Ventana modal para recuperar contraseña --}}
     <div class="modal fade" id="vtnRecuperar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="" method="POST" class="modal-content">
+            <form action="{{route('recuperacion-contraseña')}}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{__('textos.formularios.titulos.recuperar-contraseña')}}</h5>

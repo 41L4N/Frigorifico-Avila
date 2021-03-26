@@ -24,7 +24,7 @@ Route::get('/',[InicioCtrl::class,'inicio'])->name("inicio");
 Route::prefix('')->group(function(){
 
     // Vista de sesión
-    Route::get('/{seccion}',[UsuarioCtrl::class,'sesion'])
+    Route::get('/{seccion}/{codigo_acceso?}',[UsuarioCtrl::class,'sesion'])
     ->where('seccion','(registro|ingreso|recuperacion-contraseña|renovacion-contraseña)')
     ->name('sesion');
 
@@ -32,10 +32,10 @@ Route::prefix('')->group(function(){
     Route::post('/registro',[UsuarioCtrl::class,'guardar']);
     // Ingreso
     Route::post('/ingreso',[UsuarioCtrl::class,'ingreso']);
-    // Recuperar contraseña
-    Route::post('/recuperacion-contraseña',[UsuarioCtrl::class,'recuperarContraseña'])->name('recuperacion-contraseña');
-    // Renovar contraseña
-    Route::post('/renovacion-contraseña',[UsuarioCtrl::class,'renovarContraseña']);
+    // Recuperación de contraseña
+    Route::post('/recuperacion-contraseña',[UsuarioCtrl::class,'recuperacionContraseña'])->name('recuperacion-contraseña');
+    // Renovación de contraseña
+    Route::post('/renovacion-contraseña',[UsuarioCtrl::class,'renovacionContraseña']);
 });
 
 // Productos

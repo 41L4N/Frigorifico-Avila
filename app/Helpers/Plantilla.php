@@ -2,9 +2,12 @@
 
 // Iconos
 function iconos($i){
-    return [
+    $iconos =  [
 
         // Alertas
-        'success'  =>  "fas fa-check"
-    ][$i];
+        'success'   =>  "fas fa-check",
+        'danger'    =>  "fas fa-times",
+    ];
+
+    return ( isset( $iconos[$i] ) ) ? $iconos[$i] : null;
 }

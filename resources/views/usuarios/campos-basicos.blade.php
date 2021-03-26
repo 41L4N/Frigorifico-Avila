@@ -56,7 +56,7 @@
             </div>
             <div>
                 <label>{{__('textos.formularios.etiquetas.confirmar-contraseña')}}</label>
-                <input type="password" name="contraseña2" class="form-control" minlength="8" maxlength="15" required>
+                <input type="password" name="confirmacion_password" class="form-control" minlength="8" maxlength="15" required>
             </div>
         </div>
     </fieldset>

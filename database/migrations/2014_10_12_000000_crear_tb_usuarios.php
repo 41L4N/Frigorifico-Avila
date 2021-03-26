@@ -20,6 +20,9 @@ class CrearTbUsUarios extends Migration
             $tb->string('nombre');
             $tb->string('apellido');
 
+            // Boletin
+            $tb->string('boletin')->nullable();
+
             // Acceso
             $tb->string('email')->unique();
             $tb->string('codigo_acceso')->nullable();

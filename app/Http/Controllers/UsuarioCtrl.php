@@ -12,13 +12,20 @@ class UsuarioCtrl extends Controller
 {
 
     // Sesion
-    public function sesion(){
-        if (Auth::check()) {
+    public function sesion($seccion,$codigo_acceso=null){
+
+        // Si ya hay autenticación
+        if(Auth::check()){
             return redirect()->route('usuario');
         }
-        else {
-            return view('usuarios.sesion');
+
+        // Si hay código de acceso pero no coincide
+        if ($codigo_acceso && !Usuario::where("codigo_acceso",$codigo_acceso)->exists()) {
+            abort(401);
         }
+
+        // Vista de sesion
+        return view('usuarios.sesion');
     }
 
     // Guardar
@@ -48,17 +55,16 @@ class UsuarioCtrl extends Controller
     }
 
     // Recuperar contraseña
-    public function recuperarContraseña(Request $rq){
+    public function recuperacionContraseña(Request $rq){
 
         // Validación
         $validacion = $rq->validate([
-            'email'     =>  'required|max:75',
-            'password'  =>  'required|min:8|max:15'
+            'email'     =>  'required|max:75'
         ]);
 
         // Si el usuario no existe
         if(!$usuario = Usuario::where('email',$rq->email)->first()){
-            return redirect()->route("recuperar")->with('alerta', ['tipo' => 'danger', 'msj' => 'usuario-no-existe']);
+            return back()->with('alerta', ['tipo' => 'danger', 'msj' => 'recuperacion-contraseña-false']);
         }
 
         // Asigno un código de recuperación
@@ -68,26 +74,34 @@ class UsuarioCtrl extends Controller
         // Envio correo con código de recuperación
         Mail::send("correos.recuperacion",[
             "asunto"    =>  $asunto = "Recuperar contraseña",
-            "ruta"      =>  route("restablecer",$codigo)
+            "ruta"      =>  route("sesion",['renovacion-contraseña',$codigo])
         ],function($m) use ($rq,$asunto){
             $m->to($rq->email);
             $m->subject($asunto);
         });
-        return redirect()->route("inicio")->with('alerta', ['tipo' => 'success', 'msj' => 'Se ha enviado un codigo a su correo, por favor revise su buzon para continuar con el proceso']);
-        
+        return redirect()->route("inicio")->with('alerta', ['tipo' => 'success', 'msj' => 'recuperacion-contraseña-true']);
     }
 
     // Renovar contraseña
-    public function renovarContraseña(){
-        if($usuario = Usuario::where('codigo_acceso',$rq->codigo_acceso)->first()){
-            $usuario->password = bcrypt($rq->password);
-            $usuario->codigo_acceso = null;
-            $usuario->save();
-            return $this->ingresar($rq);
-        }
-        else {
-            return redirect()->route("incio");
-        }
+    public function renovacionContraseña(Request $rq){
+
+        // Validación
+        $validacion = $rq->validate([
+            'codigo_acceso'             =>  'exists:usuarios,codigo_acceso',
+            'password'                  =>  'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
+        ]);
+
+        // Cambio de contraseña
+        $usuario = Usuario::where('codigo_acceso',$rq->codigo_acceso)->first();
+        $usuario->password = bcrypt($rq->password);
+        $usuario->codigo_acceso = null;
+        $usuario->save();
+        return $this->ingreso(
+            new Request([
+                'email'     =>  $usuario->email,
+                'password'  =>  $rq->password
+            ])
+        );
     }
 
     // Usuario

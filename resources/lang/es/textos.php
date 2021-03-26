@@ -69,8 +69,8 @@ return [
             'autenticacion-true'    =>  "Bienvenido",
             'autenticacion-false'   =>  "Error al validar sus credenciales",
             // Recuperación
-            'usuario-no-existe'     =>  "El correo ingresado no existe en nuestros registros",
-            'email-repetido'        =>  "El correo ingresado no existe en nuestros registros"
+            'recuperacion-contraseña-true'  =>  "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
+            'recuperacion-contraseña-false' =>  "El correo ingresado no existe en nuestros registros",
             // Renovación
         ]
     ]
