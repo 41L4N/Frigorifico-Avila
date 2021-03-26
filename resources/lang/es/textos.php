@@ -4,8 +4,11 @@ return [
 
     // Menú
     'menu'  =>  [
-        'usuario'   =>  "Usuario",
-        'salir'     =>  "Salir"
+        // Administrador
+        'panel-administrador'   =>  "Panel de administrador",
+        // Usuario
+        'usuario'               =>  "Usuario",
+        'salir'                 =>  "Salir"
     ],
 
     // Pie de página

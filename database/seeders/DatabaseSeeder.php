@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
 
         // Administrador
         $u = new Usuario;
-        $u->nombre = "Open";
-        $u->apellido = "Skies";
-        $u->email = "desarrolloweb@openskie.com";
+        $u->nombre = "Alimentos";
+        $u->apellido = "Ávila";
+        $u->email = "desarrollo@alimentosavila.com";
+        $u->administrador = true;
         $u->password = bcrypt("000000000000000");
         $u->save();
     }

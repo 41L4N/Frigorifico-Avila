@@ -17,15 +17,18 @@ class CrearTbUsUarios extends Migration
 
             // Identificación
             $tb->id();
+            // Datos personales
             $tb->string('nombre');
             $tb->string('apellido');
-
-            // Boletin
-            $tb->string('boletin')->nullable();
-
-            // Acceso
+            // Contacto
             $tb->string('email')->unique();
+            // Boletin
+            $tb->boolean('notificaciones')->nullable();
+            // Acceso
+            $tb->boolean('administrador')->nullable();
+            $tb->integer('rol')->nullable();
             $tb->string('codigo_acceso')->nullable();
+            // Seguridad
             $tb->string('password');
             $tb->timestamps();
         });

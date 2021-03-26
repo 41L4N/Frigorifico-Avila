@@ -58,12 +58,13 @@ Route::group(['middleware'=>'auth'],function(){
     });
 
     // Administrador
-    Route::prefix('administrador')->group(function(){
+    Route::group([
+        'prefix'    =>  $n='panel-administrador',
+        'name'      =>  $n
+    ],function(){
 
-        // Validación de administrador
-        if ( Auth::check() && !Auth::user()->administrador ) {
-            back();
-        }
+        // Panel de administrador
+        Route::view('/','usuarios.panel-administrador')->name('');
     
         // Inventario
 
