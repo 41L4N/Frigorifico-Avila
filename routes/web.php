@@ -19,24 +19,18 @@ use Illuminate\Support\Facades\Auth;
 // Inicio
 Route::get('/',[InicioCtrl::class,'inicio'])->name("inicio");
 
-// Acceso
-// Perfil web
-Route::name('usuario')->group(function(){
-
-    // Vista de sesión
-    Route::get('/{seccion}/{codigo_acceso?}',[UsuarioCtrl::class,'sesion'])
-    ->where('seccion','(registro|ingreso|recuperacion-contraseña|renovacion-contraseña)')
-    ->name('.sesion');
-
-    // Registro
-    Route::post('/registro',[UsuarioCtrl::class,'guardar']);
-    // Ingreso
-    Route::post('/ingreso',[UsuarioCtrl::class,'ingreso']);
-    // Recuperación de contraseña
-    Route::post('/recuperacion-contraseña',[UsuarioCtrl::class,'recuperacionContraseña'])->name('.recuperacion-contraseña');
-    // Renovación de contraseña
-    Route::post('/renovacion-contraseña',[UsuarioCtrl::class,'renovacionContraseña']);
-});
+// Sesion
+Route::get('/{seccion}/{codigo_acceso?}',[UsuarioCtrl::class,'sesion'])
+->where('seccion','(registro|ingreso|recuperacion-contraseña|renovacion-contraseña)')
+->name('sesion');
+// Registro
+Route::post('/registro',[UsuarioCtrl::class,'guardar']);
+// Ingreso
+Route::post('/ingreso',[UsuarioCtrl::class,'ingreso']);
+// Recuperación de contraseña
+Route::post('/recuperacion-contraseña',[UsuarioCtrl::class,'recuperacionContraseña'])->name('sesion.recuperacion-contraseña');
+// Renovación de contraseña
+Route::post('/renovacion-contraseña',[UsuarioCtrl::class,'renovacionContraseña']);
 
 // Productos
 Route::get('/productos/{seo?}/{codigo?}',[ProductoCtrl::class,'inicio'])->name('productos');
@@ -48,7 +42,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix($n='usuario')->name($n)->group(function(){
 
         // Perfil
-        Route::get('/',[UsuarioCtrl::class,'usuario'])->name('');
+        Route::get('/',[UsuarioCtrl::class,'usuario'])->name('.perfil');
 
         // Salir
         Route::get("/salir",function (){
@@ -58,11 +52,21 @@ Route::middleware('auth')->group(function(){
     });
 
     // Administrador
-    Route::prefix($n='panel-administrador')->name($n)->middleware('permisos')->group(function(){
+    Route::prefix($n='panel-administrador')->middleware('permisos')->group(function(){
 
         // Panel de administrador
-        Route::view('/','usuarios.panel-administrador')->name('');
-    
+        Route::view('/','usuarios.panel-administrador')->name('panel-administrador');
+
+        // Roles
+        Route::prefix($n='roles')->name($n)->group(function (){
+            Route::get('/',[RolesCtrl::class,'roles'])->name('');
+        });
+
+        // Usuarios
+        Route::prefix($n='usuarios')->name($n)->group(function (){
+            Route::get('/',[UsuarioCtrl::class,'usuarios'])->name('');
+        });
+
         // Inventario
 
         // Ordenes de compra

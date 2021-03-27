@@ -95,14 +95,14 @@
                                 {{-- Opciones --}}
                                 <div class="opciones-lista-menu-s">
                                     @if (Auth::user()->administrador)
-                                        <a class="opcion-menu-s" href="{{route('panel-administrador')}}">{{__('textos.menu.panel-administrador')}}</a>
+                                        <a class="opcion-menu-s" href="{{route('panel-administrador')}}">{{__('textos.rutas.panel-administrador')}}</a>
                                     @endif
-                                    <a class="opcion-menu-s" href="{{route('usuario')}}">{{__('textos.menu.usuario')}}</a>
-                                    <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.menu.salir')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>
                                 </div>
                             </div>
                         @else
-                            <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('usuario.sesion','ingreso')}}"></a>
+                            <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('sesion','ingreso')}}"></a>
                         @endauth
                     </div>
                 </div>
@@ -119,7 +119,7 @@
             @endif
 
             {{-- Contenido --}}
-            <div class="container contenido d-flex justify-content-center flex-fill">
+            <div class="container contenido d-flex flex-fill">
                 @yield('contenido')
             </div>
         </div>

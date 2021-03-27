@@ -1,0 +1,39 @@
+/* Contenedor de miniaturas */
+.cont-miniaturas {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Miniatura */
+.miniatura {
+    display: block;
+    width: 100%;
+    min-width: 300px;
+    max-width: calc(100% / 3.5);
+    box-shadow: 0px 0px 2.5px black;
+    text-align: center;
+    color: black;
+}
+.miniatura:hover {
+    box-shadow: 0px 0px 2.5px var(--c-plantilla);
+    color: var(--c-plantilla);
+}
+/* Titulo */
+.titulo-miniatura {
+    font-size: 27.5px;
+}
+
+/* Paginación */
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+    .cont-miniaturas {
+        align-self: flex-start;
+    }
+}

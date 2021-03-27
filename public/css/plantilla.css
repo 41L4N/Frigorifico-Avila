@@ -118,6 +118,10 @@
 }
 
 /* Contenido */
+.contenido {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
 /* Pie de pagina */
 .pie-pagina {

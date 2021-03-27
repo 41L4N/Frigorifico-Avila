@@ -2,30 +2,40 @@
 
 return [
 
-    // Menú
-    'menu'  =>  [
+    // Rutas
+    'rutas'  =>  [
+        // Formularios
+        'recuperar-contraseña'  =>  "Recuperar contraseña",
         // Administrador
         'panel-administrador'   =>  "Panel de administrador",
+        'roles'                 =>  "Roles",
+        'usuarios'              =>  "Usuarios",
         // Usuario
         'usuario'               =>  "Usuario",
         'salir'                 =>  "Salir"
     ],
 
-    // Pie de página
+    // Contenido
+    'contenido' =>  [
+        'sin-resultados'    =>  "Sin resultados"
+    ],
 
+    // Pie de página
 
     // Alertas
     'alertas'   =>  [
         
     ],
 
+    'botones'   =>  [
+        'agregar'   =>  "Agregar",
+        'eliminar'  =>  "Eliminar",
+        'cancelar'  =>  "Cancelar",
+        'enviar'    =>  "Enviar"
+    ],
+
     // Formularios
     'formularios'   =>  [
-
-        // Enlaces
-        'enlaces'   =>  [
-            'recuperar-contraseña'  =>  "Recuperar contraseña"
-        ],
 
         // Titulos
         'titulos'   =>  [
@@ -44,6 +54,8 @@ return [
 
         // Etiquetas
         'etiquetas'  =>  [
+
+            // Usuario
             'nombre'                =>  "Nombre",
             'apellido'              =>  "Apellido",
             'email'                 =>  "Email",
@@ -51,17 +63,14 @@ return [
             'cambiar-contraseña'    =>  "Cambiar contraseña",
             'contraseña'            =>  "Contraseña",
             'confirmar-contraseña'  =>  "Confirmar contraseña",
+
+            // Roles
+            'titulo'                =>  "Titulo"
         ],
 
         // Placesholders
         'placesholders' =>  [
     
-        ],
-
-        // Botones
-        'botones'   =>  [
-            'cancelar'  =>  "Cancelar",
-            'enviar'    =>  "Enviar"
         ],
 
         // Respuestas

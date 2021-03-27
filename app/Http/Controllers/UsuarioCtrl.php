@@ -42,14 +42,14 @@ class UsuarioCtrl extends Controller
     public function ingreso(Request $rq){
 
         // Validación
-        $validacion = $rq->validate([
+        $rq->validate([
             'email'     =>  'required|max:75',
             'password'  =>  'required|min:8|max:15'
         ]);
 
         // Respuesta
         if (Auth::attempt($rq->only("email","password"))){
-            return redirect()->route('usuario')->with('alerta',['tipo' => 'success', 'msj' => 'autenticacion-true']);
+            return redirect()->route('usuario.perfil')->with('alerta',['tipo' => 'success', 'msj' => 'autenticacion-true']);
         }
         return back()->withInput($rq->only('email'))->withErrors(['autenticacion-false']);
     }
@@ -58,7 +58,7 @@ class UsuarioCtrl extends Controller
     public function recuperacionContraseña(Request $rq){
 
         // Validación
-        $validacion = $rq->validate([
+        $rq->validate([
             'email'     =>  'required|max:75'
         ]);
 
@@ -86,7 +86,7 @@ class UsuarioCtrl extends Controller
     public function renovacionContraseña(Request $rq){
 
         // Validación
-        $validacion = $rq->validate([
+        $rq->validate([
             'codigo_acceso'             =>  'exists:usuarios,codigo_acceso',
             'password'                  =>  'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
         ]);
@@ -106,7 +106,9 @@ class UsuarioCtrl extends Controller
 
     // Usuario
     public function usuario(){
-        $usuario = Auth::user();
-        return view("usuarios.usuario",compact('usuario'));
+        return view("usuarios.usuario")->with(
+            'usuario',
+            Auth::user()
+        );
     }
 }

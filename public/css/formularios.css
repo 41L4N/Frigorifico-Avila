@@ -1,6 +1,6 @@
 /* Titulos */
 .titulo-form {
-    font-size: 3.5vh;
+    font-size: 27.5px;
     margin-bottom: .75em;
 }
 
@@ -59,6 +59,54 @@ input[type=number] {
 .btns-form {
     margin-top: 2.5rem;
     text-align: right;
+}
+
+/* Formularios de resultados */
+.form-resultados {
+    width: 100%;
+}
+
+/* Submenu */
+.submenu-resultados {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    width: 100%;
+    font-size: 22.5px;
+}
+
+/* Tabla de resultados */
+.tb-resultados {
+    width: 100%;
+    text-align: center;
+}
+.tb-resultados tr:first-of-type th {
+    background: var(--c-plantilla);
+    color: white;
+}
+.tb-resultados th:first-of-type, .tb-resultados .columna-corta { width: 25px; }
+.tb-resultados th, .tb-resultados td {
+    padding: 2.5px;
+    border: solid var(--c-plantilla) 1px;
+}
+.tb-resultados img {
+    max-width: 150px;
+    max-height: 150px;
+}
+.tb-resultados tr:nth-child(odd) {
+    background: rgba(0,0,0,0.1);
+}
+
+/* Sin resultados */
+.sin-resultados {
+    font-size: 25px;
+    text-align: center;
+    padding: 50px 0px;
+    color: grey;
+    font-size: 50px;
 }
 
 /* Responsive */

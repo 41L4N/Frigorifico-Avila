@@ -15,6 +15,10 @@ function iconos($i){
         // Alertas
         'success'   =>  "fas fa-check",
         'danger'    =>  "fas fa-times",
+
+        // Enlaces
+        'roles'     =>  "fas fa-user-lock",
+        'usuarios'  =>  "fas fa-users"
     ];
 
     // Respuesta

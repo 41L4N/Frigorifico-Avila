@@ -93,7 +93,7 @@
                         {{-- Enlace --}}
                         <div class="fila-form">
                             <div>
-                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.formularios.enlaces.recuperar-contraseña')}}</a>
+                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.rutas.recuperar-contraseña')}}</a>
                             </div>
                         </div>
                     @break
@@ -113,7 +113,7 @@
                     {{-- Renovar contraseña --}}
                     @case("renovacion-contraseña")
 
-                        {{-- Contraseña y validacion --}}
+                        {{-- Contraseña y validación --}}
                         <input type="hidden" value="{{ Request::route('codigo_acceso') }}" name="codigo_acceso">
                         <div class="fila-form">
                             <div>
@@ -130,7 +130,7 @@
 
                 {{-- Botones --}}
                 <div class="btns-form">
-                    <button type="submit" class="btn btn-primary">{{__('textos.formularios.botones.enviar')}}</button>
+                    <button type="submit" class="btn btn-primary">{{__('textos.botones.enviar')}}</button>
                 </div>
             </form>
         </div>
@@ -139,7 +139,7 @@
     {{-- Ventana modal para recuperar contraseña --}}
     <div class="modal fade" id="vtnRecuperar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{route(prefijo().'.recuperacion-contraseña')}}" method="POST" class="modal-content">
+            <form action="{{route('sesion.recuperacion-contraseña')}}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{__('textos.formularios.titulos.recuperar-contraseña')}}</h5>
@@ -150,8 +150,8 @@
                     <input type="email" name="email" class="form-control" maxlength="75" required>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.formularios.botones.cancelar')}}</button>
-                    <button class="btn btn-primary">{{__('textos.formularios.botones.enviar')}}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
+                    <button class="btn btn-primary">{{__('textos.botones.enviar')}}</button>
                 </div>
             </form>
         </div>
