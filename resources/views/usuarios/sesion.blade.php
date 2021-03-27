@@ -139,7 +139,7 @@
     {{-- Ventana modal para recuperar contraseña --}}
     <div class="modal fade" id="vtnRecuperar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{route('recuperacion-contraseña')}}" method="POST" class="modal-content">
+            <form action="{{route(prefijo().'.recuperacion-contraseña')}}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{__('textos.formularios.titulos.recuperar-contraseña')}}</h5>

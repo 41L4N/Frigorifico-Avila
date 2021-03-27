@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         @else
-                            <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('sesion','ingreso')}}"></a>
+                            <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('usuario.sesion','ingreso')}}"></a>
                         @endauth
                     </div>
                 </div>

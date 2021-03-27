@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Rol;
 
 class Permisos
 {
@@ -16,13 +18,10 @@ class Permisos
      */
     public function handle(Request $request, Closure $next)
     {
-        // Accesos
-        $prefijo = explode("/",$request->route()->getPrefix())[0];
-        $accesos = [
-            // Director
-            "Director"   =>  ["perfil","administrador","perfiles","descargas"]
-        ];
-        if(in_array($prefijo,$accesos[Auth::user()->rol])){
+
+        $permisos = ( $rol = Rol::find( Auth::user()->rol ) ) ? $rol->permisos : "";
+        $permisos = explode( "," , $permisos );
+        if( Auth::user()->administrador || in_array( prefijo(), $permisos ) ){
             return $next($request);
         }
         else {
