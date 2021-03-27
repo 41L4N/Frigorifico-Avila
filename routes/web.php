@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function(){
         Route::prefix($n='roles')->name($n)->group(function (){
             Route::get('/',[RolesCtrl::class,'roles'])->name('');
             Route::post('/',[RolesCtrl::class,'guardar']);
+            Route::post('/eliminar',[RolesCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Usuarios

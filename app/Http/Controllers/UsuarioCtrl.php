@@ -40,14 +40,16 @@ class UsuarioCtrl extends Controller
 
     // Ingreso
     public function ingreso(Request $rq){
+
         // Validación
         $rq->validate([
             'email'     =>  'exists:usuarios,email|required|max:75',
             'password'  =>  'required|min:8|max:15'
         ]);
+
         // Respuesta
         if (Auth::attempt($rq->only("email","password"))){
-            return redirect()->route('usuario.perfil')->with('alerta',['tipo' => 'success', 'texto' => 'ingreso']);
+            return redirect()->route('usuario.perfil')->with('alerta', ['tipo' => 'success', 'texto' => 'ingreso']);
         }
     }
 

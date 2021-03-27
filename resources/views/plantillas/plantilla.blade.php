@@ -113,7 +113,7 @@
                 <div class="cont-alerta">
                     <div class="d-flex align-items-center alert alert-{{$a['tipo']}} alerta" onclick='this.parentNode.removeChild(this)'>
                         <i class="{{iconos($a['tipo'])}}"></i>
-                        <div>{{__('textos.alertas.'.$a['texto'])}}</div>
+                        <div>{{__('textos.alertas.'.( ( isset( $a['texto'] ) ) ? $a['texto'] : $a['tipo'] ) )}}</div>
                     </div>
                 </div>
             @endif
@@ -121,6 +121,47 @@
             {{-- Contenido --}}
             <div class="container contenido d-flex flex-fill">
                 @yield('contenido')
+            </div>
+
+            {{-- Ventanas modales --}}
+            {{-- Buscador --}}
+            <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="" method="GET" class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Buscar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+
+                            {{-- Busqueda --}}
+                            <div class="fila-form">
+                                <div>
+                                    <input type="text" class="form-control" name="busqueda" required>
+                                </div>
+                            </div>
+
+                            {{-- Categorias y colección --}}
+                            {{-- @foreach (App\FiltroArts::campos("tipo") as $url => $filtro)
+                                <div class="fila-form">
+                                    <div>
+                                        {{$filtro}}
+                                        <select name="{{$url}}" class="form-control">
+                                            <option value="" selected disabled>Elegir</option>
+                                            @foreach (App\FiltroArts::where("tipo",$filtro)->pluck("titulo")->toArray() as $titulo)
+                                                <option value="{{$titulo}}">{{$titulo}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endforeach --}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-primary">Buscar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 

@@ -22,28 +22,34 @@ return [
     // Alertas
     'alertas'    =>  [
 
+        // Sesion
         // Registro
         // Ingreso
         'ingreso'                   =>  "Bienvenido",
         // Recuperación
         'recuperacion-contraseña'   =>  "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
         // Renovación
+
+        // Rutas
+        // Roles
+        'success'                   =>  "Operación exitosa",
     ],
 
     // Contenido
     'contenido' =>  [
-        'sin-resultados'    =>  "Sin resultados"
+        'sin-resultados'        =>  "Sin resultados",
     ],
 
     // Pie de página
     'pie-pagina'   =>  [
-        
+
     ],
 
     // Botones
     'botones'   =>  [
         'agregar'   =>  "Agregar",
         'eliminar'  =>  "Eliminar",
+        'confirmar' =>  "Confirmar",
         'cancelar'  =>  "Cancelar",
         'enviar'    =>  "Enviar"
     ],
@@ -53,11 +59,19 @@ return [
 
         // Titulos
         'titulos'   =>  [
+
+            // Sesion
             'registro'                  =>  "Registro",
             'ingreso'                   =>  "Ingreso",
             'recuperar-contraseña'      =>  "Recuperar contraseña",
             'recuperacion-contraseña'   =>  "Recuperación de contraseña",
-            'renovacion-contraseña'     =>  "Renovación de contraseña"
+            'renovacion-contraseña'     =>  "Renovación de contraseña",
+
+            // Buscador
+            'buscador'                  =>  "Buscador",
+
+            // Confirmación
+            'confirmacion'              =>  "Confirmación"
         ],
 
         // Subtitulos
@@ -85,7 +99,12 @@ return [
 
         // Placesholders
         'placesholders' =>  [
-    
+
+        ],
+
+        // Descripciones
+        'descripciones' =>  [
+            'confirmacion'  =>  "¿Seguro que desea realizar esta acción?"
         ]
     ]
 ];

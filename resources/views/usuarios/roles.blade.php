@@ -14,14 +14,15 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="" method="POST" class="form-resultados">
+    <form action="{{route(prefijo().'.eliminar')}}" method="POST" class="form-resultados">
+        @csrf
 
         {{-- Submenu --}}
         <div class="submenu-resultados">
             <div>{{$tituloMD}}</div>
             <div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
-                <button type="button" class="btn btn-danger">{{__('textos.botones.eliminar')}}</button>
+                <button type="button" class="btn btn-primary" onclick="agregar()" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
+                <button type="button" class="btn btn-danger btn-admin" data-toggle="modal" data-target="#vtnConfirmacion" disabled>{{__('textos.botones.eliminar')}}</button>
             </div>
         </div>
 
@@ -35,13 +36,23 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
+                    <th>{{__('textos.formularios.etiquetas.titulo')}}</th>
+                    <th>{{__('textos.formularios.etiquetas.permisos')}}</th>
+                    <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
                 {{-- Registros --}}
                 @foreach ($roles as $r)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <td><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$r->id}}"></td>
+                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$r->id}}"></th>
+                        <td>{{$r->titulo}}</td>
+                        <td>
+                            @foreach (json_decode($r->permisos) as $p)
+                                {{__('textos.rutas.'.$p)}} <br>
+                            @endforeach
+                        </td>
+                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); editar({{$loop->index}})"></a></td>
                     </tr>
                 @endforeach
             </table>
@@ -62,13 +73,16 @@
             <form class="modal-content" action="" method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('textos.botones.agregar')}}</h5>
+                    <h5 class="modal-title">{{$tituloMD}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
 
                     {{-- Errores --}}
                     @include('plantillas.errores')
+
+                    {{-- Id --}}
+                    <input type="text" name="id">
 
                     {{-- Titulo --}}
                     <div class="fila-form">
@@ -83,7 +97,7 @@
                         <label>{{__('textos.formularios.etiquetas.permisos')}}</label>
                         @foreach (['roles','usuarios','inventario','ordenes-compras','ofertas','combos'] as $ruta)
                             <label>
-                                <input type="checkbox" name="permisos[{{$ruta}}]">
+                                <input type="checkbox" name="permisos[]" value="{{$ruta}}">
                                 {{__('textos.rutas.'.$ruta)}}
                             </label>
                         @endforeach
@@ -96,6 +110,8 @@
             </form>
         </div>
     </div>
+    {{-- Confirmación --}}
+    @include('plantillas.ventana-confirmacion')
 @endsection
 
 {{-- JavaScript --}}
@@ -106,4 +122,35 @@
             $('#vtnGuardar').modal('show');
         </script>
     @endif
+    <script>
+
+        // Datos
+        var datos = {!! json_encode($roles) !!};
+
+        // Agregar
+        function agregar() {
+            vtnGuardar.querySelector('form').reset();
+        }
+
+        // Editar
+        function editar(i) {
+
+            // Campos directos
+            Object.keys(datos[i]).forEach(clave => {
+                if ( campo = document.querySelector('[name=' + clave + ']') ) {
+                    campo.value = datos[i][clave];
+                }
+            });
+
+            // Permisos
+            JSON.parse(datos[i]['permisos']).forEach(p => {
+                if ( campo = document.querySelector('[value=' + p + ']') ) {
+                    campo.checked = true;
+                }
+            });
+
+            // Ventana
+            $('#vtnGuardar').modal('show');
+        }
+    </script>
 @endsection

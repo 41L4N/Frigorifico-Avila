@@ -16,7 +16,7 @@ class CrearTbRoles extends Migration
         Schema::create('roles', function (Blueprint $tb) {
 
             $tb->id();
-            $tb->string('rol');
+            $tb->string('titulo');
             $tb->text('permisos');
             $tb->timestamps();
         });

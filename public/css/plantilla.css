@@ -19,6 +19,7 @@
     color: var(--c-plantilla);
     padding: .75% 0px;
     box-shadow: 0px 0px 5px black;
+    z-index: 1;
 }
 /* Generales */
 /* Contenido del menú superior */
@@ -106,6 +107,7 @@
     left: 0px;
     width: 100%;
     padding: 0px 2.5%;
+    z-index: 1;
 }
 .alerta {
     width: 100%;
