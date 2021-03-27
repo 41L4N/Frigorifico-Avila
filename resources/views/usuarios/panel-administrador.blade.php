@@ -1,5 +1,5 @@
 {{-- Plantilla --}}
-@extends('plantilla')
+@extends('plantillas.plantilla')
 
 {{-- Metadatos --}}
 @php

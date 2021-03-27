@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function(){
         // Roles
         Route::prefix($n='roles')->name($n)->group(function (){
             Route::get('/',[RolesCtrl::class,'roles'])->name('');
+            Route::post('/',[RolesCtrl::class,'guardar']);
         });
 
         // Usuarios

@@ -113,7 +113,7 @@
                 <div class="cont-alerta">
                     <div class="d-flex align-items-center alert alert-{{$a['tipo']}} alerta" onclick='this.parentNode.removeChild(this)'>
                         <i class="{{iconos($a['tipo'])}}"></i>
-                        <div>{{__('textos.formularios.respuestas.'.$a['msj'])}}</div>
+                        <div>{{__('textos.alertas.'.$a['texto'])}}</div>
                     </div>
                 </div>
             @endif

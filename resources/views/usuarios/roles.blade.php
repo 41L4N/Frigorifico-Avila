@@ -1,5 +1,5 @@
 {{-- Plantilla --}}
-@extends('plantilla')
+@extends('plantillas.plantilla')
 
 {{-- Metadatos --}}
 @php
@@ -20,7 +20,7 @@
         <div class="submenu-resultados">
             <div>{{$tituloMD}}</div>
             <div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnAgregar">{{__('textos.botones.agregar')}}</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
                 <button type="button" class="btn btn-danger">{{__('textos.botones.eliminar')}}</button>
             </div>
         </div>
@@ -57,15 +57,18 @@
 
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
-    <div class="modal fade" id="vtnAgregar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="vtnGuardar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">{{$tituloMD}}</h5>
+                    <h5 class="modal-title">{{__('textos.botones.agregar')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+
+                    {{-- Errores --}}
+                    @include('plantillas.errores')
 
                     {{-- Titulo --}}
                     <div class="fila-form">
@@ -76,7 +79,15 @@
                     </div>
 
                     {{-- Permisos --}}
-
+                    <div>
+                        <label>{{__('textos.formularios.etiquetas.permisos')}}</label>
+                        @foreach (['roles','usuarios','inventario','ordenes-compras','ofertas','combos'] as $ruta)
+                            <label>
+                                <input type="checkbox" name="permisos[{{$ruta}}]">
+                                {{__('textos.rutas.'.$ruta)}}
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -90,4 +101,9 @@
 {{-- JavaScript --}}
 @section('js')
     <script src="{{asset('/js/formularios.js')}}"></script>
+    @if(count($errors))
+        <script>
+            $('#vtnGuardar').modal('show');
+        </script>
+    @endif
 @endsection

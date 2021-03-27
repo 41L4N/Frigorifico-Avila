@@ -1,5 +1,5 @@
 {{-- Plantilla --}}
-@extends('plantilla')
+@extends('plantillas.plantilla')
 
 {{-- Metadatos --}}
 @php
@@ -15,7 +15,7 @@
 
 {{-- Contenido --}}
 @section('contenido')
-
+    
 @endsection
 
 {{-- JavaScript --}}

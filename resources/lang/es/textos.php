@@ -10,9 +10,24 @@ return [
         'panel-administrador'   =>  "Panel de administrador",
         'roles'                 =>  "Roles",
         'usuarios'              =>  "Usuarios",
+        'inventario'            =>  "Inventario",
+        'ordenes-compras'       =>  "Ordenes de compras",
+        'ofertas'               =>  "Ofertas",
+        'combos'                =>  "Combos",
         // Usuario
         'usuario'               =>  "Usuario",
         'salir'                 =>  "Salir"
+    ],
+
+    // Alertas
+    'alertas'    =>  [
+
+        // Registro
+        // Ingreso
+        'ingreso'                   =>  "Bienvenido",
+        // Recuperación
+        'recuperacion-contraseña'   =>  "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
+        // Renovación
     ],
 
     // Contenido
@@ -21,12 +36,11 @@ return [
     ],
 
     // Pie de página
-
-    // Alertas
-    'alertas'   =>  [
+    'pie-pagina'   =>  [
         
     ],
 
+    // Botones
     'botones'   =>  [
         'agregar'   =>  "Agregar",
         'eliminar'  =>  "Eliminar",
@@ -65,25 +79,13 @@ return [
             'confirmar-contraseña'  =>  "Confirmar contraseña",
 
             // Roles
-            'titulo'                =>  "Titulo"
+            'titulo'                =>  "Titulo",
+            'permisos'              =>  "Permisos",
         ],
 
         // Placesholders
         'placesholders' =>  [
     
-        ],
-
-        // Respuestas
-        'respuestas'    =>  [
-
-            // Registro
-            // Ingreso
-            'autenticacion-true'    =>  "Bienvenido",
-            'autenticacion-false'   =>  "Error al validar sus credenciales",
-            // Recuperación
-            'recuperacion-contraseña-true'  =>  "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
-            'recuperacion-contraseña-false' =>  "El correo ingresado no existe en nuestros registros",
-            // Renovación
         ]
     ]
 ];

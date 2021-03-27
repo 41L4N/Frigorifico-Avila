@@ -22,7 +22,8 @@ class RolesCtrl extends Controller
         
         // Validación
         $rq->validate([
-            'titulo'     =>  'required|max:75',
+            'titulo'    =>  'required|max:75',
+            'permisos'  =>  'required'
         ]);
 
         // Registro

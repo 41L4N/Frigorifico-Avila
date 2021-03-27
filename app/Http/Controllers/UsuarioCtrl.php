@@ -40,18 +40,15 @@ class UsuarioCtrl extends Controller
 
     // Ingreso
     public function ingreso(Request $rq){
-
         // Validación
         $rq->validate([
-            'email'     =>  'required|max:75',
+            'email'     =>  'exists:usuarios,email|required|max:75',
             'password'  =>  'required|min:8|max:15'
         ]);
-
         // Respuesta
         if (Auth::attempt($rq->only("email","password"))){
-            return redirect()->route('usuario.perfil')->with('alerta',['tipo' => 'success', 'msj' => 'autenticacion-true']);
+            return redirect()->route('usuario.perfil')->with('alerta',['tipo' => 'success', 'texto' => 'ingreso']);
         }
-        return back()->withInput($rq->only('email'))->withErrors(['autenticacion-false']);
     }
 
     // Recuperar contraseña
@@ -59,15 +56,11 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'email'     =>  'required|max:75'
+            'email'     =>  'exists:usuarios,email|required|max:75'
         ]);
 
-        // Si el usuario no existe
-        if(!$usuario = Usuario::where('email',$rq->email)->first()){
-            return back()->with('alerta', ['tipo' => 'danger', 'msj' => 'recuperacion-contraseña-false']);
-        }
-
         // Asigno un código de recuperación
+        $usuario = Usuario::where('email',$rq->email)->first();
         $usuario->codigo_acceso = ($codigo = uniqid());
         $usuario->save();
 
@@ -79,7 +72,7 @@ class UsuarioCtrl extends Controller
             $m->to($rq->email);
             $m->subject($asunto);
         });
-        return redirect()->route("inicio")->with('alerta', ['tipo' => 'success', 'msj' => 'recuperacion-contraseña-true']);
+        return redirect()->route("inicio")->with('alerta', ['tipo' => 'success', 'texto' => 'recuperacion-contraseña']);
     }
 
     // Renovar contraseña
@@ -87,8 +80,8 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'codigo_acceso'             =>  'exists:usuarios,codigo_acceso',
-            'password'                  =>  'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
+            'codigo_acceso' =>  'exists:usuarios,codigo_acceso',
+            'password'      =>  'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
         ]);
 
         // Cambio de contraseña

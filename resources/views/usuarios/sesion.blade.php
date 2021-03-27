@@ -1,5 +1,5 @@
 {{-- Plantilla --}}
-@extends('plantilla')
+@extends('plantillas.plantilla')
 
 {{-- Metadatos --}}
 @php
@@ -56,14 +56,10 @@
                 {{-- Titulo --}}
                 <div class="titulo-form">{{ $tituloMD }}</div>
 
-                @if(count($errors))
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $e)
-                            <b>{{$loop->iteration}}</b> {{__('textos.formularios.respuestas.'.$e)}}<br>
-                        @endforeach
-                    </div>
-                @endif
+                {{-- Errores --}}
+                @include('plantillas.errores')
 
+                {{-- Campos --}}
                 @switch($seccionRuta)
 
                     {{-- Registro --}}
