@@ -12,25 +12,25 @@
 <div class="fila-form">
     <div>
         <label>{{__('textos.formularios.etiquetas.'.$n='nombre')}}</label>
-        <input type="text" name="nombre" class="form-control @error($n) is-invalid @enderror" maxlength="50" required>
+        <input type="text" name="nombre" class="form-control" maxlength="50" required>
     </div>
     <div>
         <label>{{__('textos.formularios.etiquetas.'.$n='apellido')}}</label>
-        <input type="text" name="apellido" class="form-control @error($n) is-invalid @enderror" maxlength="50" required>
+        <input type="text" name="apellido" class="form-control" maxlength="50" required>
     </div>
 </div>
 {{-- Email y teléfono --}}
 <div class="fila-form">
     <div>
         <label>{{__('textos.formularios.etiquetas.'.$n='email')}}</label>
-        <input type="email" name="email" class="form-control @error($n) is-invalid @enderror" maxlength="75" required>
+        <input type="email" name="email" class="form-control" maxlength="75" required>
     </div>
     @if (in_array("telf",$campos))
         <div>
             <label>{{__('textos.formularios.etiquetas.'.$n='telf')}}</label>
             <div class="d-flex">
                 <input name="telf[codigo]" class="form-control w-25" placeholder="58" minlength="2" maxlength="4" onkeypress="soloNumeros(event)" required>
-                <input name="telf[numero]" class="form-control @error($n) is-invalid @enderror" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
+                <input name="telf[numero]" class="form-control" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
             </div>
         </div>
     @endif
@@ -52,11 +52,11 @@
         <div class="fila-form">
             <div>
                 <label>{{__('textos.formularios.etiquetas.'.$n='contraseña')}}</label>
-                <input type="password" name="password" class="form-control @error($n) is-invalid @enderror" minlength="8" maxlength="15" required>
+                <input type="password" name="password" class="form-control" minlength="8" maxlength="15" required>
             </div>
             <div>
                 <label>{{__('textos.formularios.etiquetas.'.$n='confirmar-contraseña')}}</label>
-                <input type="password" name="confirmacion_password" class="form-control @error($n) is-invalid @enderror" minlength="8" maxlength="15" required>
+                <input type="password" name="confirmacion_password" class="form-control" minlength="8" maxlength="15" required>
             </div>
         </div>
     </fieldset>

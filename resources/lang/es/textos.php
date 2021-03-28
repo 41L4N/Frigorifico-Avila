@@ -48,6 +48,7 @@ return [
     // Botones
     'botones'   =>  [
         'agregar'   =>  "Agregar",
+        'roles'     =>  "Roles",
         'eliminar'  =>  "Eliminar",
         'confirmar' =>  "Confirmar",
         'cancelar'  =>  "Cancelar",

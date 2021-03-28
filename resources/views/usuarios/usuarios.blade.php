@@ -22,6 +22,7 @@
             <div>{{$tituloMD}}</div>
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnRoles">{{__('textos.botones.roles')}}</button>
                 <button type="button" class="btn btn-danger btn-admin" data-toggle="modal" data-target="#vtnConfirmacion" disabled>{{__('textos.botones.eliminar')}}</button>
             </div>
         </div>
@@ -91,6 +92,30 @@
             </form>
         </div>
     </div>
+    {{-- Roles --}}
+    <div class="modal fade" id="vtnGuardar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content" action="" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">{{$tituloMD}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                    {{-- Errores --}}
+                    @include('plantillas.errores')
+
+                    {{-- Campos --}}
+                    @include('usuarios.campos-basicos',$campos = ['id','telf'])
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
+                    <button class="btn btn-primary">{{__('textos.botones.enviar')}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
     {{-- Confirmación --}}
     @include('plantillas.ventana-confirmacion')
 @endsection
@@ -110,20 +135,20 @@
                 var registroActual = datos.filter(function(x) {
                     return x.id == id;
                 })[0];
-    
+
                 // Campos directos
                 Object.keys(registroActual).forEach(clave => {
                     if ( campo = document.querySelector('[name=' + clave + ']') ) {
                         campo.value = registroActual[clave];
                     }
                 });
-    
+
                 // Teléfono
-                // JSON.parse(registroActual['permisos']).forEach(p => {
-                //     if ( campo = document.querySelector('[value=' + p + ']') ) {
-                //         campo.checked = true;
-                //     }
-                // });
+                Object.keys( telf = JSON.parse(registroActual['telf']) ).forEach(clave => {
+                    if ( campo = document.querySelector('[name="telf[' + clave + ']"]') ) {
+                        campo.value = telf[clave];
+                    }
+                });
             }
 
             // Ventana

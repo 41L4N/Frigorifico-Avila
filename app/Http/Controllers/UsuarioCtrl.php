@@ -34,32 +34,15 @@ class UsuarioCtrl extends Controller
     public function guardar(Request $rq){
 
         // Validación
-        // Datos básicos
-        $validaciones = [
+        $rq->validate([
             'nombre'        => 'required|max:50',
             'apellido'      => 'required|max:50',
-            'email'         => 'required|max:75'
-        ];
-        // Teléfono
-        if (isset($rq->rol)) {
-            $validaciones = array_merge($validaciones,[
-                'telf.codigo'   => 'required|digits_between:1,4',
-                'telf.numero'   => 'required|digits_between:10,14'
-            ]);
-        }
-        // Rol
-        if (isset($rq->rol)) {
-            $validaciones = array_merge($validaciones,[
-                'rol' => 'required'
-            ]);
-        }
-        // Password
-        if (isset($rq->password)) {
-            $validaciones = array_merge($validaciones,[
-                'password' => 'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
-            ]);
-        }
-        $rq->validate($validaciones);
+            'email'         => 'required|max:75',
+            'telf.codigo'   => 'sometimes|required|numeric|digits_between:1,4',
+            'telf.numero'   => 'sometimes|required|numeric|digits_between:10,14',
+            'rol'           => 'sometimes|required',
+            'password'      => 'sometimes|required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password',
+        ]);
 
         // Que no sea repetido
         if ( Usuario::where($c='email', $rq->$c)->where('id', '!=', $rq->id)->exists() ) {
@@ -138,12 +121,12 @@ class UsuarioCtrl extends Controller
     public function ingreso(Request $rq){
 
         // Validación
-        $rq->validate([
+        $validacion = Validator::make($rq->all(),[
             'email'     =>  'exists:usuarios,email|required|max:75',
             'password'  =>  'required|min:8|max:15'
-        ]);
+        ])->validate();
 
-        // Respuesta
+        // Respuesta - true
         if ( Auth::attempt( $rq->only("email", "password") ) ){
             return redirect()->route('usuario.perfil')->with([
                 'alerta' => [
@@ -152,6 +135,14 @@ class UsuarioCtrl extends Controller
                 ]
             ]);
         }
+
+        // Contraseña incorrecta - Porque el email se verifica arriba
+        $validacion = Validator::make($rq->all(),[
+            'password' => 'password'
+        ]);
+        return back()->withErrors($validacion)->withInput(
+            $rq->except(['_token','password'])
+        );
     }
 
     // Recuperar contraseña
@@ -219,7 +210,9 @@ class UsuarioCtrl extends Controller
     // Usuarios
     public function usuarios(){
         return view('usuarios.usuarios')->with([
-            'usuarios'  =>  Usuario::whereNull('administrador')->get()
+            'usuarios'      =>  Usuario::whereNull('administrador')->get(),
+            'todosUsuarios' =>  Usuario::get(['id','nombre','apellido']),
+            'roles'         =>  Rol::get(['id','titulo'])
         ]);
     }
 }

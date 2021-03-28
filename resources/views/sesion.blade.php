@@ -53,11 +53,15 @@
             <form action="/{{$seccionRuta}}" method="POST" class="w-100">
                 @csrf
 
+                {{-- Errores --}}
+                
+                <input type="hidden" id="errores" value='@json([
+                    "campos"    => $errors->messages(),
+                    "valores"   => request()->old()
+                ])'>
+
                 {{-- Titulo --}}
                 <div class="titulo-form">{{ $tituloMD }}</div>
-
-                {{-- Errores --}}
-                @include('plantillas.errores')
 
                 {{-- Campos --}}
                 @switch($seccionRuta)
@@ -73,15 +77,15 @@
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.email')}}</label>
-                                <input type="email" class="form-control" name="email" maxlength="75" autofocus required>
+                                <label>{{__('textos.formularios.etiquetas.'.$n='email')}}</label>
+                                <input type="email" class="form-control" name="{{$n}}" maxlength="75" autofocus required>
                             </div>
                         </div>
 
                         {{-- Contraseña --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.contraseña')}}</label>
+                                <label>{{__('textos.formularios.etiquetas.'.$n='contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
@@ -100,8 +104,8 @@
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.email')}}</label>
-                                <input type="email" class="form-control" name="email" autofocus required>
+                                <label>{{__('textos.formularios.etiquetas.'.$n='email')}}</label>
+                                <input type="email" class="form-control" name="{{$n}}" autofocus required>
                             </div>
                         </div>
                     @break
@@ -113,11 +117,11 @@
                         <input type="hidden" value="{{ Request::route('codigo_acceso') }}" name="codigo_acceso">
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.contraseña')}}</label>
+                                <label>{{__('textos.formularios.etiquetas.'.$n='contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.confirmar-contraseña')}}</label>
+                                <label>{{__('textos.formularios.etiquetas.'.$n='confirmar-contraseña')}}</label>
                                 <input type="password" class="form-control" name="confirmacion_password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
@@ -142,8 +146,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    {{__('textos.formularios.etiquetas.email')}}
-                    <input type="email" name="email" class="form-control" maxlength="75" required>
+                    {{__('textos.formularios.etiquetas.'.$n='email')}}
+                    <input type="email" name="{{$n}}" class="form-control" maxlength="75" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -152,4 +156,9 @@
             </form>
         </div>
     </div>
+@endsection
+
+{{-- JavaScript --}}
+@section('js')
+    <script src="{{asset('/js/formularios.js')}}"></script>
 @endsection

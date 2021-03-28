@@ -88,7 +88,7 @@
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.formularios.etiquetas.'.$n = 'titulo')}}</label>
-                            <input type="text" class="form-control @error($n) is-invalid @enderror" name="{{$n}}" maxlength="75" required>
+                            <input type="text" class="form-control" name="{{$n}}" maxlength="75" required>
                         </div>
                     </div>
 

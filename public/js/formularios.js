@@ -9,6 +9,32 @@ $('#vtnGuardar').on('hide.bs.modal', function () {
     }
 });
 
+// Errores
+if (errores = document.querySelector('#errores')) {
+
+    // Lista
+    var errores = JSON.parse(errores.value);
+    // Campos o valores
+    Object.keys(errores).forEach(clave => {
+        // Elementos
+        Object.keys(errores[clave]).forEach(clave2 => {
+            if (campo = document.querySelector('[name='+clave2+']')) {
+
+                // Mensajes
+                if (clave=="campos") {
+                    campo.classList.add('is-invalid');
+                    campo.insertAdjacentHTML('afterend','<div class="alert alert-danger m-0 mt-1">'+errores[clave][clave2][0]+'</div>');
+                }
+
+                // Valores
+                else {
+                    campo.value = errores[clave][clave2];
+                }
+            }
+        });
+    });
+}
+
 // Solo numeros
 function soloNumeros(tecla) {
     if (tecla.keyCode < 47 || tecla.keyCode > 58) {
@@ -16,7 +42,7 @@ function soloNumeros(tecla) {
     }
 }
 
-// Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase "secc-resultados"
+// Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase ".tb-resultados"
 var checks = document.querySelectorAll('.tb-resultados [name^="resultado"]');
 function clickTodos(){ checks.forEach(check => { check.checked = checkPrincipal.checked; }); }
 
