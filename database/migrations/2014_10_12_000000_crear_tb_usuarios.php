@@ -22,6 +22,7 @@ class CrearTbUsUarios extends Migration
             $tb->string('apellido');
             // Contacto
             $tb->string('email')->unique();
+            $tb->string('telf');
             // Boletin
             $tb->boolean('notificaciones')->nullable();
             // Acceso
@@ -29,7 +30,7 @@ class CrearTbUsUarios extends Migration
             $tb->integer('rol')->nullable();
             $tb->string('codigo_acceso')->nullable();
             // Seguridad
-            $tb->string('password');
+            $tb->string('password')->nullable();
             $tb->timestamps();
         });
     }

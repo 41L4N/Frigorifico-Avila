@@ -21,7 +21,7 @@
         <div class="submenu-resultados">
             <div>{{$tituloMD}}</div>
             <div>
-                <button type="button" class="btn btn-primary" onclick="agregar()" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
                 <button type="button" class="btn btn-danger btn-admin" data-toggle="modal" data-target="#vtnConfirmacion" disabled>{{__('textos.botones.eliminar')}}</button>
             </div>
         </div>
@@ -47,12 +47,12 @@
                 @foreach ($usuarios as $u)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$u->id}}"></th>
+                        <th><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$u->id}}"></th>
                         <td>{{"$u->nombre $u->apellido"}}</td>
                         <td>{{$u->email}}</td>
-                        <td>{{formatos('t',$u->telf)}}</td>
-                        <td>{{$u->rol}}</td>
-                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); editar({{$loop->index}})"></a></td>
+                        <td>{{formatos('t', $u->telf, true)}}</td>
+                        <td>{{$u->rolP()}}</td>
+                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); registroActual({{$u->id}})"></a></td>
                     </tr>
                 @endforeach
             </table>
@@ -83,17 +83,6 @@
 
                     {{-- Campos --}}
                     @include('usuarios.campos-basicos',$campos = ['id','telf'])
-
-                    {{-- Rol --}}
-                    <div>
-                        <label>{{__('textos.formularios.etiquetas.rol')}}</label>
-                        <select name="rol" class="form-control" required>
-                            @foreach ($roles as $r)
-                                <option value="" selected disabled>Elegir</option>
-                                <option value="{{$r->id}}">{{$r->titulo}}</option>
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -109,40 +98,45 @@
 {{-- JavaScript --}}
 @section('js')
     <script src="{{asset('/js/formularios.js')}}"></script>
-    @if(count($errors))
-        <script>
-            $('#vtnGuardar').modal('show');
-        </script>
-    @endif
     <script>
 
-        // Datos
-        var datos = {!! json_encode($usuarios) !!};
+        // Formulario
+        function registroActual(id=null) {
 
-        // Agregar
-        function agregar() {
-            vtnGuardar.querySelector('form').reset();
-        }
+            // Elemento actual
+            if (id) {
 
-        // Editar
-        function editar(i) {
-
-            // Campos directos
-            Object.keys(datos[i]).forEach(clave => {
-                if ( campo = document.querySelector('[name=' + clave + ']') ) {
-                    campo.value = datos[i][clave];
-                }
-            });
-
-            // Teléfono
-            JSON.parse(datos[i]['permisos']).forEach(p => {
-                if ( campo = document.querySelector('[value=' + p + ']') ) {
-                    campo.checked = true;
-                }
-            });
+                // Index
+                var registroActual = datos.filter(function(x) {
+                    return x.id == id;
+                })[0];
+    
+                // Campos directos
+                Object.keys(registroActual).forEach(clave => {
+                    if ( campo = document.querySelector('[name=' + clave + ']') ) {
+                        campo.value = registroActual[clave];
+                    }
+                });
+    
+                // Teléfono
+                // JSON.parse(registroActual['permisos']).forEach(p => {
+                //     if ( campo = document.querySelector('[value=' + p + ']') ) {
+                //         campo.checked = true;
+                //     }
+                // });
+            }
 
             // Ventana
             $('#vtnGuardar').modal('show');
+        }
+
+        // Datos
+        var datos = @json($usuarios);
+        var id = @json( Session::get('id') );
+
+        // Ventana automatica si hay errores
+        if (document.querySelector('#errores')) {
+            registroActual();
         }
     </script>
 @endsection

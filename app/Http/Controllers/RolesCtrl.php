@@ -10,7 +10,7 @@ class RolesCtrl extends Controller
 
     // Roles
     public function roles(){
-        return view('usuarios.roles')
+        return view('roles')
         ->with([
             'roles' => Rol::all()
         ]);
@@ -26,12 +26,12 @@ class RolesCtrl extends Controller
         ]);
 
         // Que no sea repetido
-        if ( Rol::where('titulo',$rq->titulo)->where('id','!=',$rq->id)->exists() ) {
+        if ( Rol::where($c='titulo',$rq->$c)->where('id','!=',$rq->id)->exists() ) {
             return back()->with([
                 'id' => $rq->id
             ])->withErrors(
                 $rq->validate([
-                    'titulo' => 'unique:roles,titulo'
+                    $c => 'unique:roles,'.$c
                 ])
             );
         }
@@ -56,8 +56,14 @@ class RolesCtrl extends Controller
     public function eliminar(Request $rq){
 
         // Eliminar
-        Rol::whereIn('id',$rq->resultados)->delete();
-        
+        foreach (Rol::whereIn('id',$rq->resultado)->get(['id']) as $rol) {
+            foreach (Usuario::where('rol',$rol->id) as $u) {
+                $u->rol = null;
+                $u->save();
+            }
+            $rol->delete();
+        }
+
         // Respuesta
         return back()->with([
             'alerta' => [

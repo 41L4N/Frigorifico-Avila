@@ -45,7 +45,7 @@
                 @foreach ($roles as $r)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$r->id}}"></th>
+                        <th><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$r->id}}"></th>
                         <td>{{$r->titulo}}</td>
                         <td>
                             @foreach (json_decode($r->permisos) as $p)
@@ -119,27 +119,12 @@
     <script src="{{asset('/js/formularios.js')}}"></script>
     <script>
 
-        // Limpiar formulario
-        $('#vtnGuardar').on('hide.bs.modal', function () {
-            vtnGuardar.querySelector('form').reset();
-            vtnGuardar.querySelectorAll('.is-invalid').forEach(campo => {
-                campo.classList.remove('is-invalid');
-            });
-            if (errores = vtnGuardar.querySelector('#errores')) {
-                errores.parentNode.removeChild(errores);
-            }
-        });
-
-        // Datos
-        var datos = @json($roles);
-        var id = @json( Session::get('id') );
-
         // Formulario
         function registroActual(id=null) {
 
             // Elemento actual
             if (id) {
-                
+
                 // Index
                 var registroActual = datos.filter(function(x) {
                     return x.id == id;
@@ -163,10 +148,14 @@
             // Ventana
             $('#vtnGuardar').modal('show');
         }
-    </script>
 
-    {{-- Errores --}}
-    @if(count($errors))
-        <script> registroActual(id); </script>
-    @endif
+        // Datos
+        var datos = @json($roles);
+        var id = @json( Session::get('id') );
+
+        // Ventana automatica si hay errores
+        if (document.querySelector('#errores')) {
+            registroActual();
+        }
+    </script>
 @endsection

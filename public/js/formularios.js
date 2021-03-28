@@ -1,3 +1,14 @@
+// Limpiar formulario
+$('#vtnGuardar').on('hide.bs.modal', function () {
+    vtnGuardar.querySelector('form').reset();
+    vtnGuardar.querySelectorAll('.is-invalid').forEach(campo => {
+        campo.classList.remove('is-invalid');
+    });
+    if (errores = vtnGuardar.querySelector('#errores')) {
+        errores.parentNode.removeChild(errores);
+    }
+});
+
 // Solo numeros
 function soloNumeros(tecla) {
     if (tecla.keyCode < 47 || tecla.keyCode > 58) {

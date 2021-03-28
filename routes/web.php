@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix($n='panel-administrador')->middleware('permisos')->group(function(){
 
         // Panel de administrador
-        Route::view('/','usuarios.panel-administrador')->name('panel-administrador');
+        Route::view('/','panel-administrador')->name('panel-administrador');
 
         // Roles
         Route::prefix($n='roles')->name($n)->group(function (){

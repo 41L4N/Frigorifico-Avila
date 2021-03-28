@@ -7,7 +7,7 @@ function prefijo(){
 }
 
 // Formatos
-function formatos($tipo){
+function formatos($tipo,$dato,$texto=null){
     switch ($tipo) {
 
         // Fecha
@@ -22,9 +22,13 @@ function formatos($tipo){
     
         // Telefonico
         case 't':
-            
+            $r = implode(' ', json_decode($dato, true));
+            $r = ($texto) ? "+$r" : $r;
         break;
     }
+
+    // Respuesta 
+    return $r;
 }
 
 // Iconos

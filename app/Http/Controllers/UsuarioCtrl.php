@@ -18,7 +18,7 @@ class UsuarioCtrl extends Controller
 
         // Si ya hay autenticación
         if(Auth::check()){
-            return redirect()->route('usuario');
+            return redirect()->route('usuario.perfil');
         }
 
         // Si hay código de acceso pero no coincide
@@ -27,48 +27,111 @@ class UsuarioCtrl extends Controller
         }
 
         // Vista de sesion
-        return view('usuarios.sesion');
+        return view('sesion');
     }
 
     // Guardar
     public function guardar(Request $rq){
 
         // Validación
-        $rq->validate([
-            'nombre'    => 'required|max:50',
-            'apellido'  => '',
-            'email'     => '',
-            'telf'      => ''
-        ]);
+        // Datos básicos
+        $validaciones = [
+            'nombre'        => 'required|max:50',
+            'apellido'      => 'required|max:50',
+            'email'         => 'required|max:75'
+        ];
+        // Teléfono
         if (isset($rq->rol)) {
-            $rq->validate([
-                'rol' => '',
+            $validaciones = array_merge($validaciones,[
+                'telf.codigo'   => 'required|digits_between:1,4',
+                'telf.numero'   => 'required|digits_between:10,14'
             ]);
+        }
+        // Rol
+        if (isset($rq->rol)) {
+            $validaciones = array_merge($validaciones,[
+                'rol' => 'required'
+            ]);
+        }
+        // Password
+        if (isset($rq->password)) {
+            $validaciones = array_merge($validaciones,[
+                'password' => 'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
+            ]);
+        }
+        $rq->validate($validaciones);
+
+        // Que no sea repetido
+        if ( Usuario::where($c='email', $rq->$c)->where('id', '!=', $rq->id)->exists() ) {
+            return back()->with([
+                'id' => $rq->id
+            ])->withErrors(
+                $rq->validate([
+                    $c => 'unique:usuarios,'.$c
+                ])
+            );
         }
 
         // Registro
         if (!$u = Usuario::find($rq->id)) {
-            $rq->validate([
-                'email' => 'unique:usuarios,email',
-            ]);
             $u = new Usuario;
         }
         // Campos directos
         foreach (Schema::getColumnListing('usuarios') as $campo) {
             if ($rq->exists($campo) && $campo!="id") {
-                $art->$campo = $rq->$campo;
+                $u->$campo = $rq->$campo;
             }
         }
         // Teléfono
         $u->telf = json_encode($rq->telf);
+        // Contraseña
+        if ($rq->exists('password')) {
+            $u->password = bcrypt($rq->password);
+        }
         $u->save();
 
+        // Correo de invitación - Si no hay password es porque lo guardo el administrador
+        if (!$u->password) {
+
+            // Asigno un código de recuperación
+            $u->codigo_acceso = ($codigo = uniqid());
+            $u->save();
+
+            // Correo
+            Mail::send("correos.invitacion",[
+                "asunto"    =>  $asunto = "Invitación",
+                "ruta"      =>  route("sesion", ['renovacion-contraseña',$codigo])
+            ],function($m) use ($rq, $asunto){
+                $m->to($rq->email);
+                $m->subject($asunto);
+            });
+        }
+
         // Respuesta
+        if (Auth::check()) {
+            return back()->with([
+                'alerta' => [
+                    'tipo' => 'success'
+                ]
+            ]);
+        }
+        else {
+            return $this->ingreso($rq);
+        }
     }
 
     // Eliminar
     public function eliminar(Request $rq){
+
+        // Eliminar
+        Usuario::whereIn('id',$rq->resultado)->delete();
         
+        // Respuesta
+        return back()->with([
+            'alerta' => [
+                'tipo' => 'success'
+            ]
+        ]);
     }
 
     // Ingreso
@@ -81,7 +144,7 @@ class UsuarioCtrl extends Controller
         ]);
 
         // Respuesta
-        if (Auth::attempt($rq->only("email","password"))){
+        if ( Auth::attempt( $rq->only("email", "password") ) ){
             return redirect()->route('usuario.perfil')->with([
                 'alerta' => [
                     'tipo'  => 'success',
@@ -100,18 +163,20 @@ class UsuarioCtrl extends Controller
         ]);
 
         // Asigno un código de recuperación
-        $u = Usuario::where('email',$rq->email)->first();
+        $u = Usuario::where('email', $rq->email)->first();
         $u->codigo_acceso = ($codigo = uniqid());
         $u->save();
 
         // Envio correo con código de recuperación
         Mail::send("correos.recuperacion",[
             "asunto"    =>  $asunto = "Recuperar contraseña",
-            "ruta"      =>  route("sesion",['renovacion-contraseña',$codigo])
-        ],function($m) use ($rq,$asunto){
+            "ruta"      =>  route("sesion", ['renovacion-contraseña',$codigo])
+        ],function($m) use ($rq, $asunto){
             $m->to($rq->email);
             $m->subject($asunto);
         });
+
+        // Respuesta
         return redirect()->route("inicio")->with([
             'alerta' => [
                 'tipo' => 'success',
@@ -130,10 +195,12 @@ class UsuarioCtrl extends Controller
         ]);
 
         // Cambio de contraseña
-        $u = Usuario::where('codigo_acceso',$rq->codigo_acceso)->first();
+        $u = Usuario::where('codigo_acceso', $rq->codigo_acceso)->first();
         $u->password = bcrypt($rq->password);
         $u->codigo_acceso = null;
         $u->save();
+
+        // Respuesta
         return $this->ingreso(
             new Request([
                 'email'     =>  $u->email,
@@ -152,8 +219,7 @@ class UsuarioCtrl extends Controller
     // Usuarios
     public function usuarios(){
         return view('usuarios.usuarios')->with([
-            'usuarios'  =>  Usuario::where('administrador',false)->get(),
-            'roles'     =>  Rol::all()
+            'usuarios'  =>  Usuario::whereNull('administrador')->get()
         ]);
     }
 }
