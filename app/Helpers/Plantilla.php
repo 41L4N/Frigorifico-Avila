@@ -6,6 +6,27 @@ function prefijo(){
     return end($prefijo);
 }
 
+// Formatos
+function formatos($tipo){
+    switch ($tipo) {
+
+        // Fecha
+        case 'f':
+            
+        break;
+    
+        // Numérico
+        case 'n':
+            
+        break;
+    
+        // Telefonico
+        case 't':
+            
+        break;
+    }
+}
+
 // Iconos
 function iconos($i){
 

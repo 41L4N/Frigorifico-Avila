@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Usuario;
+use App\Models\Rol;
 
 class UsuarioCtrl extends Controller
 {
@@ -30,7 +32,38 @@ class UsuarioCtrl extends Controller
 
     // Guardar
     public function guardar(Request $rq){
-        
+
+        // Validación
+        $rq->validate([
+            'nombre'    => 'required|max:50',
+            'apellido'  => '',
+            'email'     => '',
+            'telf'      => ''
+        ]);
+        if (isset($rq->rol)) {
+            $rq->validate([
+                'rol' => '',
+            ]);
+        }
+
+        // Registro
+        if (!$u = Usuario::find($rq->id)) {
+            $rq->validate([
+                'email' => 'unique:usuarios,email',
+            ]);
+            $u = new Usuario;
+        }
+        // Campos directos
+        foreach (Schema::getColumnListing('usuarios') as $campo) {
+            if ($rq->exists($campo) && $campo!="id") {
+                $art->$campo = $rq->$campo;
+            }
+        }
+        // Teléfono
+        $u->telf = json_encode($rq->telf);
+        $u->save();
+
+        // Respuesta
     }
 
     // Eliminar
@@ -49,7 +82,12 @@ class UsuarioCtrl extends Controller
 
         // Respuesta
         if (Auth::attempt($rq->only("email","password"))){
-            return redirect()->route('usuario.perfil')->with('alerta', ['tipo' => 'success', 'texto' => 'ingreso']);
+            return redirect()->route('usuario.perfil')->with([
+                'alerta' => [
+                    'tipo'  => 'success',
+                    'texto' => 'ingreso'
+                ]
+            ]);
         }
     }
 
@@ -62,9 +100,9 @@ class UsuarioCtrl extends Controller
         ]);
 
         // Asigno un código de recuperación
-        $usuario = Usuario::where('email',$rq->email)->first();
-        $usuario->codigo_acceso = ($codigo = uniqid());
-        $usuario->save();
+        $u = Usuario::where('email',$rq->email)->first();
+        $u->codigo_acceso = ($codigo = uniqid());
+        $u->save();
 
         // Envio correo con código de recuperación
         Mail::send("correos.recuperacion",[
@@ -74,7 +112,12 @@ class UsuarioCtrl extends Controller
             $m->to($rq->email);
             $m->subject($asunto);
         });
-        return redirect()->route("inicio")->with('alerta', ['tipo' => 'success', 'texto' => 'recuperacion-contraseña']);
+        return redirect()->route("inicio")->with([
+            'alerta' => [
+                'tipo' => 'success',
+                'texto' => 'recuperacion-contraseña'
+            ]
+        ]);
     }
 
     // Renovar contraseña
@@ -87,13 +130,13 @@ class UsuarioCtrl extends Controller
         ]);
 
         // Cambio de contraseña
-        $usuario = Usuario::where('codigo_acceso',$rq->codigo_acceso)->first();
-        $usuario->password = bcrypt($rq->password);
-        $usuario->codigo_acceso = null;
-        $usuario->save();
+        $u = Usuario::where('codigo_acceso',$rq->codigo_acceso)->first();
+        $u->password = bcrypt($rq->password);
+        $u->codigo_acceso = null;
+        $u->save();
         return $this->ingreso(
             new Request([
-                'email'     =>  $usuario->email,
+                'email'     =>  $u->email,
                 'password'  =>  $rq->password
             ])
         );
@@ -101,9 +144,16 @@ class UsuarioCtrl extends Controller
 
     // Usuario
     public function usuario(){
-        return view("usuarios.usuario")->with(
-            'usuario',
-            Auth::user()
-        );
+        return view("usuarios.usuario")->with([
+            'usuario' => Auth::user()
+        ]);
+    }
+
+    // Usuarios
+    public function usuarios(){
+        return view('usuarios.usuarios')->with([
+            'usuarios'  =>  Usuario::where('administrador',false)->get(),
+            'roles'     =>  Rol::all()
+        ]);
     }
 }

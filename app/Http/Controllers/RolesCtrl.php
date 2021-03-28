@@ -11,10 +11,9 @@ class RolesCtrl extends Controller
     // Roles
     public function roles(){
         return view('usuarios.roles')
-        ->with(
-            'roles',
-            Rol::all()
-        );
+        ->with([
+            'roles' => Rol::all()
+        ]);
     }
 
     // Guardar
@@ -22,15 +21,23 @@ class RolesCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'    =>  'required|max:75',
-            'permisos'  =>  'required'
+            'titulo'    => 'required|max:75',
+            'permisos'  => 'required'
         ]);
+
+        // Que no sea repetido
+        if ( Rol::where('titulo',$rq->titulo)->where('id','!=',$rq->id)->exists() ) {
+            return back()->with([
+                'id' => $rq->id
+            ])->withErrors(
+                $rq->validate([
+                    'titulo' => 'unique:roles,titulo'
+                ])
+            );
+        }
 
         // Registro
         if (!$r = Rol::find($rq->id)) {
-            $rq->validate([
-                'titulo'    =>  'unique:roles,titulo',
-            ]);
             $r = new Rol;
         }
         $r->titulo = $rq->titulo;
@@ -38,12 +45,24 @@ class RolesCtrl extends Controller
         $r->save();
 
         // Respuesta
-        return back()->with('alerta', ['tipo' => 'success']);
+        return back()->with([
+            'alerta' => [
+                'tipo' => 'success'
+            ]
+        ]);
     }
 
     // Eliminar
     public function eliminar(Request $rq){
+
+        // Eliminar
         Rol::whereIn('id',$rq->resultados)->delete();
-        return back()->with('alerta', ['tipo' => 'success']);
+        
+        // Respuesta
+        return back()->with([
+            'alerta' => [
+                'tipo' => 'success'
+            ]
+        ]);
     }
 }

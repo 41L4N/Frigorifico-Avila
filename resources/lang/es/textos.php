@@ -88,6 +88,7 @@ return [
             'apellido'              =>  "Apellido",
             'email'                 =>  "Email",
             'telf'                  =>  "Teléfono",
+            'rol'                   =>  "Rol",
             'cambiar-contraseña'    =>  "Cambiar contraseña",
             'contraseña'            =>  "Contraseña",
             'confirmar-contraseña'  =>  "Confirmar contraseña",

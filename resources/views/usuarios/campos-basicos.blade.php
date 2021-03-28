@@ -28,7 +28,7 @@
     @if (in_array("telf",$campos))
         <div>
             <label>{{__('textos.formularios.etiquetas.telf')}}</label>
-            <div class="fila-form">
+            <div class="d-flex">
                 <input name="telf[codigo_pais]" class="form-control w-25" placeholder="58" minlength="2" maxlength="4" onkeypress="soloNumeros(event)" required>
                 <input name="telf[telf]" class="form-control" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
             </div>

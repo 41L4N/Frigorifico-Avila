@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function(){
         // Usuarios
         Route::prefix($n='usuarios')->name($n)->group(function (){
             Route::get('/',[UsuarioCtrl::class,'usuarios'])->name('');
+            Route::post('/',[UsuarioCtrl::class,'guardar']);
+            Route::post('/eliminar',[UsuarioCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Inventario

@@ -21,7 +21,7 @@
         <div class="submenu-resultados">
             <div>{{$tituloMD}}</div>
             <div>
-                <button type="button" class="btn btn-primary" onclick="agregar()" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
                 <button type="button" class="btn btn-danger btn-admin" data-toggle="modal" data-target="#vtnConfirmacion" disabled>{{__('textos.botones.eliminar')}}</button>
             </div>
         </div>
@@ -52,7 +52,7 @@
                                 {{__('textos.rutas.'.$p)}} <br>
                             @endforeach
                         </td>
-                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); editar({{$loop->index}})"></a></td>
+                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); registroActual({{$r->id}})"></a></td>
                     </tr>
                 @endforeach
             </table>
@@ -69,7 +69,7 @@
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
     <div class="modal fade" id="vtnGuardar" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
                 <div class="modal-header">
@@ -82,13 +82,13 @@
                     @include('plantillas.errores')
 
                     {{-- Id --}}
-                    <input type="text" name="id">
+                    <input type="hidden" name="id">
 
                     {{-- Titulo --}}
                     <div class="fila-form">
                         <div>
-                            <label>{{__('textos.formularios.etiquetas.titulo')}}</label>
-                            <input type="text" class="form-control" name="titulo" maxlength="75" required>
+                            <label>{{__('textos.formularios.etiquetas.'.$n = 'titulo')}}</label>
+                            <input type="text" class="form-control @error($n) is-invalid @enderror" name="{{$n}}" maxlength="75" required>
                         </div>
                     </div>
 
@@ -117,40 +117,56 @@
 {{-- JavaScript --}}
 @section('js')
     <script src="{{asset('/js/formularios.js')}}"></script>
-    @if(count($errors))
-        <script>
-            $('#vtnGuardar').modal('show');
-        </script>
-    @endif
     <script>
 
-        // Datos
-        var datos = {!! json_encode($roles) !!};
-
-        // Agregar
-        function agregar() {
+        // Limpiar formulario
+        $('#vtnGuardar').on('hide.bs.modal', function () {
             vtnGuardar.querySelector('form').reset();
-        }
-
-        // Editar
-        function editar(i) {
-
-            // Campos directos
-            Object.keys(datos[i]).forEach(clave => {
-                if ( campo = document.querySelector('[name=' + clave + ']') ) {
-                    campo.value = datos[i][clave];
-                }
+            vtnGuardar.querySelectorAll('.is-invalid').forEach(campo => {
+                campo.classList.remove('is-invalid');
             });
+            if (errores = vtnGuardar.querySelector('#errores')) {
+                errores.parentNode.removeChild(errores);
+            }
+        });
 
-            // Permisos
-            JSON.parse(datos[i]['permisos']).forEach(p => {
-                if ( campo = document.querySelector('[value=' + p + ']') ) {
-                    campo.checked = true;
-                }
-            });
+        // Datos
+        var datos = @json($roles);
+        var id = @json( Session::get('id') );
+
+        // Formulario
+        function registroActual(id=null) {
+
+            // Elemento actual
+            if (id) {
+                
+                // Index
+                var registroActual = datos.filter(function(x) {
+                    return x.id == id;
+                })[0];
+    
+                // Campos directos
+                Object.keys(registroActual).forEach(clave => {
+                    if ( campo = document.querySelector('[name=' + clave + ']') ) {
+                        campo.value = registroActual[clave];
+                    }
+                });
+    
+                // Permisos
+                JSON.parse(registroActual['permisos']).forEach(p => {
+                    if ( campo = document.querySelector('[value=' + p + ']') ) {
+                        campo.checked = true;
+                    }
+                });
+            }
 
             // Ventana
             $('#vtnGuardar').modal('show');
         }
     </script>
+
+    {{-- Errores --}}
+    @if(count($errors))
+        <script> registroActual(id); </script>
+    @endif
 @endsection

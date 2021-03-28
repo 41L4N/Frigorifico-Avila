@@ -1,3 +1,10 @@
+// Solo numeros
+function soloNumeros(tecla) {
+    if (tecla.keyCode < 47 || tecla.keyCode > 58) {
+        tecla.returnValue = false;
+    }
+}
+
 // Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase "secc-resultados"
 var checks = document.querySelectorAll('.tb-resultados [name^="resultado"]');
 function clickTodos(){ checks.forEach(check => { check.checked = checkPrincipal.checked; }); }
