@@ -52,7 +52,7 @@
                                 {{__('textos.rutas.'.$p)}} <br>
                             @endforeach
                         </td>
-                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$r->id}})"></a></td>
+                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
             </table>
@@ -68,7 +68,7 @@
 
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
-    <div class="modal fade" id="vtnGuardar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="{{$idVtn = "vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
@@ -80,6 +80,7 @@
 
                     {{-- Id --}}
                     <input type="hidden" name="id">
+                    <input type="hidden" name="{{$idVtn}}">
 
                     {{-- Titulo --}}
                     <div class="fila-form">
@@ -113,46 +114,26 @@
 
 {{-- JavaScript --}}
 @section('js')
-    <script src="{{asset('/js/formularios.js')}}"></script>
-    <script>
+<script src="{{asset('/js/formularios.js')}}"></script>
+<script>
+    var registros       = @json($roles),
+        registroA       = null,
+        mensajesErrores = new Object( @json( $errors->messages() ) ),
+        valoresErrores  = new Object( @json( request()->old() ) );
+    if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
+        llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
+    }
 
-        // Formulario
-        function llenarFormulario(id=null) {
+    // Campos adicionales
+    function camposAdicionales() {
 
-            // Elemento actual
-            if (id) {
-
-                // Index
-                var registroActual = datos.filter(function(x) {
-                    return x.id == id;
-                })[0];
-    
-                // Campos directos
-                Object.keys(registroActual).forEach(clave => {
-                    if ( campo = document.querySelector('[name=' + clave + ']') ) {
-                        campo.value = registroActual[clave];
-                    }
-                });
-    
-                // Permisos
-                JSON.parse(registroActual['permisos']).forEach(p => {
-                    if ( campo = document.querySelector('[value=' + p + ']') ) {
-                        campo.checked = true;
-                    }
-                });
+        // Permisos
+        var permisos = (typeof registroA.permisos === 'string') ? JSON.parse( registroA.permisos ) : registroA.permisos;
+        permisos.forEach(p => {
+            if ( campo = document.querySelector('[value=' + p + ']') ) {
+                campo.checked = true;
             }
-
-            // Ventana
-            $('#vtnGuardar').modal('show');
-        }
-
-        // Datos
-        var datos = @json($roles);
-        var id = @json( Session::get('id') );
-
-        // Ventana automatica si hay errores
-        if (document.querySelector('#errores')) {
-            llenarFormulario();
-        }
-    </script>
+        });
+    }
+</script>
 @endsection

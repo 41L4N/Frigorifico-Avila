@@ -53,7 +53,7 @@
                         <td>{{$u->email}}</td>
                         <td>{{formatos('t', $u->telf, true)}}</td>
                         <td>{{$u->rolP()}}</td>
-                        <td><a class="fas fa-edit" href="" onclick='event.preventDefault(); llenarFormulario({{$loop->index}},"#vtnGuardar")'></a></td>
+                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
             </table>
