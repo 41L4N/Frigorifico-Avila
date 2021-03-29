@@ -72,6 +72,11 @@ Route::middleware('auth')->group(function(){
         });
 
         // Inventario
+        Route::prefix($n='inventario')->name($n)->group(function (){
+            Route::get('/',[ProductoCtrl::class,'inventario'])->name('');
+            Route::post('/',[ProductoCtrl::class,'guardar']);
+            Route::post('/eliminar',[ProductoCtrl::class,'eliminar'])->name('.eliminar');
+        });
 
         // Ordenes de compra
 

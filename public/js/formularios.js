@@ -69,6 +69,7 @@ function llenarFormulario(clave=null, contFormulario) {
                 case 'hidden':
                 case 'text':
                 case 'email':
+                case 'number':
                 case 'select':
                 case 'textarea':
                     campo.value = registroA[clave];

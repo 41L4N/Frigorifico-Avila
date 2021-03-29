@@ -39,7 +39,7 @@
     margin: 0px;
 }
 
-/* Input tel sin flechitas feas */
+/* Input numerico sin flechitas feas */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

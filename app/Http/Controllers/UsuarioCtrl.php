@@ -211,9 +211,7 @@ class UsuarioCtrl extends Controller
     // Usuarios
     public function usuarios(){
         return view('usuarios.usuarios')->with([
-            'usuarios'      =>  Usuario::whereNull('administrador')->get(),
-            'todosUsuarios' =>  Usuario::get(['id','nombre','apellido']),
-            'roles'         =>  Rol::get(['id','titulo'])
+            'usuarios' => Usuario::whereNull('administrador')->get()
         ]);
     }
 }
