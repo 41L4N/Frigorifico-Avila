@@ -52,7 +52,7 @@
                                 {{__('textos.rutas.'.$p)}} <br>
                             @endforeach
                         </td>
-                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); registroActual({{$r->id}})"></a></td>
+                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$r->id}})"></a></td>
                     </tr>
                 @endforeach
             </table>
@@ -120,7 +120,7 @@
     <script>
 
         // Formulario
-        function registroActual(id=null) {
+        function llenarFormulario(id=null) {
 
             // Elemento actual
             if (id) {
@@ -155,7 +155,7 @@
 
         // Ventana automatica si hay errores
         if (document.querySelector('#errores')) {
-            registroActual();
+            llenarFormulario();
         }
     </script>
 @endsection

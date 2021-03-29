@@ -53,13 +53,6 @@
             <form action="/{{$seccionRuta}}" method="POST" class="w-100">
                 @csrf
 
-                {{-- Errores --}}
-                
-                <input type="hidden" id="errores" value='@json([
-                    "campos"    => $errors->messages(),
-                    "valores"   => request()->old()
-                ])'>
-
                 {{-- Titulo --}}
                 <div class="titulo-form">{{ $tituloMD }}</div>
 
@@ -161,4 +154,11 @@
 {{-- JavaScript --}}
 @section('js')
     <script src="{{asset('/js/formularios.js')}}"></script>
+    <script>
+        var mensajesErrores = new Object( @json( $errors->messages() ) ),
+            valoresErrores = new Object( @json( request()->old() ) );
+        if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
+            llenarFormulario(null, '#vtnGuardar');
+        }
+    </script>
 @endsection

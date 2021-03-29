@@ -1,40 +1,3 @@
-// Limpiar formulario
-$('#vtnGuardar').on('hide.bs.modal', function () {
-    vtnGuardar.querySelector('form').reset();
-    vtnGuardar.querySelectorAll('.is-invalid').forEach(campo => {
-        campo.classList.remove('is-invalid');
-    });
-    if (errores = vtnGuardar.querySelector('#errores')) {
-        errores.parentNode.removeChild(errores);
-    }
-});
-
-// Errores
-if (errores = document.querySelector('#errores')) {
-
-    // Lista
-    var errores = JSON.parse(errores.value);
-    // Campos o valores
-    Object.keys(errores).forEach(clave => {
-        // Elementos
-        Object.keys(errores[clave]).forEach(clave2 => {
-            if (campo = document.querySelector('[name='+clave2+']')) {
-
-                // Mensajes
-                if (clave=="campos") {
-                    campo.classList.add('is-invalid');
-                    campo.insertAdjacentHTML('afterend','<div class="alert alert-danger m-0 mt-1">'+errores[clave][clave2][0]+'</div>');
-                }
-
-                // Valores
-                else {
-                    campo.value = errores[clave][clave2];
-                }
-            }
-        });
-    });
-}
-
 // Solo numeros
 function soloNumeros(tecla) {
     if (tecla.keyCode < 47 || tecla.keyCode > 58) {
@@ -58,4 +21,61 @@ function contarChecks(){
     if(numChecksActivos > 0){ var estatus = false; }
     else { var estatus = true; }
     document.querySelectorAll('.btn-admin').forEach(btn => { btn.disabled = estatus; });
+}
+
+// Limpiar formulario
+$('#vtnGuardar').on('hide.bs.modal', function () {
+    vtnGuardar.querySelector('form').reset();
+    vtnGuardar.querySelectorAll('.is-invalid').forEach(campo => {
+        campo.classList.remove('is-invalid');
+    });
+    vtnGuardar.querySelectorAll('.alert-danger').forEach(alerta => {
+        alerta.parentNode.removeChild(alerta);
+    });
+});
+
+// Registro actual
+function llenarFormulario(clave=null, vtn=null) {
+
+    // Posibles errores
+    Object.keys(mensajesErrores).forEach(clave => {
+        if (campo = document.querySelector('[name='+clave+']')) {
+            // Estilos
+            campo.classList.add('is-invalid');
+            // Mensaje
+            campo.insertAdjacentHTML('afterend','<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
+        }
+    });
+    
+    // Registro actual
+    registroA = (clave===null) ? valoresErrores : registros[clave];
+    // Campos directos
+    Object.keys(registroA).forEach(clave => {
+        if ( campo = document.querySelector('[name=' + clave + ']') ) {
+
+            // Según el tipo de campo
+            switch (campo.type) {
+
+                case 'text':
+                case 'email':
+                case 'select':
+                case 'textarea':
+                    campo.value = registroA[clave];
+                break;
+
+                case 'checkbox':
+                case 'ratio':
+                    campo.checked = true;
+                break;
+            }
+        }
+    });
+
+    // Campos adicionales
+    if (typeof camposAdicionales !== 'undefined') {
+        camposAdicionales();
+    }
+
+    // Ventana
+    $(vtn).modal('show');    
 }

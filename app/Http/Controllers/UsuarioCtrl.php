@@ -46,13 +46,14 @@ class UsuarioCtrl extends Controller
 
         // Que no sea repetido
         if ( Usuario::where($c='email', $rq->$c)->where('id', '!=', $rq->id)->exists() ) {
-            return back()->with([
-                'id' => $rq->id
-            ])->withErrors(
+            return back()->withErrors(
                 $rq->validate([
                     $c => 'unique:usuarios,'.$c
                 ])
+            )->withInput(
+                $rq->except(['_token','password'])
             );
+            
         }
 
         // Registro

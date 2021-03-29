@@ -53,7 +53,7 @@
                         <td>{{$u->email}}</td>
                         <td>{{formatos('t', $u->telf, true)}}</td>
                         <td>{{$u->rolP()}}</td>
-                        <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); registroActual({{$u->id}})"></a></td>
+                        <td><a class="fas fa-edit" href="" onclick='event.preventDefault(); llenarFormulario({{$loop->index}},"#vtnGuardar")'></a></td>
                     </tr>
                 @endforeach
             </table>
@@ -77,12 +77,8 @@
                     <h5 class="modal-title">{{$tituloMD}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
+                {{-- Campos --}}
                 <div class="modal-body">
-
-                    {{-- Errores --}}
-                    @include('plantillas.errores')
-
-                    {{-- Campos --}}
                     @include('usuarios.campos-basicos',$campos = ['id','telf'])
                 </div>
                 <div class="modal-footer">
@@ -93,7 +89,7 @@
         </div>
     </div>
     {{-- Roles --}}
-    <div class="modal fade" id="vtnGuardar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="vtnRoles" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
@@ -101,12 +97,8 @@
                     <h5 class="modal-title">{{$tituloMD}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
+                {{-- Campos --}}
                 <div class="modal-body">
-
-                    {{-- Errores --}}
-                    @include('plantillas.errores')
-
-                    {{-- Campos --}}
                     @include('usuarios.campos-basicos',$campos = ['id','telf'])
                 </div>
                 <div class="modal-footer">
@@ -125,43 +117,24 @@
     <script src="{{asset('/js/formularios.js')}}"></script>
     <script>
 
-        // Formulario
-        function registroActual(id=null) {
-
-            // Elemento actual
-            if (id) {
-
-                // Index
-                var registroActual = datos.filter(function(x) {
-                    return x.id == id;
-                })[0];
-
-                // Campos directos
-                Object.keys(registroActual).forEach(clave => {
-                    if ( campo = document.querySelector('[name=' + clave + ']') ) {
-                        campo.value = registroActual[clave];
-                    }
-                });
-
-                // Teléfono
-                Object.keys( telf = JSON.parse(registroActual['telf']) ).forEach(clave => {
-                    if ( campo = document.querySelector('[name="telf[' + clave + ']"]') ) {
-                        campo.value = telf[clave];
-                    }
-                });
-            }
-
-            // Ventana
-            $('#vtnGuardar').modal('show');
+        var registros = @json($usuarios),
+                        registroA = "",
+                        mensajesErrores = new Object( @json( $errors->messages() ) ),
+                        valoresErrores = new Object( @json( request()->old() ) );
+        if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
+            llenarFormulario(null, '#vtnGuardar');
         }
 
-        // Datos
-        var datos = @json($usuarios);
-        var id = @json( Session::get('id') );
+        // Campos adicionales
+        function camposAdicionales() {
 
-        // Ventana automatica si hay errores
-        if (document.querySelector('#errores')) {
-            registroActual();
+            // Teléfono
+            var telf = (typeof registroA.telf === 'string') ? JSON.parse( registroA.telf ) : registroA.telf;
+            Object.keys( telf ).forEach(clave => {
+                if ( campo = document.querySelector('[name="telf[' + clave + ']"]') ) {
+                    campo.value = telf[clave];
+                }
+            });
         }
     </script>
 @endsection
