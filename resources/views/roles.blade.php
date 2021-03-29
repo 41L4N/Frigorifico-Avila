@@ -146,15 +146,25 @@
     }
 
     // Campos adicionales
-    function camposAdicionales() {
+    function camposAdicionales(llenar, contFormulario) {
 
-        // Permisos
-        var permisos = (typeof registroA.permisos === 'string') ? JSON.parse( registroA.permisos ) : registroA.permisos;
-        permisos.forEach(p => {
-            if ( campo = document.querySelector('[value=' + p + ']') ) {
-                campo.parentNode.click();
-            }
-        });
+        // Llenar
+        if (llenar) {
+            // Permisos
+            var permisos = (typeof registroA.permisos === 'string') ? JSON.parse( registroA.permisos ) : registroA.permisos;
+            permisos.forEach(p => {
+                if ( campo = document.querySelector(contFormulario + ' [value=' + p + ']') ) {
+                    campo.parentNode.click();
+                }
+            });
+        }
+
+        // Vaciar
+        else {
+            contFormulario.querySelectorAll('.activo, .activa').forEach(campo => {
+                campo.classList.remove('activo', 'activa');
+            });
+        }
     }
 </script>
 @endsection

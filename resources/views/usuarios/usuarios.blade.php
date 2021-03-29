@@ -107,15 +107,19 @@
         }
 
         // Campos adicionales
-        function camposAdicionales() {
+        function camposAdicionales(llenar, contFormulario) {
 
-            // Teléfono
-            var telf = (typeof registroA.telf === 'string') ? JSON.parse( registroA.telf ) : registroA.telf;
-            Object.keys( telf ).forEach(clave => {
-                if ( campo = document.querySelector('[name="telf[' + clave + ']"]') ) {
-                    campo.value = telf[clave];
-                }
-            });
+            // Llenar
+            if (llenar) {
+
+                // Teléfono
+                var telf = (typeof registroA.telf === 'string') ? JSON.parse( registroA.telf ) : registroA.telf;
+                Object.keys( telf ).forEach(clave => {
+                    if ( campo = document.querySelector(contFormulario + ' [name="telf[' + clave + ']"]') ) {
+                        campo.value = telf[clave];
+                    }
+                });
+            }
         }
     </script>
 @endsection

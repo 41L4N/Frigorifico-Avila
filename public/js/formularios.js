@@ -24,19 +24,20 @@ function contarChecks(){
 }
 
 // Limpiar formulario
-document.querySelectorAll('.contenido .modal').forEach(vtnModal => {
-    $('#'+vtnModal.id).on('hide.bs.modal', function () {
+document.querySelectorAll('.contenido .modal').forEach(contFormulario => {
+    $('#'+contFormulario.id).on('hide.bs.modal', function () {
         // Campos
-        vtnModal.querySelector('form').reset();
+        contFormulario.querySelector('form').reset();
+        // Campos adicionales
+        if (typeof camposAdicionales !== 'undefined') {
+            camposAdicionales(false, contFormulario)
+        }
         // Estilos
-        vtnModal.querySelectorAll('.is-invalid').forEach(campo => {
+        contFormulario.querySelectorAll('.is-invalid').forEach(campo => {
             campo.classList.remove('is-invalid');
         });
-        vtnModal.querySelectorAll('.activo, .activa').forEach(campo => {
-            campo.classList.remove('activo', 'activa');
-        });
         // Alertas
-        vtnModal.querySelectorAll('.alert').forEach(alerta => {
+        contFormulario.querySelectorAll('.alert').forEach(alerta => {
             alerta.parentNode.removeChild(alerta);
         });
     });
@@ -83,10 +84,9 @@ function llenarFormulario(clave=null, contFormulario) {
 
     // Campos adicionales
     if (typeof camposAdicionales !== 'undefined') {
-        camposAdicionales();
+        camposAdicionales(true, contFormulario);
     }
 
     // Ventana
-    // La ventana actual la busco escalando hacia arriba parentNode
     $(contFormulario).modal('show');
 }
