@@ -130,7 +130,7 @@
     </div>
 
     {{-- Ventana modal para recuperar contraseña --}}
-    <div class="modal fade" id="vtnRecuperar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="{{$idVtn = "vtnRecuperar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{route('sesion.recuperacion-contraseña')}}" method="POST" class="modal-content">
                 @csrf
@@ -139,6 +139,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="id_vtn" value="{{$idVtn}}">
                     {{__('textos.formularios.etiquetas.'.$n='email')}}
                     <input type="email" name="{{$n}}" class="form-control" maxlength="75" required>
                 </div>
@@ -156,9 +157,9 @@
     <script src="{{asset('/js/formularios.js')}}"></script>
     <script>
         var mensajesErrores = new Object( @json( $errors->messages() ) ),
-            valoresErrores = new Object( @json( request()->old() ) );
+            valoresErrores  = new Object( @json( request()->old() ) );
         if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
-            llenarFormulario(null, '#vtnGuardar');
+            llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
         }
     </script>
 @endsection

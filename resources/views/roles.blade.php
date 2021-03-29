@@ -78,9 +78,6 @@
                 </div>
                 <div class="modal-body">
 
-                    {{-- Errores --}}
-                    @include('plantillas.errores')
-
                     {{-- Id --}}
                     <input type="hidden" name="id">
 

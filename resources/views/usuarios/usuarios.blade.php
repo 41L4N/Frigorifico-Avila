@@ -69,7 +69,7 @@
 
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
-    <div class="modal fade" id="vtnGuardar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="{{$idVtn = "vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
@@ -79,6 +79,7 @@
                 </div>
                 {{-- Campos --}}
                 <div class="modal-body">
+                    <input type="hidden" name="id_vtn" value="{{$idVtn}}">
                     @include('usuarios.campos-basicos',$campos = ['id','telf'])
                 </div>
                 <div class="modal-footer">
@@ -117,12 +118,12 @@
     <script src="{{asset('/js/formularios.js')}}"></script>
     <script>
 
-        var registros = @json($usuarios),
-                        registroA = "",
-                        mensajesErrores = new Object( @json( $errors->messages() ) ),
-                        valoresErrores = new Object( @json( request()->old() ) );
+        var registros       = @json($usuarios),
+            registroA       = null,
+            mensajesErrores = new Object( @json( $errors->messages() ) ),
+            valoresErrores  = new Object( @json( request()->old() ) );
         if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
-            llenarFormulario(null, '#vtnGuardar');
+            llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
         }
 
         // Campos adicionales

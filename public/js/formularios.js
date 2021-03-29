@@ -35,27 +35,29 @@ $('#vtnGuardar').on('hide.bs.modal', function () {
 });
 
 // Registro actual
-function llenarFormulario(clave=null, vtn=null) {
+function llenarFormulario(clave=null, contFormulario) {
 
     // Posibles errores
     Object.keys(mensajesErrores).forEach(clave => {
-        if (campo = document.querySelector('[name='+clave+']')) {
+        if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']') ) {
             // Estilos
             campo.classList.add('is-invalid');
             // Mensaje
-            campo.insertAdjacentHTML('afterend','<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
+            campo.insertAdjacentHTML('afterend', '<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
         }
     });
-    
+
     // Registro actual
     registroA = (clave===null) ? valoresErrores : registros[clave];
+
     // Campos directos
     Object.keys(registroA).forEach(clave => {
-        if ( campo = document.querySelector('[name=' + clave + ']') ) {
+        if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']') ) {
 
             // Según el tipo de campo
             switch (campo.type) {
 
+                case 'hidden':
                 case 'text':
                 case 'email':
                 case 'select':
@@ -77,5 +79,6 @@ function llenarFormulario(clave=null, vtn=null) {
     }
 
     // Ventana
-    $(vtn).modal('show');    
+    // La ventana actual la busco escalando hacia arriba parentNode
+    $(contFormulario).modal('show');
 }
