@@ -95,7 +95,7 @@
                                 {{-- Opciones --}}
                                 <div class="opciones-lista-menu-s">
                                     @if (Auth::user()->administrador)
-                                        <a class="opcion-menu-s" href="{{route('panel-administrador')}}">{{__('textos.rutas.panel-administrador')}}</a>
+                                        <a class="opcion-menu-s" href="{{route('panel-administrador')}}">{{__('textos.rutas.panel_administrador')}}</a>
                                     @endif
                                     <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
                                     <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>

@@ -11,26 +11,26 @@
 {{-- Nombre y apellido --}}
 <div class="fila-form">
     <div>
-        <label>{{__('textos.formularios.etiquetas.'.$n='nombre')}}</label>
-        <input type="text" name="nombre" class="form-control" maxlength="50" required>
+        <label>{{__('textos.campos.' . $n='nombre')}}</label>
+        <input type="text" name="{{$n}}" class="form-control" maxlength="50" required>
     </div>
     <div>
-        <label>{{__('textos.formularios.etiquetas.'.$n='apellido')}}</label>
-        <input type="text" name="apellido" class="form-control" maxlength="50" required>
+        <label>{{__('textos.campos.' . $n='apellido')}}</label>
+        <input type="text" name="{{$n}}" class="form-control" maxlength="50" required>
     </div>
 </div>
 {{-- Email y teléfono --}}
 <div class="fila-form">
     <div>
-        <label>{{__('textos.formularios.etiquetas.'.$n='email')}}</label>
-        <input type="email" name="email" class="form-control" maxlength="75" required>
+        <label>{{__('textos.campos.' . $n='email')}}</label>
+        <input type="email" name="{{$n}}" class="form-control" maxlength="75" required>
     </div>
     @if (in_array("telf",$campos))
         <div>
-            <label>{{__('textos.formularios.etiquetas.'.$n='telf')}}</label>
+            <label>{{__('textos.campos.' . $n='telf')}}</label>
             <div class="d-flex">
-                <input name="telf[codigo]" class="form-control w-25" placeholder="58" minlength="2" maxlength="4" onkeypress="soloNumeros(event)" required>
-                <input name="telf[numero]" class="form-control" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
+                <input name="{{$n}}[codigo]" class="form-control w-25" placeholder="58" minlength="2" maxlength="4" onkeypress="soloNumeros(event)" required>
+                <input name="{{$n}}[numero]" class="form-control" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
             </div>
         </div>
     @endif
@@ -45,17 +45,17 @@
 @if (in_array("contraseñas",$campos))
     @if (in_array("cambiar_contraseñas",$campos))
         <label class="cursor-pointer"> <input type="checkbox" name="contraseñas" onchange='contraseñas.disabled = !contraseñas.disabled'>
-            {{__('textos.formularios.etiquetas.cambiar_contraseña')}}
+            {{__('textos.campos.cambiar_contraseña')}}
         </label>
     @endif
-    <fieldset id="contraseñas" @if (in_array("cambiar-contraseñas",$campos)) disabled @endif>
+    <fieldset id="contraseñas" @if (in_array('cambiar-contraseñas', $campos)) disabled @endif>
         <div class="fila-form">
             <div>
-                <label>{{__('textos.formularios.etiquetas.'.$n='contraseña')}}</label>
+                <label>{{__('textos.campos.contraseña')}}</label>
                 <input type="password" name="password" class="form-control" minlength="8" maxlength="15" required>
             </div>
             <div>
-                <label>{{__('textos.formularios.etiquetas.'.$n='confirmar-contraseña')}}</label>
+                <label>{{__('textos.campos.confirmar-contraseña')}}</label>
                 <input type="password" name="confirmacion_password" class="form-control" minlength="8" maxlength="15" required>
             </div>
         </div>

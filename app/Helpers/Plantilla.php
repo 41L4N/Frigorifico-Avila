@@ -1,8 +1,11 @@
 <?php
 
 // Prefijo
-function prefijo(){
-    $prefijo = explode( "/", Request::route()->getPrefix() );
+function prefijo($espacio=null){
+    $prefijo = explode("/", Request::route()->getPrefix());
+    if ($espacio) {
+        $prefijo = str_replace('-', $espacio, $prefijo);
+    }
     return end($prefijo);
 }
 

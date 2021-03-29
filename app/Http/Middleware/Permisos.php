@@ -19,9 +19,9 @@ class Permisos
     public function handle(Request $request, Closure $next)
     {
 
-        $permisos = ( $rol = Rol::find( Auth::user()->rol ) ) ? $rol->permisos : "";
-        $permisos = explode( "," , $permisos );
-        if( Auth::user()->administrador || in_array( prefijo(), $permisos ) ){
+        $permisos = ($rol = Rol::find( Auth::user()->rol ) ) ? $rol->permisos : "";
+        $permisos = explode("," , $permisos);
+        if(Auth::user()->administrador || in_array(prefijo(), $permisos) ){
             return $next($request);
         }
         else {

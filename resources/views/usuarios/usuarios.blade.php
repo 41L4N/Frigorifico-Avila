@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.'.prefijo());
+    $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
 {{-- Estilos --}}
@@ -14,7 +14,7 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo().'.eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(prefijo() . '.eliminar')}}" method="POST" class="form-resultados">
         @csrf
 
         {{-- Submenu --}}
@@ -22,7 +22,6 @@
             <div>{{$tituloMD}}</div>
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnRoles">{{__('textos.botones.roles')}}</button>
                 <button type="button" class="btn btn-danger btn-admin" data-toggle="modal" data-target="#vtnConfirmacion" disabled>{{__('textos.botones.eliminar')}}</button>
             </div>
         </div>
@@ -37,10 +36,10 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
-                    <th>{{__('textos.formularios.etiquetas.nombre') ." y ". __('textos.formularios.etiquetas.apellido')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.email')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.telf')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.rol')}}</th>
+                    <th>{{__('textos.campos.nombre') ." y ". __('textos.campos.apellido')}}</th>
+                    <th>{{__('textos.campos.email')}}</th>
+                    <th>{{__('textos.campos.telf')}}</th>
+                    <th>{{__('textos.campos.rol')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
@@ -60,16 +59,13 @@
 
         {{-- Sin resultados --}}
         @else
-            <div class="sin-resultados">
-                <i class="fas fa-folder-open"></i>
-                <div>{{__('textos.contenido.sin-resultados')}}</div>
-            </div>
+            @include('plantillas.sin-resultados')
         @endif
     </form>
 
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
-    <div class="modal fade" id="{{$idVtn = "vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
@@ -80,7 +76,7 @@
                 {{-- Campos --}}
                 <div class="modal-body">
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
-                    @include('usuarios.campos-basicos',$campos = ['id','telf'])
+                    @include('usuarios.campos-basicos', $campos=['id','telf'])
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>

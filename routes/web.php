@@ -17,23 +17,23 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Inicio
-Route::get('/',[InicioCtrl::class,'inicio'])->name("inicio");
+Route::get('/', [InicioCtrl::class,'inicio'])->name("inicio");
 
 // Sesion
-Route::get('/{seccion}/{codigo_acceso?}',[UsuarioCtrl::class,'sesion'])
-->where('seccion','(registro|ingreso|recuperacion-contraseña|renovacion-contraseña)')
+Route::get('/{seccion}/{codigo_acceso?}', [UsuarioCtrl::class,'sesion'])
+->where('seccion', '(registro|ingreso|recuperacion-contraseña|renovacion-contraseña)')
 ->name('sesion');
 // Registro
-Route::post('/registro',[UsuarioCtrl::class,'guardar']);
+Route::post('/registro', [UsuarioCtrl::class,'guardar']);
 // Ingreso
-Route::post('/ingreso',[UsuarioCtrl::class,'ingreso']);
+Route::post('/ingreso', [UsuarioCtrl::class,'ingreso']);
 // Recuperación de contraseña
-Route::post('/recuperacion-contraseña',[UsuarioCtrl::class,'recuperacionContraseña'])->name('sesion.recuperacion-contraseña');
+Route::post('/recuperacion-contraseña', [UsuarioCtrl::class,'recuperacionContraseña'])->name('sesion.recuperacion-contraseña');
 // Renovación de contraseña
-Route::post('/renovacion-contraseña',[UsuarioCtrl::class,'renovacionContraseña']);
+Route::post('/renovacion-contraseña', [UsuarioCtrl::class,'renovacionContraseña']);
 
 // Productos
-Route::get('/productos/{seo?}/{codigo?}',[ProductoCtrl::class,'inicio'])->name('productos');
+Route::get('/productos/{seo?}/{codigo?}', [ProductoCtrl::class,'inicio'])->name('productos');
 
 // Rutas protegidas
 Route::middleware('auth')->group(function(){
@@ -42,10 +42,10 @@ Route::middleware('auth')->group(function(){
     Route::prefix($n='usuario')->name($n)->group(function(){
 
         // Perfil
-        Route::get('/',[UsuarioCtrl::class,'usuario'])->name('.perfil');
+        Route::get('/', [UsuarioCtrl::class,'usuario'])->name('.perfil');
 
         // Salir
-        Route::get("/salir",function (){
+        Route::get("/salir", function (){
             Auth::logout();
             return redirect()->route("inicio");
         })->name('.salir');
@@ -59,23 +59,23 @@ Route::middleware('auth')->group(function(){
 
         // Roles
         Route::prefix($n='roles')->name($n)->group(function (){
-            Route::get('/',[RolesCtrl::class,'roles'])->name('');
-            Route::post('/',[RolesCtrl::class,'guardar']);
-            Route::post('/eliminar',[RolesCtrl::class,'eliminar'])->name('.eliminar');
+            Route::get('/', [RolesCtrl::class,'roles'])->name('');
+            Route::post('/', [RolesCtrl::class,'guardar']);
+            Route::post('/eliminar', [RolesCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Usuarios
         Route::prefix($n='usuarios')->name($n)->group(function (){
-            Route::get('/',[UsuarioCtrl::class,'usuarios'])->name('');
-            Route::post('/',[UsuarioCtrl::class,'guardar']);
-            Route::post('/eliminar',[UsuarioCtrl::class,'eliminar'])->name('.eliminar');
+            Route::get('/', [UsuarioCtrl::class,'usuarios'])->name('');
+            Route::post('/', [UsuarioCtrl::class,'guardar']);
+            Route::post('/eliminar', [UsuarioCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Inventario
         Route::prefix($n='inventario')->name($n)->group(function (){
-            Route::get('/',[ProductoCtrl::class,'inventario'])->name('');
-            Route::post('/',[ProductoCtrl::class,'guardar']);
-            Route::post('/eliminar',[ProductoCtrl::class,'eliminar'])->name('.eliminar');
+            Route::get('/', [ProductoCtrl::class,'inventario'])->name('');
+            Route::post('/', [ProductoCtrl::class,'guardar']);
+            Route::post('/eliminar', [ProductoCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Ordenes de compra

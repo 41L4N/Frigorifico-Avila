@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.'.prefijo());
+    $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
 {{-- Estilos --}}
@@ -33,7 +33,7 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo().'.eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(prefijo() . '.eliminar')}}" method="POST" class="form-resultados">
         @csrf
 
         {{-- Submenu --}}
@@ -55,8 +55,8 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
-                    <th>{{__('textos.formularios.etiquetas.titulo')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.permisos')}}</th>
+                    <th>{{__('textos.campos.titulo')}}</th>
+                    <th>{{__('textos.campos.permisos')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
@@ -68,7 +68,7 @@
                         <td>{{$r->titulo}}</td>
                         <td>
                             @foreach (json_decode($r->permisos) as $p)
-                                {{__('textos.rutas.'.$p)}} <br>
+                                {{__('textos.rutas.' . str_replace('-', '_', $p))}}<br>
                             @endforeach
                         </td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
@@ -78,16 +78,13 @@
 
         {{-- Sin resultados --}}
         @else
-            <div class="sin-resultados">
-                <i class="fas fa-folder-open"></i>
-                <div>{{__('textos.contenido.sin-resultados')}}</div>
-            </div>
+            @include('plantillas.sin-resultados')
         @endif
     </form>
 
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
-    <div class="modal fade" id="{{$idVtn = "vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
@@ -104,7 +101,7 @@
                     {{-- Titulo --}}
                     <div class="fila-form">
                         <div>
-                            <label>{{__('textos.formularios.etiquetas.'.$n = 'titulo')}}</label>
+                            <label>{{__('textos.campos.' . $n = 'titulo')}}</label>
                             <input type="text" class="form-control" name="{{$n}}" maxlength="75" required>
                         </div>
                     </div>
@@ -112,11 +109,11 @@
                     {{-- Permisos --}}
                     <div class="fila-form">
                         <div>
-                            <label>{{__('textos.formularios.etiquetas.permisos')}}</label>
+                            <label>{{__('textos.campos.permisos')}}</label>
                             @foreach (['roles','usuarios','inventario','ordenes-compras','ofertas','combos'] as $ruta)
                                 <label class="opcion-rol">
                                     <input type="checkbox" name="permisos[]" value="{{$ruta}}" onchange="this.parentNode.classList.toggle('activa')">
-                                    {{__('textos.rutas.'.$ruta)}}
+                                    {{__('textos.rutas.' . str_replace('-', '_', $ruta))}}
                                 </label>
                             @endforeach
                         </div>

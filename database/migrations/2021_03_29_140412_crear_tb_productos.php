@@ -18,7 +18,7 @@ class CrearTbProductos extends Migration
             $tb->id();
             $tb->string('titulo');
             $tb->string('precio_detal');
-            $tb->string('compra_minima');
+            $tb->string('compra_min');
             $tb->string('precio_mayor');
             $tb->timestamps();
         });

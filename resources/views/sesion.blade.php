@@ -70,7 +70,7 @@
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.'.$n='email')}}</label>
+                                <label>{{__('textos.campos.' . $n='email')}}</label>
                                 <input type="email" class="form-control" name="{{$n}}" maxlength="75" autofocus required>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                         {{-- Contraseña --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.'.$n='contraseña')}}</label>
+                                <label>{{__('textos.campos.' . $n='contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                         {{-- Email --}}
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.'.$n='email')}}</label>
+                                <label>{{__('textos.campos.' . $n='email')}}</label>
                                 <input type="email" class="form-control" name="{{$n}}" autofocus required>
                             </div>
                         </div>
@@ -110,11 +110,11 @@
                         <input type="hidden" value="{{ Request::route('codigo_acceso') }}" name="codigo_acceso">
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.'.$n='contraseña')}}</label>
+                                <label>{{__('textos.campos.' . $n='contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                             <div>
-                                <label>{{__('textos.formularios.etiquetas.'.$n='confirmar-contraseña')}}</label>
+                                <label>{{__('textos.campos.' . $n='confirmar-contraseña')}}</label>
                                 <input type="password" class="form-control" name="confirmacion_password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
     </div>
 
     {{-- Ventana modal para recuperar contraseña --}}
-    <div class="modal fade" id="{{$idVtn = "vtnRecuperar"}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="{{$idVtn="vtnRecuperar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{route('sesion.recuperacion-contraseña')}}" method="POST" class="modal-content">
                 @csrf
@@ -140,7 +140,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
-                    {{__('textos.formularios.etiquetas.'.$n='email')}}
+                    {{__('textos.campos.' . $n='email')}}
                     <input type="email" name="{{$n}}" class="form-control" maxlength="75" required>
                 </div>
                 <div class="modal-footer">

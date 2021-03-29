@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.'.prefijo());
+    $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
 {{-- Estilos --}}
@@ -14,7 +14,7 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo().'.eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(prefijo() . '.eliminar')}}" method="POST" class="form-resultados">
         @csrf
 
         {{-- Submenu --}}
@@ -35,11 +35,8 @@
                 {{-- Titulos --}}
                 <tr>
                     <th>#</th>
-                    <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
-                    <th>{{__('textos.formularios.etiquetas.nombre') ." y ". __('textos.formularios.etiquetas.apellido')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.email')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.telf')}}</th>
-                    <th>{{__('textos.formularios.etiquetas.rol')}}</th>
+                    <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(), contarChecks()'></th>
+                    
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
@@ -48,10 +45,7 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <th><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$u->id}}"></th>
-                        <td>{{"$u->nombre $u->apellido"}}</td>
-                        <td>{{$u->email}}</td>
-                        <td>{{formatos('t', $u->telf, true)}}</td>
-                        <td>{{$u->rolP()}}</td>
+                        
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -59,17 +53,14 @@
 
         {{-- Sin resultados --}}
         @else
-            <div class="sin-resultados">
-                <i class="fas fa-folder-open"></i>
-                <div>{{__('textos.contenido.sin-resultados')}}</div>
-            </div>
+            @include('plantillas.sin-resultados')
         @endif
     </form>
 
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
-    <div class="modal fade" id="{{$idVtn = "vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <form class="modal-content" action="" method="POST">
                 @csrf
                 <div class="modal-header">
@@ -79,7 +70,38 @@
                 {{-- Campos --}}
                 <div class="modal-body">
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
+
+                    {{-- Titulo --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n='titulo')}}</label>
+                            <input type="text" class="form-control" name="{{$n}}" maxlength="75" required>
+                        </div>
+                    </div>
+
+                    {{-- Precio detal --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
+                            <input class="form-control" name="{{$n}}" maxlength="6" onkeypress="soloNumeros(event)" required>
+                        </div>
+                    </div>
+
+                    {{-- Compra mínima --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n='compra_min')}}</label>
+                            <input class="form-control" name="{{$n}}" maxlength="3" onkeypress="soloNumeros(event)">
+                        </div>
+                        <div>
+                            <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
+                            <input class="form-control" name="{{$n}}" maxlength="6" onkeypress="soloNumeros(event)">
+                        </div>
+                    </div>
+
+                    {{-- Fotos --}}
                     
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -110,6 +132,11 @@
 
             // Llenar
             if (llenar) {
+
+            }
+
+            // Vaciar
+            else {
 
             }
         }

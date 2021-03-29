@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.'.prefijo());
+    $tituloMD = __('textos.rutas.' . prefijo("_"));
 @endphp
 
 {{-- Estilos --}}
@@ -23,7 +23,7 @@
             <a href="{{route($r)}}" class="min">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>
-                    <div class="titulo-min">{{__('textos.rutas.'.$r)}}</div>
+                    <div class="titulo-min">{{__('textos.rutas.' . $r)}}</div>
                 </div>
             </a>
         @endforeach
