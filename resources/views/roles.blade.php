@@ -9,6 +9,25 @@
 {{-- Estilos --}}
 @section('estilos')
     <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
+    <style>
+        .opcion-rol {
+            width: 100%;
+            padding: 7.5px 12.5px;
+            box-shadow: 0px 0px 2.5px black;
+            cursor: pointer;
+            margin-bottom: 12.5px !important;
+            border: solid transparent 2.5px;
+        }
+        .opcion-rol input { margin-right: 5px; }
+        .opcion-rol:hover {
+            border: solid var(--c-plantilla) 2.5px;
+            box-shadow: 0px 0px 1.5px var(--c-plantilla);
+        }
+        .opcion-rol.activa {
+            border: solid var(--c-plantilla) 2.5px;
+            box-shadow: 0px 0px 1.5px var(--c-plantilla);
+        }
+    </style>
 @endsection
 
 {{-- Contenido --}}
@@ -91,14 +110,16 @@
                     </div>
 
                     {{-- Permisos --}}
-                    <div>
-                        <label>{{__('textos.formularios.etiquetas.permisos')}}</label>
-                        @foreach (['roles','usuarios','inventario','ordenes-compras','ofertas','combos'] as $ruta)
-                            <label>
-                                <input type="checkbox" name="permisos[]" value="{{$ruta}}">
-                                {{__('textos.rutas.'.$ruta)}}
-                            </label>
-                        @endforeach
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.formularios.etiquetas.permisos')}}</label>
+                            @foreach (['roles','usuarios','inventario','ordenes-compras','ofertas','combos'] as $ruta)
+                                <label class="opcion-rol">
+                                    <input type="checkbox" name="permisos[]" value="{{$ruta}}" onchange="this.parentNode.classList.toggle('activa')">
+                                    {{__('textos.rutas.'.$ruta)}}
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -131,7 +152,7 @@
         var permisos = (typeof registroA.permisos === 'string') ? JSON.parse( registroA.permisos ) : registroA.permisos;
         permisos.forEach(p => {
             if ( campo = document.querySelector('[value=' + p + ']') ) {
-                campo.checked = true;
+                campo.parentNode.click();
             }
         });
     }

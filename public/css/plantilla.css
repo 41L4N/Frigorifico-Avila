@@ -2,12 +2,19 @@
 :root {
 
     /* Colores de fondo, letra y transparencias */
+    /* Color 1 */
     --c-1: rgb(148, 2, 2);
     --c-l-c-1: white;
+    /* Transparencia */
+    /* --t-c-1: rgba(148, 2, 2, .5);
+    --c-l-t-c-1: white; */
 
     /* Plantilla */
     --c-plantilla: var(--c-1);
     --c-l-plantilla: var(--c-l-c-1);
+    /* Transparencia */
+    /* --t-c-plantilla: var(--t-c-1);
+    --c-l-t-c-plantilla: var(--c-l-t-c-1); */
 }
 
 /* Menú superior */

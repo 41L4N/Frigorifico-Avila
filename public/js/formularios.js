@@ -24,13 +24,21 @@ function contarChecks(){
 }
 
 // Limpiar formulario
-$('#vtnGuardar').on('hide.bs.modal', function () {
-    vtnGuardar.querySelector('form').reset();
-    vtnGuardar.querySelectorAll('.is-invalid').forEach(campo => {
-        campo.classList.remove('is-invalid');
-    });
-    vtnGuardar.querySelectorAll('.alert-danger').forEach(alerta => {
-        alerta.parentNode.removeChild(alerta);
+document.querySelectorAll('.contenido .modal').forEach(vtnModal => {
+    $('#'+vtnModal.id).on('hide.bs.modal', function () {
+        // Campos
+        vtnModal.querySelector('form').reset();
+        // Estilos
+        vtnModal.querySelectorAll('.is-invalid').forEach(campo => {
+            campo.classList.remove('is-invalid');
+        });
+        vtnModal.querySelectorAll('.activo, .activa').forEach(campo => {
+            campo.classList.remove('activo', 'activa');
+        });
+        // Alertas
+        vtnModal.querySelectorAll('.alert').forEach(alerta => {
+            alerta.parentNode.removeChild(alerta);
+        });
     });
 });
 

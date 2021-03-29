@@ -1,5 +1,5 @@
 /* Contenedor de miniaturas */
-.cont-miniaturas {
+.cont-mins {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -11,7 +11,7 @@
 }
 
 /* Miniatura */
-.miniatura {
+.min {
     display: block;
     width: 100%;
     min-width: 300px;
@@ -20,20 +20,25 @@
     text-align: center;
     color: black;
 }
-.miniatura:hover {
+.min:hover {
     box-shadow: 0px 0px 2.5px var(--c-plantilla);
     color: var(--c-plantilla);
 }
+/* Contenido */
+.contenido-min {
+    padding: 15px;
+}
 /* Titulo */
-.titulo-miniatura {
+.titulo-min {
     font-size: 27.5px;
+    margin-top: 15px;
 }
 
 /* Paginación */
 
 /* Responsive */
 @media only screen and (max-width: 768px) {
-    .cont-miniaturas {
+    .cont-mins {
         align-self: flex-start;
     }
 }

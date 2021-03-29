@@ -9,17 +9,22 @@
 {{-- Estilos --}}
 @section('estilos')
     <link rel="stylesheet" href="{{asset('/css/miniaturas.css')}}">
+    <style>
+        .min i { font-size: 50px }
+    </style>
 @endsection
 
 {{-- Contenido --}}
 @section('contenido')
-    <div class="cont-miniaturas">
+    <div class="cont-mins">
 
         {{-- Rutas --}}
         @foreach (['roles','usuarios',] as $r)
-            <a href="{{route($r)}}" class="miniatura">
-                <i class="{{iconos($r)}}"></i>
-                <div class="titulo-miniatura">{{__('textos.rutas.'.$r)}}</div>
+            <a href="{{route($r)}}" class="min">
+                <div class="contenido-min">
+                    <i class="{{iconos($r)}}"></i>
+                    <div class="titulo-min">{{__('textos.rutas.'.$r)}}</div>
+                </div>
             </a>
         @endforeach
     </div>
