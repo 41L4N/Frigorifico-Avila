@@ -94,9 +94,10 @@
                 </div>
                 <div class="modal-body">
 
+                    {{-- Id de ventana --}}
+                    <input type="hidden" name="{{$idVtn}}">
                     {{-- Id --}}
                     <input type="hidden" name="id">
-                    <input type="hidden" name="{{$idVtn}}">
 
                     {{-- Titulo --}}
                     <div class="fila-form">
@@ -132,15 +133,11 @@
 
 {{-- JavaScript --}}
 @section('js')
-<script src="{{asset('/js/formularios.js')}}"></script>
 <script>
     var registros       = @json($roles),
         registroA       = null,
         mensajesErrores = new Object( @json( $errors->messages() ) ),
         valoresErrores  = new Object( @json( request()->old() ) );
-    if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
-        llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
-    }
 
     // Campos adicionales
     function camposAdicionales(llenar, contFormulario) {
@@ -164,4 +161,5 @@
         }
     }
 </script>
+<script src="{{asset('/js/formularios.js')}}"></script>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rule;
 use App\Models\Usuario;
 use App\Models\Rol;
 
@@ -37,24 +38,12 @@ class UsuarioCtrl extends Controller
         $rq->validate([
             'nombre'        => 'required|max:50',
             'apellido'      => 'required|max:50',
-            'email'         => 'required|max:75',
+            'email'         => 'required|max:75|'.Rule::unique( (new Usuario)->getTable() )->ignore($rq->id),
             'telf.codigo'   => 'sometimes|required|numeric|digits_between:1,4',
             'telf.numero'   => 'sometimes|required|numeric|digits_between:10,14',
             'rol'           => 'sometimes|required',
             'password'      => 'sometimes|required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password',
         ]);
-
-        // Que no sea repetido
-        if ( Usuario::where($c='email', $rq->$c)->where('id', '!=', $rq->id)->exists() ) {
-            return back()->withErrors(
-                $rq->validate([
-                    $c => 'unique:usuarios,'.$c
-                ])
-            )->withInput(
-                $rq->except(['_token','password'])
-            );
-            
-        }
 
         // Registro
         if (!$u = Usuario::find($rq->id)) {
@@ -66,6 +55,7 @@ class UsuarioCtrl extends Controller
                 $u->$campo = $rq->$campo;
             }
         }
+        // Campos adicionales
         // Teléfono
         $u->telf = json_encode($rq->telf);
         // Contraseña
@@ -108,7 +98,7 @@ class UsuarioCtrl extends Controller
     public function eliminar(Request $rq){
 
         // Eliminar
-        Usuario::whereIn('id',$rq->resultado)->delete();
+        Usuario::whereIn('id', $rq->resultado)->delete();
         
         // Respuesta
         return back()->with([

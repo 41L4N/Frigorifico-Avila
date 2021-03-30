@@ -86,7 +86,7 @@
                         {{-- Enlace --}}
                         <div class="fila-form">
                             <div>
-                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.rutas.recuperar-contraseña')}}</a>
+                                <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.rutas.recuperar_contraseña')}}</a>
                             </div>
                         </div>
                     @break
@@ -154,12 +154,9 @@
 
 {{-- JavaScript --}}
 @section('js')
-    <script src="{{asset('/js/formularios.js')}}"></script>
     <script>
         var mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );
-        if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
-            llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
-        }
     </script>
+    <script src="{{asset('/js/formularios.js')}}"></script>
 @endsection

@@ -19,11 +19,11 @@
     <div class="cont-mins">
 
         {{-- Rutas --}}
-        @foreach (['roles','usuarios','inventario'] as $r)
+        @foreach (['roles','usuarios','filtros-productos','productos'] as $r)
             <a href="{{route($r)}}" class="min">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>
-                    <div class="titulo-min">{{__('textos.rutas.' . $r)}}</div>
+                    <div class="titulo-min">{{__('textos.rutas.' . str_replace('-', '_', $r) )}}</div>
                 </div>
             </a>
         @endforeach

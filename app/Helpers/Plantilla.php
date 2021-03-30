@@ -41,13 +41,14 @@ function iconos($i){
     $iconos =  [
 
         // Alertas
-        'success'       =>  "fas fa-check",
-        'danger'        =>  "fas fa-times",
+        'success'           =>  "fas fa-check",
+        'danger'            =>  "fas fa-times",
 
         // Enlaces
-        'roles'         =>  "fas fa-user-lock",
-        'usuarios'      =>  "fas fa-users",
-        'inventario'    =>  "fas fa-boxes"
+        'roles'             =>  "fas fa-user-lock",
+        'usuarios'          =>  "fas fa-users",
+        'filtros-productos' =>  "fas fa-filter",
+        'productos'         =>  "fas fa-boxes"
     ];
 
     // Respuesta

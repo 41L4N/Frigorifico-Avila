@@ -28,6 +28,7 @@ document.querySelectorAll('.contenido .modal').forEach(contFormulario => {
     $('#'+contFormulario.id).on('hide.bs.modal', function () {
         // Campos
         contFormulario.querySelector('form').reset();
+        contFormulario.querySelector('[name="id"]').removeAttribute('value');
         // Campos adicionales
         if (typeof camposAdicionales !== 'undefined') {
             camposAdicionales(false, contFormulario)
@@ -90,4 +91,9 @@ function llenarFormulario(clave=null, contFormulario) {
 
     // Ventana
     $(contFormulario).modal('show');
+}
+
+// Acción
+if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
+    llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Rol;
 
 class RolesCtrl extends Controller
@@ -21,20 +22,9 @@ class RolesCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'    => 'required|max:75',
+            'titulo'    => 'required|max:75|'.Rule::unique( (new Rol)->getTable() )->ignore($rq->id),
             'permisos'  => 'required'
         ]);
-
-        // Que no sea repetido
-        if ( Rol::where($c='titulo',$rq->$c)->where('id','!=',$rq->id)->exists() ) {
-            return back()->with([
-                'id' => $rq->id
-            ])->withErrors(
-                $rq->validate([
-                    $c => 'unique:roles,'.$c
-                ])
-            );
-        }
 
         // Registro
         if (!$r = Rol::find($rq->id)) {

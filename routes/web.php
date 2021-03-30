@@ -71,9 +71,16 @@ Route::middleware('auth')->group(function(){
             Route::post('/eliminar', [UsuarioCtrl::class,'eliminar'])->name('.eliminar');
         });
 
-        // Inventario
-        Route::prefix($n='inventario')->name($n)->group(function (){
-            Route::get('/', [ProductoCtrl::class,'inventario'])->name('');
+        // Filtros
+        Route::prefix($n='filtros-productos')->name($n)->group(function (){
+            Route::get('/', [FiltroProductoCtrl::class,'filtros'])->name('');
+            Route::post('/', [FiltroProductoCtrl::class,'guardar']);
+            Route::post('/eliminar', [FiltroProductoCtrl::class,'eliminar'])->name('.eliminar');
+        });
+
+        // Productos
+        Route::prefix($n='productos')->name($n)->group(function (){
+            Route::get('/', [ProductoCtrl::class,'productos'])->name('');
             Route::post('/', [ProductoCtrl::class,'guardar']);
             Route::post('/eliminar', [ProductoCtrl::class,'eliminar'])->name('.eliminar');
         });

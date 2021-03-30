@@ -10,7 +10,8 @@ return [
         'panel_administrador'   =>  "Panel de administrador",
         'roles'                 =>  "Roles",
         'usuarios'              =>  "Usuarios",
-        'inventario'            =>  "Inventario",
+        'filtros_productos'     =>  "Filtros de productos",
+        'productos'             =>  "Productos",
         'ordenes_compras'       =>  "Ordenes de compras",
         'ofertas'               =>  "Ofertas",
         'combos'                =>  "Combos",
@@ -37,7 +38,7 @@ return [
 
     // Contenido
     'contenido' => [
-        'sin_resultados'        =>  "Sin resultados",
+        'sin_resultados' => "Sin resultados",
     ],
 
     // Pie de página
@@ -61,6 +62,9 @@ return [
         // Roles
         'titulo'                =>  "Titulo",
         'permisos'              =>  "Permisos",
+
+        // Filtros
+        'opciones'              =>  "Opciones",
 
         // Productos
         'precio_detal'          =>  "Precio al detal",
