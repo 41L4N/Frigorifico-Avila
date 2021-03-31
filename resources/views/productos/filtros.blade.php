@@ -9,35 +9,6 @@
 {{-- Estilos --}}
 @section('estilos')
     <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
-    <style>
-        /* Contenedor */
-        #contImgs {
-            min-height: 250px;
-            color: gray;
-            box-shadow: 0px 0px 2.5px var(--c-plantilla);
-        }
-        /* Vistas previas */
-        .vp-img {
-            width: 250px;
-            height: 250px;
-            border: solid var(--c-plantilla) 1px;
-            margin: .5rem;
-            cursor: grab;
-        }
-        .vp-img img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .vp-img .btn { top: 0px; }
-        .vp-img .btn-danger { left: 0px; }
-        .vp-img .btn-primary { right: 0px !important; }
-        /* Barra de carga */
-        .vp-img .barra-carga { background: var(--c-2); color: var(--c-letra); }
-        /* Error al cargar */
-        .vp-img-error { border: solid red 1px !important; }
-        .vp-img-error img { filter: grayscale(100%); }
-        .vp-img-error .msj-error { display: initial !important; }
-    </style>
 @endsection
 
 {{-- Contenido --}}
@@ -109,7 +80,7 @@
 
                     {{-- Ids --}}
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
-                    <input type="hidden" name="id">
+                    <input name="id" class="d-none">
 
                     {{-- Titulo --}}
                     <div class="fila-form">
@@ -145,7 +116,7 @@
     {{-- Ejemplo de opcion --}}
     <div class="d-none fila-form" id="ejemploOpcion">
         <input type="text" class="form-control">
-        <button type="button" class="btn btn-danger w-auto fas fa-times" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        <button type="button" class="btn btn-danger w-auto fas fa-times" onclick="this.parentNode.remove()"></button>
     </div>
 @endsection
 
@@ -173,7 +144,7 @@
             // Vaciar
             else {
                 contFormulario.querySelectorAll('#contOpciones > *').forEach(opcion => {
-                    opcion.parentNode.removeChild(opcion);
+                    opcion.remove();
                 });
             }
         }

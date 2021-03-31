@@ -5,19 +5,19 @@ return [
     // Rutas
     'rutas' => [
         // Formularios
-        'recuperar_contraseña'  =>  "Recuperar contraseña",
+        'recuperar_contraseña'  => "Recuperar contraseña",
         // Administrador
-        'panel_administrador'   =>  "Panel de administrador",
-        'roles'                 =>  "Roles",
-        'usuarios'              =>  "Usuarios",
-        'filtros_productos'     =>  "Filtros de productos",
-        'productos'             =>  "Productos",
-        'ordenes_compras'       =>  "Ordenes de compras",
-        'ofertas'               =>  "Ofertas",
-        'combos'                =>  "Combos",
+        'panel_administrador'   => "Panel de administrador",
+        'roles'                 => "Roles",
+        'usuarios'              => "Usuarios",
+        'filtros_productos'     => "Filtros de productos",
+        'productos'             => "Productos",
+        'ordenes_compras'       => "Ordenes de compras",
+        'ofertas'               => "Ofertas",
+        'combos'                => "Combos",
         // Usuario
-        'usuario'               =>  "Usuario",
-        'salir'                 =>  "Salir"
+        'usuario'               => "Usuario",
+        'salir'                 => "Salir"
     ],
 
     // Alertas
@@ -26,14 +26,14 @@ return [
         // Sesion
         // Registro
         // Ingreso
-        'ingreso'                   =>  "Bienvenido",
+        'ingreso'                   => "Bienvenido",
         // Recuperación
-        'recuperacion_contraseña'   =>  "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
+        'recuperacion_contraseña'   => "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
         // Renovación
 
         // Rutas
         // Roles
-        'success'                   =>  "Operación exitosa",
+        'success'                   => "Operación exitosa",
     ],
 
     // Contenido
@@ -46,71 +46,76 @@ return [
 
     ],
 
+    // Titulos
+    'titulos'   =>  [
+
+        // Sesion
+        'registro'                  => "Registro",
+        'ingreso'                   => "Ingreso",
+        'recuperar_contraseña'      => "Recuperar contraseña",
+        'recuperacion_contraseña'   => "Recuperación de contraseña",
+        'renovacion_contraseña'     => "Renovación de contraseña",
+
+        // Buscador
+        'buscador'                  => "Buscador",
+
+        // Confirmación
+        'confirmacion'              => "Confirmación"
+    ],
+
+    // Subtitulos
+    'subtitulos' => [
+
+        // Usuarios
+        'datos_personales'  => "Datos personales",
+        'seguridad'         => "Seguridad",
+
+        // Productos
+        'compra_detal'      => "Compra detal",
+        'compra_mayor'      => "Compra al mayor",
+
+    ],
+
     // Campos
     'campos' => [
 
         // Usuario
-        'nombre'                =>  "Nombre",
-        'apellido'              =>  "Apellido",
-        'email'                 =>  "Email",
-        'telf'                  =>  "Teléfono",
-        'rol'                   =>  "Rol",
-        'cambiar_contraseña'    =>  "Cambiar contraseña",
-        'contraseña'            =>  "Contraseña",
-        'confirmar_contraseña'  =>  "Confirmar contraseña",
+        'nombre'                => "Nombre",
+        'apellido'              => "Apellido",
+        'email'                 => "Email",
+        'telf'                  => "Teléfono",
+        'rol'                   => "Rol",
+        'cambiar_contraseña'    => "Cambiar contraseña",
+        'contraseña'            => "Contraseña",
+        'confirmar_contraseña'  => "Confirmar contraseña",
 
         // Roles
-        'titulo'                =>  "Titulo",
-        'permisos'              =>  "Permisos",
+        'titulo'                => "Titulo",
+        'permisos'              => "Permisos",
 
         // Filtros
-        'opciones'              =>  "Opciones",
+        'opciones'              => "Opciones",
 
         // Productos
-        'precio_detal'          =>  "Precio al detal",
-        'compra_min'            =>  "Compra mínima",
-        'precio_mayor'          =>  "Precio al mayor"
+        'filtro'                => "Filtro",
+        'pedido_min'            => "Pedido mínimo",
+        'precio'                => "Precio",
+        'oferta'                => "Oferta (%)",
+        'actualizar_img'        => "Actualizar Imagen"
     ],
 
     // Botones
     'botones' => [
-        'agregar'   =>  "Agregar",
-        'roles'     =>  "Roles",
-        'eliminar'  =>  "Eliminar",
-        'confirmar' =>  "Confirmar",
-        'cancelar'  =>  "Cancelar",
-        'enviar'    =>  "Enviar"
+        'agregar'   => "Agregar",
+        'roles'     => "Roles",
+        'eliminar'  => "Eliminar",
+        'confirmar' => "Confirmar",
+        'cancelar'  => "Cancelar",
+        'enviar'    => "Enviar"
     ],
 
-    // Formularios
-    'formularios' => [
-
-        // Titulos
-        'titulos'   =>  [
-
-            // Sesion
-            'registro'                  =>  "Registro",
-            'ingreso'                   =>  "Ingreso",
-            'recuperar_contraseña'      =>  "Recuperar contraseña",
-            'recuperacion_contraseña'   =>  "Recuperación de contraseña",
-            'renovacion_contraseña'     =>  "Renovación de contraseña",
-
-            // Buscador
-            'buscador'                  =>  "Buscador",
-
-            // Confirmación
-            'confirmacion'              =>  "Confirmación"
-        ],
-
-        // Subtitulos
-        'subtitulos' => [
-            'datos_personales'  =>  "Datos personales",
-            'seguridad'         =>  "Seguridad"
-        ],
-
-        // Descripciones
-        'descripciones' => [
-            'confirmacion'  =>  "¿Seguro que desea realizar esta acción?"
-        ]
+    // Parrafos
+    'parrafos' => [
+        'confirmacion' => "¿Seguro que desea realizar esta acción?"
     ]
 ];

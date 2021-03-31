@@ -36,11 +36,11 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'nombre'        => 'required|max:50',
-            'apellido'      => 'required|max:50',
-            'email'         => 'required|max:75|'.Rule::unique( (new Usuario)->getTable() )->ignore($rq->id),
-            'telf.codigo'   => 'sometimes|required|numeric|digits_between:1,4',
-            'telf.numero'   => 'sometimes|required|numeric|digits_between:10,14',
+            'nombre'        => 'required|alpha_num|between:1,50',
+            'apellido'      => 'required|alpha_num|between:1,50',
+            'email'         => 'required|email|between:1,75|'.Rule::unique( (new Usuario)->getTable() )->ignore($rq->id),
+            'telf.codigo'   => 'sometimes|required|numeric|between:1,4',
+            'telf.numero'   => 'sometimes|required|numeric|between:10,14',
             'rol'           => 'sometimes|required',
             'password'      => 'sometimes|required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password',
         ]);

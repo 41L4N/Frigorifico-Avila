@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function(){
 
         // Productos
         Route::prefix($n='productos')->name($n)->group(function (){
-            Route::get('/', [ProductoCtrl::class,'productos'])->name('');
+            Route::get('/', [ProductoCtrl::class,'inventario'])->name('');
             Route::post('/', [ProductoCtrl::class,'guardar']);
             Route::post('/eliminar', [ProductoCtrl::class,'eliminar'])->name('.eliminar');
         });

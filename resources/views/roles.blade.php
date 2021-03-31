@@ -94,10 +94,9 @@
                 </div>
                 <div class="modal-body">
 
-                    {{-- Id de ventana --}}
+                    {{-- Ids --}}
                     <input type="hidden" name="{{$idVtn}}">
-                    {{-- Id --}}
-                    <input type="hidden" name="id">
+                    <input name="id" class="d-none">
 
                     {{-- Titulo --}}
                     <div class="fila-form">

@@ -10,4 +10,12 @@ class FiltroProducto extends Model
     use HasFactory;
 
     protected $table = 'filtros_productos';
+
+    // Lista
+    static function lista(){
+        foreach ($filtros = FiltroProducto::whereNull('relacion')->orderBy('titulo', 'ASC')->get(['id', 'titulo']) as $f) {
+            $f->opciones = FiltroProducto::where('relacion', $f->id)->orderBy('titulo', 'ASC')->get(['id','titulo']);
+        }
+        return $filtros;
+    }
 }

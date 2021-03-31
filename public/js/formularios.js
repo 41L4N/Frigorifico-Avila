@@ -28,7 +28,6 @@ document.querySelectorAll('.contenido .modal').forEach(contFormulario => {
     $('#'+contFormulario.id).on('hide.bs.modal', function () {
         // Campos
         contFormulario.querySelector('form').reset();
-        contFormulario.querySelector('[name="id"]').removeAttribute('value');
         // Campos adicionales
         if (typeof camposAdicionales !== 'undefined') {
             camposAdicionales(false, contFormulario)

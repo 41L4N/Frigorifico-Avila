@@ -11,11 +11,8 @@ class FiltroProductoCtrl extends Controller
     // Filtros
     public function filtros(){
 
-        foreach ($filtros = FiltroProducto::whereNull('relacion')->get(['id', 'titulo']) as $f) {
-            $f->opciones = FiltroProducto::where('relacion', $f->id)->get(['id','titulo']);
-        }
         return view('productos.filtros')->with([
-            'filtros' => $filtros
+            'filtros' => FiltroProducto::lista()
         ]);
     }
 
@@ -24,7 +21,7 @@ class FiltroProductoCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'    => 'required|max:75|'.Rule::unique( (new FiltroProducto)->getTable() )->ignore($rq->id),
+            'titulo'    => 'required|alpha_num|between:1,50|'.Rule::unique( (new FiltroProducto)->getTable() )->ignore($rq->id),
             'opcion'    => 'sometimes|required'
         ]);
 
@@ -35,10 +32,21 @@ class FiltroProductoCtrl extends Controller
         $fp->titulo = $rq->titulo;
         $fp->save();
 
-        // Posibles opciones
+        // Opciones
+        // Actualizo
+        foreach (FiltroProducto::where('relacion', $fp->id)->get(['id']) as $opcion) {
+            if ( isset( $rq->opcion[$opcion->id] ) ) {
+                $opcion->titulo = $rq->opcion[$opcion->id];
+                $opcion->save();
+            }
+            else {
+                $opcion->delete();
+            }
+        }
+        // Nuevas
         if ($rq->opcion) {
             foreach ($rq->opcion as $id => $o) {
-                if (!$opcion = FiltroProducto::find($id)) {
+                if (!FiltroProducto::where('id', $id)->where('relacion', $fp->id)->exists()) {
                     $opcion = new FiltroProducto;
                 }
                 $opcion->titulo = $o;

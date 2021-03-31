@@ -22,7 +22,7 @@ class RolesCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'    => 'required|max:75|'.Rule::unique( (new Rol)->getTable() )->ignore($rq->id),
+            'titulo'    => 'required|alpha_num|between:1,50|'.Rule::unique( (new Rol)->getTable() )->ignore($rq->id),
             'permisos'  => 'required'
         ]);
 

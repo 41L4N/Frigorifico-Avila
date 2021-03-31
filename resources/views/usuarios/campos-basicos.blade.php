@@ -1,12 +1,12 @@
 {{-- Id --}}
 @if (in_array("id",$campos))
-    <input type="hidden" name="id">
+    <input name="id" class="d-none">
 @endif
 
 {{-- Datos personales --}}
 {{-- Subtitulo --}}
 @if (in_array("subtitulos",$campos))
-    <h4 class="subtitulo-campos-usuario">{{__('textos.formularios.subtitulos.datos_personales')}}</h4>
+    <h4 class="subtitulo-form">{{__('textos.subtitulos.datos_personales')}}</h4>
 @endif
 {{-- Nombre y apellido --}}
 <div class="fila-form">
@@ -39,7 +39,7 @@
 {{-- Seguridad --}}
 {{-- Subtitulo --}}
 @if (in_array("subtitulos",$campos))
-    <h4 class="subtitulo-campos-usuario">{{__('textos.formularios.subtitulos.seguridad')}}</h4>
+    <h4 class="subtitulo-form">{{__('textos.subtitulos.seguridad')}}</h4>
 @endif
 {{-- Contraseñas --}}
 @if (in_array("contraseñas",$campos))

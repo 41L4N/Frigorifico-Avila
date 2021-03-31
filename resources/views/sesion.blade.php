@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.formularios.titulos.'. $seccionRuta = Request::route('seccion'));
+    $tituloMD = __('textos.titulos.'. $seccionRuta = Request::route('seccion'));
 @endphp
 
 {{-- Estilos --}}
@@ -135,7 +135,7 @@
             <form action="{{route('sesion.recuperacion-contraseña')}}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('textos.formularios.titulos.recuperar-contraseña')}}</h5>
+                    <h5 class="modal-title">{{__('textos.titulos.recuperar-contraseña')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
