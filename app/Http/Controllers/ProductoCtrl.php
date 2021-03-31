@@ -34,10 +34,24 @@ class ProductoCtrl extends Controller
         ]);
 
         // Registro
-
+        if (!$p = Producto::find($rq->id)) {
+            $p = new Producto;
+        }
+        // Campos directos
+        foreach (Schema::getColumnListing( (new Producto)->getTable() ) as $campo) {
+            if ($rq->exists($campo)) {
+                $u->$campo = $rq->$campo;
+            }
+        }
+        // Campos adicionales
         // Imagen
 
         // Respuesta
+        return back()->with([
+            'alerta' => [
+                'tipo' => 'success'
+            ]
+        ]);
     }
     
     // Eliminar

@@ -161,7 +161,7 @@
         function agregarOpcion(idOpcion=null,valorOpcion=null) {
 
             // Validacion
-            if (idOpcion == "" && valorOpcion == "") {
+            if (idOpcion === null && valorOpcion === null) {
                 console.log({idOpcion,valorOpcion});
                 nuevaOpcion.required = true;
                 if (!nuevaOpcion.reportValidity()) {

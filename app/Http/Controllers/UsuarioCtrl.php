@@ -49,8 +49,8 @@ class UsuarioCtrl extends Controller
             $u = new Usuario;
         }
         // Campos directos
-        foreach (Schema::getColumnListing('usuarios') as $campo) {
-            if ($rq->exists($campo) && $campo!="id") {
+        foreach (Schema::getColumnListing( (new Usuario)->getTable() ) as $campo) {
+            if ($rq->exists($campo)) {
                 $u->$campo = $rq->$campo;
             }
         }

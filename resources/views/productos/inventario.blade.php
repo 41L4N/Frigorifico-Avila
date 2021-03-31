@@ -120,7 +120,7 @@
                         <div>
                             <label>{{__('textos.campos.' . $n='filtro')}}</label>
                             <select name="filtro" class="form-control">
-                                <option value="" selected disabled></option>
+                                <option value="" selected disabled>{{__('textos.placesholder.select')}}</option>
                                 @foreach ($filtros as $f)
                                     @if ($f->opciones->count())
                                         <optgroup label="{{$f->titulo}}">
@@ -150,7 +150,7 @@
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
-                            <input class="form-control" name="{{$n}}" maxlength="10" onkeypress="soloNumeros(event)" required>
+                            <input class="form-control" name="{{$n}}" maxlength="10" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 
@@ -164,6 +164,14 @@
                         <div>
                             <label>{{__('textos.campos.precio')}}</label>
                             <input class="form-control" name="precio_mayor" maxlength="10" onkeypress="soloNumeros(event)">
+                        </div>
+                    </div>
+                    
+                    {{-- Descripción --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n = 'descripcion')}}</label>
+                            <textarea name="{{$n}}" class="form-control" maxlength="500"></textarea>
                         </div>
                     </div>
 

@@ -101,7 +101,13 @@ return [
         'pedido_min'            => "Pedido mínimo",
         'precio'                => "Precio",
         'oferta'                => "Oferta (%)",
+        'descripcion'           => "Descripción",
         'actualizar_img'        => "Actualizar Imagen"
+    ],
+
+    // Placesholder
+    'placeholders' => [
+        'select' => "Elegir"
     ],
 
     // Botones
