@@ -22,15 +22,15 @@ class ProductoCtrl extends Controller
         
         // Validación
         $rq->validate([
-            'titulo'            => 'required|alpha_num|between:1,50',
-            'filtro'            => 'required|numeric',
-            'precio_detal'      => 'required|numeric|digits_between:1,10',
-            'pedido_min_detal'  => 'required|numeric|digits_between:1,10',
-            'oferta'            => 'required|numeric|digits_between:1,10',
-            'precio_mayor'      => 'required|numeric|digits_between:1,10',
-            'pedido_min_mayor'  => 'required|numeric|digits_between:1,10',
-            'descripcion'       => 'max:500',
-            'img'               => 'mimes:jpg,jpeg,png',
+            'titulo'            => 'required|between:1,50',
+            'filtro'            => 'required|digits_between:1,10',
+            'precio_detal'      => 'required|digits_between:1,10',
+            'pedido_min_detal'  => 'required|digits_between:1,10',
+            'oferta'            => 'nullable|digits_between:1,10',
+            'precio_mayor'      => 'nullable|digits_between:1,10',
+            'pedido_min_mayor'  => 'nullable|digits_between:1,10',
+            'descripcion'       => 'nullable|max:500',
+            'img'               => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
 
         // Registro

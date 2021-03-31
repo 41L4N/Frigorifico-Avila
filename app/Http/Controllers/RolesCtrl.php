@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Models\Rol;
 
 class RolesCtrl extends Controller
@@ -22,7 +21,7 @@ class RolesCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'    => 'required|alpha_num|between:1,50|'.Rule::unique( (new Rol)->getTable() )->ignore($rq->id),
+            'titulo'    => 'required|unique:' . (new Rol)->getTable() . ',titulo,' . $rq->id . '|between:1,50|',
             'permisos'  => 'required'
         ]);
 

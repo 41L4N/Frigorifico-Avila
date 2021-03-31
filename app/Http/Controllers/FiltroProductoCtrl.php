@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Models\FiltroProducto;
 
 class FiltroProductoCtrl extends Controller
 {
     // Filtros
     public function filtros(){
-
         return view('productos.filtros')->with([
             'filtros' => FiltroProducto::lista()
         ]);
@@ -21,8 +19,8 @@ class FiltroProductoCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'    => 'required|alpha_num|between:1,50|'.Rule::unique( (new FiltroProducto)->getTable() )->ignore($rq->id),
-            'opcion'    => 'sometimes|required'
+            'titulo'    => 'required|string|unique:' . (new FiltroProducto)->getTable() . ',titulo,' . $rq->id . '|between:1,50|',
+            'opciones'  => 'sometimes|array|required'
         ]);
 
         // Registro
@@ -35,8 +33,8 @@ class FiltroProductoCtrl extends Controller
         // Opciones
         // Actualizo
         foreach (FiltroProducto::where('relacion', $fp->id)->get(['id']) as $opcion) {
-            if ( isset( $rq->opcion[$opcion->id] ) ) {
-                $opcion->titulo = $rq->opcion[$opcion->id];
+            if ( isset( $rq->opciones[$opcion->id] ) ) {
+                $opcion->titulo = $rq->opciones[$opcion->id];
                 $opcion->save();
             }
             else {
@@ -44,11 +42,9 @@ class FiltroProductoCtrl extends Controller
             }
         }
         // Nuevas
-        if ($rq->opcion) {
-            foreach ($rq->opcion as $id => $o) {
-                if (!FiltroProducto::where('id', $id)->where('relacion', $fp->id)->exists()) {
-                    $opcion = new FiltroProducto;
-                }
+        if (isset($rq->opciones['nuevas'])) {
+            foreach ($rq->opciones['nuevas'] as $id => $o) {
+                $opcion = new FiltroProducto;
                 $opcion->titulo = $o;
                 $opcion->relacion = $fp->id;
                 $opcion->save();

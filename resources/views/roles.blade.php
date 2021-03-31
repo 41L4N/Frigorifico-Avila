@@ -110,7 +110,7 @@
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.permisos')}}</label>
-                            @foreach (['roles','usuarios','inventario','ordenes-compras','ofertas','combos'] as $ruta)
+                            @foreach (['roles','usuarios','productos','ordenes-compras','ofertas','combos'] as $ruta)
                                 <label class="opcion-rol">
                                     <input type="checkbox" name="permisos[]" value="{{$ruta}}" onchange="this.parentNode.classList.toggle('activa')">
                                     {{__('textos.rutas.' . str_replace('-', '_', $ruta))}}

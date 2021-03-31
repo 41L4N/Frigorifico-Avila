@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Validation\Rule;
 use App\Models\Usuario;
 use App\Models\Rol;
 
@@ -36,9 +35,9 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'nombre'        => 'required|alpha_num|between:1,50',
-            'apellido'      => 'required|alpha_num|between:1,50',
-            'email'         => 'required|email|between:1,75|'.Rule::unique( (new Usuario)->getTable() )->ignore($rq->id),
+            'nombre'        => 'required|between:1,50',
+            'apellido'      => 'required|between:1,50',
+            'email'         => 'required|email|unique:' . (new Usuario)->getTable() . ',email,' . $rq->id . '|between:1,75',
             'telf.codigo'   => 'sometimes|required|numeric|between:1,4',
             'telf.numero'   => 'sometimes|required|numeric|between:10,14',
             'rol'           => 'sometimes|required',
@@ -113,8 +112,8 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $validacion = Validator::make($rq->all(),[
-            'email'     =>  'exists:usuarios,email|required|max:75',
-            'password'  =>  'required|min:8|max:15'
+            'email'     =>  'exists:' . (new Usuario)->getTable() . ',email|required|between:1,75',
+            'password'  =>  'required|between:8,15'
         ])->validate();
 
         // Respuesta - true
@@ -141,7 +140,7 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'email'     =>  'exists:usuarios,email|required|max:75'
+            'email'     =>  'exists:' . (new Usuario)->getTable() . ',email|required|between:1,75'
         ]);
 
         // Asigno un código de recuperación
@@ -172,8 +171,8 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'codigo_acceso' =>  'exists:usuarios,codigo_acceso',
-            'password'      =>  'required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password'
+            'codigo_acceso' =>  'exists:' . (new Usuario)->getTable() . ',codigo_acceso',
+            'password'      =>  'required|between:8,15|required_with:confirmacion_password|same:confirmacion_password'
         ]);
 
         // Cambio de contraseña

@@ -89,12 +89,12 @@
                             <input class="form-control" name="{{$n}}" maxlength="75" required>
                         </div>
                     </div>
-
+                   
                     {{-- Opciones --}}
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.' . $n='opciones')}}</label>
-                            <input class="form-control" id="nuevaOpcion" maxlength="75">
+                            <input class="form-control" id="nuevaOpcion" maxlength="50">
                         </div>
                         <div class="w-auto">
                             <label></label>
@@ -136,9 +136,17 @@
             if (llenar) {
 
                 // Opciones
-                Object.values( registroA.opciones ).forEach(opcion => {
-                    agregarOpcion(opcion.id,opcion.titulo);
-                });
+                if (opciones = registroA.opciones) {
+                    Object.keys( opciones ).forEach(clave => {
+                        if (typeof (opcion = opciones[clave]) != 'object') {
+                            opcion = {
+                                "id": clave,
+                                "titulo": opcion
+                            };
+                        }
+                        agregarOpcion(opcion.id,opcion.titulo);
+                    });
+                }
             }
 
             // Vaciar
@@ -153,7 +161,8 @@
         function agregarOpcion(idOpcion=null,valorOpcion=null) {
 
             // Validacion
-            if (!idOpcion && !valorOpcion) {
+            if (idOpcion == "" && valorOpcion == "") {
+                console.log({idOpcion,valorOpcion});
                 nuevaOpcion.required = true;
                 if (!nuevaOpcion.reportValidity()) {
                     nuevaOpcion.required = false;
@@ -166,7 +175,7 @@
             opcion = ejemploOpcion.cloneNode(true);
             opcion.classList.remove('d-none');
             opcion.removeAttribute('id');
-            opcion.querySelector('input').name = 'opcion[' + ((idOpcion) ? idOpcion : '') + ']';
+            opcion.querySelector('input').name = 'opciones' + ((idOpcion) ? '[' + idOpcion + ']' : '[nuevas][]');
             opcion.querySelector('input').value = (valorOpcion) ? valorOpcion : nuevaOpcion.value;
             contOpciones.insertAdjacentElement('beforeend', opcion);
             nuevaOpcion.value = null;
