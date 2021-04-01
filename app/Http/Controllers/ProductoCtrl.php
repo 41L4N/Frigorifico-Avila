@@ -20,16 +20,16 @@ class ProductoCtrl extends Controller
 
     // Guardar
     public function guardar(Request $rq){
-        
+
         // Validación
         $rq->validate([
             'titulo'            => 'required|between:1,50',
-            'filtro'            => 'required|digits_between:1,10',
-            'precio_detal'      => 'required|digits_between:1,10',
-            'pedido_min_detal'  => 'required|digits_between:1,10',
-            'oferta'            => 'nullable|digits_between:1,10',
-            'precio_mayor'      => 'nullable|digits_between:1,10',
-            'pedido_min_mayor'  => 'nullable|digits_between:1,10',
+            'filtro'            => 'required|integer',
+            'pedido_min_detal'  => 'required|digits_between:1,5',
+            'precio_detal'      => 'required|digits_between:1,5',
+            'oferta'            => 'nullable|digits_between:1,5',
+            'pedido_min_mayor'  => 'nullable|digits_between:1,5',
+            'precio_mayor'      => 'nullable|digits_between:1,5',
             'descripcion'       => 'nullable|max:500',
             'img'               => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
@@ -49,7 +49,9 @@ class ProductoCtrl extends Controller
 
         // Campos adicionales
         // Imagen
-        guardarImg((new Producto)->getTable(), $rq->img, $p->id);
+        if ($rq->img) {
+            guardarImg((new Producto)->getTable(), $rq->img, $p->id);
+        }
 
         // Respuesta
         return back()->with([

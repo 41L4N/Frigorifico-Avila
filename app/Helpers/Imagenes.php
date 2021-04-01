@@ -60,21 +60,15 @@ function guardarImg($tipo, $img, $id){
     if ($base64 = convertirImg($tipo, $img)) {
         $almacen = almacenImg();
         $ruta = $tipo."_$id.json";
-        $imgs = ($almacen->exists($ruta)) ? json_decode($almacen->get($ruta)) : [];
-        array_push($imgs,[
-            "base64"    => $base64
-        ]);
-        $almacen->put($ruta, json_encode($imgs));
-        return array_key_last($imgs);
+        $almacen->put($ruta, $base64);
     }
-    return null;
 }
 
 // Mostrar
-function mostrarImg($tipo,$id,$iImg=0,$resolucion=null){
+function mostrarImg($tipo, $id, $iImg=0, $resolucion=null){
     header('Content-Type: image/webp;');
     header('Content-Disposition: inline; filename="'.$id.$iImg.'.webp"');
-    $base64 = json_decode( almacenImg()->get($tipo."_$id.json") )[$iImg]->base64;
+    $base64 = almacenImg()->get($tipo."_$id.json");
     if ($resolucion) {
         $base64 = convertirImg($tipo, $base64, $resolucion);
     }

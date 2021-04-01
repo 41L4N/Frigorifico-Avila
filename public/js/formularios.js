@@ -1,6 +1,6 @@
-// Solo numeros
-function soloNumeros(tecla) {
-    if (tecla.keyCode < 47 || tecla.keyCode > 58) {
+// Solo numeros y longitud maxima opcional
+function soloNumeros(tecla, longitud=null) {
+    if (tecla.keyCode < 47 || tecla.keyCode > 58 || (longitud) ? tecla.target.value.length > longitud : null ) {
         tecla.returnValue = false;
     }
 }
@@ -64,21 +64,11 @@ function llenarFormulario(clave=null, contFormulario) {
         if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']') ) {
 
             // Según el tipo de campo
-            switch (campo.type) {
-
-                case 'hidden':
-                case 'text':
-                case 'email':
-                case 'number':
-                case 'select':
-                case 'textarea':
-                    campo.value = registroA[clave];
-                break;
-
-                case 'checkbox':
-                case 'ratio':
-                    campo.checked = true;
-                break;
+            if (['checkbox','ratio'].includes(campo.type)) {
+                campo.checked = true;
+            }
+            else {
+                campo.value = registroA[clave];
             }
         }
     });

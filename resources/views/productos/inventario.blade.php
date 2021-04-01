@@ -73,16 +73,26 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(), contarChecks()'></th>
-                    
+                    @foreach (['titulo', 'filtro', 'precio_detal', 'precio_mayor'] as $campo)
+                        <th>{!! __('textos.campos.' . $campo) !!}</th>
+                    @endforeach
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
                 {{-- Registros --}}
-                @foreach ($productos as $u)
+                @foreach ($productos as $p)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$u->id}}"></th>
-                        
+                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$p->id}}"></th>
+                        <td>
+                            {{$p->titulo}}
+                            <div class="cont-img-tb-resultados">
+                                <img src="{{route('mostrar-img',[$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
+                            </div>
+                        </td>
+                        <td>{{$p->filtroP()}}</td>
+                        <td>{!! ($p->oferta) ? $p->precioOfertaP() : formatos('n', $p->precio_detal, true) !!}</td>
+                        <td>{!! ($p->precio_mayor) ? $p->precioMayorP() : "-" !!}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -97,7 +107,7 @@
     {{-- Ventanas modales --}}
     {{-- Agregar --}}
     <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <form class="modal-content" action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
@@ -107,9 +117,9 @@
                 {{-- Campos --}}
                 <div class="modal-body">
 
-                    {{-- Id --}}
-                    <input type="hidden" name="id" value="">
+                    {{-- Ids --}}
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
+                    <input type="hidden" name="id">
 
                     {{-- Titulo y filtro --}}
                     <div class="fila-form">
@@ -137,36 +147,34 @@
                     </div>
 
                     {{-- Compra al detal --}}
-                    <div class="subtitulo-form-2">{{__('textos.subtitulos.compra_detal')}}</div>
                     <div class="fila-form">
                         {{-- Pedido mínimo --}}
                         <div>
-                            <label>{{__('textos.campos.pedido_min')}}</label>
-                            <input class="form-control" name="pedido_min_detal" maxlength="10" onkeypress="soloNumeros(event)" required>
+                            <label>{{__('textos.campos.' . $n='pedido_min_detal')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" value="{{$min}}" onkeypress="soloNumeros(event,5)" required>
                         </div>
                         <div>
-                            <label>{{__('textos.campos.precio')}}</label>
-                            <input class="form-control" name="precio_detal" maxlength="10" onkeypress="soloNumeros(event)" required>
+                            <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" value="{{$min}}" onkeypress="soloNumeros(event,5)" required>
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
-                            <input class="form-control" name="{{$n}}" maxlength="10" onkeypress="soloNumeros(event)">
+                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event,5)">
                         </div>
                     </div>
 
                     {{-- Compra al mayor --}}
-                    <div class="subtitulo-form-2">{{__('textos.subtitulos.compra_mayor')}}</div>
                     <div class="fila-form">
                         <div>
-                            <label>{{__('textos.campos.pedido_min')}}</label>
-                            <input class="form-control" name="pedido_min_mayor" maxlength="10" onkeypress="soloNumeros(event)">
+                            <label>{{__('textos.campos.' . $n='pedido_min_mayor')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event,5)">
                         </div>
                         <div>
-                            <label>{{__('textos.campos.precio')}}</label>
-                            <input class="form-control" name="precio_mayor" maxlength="10" onkeypress="soloNumeros(event)">
+                            <label>{{__('textos.campos.' . $n='precio_mayor')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event,5)">
                         </div>
                     </div>
-                    
+
                     {{-- Descripción --}}
                     <div class="fila-form">
                         <div>
@@ -209,7 +217,7 @@
 
             // Llenar
             if (llenar) {
-                vistaPrevia('/img/' + registroA.id + '/0');
+                vistaPrevia('/img/productos/' + registroA.id);
             }
 
             // Vaciar

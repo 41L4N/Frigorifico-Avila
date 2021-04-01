@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// Mostrar imagen
+Route::get('/img/{tipo}/{id}/{iImg?}/{resolucion?}',function($tipo, $id, $iImg=0, $resolucion=null){
+    mostrarImg($tipo, $id, $iImg, $resolucion);
+})->name('mostrar-img');
+
 // Inicio
 Route::get('/', [InicioCtrl::class,'inicio'])->name("inicio");
 

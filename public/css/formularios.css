@@ -87,15 +87,22 @@ input[type=number] {
 .tb-resultados tr:first-of-type th {
     background: var(--c-plantilla);
     color: white;
+    border-color: var(--c-l-plantilla);
 }
 .tb-resultados th:first-of-type, .tb-resultados .columna-corta { width: 25px; }
 .tb-resultados th, .tb-resultados td {
     padding: 2.5px;
     border: solid var(--c-plantilla) 1px;
 }
-.tb-resultados img {
-    max-width: 150px;
-    max-height: 150px;
+.cont-img-tb-resultados {
+    margin: 0px auto;
+    width: 100px;
+    height: 100px;
+}
+.cont-img-tb-resultados img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .tb-resultados tr:nth-child(odd) {
     background: rgba(0,0,0,0.1);

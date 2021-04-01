@@ -20,13 +20,12 @@ function formatos($tipo,$dato,$texto=null){
     
         // Numérico
         case 'n':
-            
+            $r = (($texto) ? "$" : "") . number_format($dato, 2, ',', '.');
         break;
     
         // Telefonico
         case 't':
-            $r = implode(' ', json_decode($dato, true));
-            $r = ($texto) ? "+$r" : $r;
+            $r = (($texto) ? "+" : "") .  implode(' ', json_decode($dato, true));
         break;
     }
 

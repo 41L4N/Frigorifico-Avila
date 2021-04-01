@@ -99,8 +99,12 @@ return [
         // Productos
         'filtro'                => "Filtro",
         'pedido_min'            => "Pedido mínimo",
+        'pedido_min_detal'      => "Pedido mínimo al detal",
         'precio'                => "Precio",
+        'precio_detal'          => "Precio al detal",
         'oferta'                => "Oferta (%)",
+        'pedido_min_mayor'      => "Pedido mínimo al mayor",
+        'precio_mayor'          => "Precio al mayor",
         'descripcion'           => "Descripción",
         'actualizar_img'        => "Actualizar Imagen"
     ],
