@@ -61,7 +61,7 @@ class FiltroProductoCtrl extends Controller
 
     // Eliminar
     public function eliminar(Request $rq){
-        foreach ($rq->resultado as $id) {
+        foreach ($rq->resultados as $id) {
             // Posibles opciones
             FiltroProducto::where('relacion', $id)->delete();
             FiltroProducto::find($id)->delete();

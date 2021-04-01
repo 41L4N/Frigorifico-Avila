@@ -47,7 +47,7 @@
                 @foreach ($usuarios as $u)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$u->id}}"></th>
+                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$u->id}}"></th>
                         <td>{{"$u->nombre $u->apellido"}}</td>
                         <td>{{$u->email}}</td>
                         <td>{{formatos('t', $u->telf, true)}}</td>

@@ -64,7 +64,7 @@
                 @foreach ($roles as $r)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$r->id}}"></th>
+                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$r->id}}"></th>
                         <td>{{$r->titulo}}</td>
                         <td>
                             @foreach (json_decode($r->permisos) as $p)

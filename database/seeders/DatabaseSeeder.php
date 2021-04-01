@@ -30,18 +30,18 @@ class DatabaseSeeder extends Seeder
 
         // Filtros
         foreach ([
-            'Aves',
-            'Embutidos' => ['Al vacio'],
-            'Productos congelados',
-            'Vacunos'
-        ] as $fp => $opciones) {
+            'Aves'                  => [],
+            'Embutidos'             => ['Al vacio'],
+            'Productos congelados'  => [],
+            'Vacunos'               => []
+        ] as $titulo => $opciones) {
             $fp = new FiltroProducto;
-            $fp->titulo = (is_array($opciones)) ? $fp : $opciones;
+            $fp->titulo = $titulo;
             $fp->save();
-            foreach ((is_array($opciones)) ? $opciones : [] as $opcion) {
-                $o = new FiltroOpcion;
-                $o->titulo = $opcion;
-                $o->relacion = $fs->id;
+            foreach ($opciones as $titulo) {
+                $o = new FiltroProducto;
+                $o->titulo = $titulo;
+                $o->relacion = $fp->id;
                 $o->save();
             }
         }

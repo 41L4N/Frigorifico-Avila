@@ -97,7 +97,7 @@ class UsuarioCtrl extends Controller
     public function eliminar(Request $rq){
 
         // Eliminar
-        Usuario::whereIn('id', $rq->resultado)->delete();
+        Usuario::whereIn('id', $rq->resultados)->delete();
         
         // Respuesta
         return back()->with([

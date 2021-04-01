@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Producto;
 use App\Models\FiltroProducto;
 
@@ -40,11 +41,15 @@ class ProductoCtrl extends Controller
         // Campos directos
         foreach (Schema::getColumnListing( (new Producto)->getTable() ) as $campo) {
             if ($rq->exists($campo)) {
-                $u->$campo = $rq->$campo;
+                $p->$campo = $rq->$campo;
             }
         }
+        // Guardar
+        $p->save();
+
         // Campos adicionales
         // Imagen
+        guardarImg((new Producto)->getTable(), $rq->img, $p->id);
 
         // Respuesta
         return back()->with([
@@ -55,6 +60,20 @@ class ProductoCtrl extends Controller
     }
     
     // Eliminar
+    public function eliminar(Request $rq){
+        foreach ($rq->resultados as $id) {
+            if (almacenImg()->exists($ruta = (new Producto)->getTable() . "_$i.json")) {
+                almacenImg()->delete($ruta);
+            }
+            Producto::find($id)->delete();
+        }
+        // Respuesta
+        return back()->with([
+            'alerta' => [
+                'tipo' => 'success'
+            ]
+        ]);
+    }
 
     // Productos
 

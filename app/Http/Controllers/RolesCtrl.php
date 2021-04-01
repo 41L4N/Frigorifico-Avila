@@ -45,7 +45,7 @@ class RolesCtrl extends Controller
     public function eliminar(Request $rq){
 
         // Eliminar
-        foreach (Rol::whereIn('id',$rq->resultado)->get(['id']) as $rol) {
+        foreach (Rol::whereIn('id',$rq->resultados)->get(['id']) as $rol) {
             foreach (Usuario::where('rol',$rol->id) as $u) {
                 $u->rol = null;
                 $u->save();

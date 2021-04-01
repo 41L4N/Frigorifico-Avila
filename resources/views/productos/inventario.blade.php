@@ -81,7 +81,7 @@
                 @foreach ($productos as $u)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultado[]" onclick='contarChecks()' value="{{$u->id}}"></th>
+                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$u->id}}"></th>
                         
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
@@ -120,7 +120,7 @@
                         <div>
                             <label>{{__('textos.campos.' . $n='filtro')}}</label>
                             <select name="filtro" class="form-control">
-                                <option value="" selected disabled>{{__('textos.placesholder.select')}}</option>
+                                <option value="" selected disabled>{{__('textos.placeholders.select')}}</option>
                                 @foreach ($filtros as $f)
                                     @if ($f->opciones->count())
                                         <optgroup label="{{$f->titulo}}">
