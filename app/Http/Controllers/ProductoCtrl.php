@@ -60,7 +60,7 @@ class ProductoCtrl extends Controller
             ]
         ]);
     }
-    
+
     // Eliminar
     public function eliminar(Request $rq){
 
@@ -115,6 +115,7 @@ class ProductoCtrl extends Controller
             break;
         }
 
+        // Respuesta
         return view('productos.productos')->with([
             'productos' => $ps
         ]);

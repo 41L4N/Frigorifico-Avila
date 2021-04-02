@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrearTbFiltrosProductos extends Migration
+class CrearTbOrdenesCompras extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class CrearTbFiltrosProductos extends Migration
      */
     public function up()
     {
-        Schema::create('filtros_productos', function (Blueprint $tb) {
-
+        Schema::create('ordenes_compras', function (Blueprint $tb) {
             $tb->id();
             $tb->string('titulo');
             $tb->string('relacion')->nullable();
@@ -29,6 +28,6 @@ class CrearTbFiltrosProductos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filtros_productos');
+        Schema::dropIfExists('ordenes_compras');
     }
 }

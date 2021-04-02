@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="{{asset("/css/normalize.css")}}">
         <link rel="stylesheet" href="{{asset("/css/bootstrap/bootstrap.min.css")}}">
         <link rel="stylesheet" href="{{asset("/css/plantilla.css")}}">
+        <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
         @yield('estilos')
 
         {{-- jQuery --}}
@@ -97,8 +98,8 @@
                                     @if (Auth::user()->administrador)
                                         <a class="opcion-menu-s" href="{{route('panel-administrador')}}">{{__('textos.rutas.panel_administrador')}}</a>
                                     @endif
-                                    <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
-                                    <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario-perfil')}}">{{__('textos.rutas.usuario')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario-salir')}}">{{__('textos.rutas.salir')}}</a>
                                 </div>
                             </div>
                         @else
@@ -123,7 +124,60 @@
                 @yield('contenido')
             </div>
 
+            {{-- Boton de whatsapp --}}
+
             {{-- Ventanas modales --}}
+            {{-- Orden de compra --}}
+            @if ($nCompras = count($listaCompras))
+
+                {{-- Boton --}}
+                <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
+                    <span class="n-compras">{{$nCompras}}</span>
+                </div>
+
+                {{-- Ventana --}}
+                <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form action="{{route('orden-compra')}}" method="POST" class="modal-content">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{__('textos.titulos.orden_compra')}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                @foreach ($listaCompras as $p)
+                                    <div class="fila-form align-items-center">
+                                        {{-- Id --}}
+                                        <input type="hidden" name="ids[]" value="{{$p->id}}">
+                                        {{-- Cantidad --}}
+                                        <input type="hidden" name="cantidades[]" value="{{$c=$p->cantidad}}">
+                                        {{-- Precios --}}
+                                        <input type="hidden" name="precio_venta" value="{{$precioVenta = $p->precio_venta * $p->cantidad}}" disabled>
+                                        {{-- Miniatura de imagen --}}
+                                        <a href="{{$rutaP = route('productos', [$p->alias(),$p->id])}}" class="min-img">
+                                            <img src="{{route('mostrar-img', [$p->getTable(), $p->id])}}" alt="{{config('app.name') ." " . $p->alias()}}">
+                                        </a>
+                                        {{-- Información --}}
+                                        <div>
+                                            <a href="{{$rutaP}}">{{$p->titulo}}</a>
+                                            <br>
+                                            {{$c}}
+                                            <br>
+                                            {{formatos('n', $precioVenta, true)}}
+                                        </div>
+                                        <button type="button" class="btn btn-danger w-auto fas fa-times" onclick="this.parentNode.remove(); sumaTotal()"></button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="modal-footer justify-content-center text-center btn btn-primary">
+                                {{__('textos.botones.confirmar')}}
+                                <br>
+                                <b id="precioTotal"></b>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endif
             {{-- Buscador --}}
             <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -173,7 +227,18 @@
         </div>
 
         {{-- JavaScript --}}
-        <script src="{{asset('/js/plantilla.js')}}"></script>
+        @if ($nCompras)
+            <script>
+                function sumaTotal() {
+                    var total = 0;
+                    document.querySelectorAll('[name="precio_venta"]').forEach(input => {
+                        total = total + Math.round( parseFloat(input.value) );
+                    });
+                    precioTotal.innerHTML = "$" + total.toLocaleString('es-AR', { minimumFractionDigits: 2 });
+                }
+                sumaTotal();
+            </script>
+        @endif
         @yield('js')
     </body>
 </html>

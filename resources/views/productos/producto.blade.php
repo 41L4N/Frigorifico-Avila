@@ -142,9 +142,11 @@
             @endif
 
             {{-- Compras --}}
-            <form action="" method="POST" class="fila-form form-compras">
-                <input type="number" class="form-control" min="1" value="1" onkeypress="soloNumeros(event,5)" required>
-                <button class="btn btn-primary btn-compras"><i class="fas fa-cart-plus mr-2"></i>{{__('textos.botones.comprar')}}</button>
+            <form action="{{route('lista-compras')}}" method="POST" class="fila-form form-compras">
+                @csrf
+                <input type="hidden" name="id" value="{{$p->id}}">
+                <input type="number" name="cantidad" class="form-control" min="1" value="1" onkeypress="soloNumeros(event,5)" required>
+                <button class="btn btn-primary"><i class="fas fa-cart-plus mr-2"></i>{{__('textos.botones.comprar')}}</button>
             </form>
 
             {{-- Redes sociales --}}

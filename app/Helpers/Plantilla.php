@@ -28,12 +28,12 @@ function formatos($tipo,$dato,$parametroAdicional=null){
         case 'f':
             
         break;
-    
+
         // Numérico
         case 'n':
             $r = (($parametroAdicional) ? "$" : "") . number_format($dato, 2, ',', '.');
         break;
-    
+
         // Telefonico
         case 't':
             $r = (($parametroAdicional) ? "+" : "") .  implode(' ', json_decode($dato, true));

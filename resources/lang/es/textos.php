@@ -56,6 +56,9 @@ return [
         'recuperacion_contraseña'   => "Recuperación de contraseña",
         'renovacion_contraseña'     => "Renovación de contraseña",
 
+        // Compras
+        'orden_compra'              => "Orden de compra",
+
         // Buscador
         'buscador'                  => "Buscador",
 
@@ -118,10 +121,10 @@ return [
         'agregar'   => "Agregar",
         'roles'     => "Roles",
         'eliminar'  => "Eliminar",
-        'confirmar' => "Confirmar",
         'cancelar'  => "Cancelar",
         'enviar'    => "Enviar",
-        'comprar'   => "Comprar"
+        'comprar'   => "Comprar",
+        'confirmar' => "Confirmar",
     ],
 
     // Parrafos

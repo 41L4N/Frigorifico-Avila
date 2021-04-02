@@ -88,10 +88,10 @@
                         <th>{{$loop->iteration}}</th>
                         <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$p->id}}"></th>
                         <td>
-                            <a href="{{route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
-                            <div class="cont-img-tb-resultados">
+                            <a href="{{$rutaP = route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
+                            <a href="{{$rutaP}}" class="min-img">
                                 <img src="{{route('mostrar-img',[$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
-                            </div>
+                            </a>
                         </td>
                         <td>{{$p->filtroP()}}</td>
                         <td>

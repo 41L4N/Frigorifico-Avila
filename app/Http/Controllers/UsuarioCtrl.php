@@ -118,7 +118,7 @@ class UsuarioCtrl extends Controller
 
         // Respuesta - true
         if ( Auth::attempt( $rq->only("email", "password") ) ){
-            return redirect()->route('usuario.perfil')->with([
+            return redirect()->route('usuario-perfil')->with([
                 'alerta' => [
                     'tipo'  => 'success',
                     'texto' => 'ingreso'
