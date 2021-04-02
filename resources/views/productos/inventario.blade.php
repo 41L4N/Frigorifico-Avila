@@ -54,7 +54,7 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo() . '.eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(prefijo() . '-eliminar')}}" method="POST" class="form-resultados">
         @csrf
 
         {{-- Submenu --}}
@@ -89,6 +89,7 @@
                         <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$p->id}}"></th>
                         <td>
                             <a href="{{$rutaP = route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
+                            <br>
                             <a href="{{$rutaP}}" class="min-img">
                                 <img src="{{route('mostrar-img',[$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
                             </a>

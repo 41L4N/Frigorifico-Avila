@@ -14,7 +14,7 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo() . '.eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(prefijo() . '-eliminar')}}" method="POST" class="form-resultados">
         @csrf
 
         {{-- Submenu --}}

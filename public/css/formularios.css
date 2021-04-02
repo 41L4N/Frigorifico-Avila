@@ -81,11 +81,14 @@ input[type=number] {
 
 /* Imágen en miniatura */
 .min-img {
+    display: block;
     margin: 0px auto;
     width: 100px;
     min-width: 100px;
+    /* max-width: 100px; */
     height: 100px;
     min-height: 100px;
+    /* max-width: 100px; */
 }
 .min-img img {
     max-width: 100%;
