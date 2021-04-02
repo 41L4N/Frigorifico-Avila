@@ -38,7 +38,7 @@ Route::post('/recuperacion-contraseña', [UsuarioCtrl::class,'recuperacionContra
 Route::post('/renovacion-contraseña', [UsuarioCtrl::class,'renovacionContraseña']);
 
 // Productos
-Route::get('/productos/{seo?}/{codigo?}', [ProductoCtrl::class,'inicio'])->name('productos');
+Route::get('/productos/{filtro?}/{id?}', [ProductoCtrl::class,'productos'])->name('productos');
 
 // Rutas protegidas
 Route::middleware('auth')->group(function(){
@@ -83,16 +83,14 @@ Route::middleware('auth')->group(function(){
             Route::post('/eliminar', [FiltroProductoCtrl::class,'eliminar'])->name('.eliminar');
         });
 
-        // Productos
-        Route::prefix($n='productos')->name($n)->group(function (){
+        // Inventario
+        Route::prefix($n='inventario')->name($n)->group(function (){
             Route::get('/', [ProductoCtrl::class,'inventario'])->name('');
             Route::post('/', [ProductoCtrl::class,'guardar']);
             Route::post('/eliminar', [ProductoCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Ordenes de compra
-
-        // Ofertas
 
         // Combos
     });

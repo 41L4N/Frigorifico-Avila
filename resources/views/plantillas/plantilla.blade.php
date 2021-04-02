@@ -119,7 +119,7 @@
             @endif
 
             {{-- Contenido --}}
-            <div class="container contenido d-flex flex-fill">
+            <div class="container contenido d-flex flex-column flex-fill">
                 @yield('contenido')
             </div>
 

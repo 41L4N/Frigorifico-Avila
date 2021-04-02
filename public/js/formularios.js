@@ -83,6 +83,8 @@ function llenarFormulario(clave=null, contFormulario) {
 }
 
 // Acción
-if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
-    llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
+if (typeof mensajesErrores !='undefined' && typeof valoresErrores != 'undefined') {
+    if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
+        llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
+    }
 }

@@ -11,7 +11,7 @@ return [
         'roles'                 => "Roles",
         'usuarios'              => "Usuarios",
         'filtros_productos'     => "Filtros de productos",
-        'productos'             => "Productos",
+        'inventario'            => "Inventario",
         'ordenes_compras'       => "Ordenes de compras",
         'ofertas'               => "Ofertas",
         'combos'                => "Combos",
@@ -71,9 +71,8 @@ return [
         'seguridad'         => "Seguridad",
 
         // Productos
-        'compra_detal'      => "Compra detal",
+        'compra_detal'      => "Compra al detal",
         'compra_mayor'      => "Compra al mayor",
-
     ],
 
     // Campos
@@ -121,7 +120,8 @@ return [
         'eliminar'  => "Eliminar",
         'confirmar' => "Confirmar",
         'cancelar'  => "Cancelar",
-        'enviar'    => "Enviar"
+        'enviar'    => "Enviar",
+        'comprar'   => "Comprar"
     ],
 
     // Parrafos

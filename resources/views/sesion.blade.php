@@ -41,7 +41,7 @@
 @section('contenido')
 
     {{-- Contenedor --}}
-    <div class="d-flex flex-wrap w-100">
+    <div class="d-flex flex-wrap w-100 flex-fill">
 
         {{-- Imagen --}}
         <div class="cont-img-sesion">

@@ -16,10 +16,10 @@
 
 {{-- Contenido --}}
 @section('contenido')
-    <div class="cont-mins">
+    <div class="cont-mins align-content-center">
 
         {{-- Rutas --}}
-        @foreach (['roles','usuarios','filtros-productos','productos'] as $r)
+        @foreach (['roles', 'usuarios', 'filtros-productos', 'inventario'] as $r)
             <a href="{{route($r)}}" class="min">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>

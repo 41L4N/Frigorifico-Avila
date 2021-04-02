@@ -25,6 +25,10 @@
             cursor: pointer;
             color: grey;
         }
+        #inputImg {
+            position: absolute;
+            opacity: 0;
+        }
         .vista-previa i {font-size: 50px;}
         .vista-previa div {
             position: absolute;
@@ -41,9 +45,8 @@
         }
         .vista-previa:hover div { display: flex; }
         .vista-previa img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
         }
     </style>
 @endsection
@@ -85,14 +88,22 @@
                         <th>{{$loop->iteration}}</th>
                         <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$p->id}}"></th>
                         <td>
-                            {{$p->titulo}}
+                            <a href="{{route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
                             <div class="cont-img-tb-resultados">
                                 <img src="{{route('mostrar-img',[$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
                             </div>
                         </td>
                         <td>{{$p->filtroP()}}</td>
-                        <td>{!! ($p->oferta) ? $p->precioOfertaP() : formatos('n', $p->precio_detal, true) !!}</td>
-                        <td>{!! ($p->precio_mayor) ? $p->precioMayorP() : "-" !!}</td>
+                        <td>
+                            @if ($p->oferta)
+                                <del>{{ ( $precio = $p->precioOfertaP() )['precio'] }}</del>
+                                <br>
+                                {{$precio['oferta']}}
+                            @else
+                                {{ formatos('n', $p->precio_detal, true) }}
+                            @endif
+                        </td>
+                        <td>{{ ($p->precio_mayor) ? $p->precioMayorP() : "-" }}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -186,9 +197,9 @@
                     {{-- Foto --}}
                     <div class="fila-form justify-content-center">
                         <label class="vista-previa">
+                            <input type="file" id="inputImg" name="img" accept="image/jpg,image/jpeg,image/png" onchange="vistaPrevia()" required>
                             <i class="position-absolute fas fa-image"></i>
-                            <input type="file" id="inputImg" name="img" class="d-none" accept="image/jpg,image/jpeg,image/png" onchange="vistaPrevia()">
-                            <img src="" class="position-relative d-none">
+                            <img class="position-relative d-none">
                             <div>{{__('textos.campos.actualizar_img')}}</div>
                         </label>
                     </div>
@@ -218,12 +229,14 @@
             // Llenar
             if (llenar) {
                 vistaPrevia('/img/productos/' + registroA.id);
+                inputImg.required = false;
             }
 
             // Vaciar
             else {
                 img.removeAttribute('src');
                 img.classList.add('d-none');
+                inputImg.required = true;
             }
         }
 

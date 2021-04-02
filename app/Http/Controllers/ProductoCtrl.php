@@ -63,12 +63,14 @@ class ProductoCtrl extends Controller
     
     // Eliminar
     public function eliminar(Request $rq){
+
         foreach ($rq->resultados as $id) {
-            if (almacenImg()->exists($ruta = (new Producto)->getTable() . "_$i.json")) {
+            if (almacenImg()->exists($ruta = (new Producto)->getTable() . "_$id.json")) {
                 almacenImg()->delete($ruta);
             }
             Producto::find($id)->delete();
         }
+
         // Respuesta
         return back()->with([
             'alerta' => [
@@ -78,6 +80,43 @@ class ProductoCtrl extends Controller
     }
 
     // Productos
+    public function productos($filtro=null,$id=null){
 
-    // Producto
+        // Según el filtro
+        switch ($filtro){
+
+            // Producto individual
+            case (($p = Producto::find($id)) != ""):
+                // $p->n_visitas = $p->n_visitas + 1;
+                // $p->save();
+                return view('productos.producto')->with([
+                    'producto'  => $p
+                ]);
+            break;
+
+            // Todos
+            case null:
+                $ps = Producto::select("*");
+            break;
+
+            // Buscador
+            case 'buscar':
+
+                // Titulo
+                if($rq->consulta != ""){
+                    $ps = Producto::where("titulo","LIKE","%$rq->consulta%");
+                }
+                // Precio
+            break;
+
+            // Ofertas
+            case 'ofertas':
+                
+            break;
+        }
+
+        return view('productos.productos')->with([
+            'productos' => $ps
+        ]);
+    }
 }

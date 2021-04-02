@@ -24,6 +24,7 @@ class CrearTbProductos extends Migration
             $tb->string('pedido_min_mayor')->nullable();
             $tb->string('precio_mayor')->nullable();
             $tb->string('descripcion')->nullable();
+            $tb->integer('n_visitas')->default(0);
             $tb->timestamps();
         });
     }

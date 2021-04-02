@@ -10,8 +10,19 @@ function prefijo($espacio=null){
 }
 
 // Formatos
-function formatos($tipo,$dato,$texto=null){
+function formatos($tipo,$dato,$parametroAdicional=null){
     switch ($tipo) {
+
+        // Texto base
+        case 'tb':
+            $r = strtolower(
+                str_replace(
+                    " ",
+                    $parametroAdicional,
+                    preg_replace('([^A-Za-zñÑ0-9 ])','',iconv('UTF-8','ASCII//TRANSLIT',$dato))
+                )
+            );
+        break;
 
         // Fecha
         case 'f':
@@ -20,12 +31,12 @@ function formatos($tipo,$dato,$texto=null){
     
         // Numérico
         case 'n':
-            $r = (($texto) ? "$" : "") . number_format($dato, 2, ',', '.');
+            $r = (($parametroAdicional) ? "$" : "") . number_format($dato, 2, ',', '.');
         break;
     
         // Telefonico
         case 't':
-            $r = (($texto) ? "+" : "") .  implode(' ', json_decode($dato, true));
+            $r = (($parametroAdicional) ? "+" : "") .  implode(' ', json_decode($dato, true));
         break;
     }
 
@@ -47,7 +58,7 @@ function iconos($i){
         'roles'             =>  "fas fa-user-lock",
         'usuarios'          =>  "fas fa-users",
         'filtros-productos' =>  "fas fa-filter",
-        'productos'         =>  "fas fa-boxes"
+        'inventario'        =>  "fas fa-boxes"
     ];
 
     // Respuesta

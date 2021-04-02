@@ -10,6 +10,11 @@ class Producto extends Model
 {
     use HasFactory;
 
+    // Alias
+    function alias(){
+        return formatos('tb', "$this->titulo " . $this->filtroP(), '-');
+    }
+
     // Filtro
     public function filtroP(){
         if ($f = FiltroProducto::find($this->filtro)) {
@@ -25,8 +30,10 @@ class Producto extends Model
 
     // Oferta
     function precioOfertaP(){
-        $r = "<del>" . formatos('n', $p = $this->precio_detal, true) . "</del>";
-        $r .= "<br>" . formatos('n', round($p - $this->oferta * $p / 100), true) . " (-$this->oferta %)";
+        return [
+            'precio' => formatos('n', $p = $this->precio_detal, true),
+            'oferta' => formatos('n', round($p - $this->oferta * $p / 100), true) . " (-$this->oferta %)"
+        ];
         return $r;
     }
 
