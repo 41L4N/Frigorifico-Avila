@@ -144,7 +144,8 @@
             {{-- Compras --}}
             <form action="{{route('lista-compras')}}" method="POST" class="fila-form form-compras">
                 @csrf
-                <input type="hidden" name="id" value="{{$p->id}}">
+                <input type="hidden" name="accion" value="0">
+                <input type="hidden" name="id_producto" value="{{$p->id}}">
                 <input type="number" name="cantidad" class="form-control" min="1" value="1" onkeypress="soloNumeros(event,5)" required>
                 <button class="btn btn-primary"><i class="fas fa-cart-plus mr-2"></i>{{__('textos.botones.comprar')}}</button>
             </form>

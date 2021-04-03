@@ -76,7 +76,7 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(), contarChecks()'></th>
-                    @foreach (['titulo', 'filtro', 'precio_detal', 'precio_mayor'] as $campo)
+                    @foreach (['producto', 'filtro', 'precio_detal', 'precio_mayor'] as $campo)
                         <th>{!! __('textos.campos.' . $campo) !!}</th>
                     @endforeach
                     <th><i class="fas fa-cogs"></i></th>

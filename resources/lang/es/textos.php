@@ -57,7 +57,7 @@ return [
         'renovacion_contraseña'     => "Renovación de contraseña",
 
         // Compras
-        'orden_compra'              => "Orden de compra",
+        'lista_compra'              => "Lista de compras",
 
         // Buscador
         'buscador'                  => "Buscador",
@@ -99,16 +99,19 @@ return [
         'opciones'              => "Opciones",
 
         // Productos
+        'producto'              => "Producto",
         'filtro'                => "Filtro",
         'pedido_min'            => "Pedido mínimo",
         'pedido_min_detal'      => "Pedido mínimo al detal",
-        'precio'                => "Precio",
         'precio_detal'          => "Precio al detal",
         'oferta'                => "Oferta (%)",
         'pedido_min_mayor'      => "Pedido mínimo al mayor",
         'precio_mayor'          => "Precio al mayor",
         'descripcion'           => "Descripción",
-        'actualizar_img'        => "Actualizar Imagen"
+        'actualizar_img'        => "Actualizar Imagen",
+        'precio_venta'          => "Precio de venta",
+        'cantidad'              => "Cantidad",
+        'subtotal'              => "Subtotal"
     ],
 
     // Placesholder

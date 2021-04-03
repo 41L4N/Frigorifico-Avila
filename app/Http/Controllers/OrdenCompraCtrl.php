@@ -13,26 +13,65 @@ class OrdenCompraCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'id'        => 'required|integer',
-            'cantidad'  => 'required|digits_between:1,5'
+            'accion'        => 'required|digits:1|digits_between:0,2',
+            'id_producto'   => 'required|integer',
+            'cantidad'      => 'required|digits_between:1,5|min:1',
         ]);
 
-        // Registro
+        // Lista de compras
         if (!$listaCompras = Cache::get($n='lista-compras')) {
             $listaCompras = [];
         }
-        array_push($listaCompras, [
-            'id'        => $rq->id,
-            'cantidad'  => $rq->cantidad
-        ]);
+
+        // Compra actual
+        $compra = array_filter($listaCompras, function ($c) use ($rq) {
+            return ($c['id_producto'] == $rq->id_producto);
+        });
+        $iC = array_key_first($compra);
+
+        // Acción
+        switch ($rq->accion) {
+            // Agregar
+            case 0:
+                // Nuevo producto
+                if ($iC !== null) {
+                    $compra[$iC]['cantidad'] = $compra[$iC]['cantidad'] + $rq->cantidad;
+                    $listaCompras[$iC] = $compra[$iC];
+                }
+                // O sumar cantidades
+                else {
+                    array_push($listaCompras, [
+                        'id_producto'   => $rq->id_producto,
+                        'cantidad'      => $rq->cantidad
+                    ]);
+                }
+            break;
+            // Editar
+            case 1:
+                if ($iC !== null) {
+                    $listaCompras[$iC]['cantidad'] = $rq->cantidad;
+                }
+            break;
+            // Eliminar
+            case 2:
+                if ($iC !== null) {
+                    unset($listaCompras[$iC]);
+                }
+            break;
+        }
         Cache::put($n, $listaCompras);
 
         // Respuesta
-        return back()->with([
-            'alerta'    => [
-                'tipo' => 'success'
-            ]
-        ]);
+        if ($rq->ajax()) {
+            return response($rq->accion);
+        }
+        else {
+            return back()->with([
+                'alerta'    => [
+                    'tipo' => 'success'
+                ]
+            ]);
+        }
     }
 
     // Orden
@@ -43,11 +82,12 @@ class OrdenCompraCtrl extends Controller
             $listaCompras = [];
             foreach ($rq->ids as $i => $id) {
                 array_push($listaCompras, [
-                    'id'        => $rq->ids[$i],
+                    'id_producto'        => $rq->ids[$i],
                     'cantidad'  => $rq->cantidades[$i]
                 ]);
             }
             Cache::put('lista-compras', $listaCompras);
+            return redirect()->route('orden-compra');
         }
 
         // Respuesta

@@ -87,8 +87,8 @@ class ProductoCtrl extends Controller
 
             // Producto individual
             case (($p = Producto::find($id)) != ""):
-                // $p->n_visitas = $p->n_visitas + 1;
-                // $p->save();
+                $p->n_visitas = $p->n_visitas + 1;
+                $p->save();
                 return view('productos.producto')->with([
                     'producto'  => $p
                 ]);

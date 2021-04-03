@@ -124,60 +124,62 @@
                 @yield('contenido')
             </div>
 
-            {{-- Boton de whatsapp --}}
+            {{-- Botones flotantes --}}
+            {{-- Whatsapp --}}
+
+            {{-- Lista de compras --}}
+            <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
+                <span class="n-compras"></span>
+            </div>
 
             {{-- Ventanas modales --}}
-            {{-- Orden de compra --}}
-            @if ($nCompras = count($listaCompras))
-
-                {{-- Boton --}}
-                <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
-                    <span class="n-compras">{{$nCompras}}</span>
-                </div>
-
-                {{-- Ventana --}}
-                <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <form action="{{route('orden-compra')}}" method="POST" class="modal-content">
-                            @csrf
-                            <div class="modal-header">
-                                <h5 class="modal-title">{{__('textos.titulos.orden_compra')}}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <div class="modal-body">
-                                @foreach ($listaCompras as $p)
-                                    <div class="fila-form align-items-center">
-                                        {{-- Id --}}
-                                        <input type="hidden" name="ids[]" value="{{$p->id}}">
+            {{-- Lista de compras --}}
+            <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{__('textos.titulos.lista_compra')}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            @foreach ($listaCompras as $c)
+                                <form action="{{route('lista-compras')}}" method="POST" class="producto-lista-compras">
+                                    {{-- Acción --}}
+                                    <input type="hidden" name="accion" value="1">
+                                    {{-- Id de producto --}}
+                                    <input type="hidden" name="id_producto" value="{{$c->id}}">
+                                    {{-- Precio --}}
+                                    <input type="hidden" name="precio_unitario" value="{{$c->precio_unitario}}" disabled>
+                                    <b>{{$loop->iteration}}</b>
+                                    {{-- Miniatura de imagen --}}
+                                    <a href="{{$rutaP = route('productos', [$c->alias(), $c->id])}}" class="min-img">
+                                        <img src="{{route('mostrar-img', [$c->getTable(), $c->id])}}" alt="{{config('app.name') ." " . $c->alias()}}">
+                                    </a>
+                                    {{-- Información --}}
+                                    <div class="w-100">
+                                        <a href="{{$rutaP}}">{{$c->titulo}}</a> ({{formatos('n', $c->precio_unitario, true)}})
                                         {{-- Cantidad --}}
-                                        <input type="hidden" name="cantidades[]" value="{{$c=$p->cantidad}}">
-                                        {{-- Precios --}}
-                                        <input type="hidden" name="precio_venta" value="{{$precioVenta = $p->precio_venta * $p->cantidad}}" disabled>
-                                        {{-- Miniatura de imagen --}}
-                                        <a href="{{$rutaP = route('productos', [$p->alias(),$p->id])}}" class="min-img">
-                                            <img src="{{route('mostrar-img', [$p->getTable(), $p->id])}}" alt="{{config('app.name') ." " . $p->alias()}}">
-                                        </a>
-                                        {{-- Información --}}
-                                        <div>
-                                            <a href="{{$rutaP}}">{{$p->titulo}}</a>
-                                            <br>
-                                            {{$c}}
-                                            <br>
-                                            {{formatos('n', $precioVenta, true)}}
-                                        </div>
-                                        <button type="button" class="btn btn-danger w-auto fas fa-times" onclick="this.parentNode.remove(); sumaTotal()"></button>
+                                        <input type="number" name="cantidad" class="form-control w-25" min="1" value="{{$c->cantidad}}" onkeypress="soloNumeros(event ,5)" onchange="listaCompras(this)">
+                                        <b class="subtotal">{{formatos('n', $c->precio_unitario * $c->cantidad, true)}}</b>
                                     </div>
-                                @endforeach
-                            </div>
-                            <button class="modal-footer justify-content-center text-center btn btn-primary">
+                                    <label class="btn btn-danger fas fa-times">
+                                        <input type="checkbox" name="accion" class="d-none" value="2" onchange="listaCompras(this)">
+                                    </label>
+                                </form>
+                            @endforeach
+                        </div>
+                        <a href="{{route('orden-compra')}}" class="modal-footer justify-content-center text-center btn btn-primary">
+                            <div>
                                 {{__('textos.botones.confirmar')}}
                                 <br>
                                 <b id="precioTotal"></b>
-                            </button>
-                        </form>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            @endif
+            </div>
+
             {{-- Buscador --}}
             <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -195,7 +197,7 @@
                                 </div>
                             </div>
 
-                            {{-- Categorias y colección --}}
+                            {{-- Filtro --}}
                             {{-- @foreach (App\FiltroArts::campos("tipo") as $url => $filtro)
                                 <div class="fila-form">
                                     <div>
@@ -227,18 +229,60 @@
         </div>
 
         {{-- JavaScript --}}
-        @if ($nCompras)
-            <script>
-                function sumaTotal() {
-                    var total = 0;
-                    document.querySelectorAll('[name="precio_venta"]').forEach(input => {
-                        total = total + Math.round( parseFloat(input.value) );
+        <script>
+
+            // Lista de compras
+            function listaCompras(btn=null) {
+
+                // Formulario actual
+                if (btn) {
+
+                    var formulario = btn;
+                    while (formulario.tagName != 'FORM') {
+                        formulario = formulario.parentNode;
+                    }
+
+                    // Validacion
+                    if (!formulario.checkValidity()) {
+                        return;
+                    }
+
+                    // Envio
+                    $.ajax({
+                        type: "POST",
+                        url: formulario.action,
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('[name="csrf-token"]').content
+                        },
+                        data: datosC = new FormData(formulario),
+                        processData: false,
+                        contentType: false,
+                        success: function (r) {
+                            if (r == 2) {
+                                formulario.remove();
+                            }
+                        }
                     });
-                    precioTotal.innerHTML = "$" + total.toLocaleString('es-AR', { minimumFractionDigits: 2 });
                 }
-                sumaTotal();
-            </script>
-        @endif
+
+                var total = 0,
+                    nCompras = 0;
+                document.querySelectorAll('.producto-lista-compras').forEach(formulario => {
+
+                    // Subtotal
+                    subtotal = formulario.querySelector('[name="cantidad"]').value * formulario.querySelector('[name="precio_unitario"]').value;
+                    formulario.querySelector('.subtotal').innerHTML = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+
+                    // Total
+                    total = total + subtotal;
+                    precioTotal.innerHTML = "$" + total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+
+                    // Numero de compras
+                    document.querySelector('.btn-compras span').innerHTML = (nCompras = nCompras + parseInt(formulario.querySelector('[name="cantidad"]').value) )
+                });
+            }
+            listaCompras();
+        </script>
         @yield('js')
     </body>
 </html>
