@@ -8,7 +8,6 @@
 
 {{-- Estilos --}}
 @section('estilos')
-    <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
     <style>
         .opcion-rol {
             width: 100%;
@@ -86,7 +85,7 @@
     {{-- Agregar --}}
     <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form class="modal-content" action="" method="POST">
+            <form class="modal-content" method="POST">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{$tituloMD}}</h5>
@@ -132,33 +131,32 @@
 
 {{-- JavaScript --}}
 @section('js')
-<script>
-    var registros       = @json($roles),
-        registroA       = null,
-        mensajesErrores = new Object( @json( $errors->messages() ) ),
-        valoresErrores  = new Object( @json( request()->old() ) );
+    <script>
+        var registros       = @json($roles),
+            registroA       = null,
+            mensajesErrores = new Object( @json( $errors->messages() ) ),
+            valoresErrores  = new Object( @json( request()->old() ) );
 
-    // Campos adicionales
-    function camposAdicionales(llenar, contFormulario) {
+        // Campos adicionales
+        function camposAdicionales(llenar, contFormulario) {
 
-        // Llenar
-        if (llenar) {
-            // Permisos
-            var permisos = (typeof registroA.permisos === 'string') ? JSON.parse( registroA.permisos ) : registroA.permisos;
-            permisos.forEach(p => {
-                if ( campo = document.querySelector(contFormulario + ' [value=' + p + ']') ) {
-                    campo.parentNode.click();
-                }
-            });
+            // Llenar
+            if (llenar) {
+                // Permisos
+                var permisos = (typeof registroA.permisos === 'string') ? JSON.parse( registroA.permisos ) : registroA.permisos;
+                permisos.forEach(p => {
+                    if ( campo = document.querySelector(contFormulario + ' [value=' + p + ']') ) {
+                        campo.parentNode.click();
+                    }
+                });
+            }
+
+            // Vaciar
+            else {
+                contFormulario.querySelectorAll('.activo, .activa').forEach(campo => {
+                    campo.classList.remove('activo', 'activa');
+                });
+            }
         }
-
-        // Vaciar
-        else {
-            contFormulario.querySelectorAll('.activo, .activa').forEach(campo => {
-                campo.classList.remove('activo', 'activa');
-            });
-        }
-    }
-</script>
-<script src="{{asset('/js/formularios.js')}}"></script>
+    </script>
 @endsection

@@ -8,7 +8,6 @@
 
 {{-- Estilos --}}
 @section('estilos')
-    <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
     <style>
         /* Vista previa */
         .vista-previa {
@@ -120,7 +119,7 @@
     {{-- Agregar --}}
     <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            <form class="modal-content" action="" method="POST" enctype="multipart/form-data">
+            <form class="modal-content" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{$tituloMD}}</h5>
@@ -249,5 +248,4 @@
             img.classList.remove('d-none');
         }
     </script>
-    <script src="{{asset('/js/formularios.js')}}"></script>
 @endsection

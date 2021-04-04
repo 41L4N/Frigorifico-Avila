@@ -23,26 +23,6 @@ function contarChecks(){
     document.querySelectorAll('.btn-admin').forEach(btn => { btn.disabled = estatus; });
 }
 
-// Limpiar formulario
-document.querySelectorAll('.contenido .modal').forEach(contFormulario => {
-    $('#'+contFormulario.id).on('hide.bs.modal', function () {
-        // Campos
-        contFormulario.querySelector('form').reset();
-        // Campos adicionales
-        if (typeof camposAdicionales !== 'undefined') {
-            camposAdicionales(false, contFormulario)
-        }
-        // Estilos
-        contFormulario.querySelectorAll('.is-invalid').forEach(campo => {
-            campo.classList.remove('is-invalid');
-        });
-        // Alertas
-        contFormulario.querySelectorAll('.alert').forEach(alerta => {
-            alerta.parentNode.removeChild(alerta);
-        });
-    });
-});
-
 // Registro actual
 function llenarFormulario(clave=null, contFormulario) {
 
@@ -80,11 +60,4 @@ function llenarFormulario(clave=null, contFormulario) {
 
     // Ventana
     $(contFormulario).modal('show');
-}
-
-// Acción
-if (typeof mensajesErrores !='undefined' && typeof valoresErrores != 'undefined') {
-    if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
-        llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
-    }
 }

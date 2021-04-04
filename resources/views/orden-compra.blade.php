@@ -15,7 +15,15 @@
 
 {{-- Contenido --}}
 @section('contenido')
+    <form method="POST">
 
+
+        {{-- Nombre y apellido --}}
+        <div class="fila-form">
+            <div></div>
+            <div></div>
+        </div>
+    </form>
 @endsection
 
 {{-- JavaScript --}}

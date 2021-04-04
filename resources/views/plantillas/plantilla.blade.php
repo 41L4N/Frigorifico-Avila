@@ -183,7 +183,7 @@
             {{-- Buscador --}}
             <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="" method="GET" class="modal-content">
+                    <form method="GET" class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Buscar</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -229,60 +229,8 @@
         </div>
 
         {{-- JavaScript --}}
-        <script>
-
-            // Lista de compras
-            function listaCompras(btn=null) {
-
-                // Formulario actual
-                if (btn) {
-
-                    var formulario = btn;
-                    while (formulario.tagName != 'FORM') {
-                        formulario = formulario.parentNode;
-                    }
-
-                    // Validacion
-                    if (!formulario.checkValidity()) {
-                        return;
-                    }
-
-                    // Envio
-                    $.ajax({
-                        type: "POST",
-                        url: formulario.action,
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('[name="csrf-token"]').content
-                        },
-                        data: datosC = new FormData(formulario),
-                        processData: false,
-                        contentType: false,
-                        success: function (r) {
-                            if (r == 2) {
-                                formulario.remove();
-                            }
-                        }
-                    });
-                }
-
-                var total = 0,
-                    nCompras = 0;
-                document.querySelectorAll('.producto-lista-compras').forEach(formulario => {
-
-                    // Subtotal
-                    subtotal = formulario.querySelector('[name="cantidad"]').value * formulario.querySelector('[name="precio_unitario"]').value;
-                    formulario.querySelector('.subtotal').innerHTML = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-
-                    // Total
-                    total = total + subtotal;
-                    precioTotal.innerHTML = "$" + total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-
-                    // Numero de compras
-                    document.querySelector('.btn-compras span').innerHTML = (nCompras = nCompras + parseInt(formulario.querySelector('[name="cantidad"]').value) )
-                });
-            }
-            listaCompras();
-        </script>
+        <script src="{{asset('/js/formularios.js')}}"></script>
+        <script src="{{asset('/js/plantilla.js')}}"></script>
         @yield('js')
     </body>
 </html>

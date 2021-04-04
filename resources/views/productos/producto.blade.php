@@ -12,7 +12,6 @@
 
 {{-- Estilos --}}
 @section('estilos')
-    <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
     <style>
 
         /* Imagen */
@@ -158,9 +157,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-{{-- JavaScript --}}
-@section('js')
-    <script src="{{asset('/js/formularios.js')}}"></script>
 @endsection

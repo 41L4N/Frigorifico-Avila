@@ -8,7 +8,6 @@
 
 {{-- Estilos --}}
 @section('estilos')
-    <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
     <style>
 
         /* Imagen */
@@ -158,5 +157,4 @@
         var mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );
     </script>
-    <script src="{{asset('/js/formularios.js')}}"></script>
 @endsection

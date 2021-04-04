@@ -6,11 +6,6 @@
     $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
-{{-- Estilos --}}
-@section('estilos')
-    <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
-@endsection
-
 {{-- Contenido --}}
 @section('contenido')
 
@@ -67,7 +62,7 @@
     {{-- Agregar --}}
     <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form class="modal-content" action="" method="POST">
+            <form class="modal-content" method="POST">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{$tituloMD}}</h5>
@@ -115,5 +110,4 @@
             }
         }
     </script>
-    <script src="{{asset('/js/formularios.js')}}"></script>
 @endsection
