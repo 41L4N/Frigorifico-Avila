@@ -55,7 +55,7 @@
                 <input type="password" name="password" class="form-control" minlength="8" maxlength="15" required>
             </div>
             <div>
-                <label>{{__('textos.campos.confirmar-contraseña')}}</label>
+                <label>{{__('textos.campos.confirmar_contraseña')}}</label>
                 <input type="password" name="confirmacion_password" class="form-control" minlength="8" maxlength="15" required>
             </div>
         </div>
