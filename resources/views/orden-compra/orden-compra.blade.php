@@ -30,7 +30,7 @@
         {{-- Check --}}
         <div class="fila-form">
             <div>
-                <label><input type="checkbox" name="direccion_envio">{{__('textos.campos.direccion_diferente')}}</label>
+                <label><input type="checkbox" name="direccion_envio" onchange="">{{__('textos.campos.direccion_diferente')}}</label>
             </div>
         </div>
         {{-- Campos --}}
@@ -42,7 +42,7 @@
         <div class="fila-form">
             <div>
                 <label>{{__('textos.campos.notas_pedido')}}</label>
-                <textarea name="informacion_envio" class="form-control"></textarea>
+                <textarea name="informacion_envio" class="form-control" maxlength="500"></textarea>
             </div>
         </div>
 

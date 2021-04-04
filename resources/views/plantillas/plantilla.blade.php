@@ -123,108 +123,107 @@
             <div class="container contenido d-flex flex-column flex-fill">
                 @yield('contenido')
             </div>
-
-            {{-- Botones flotantes --}}
-            {{-- Whatsapp --}}
-
-            {{-- Lista de compras --}}
-            <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
-                <span class="n-compras"></span>
-            </div>
-
-            {{-- Ventanas modales --}}
-            {{-- Lista de compras --}}
-            <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        @csrf
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{__('textos.titulos.lista_compra')}}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            @foreach ($listaCompras as $c)
-                                <form action="{{route('lista-compras')}}" method="POST" class="producto-lista-compras">
-                                    {{-- Acción --}}
-                                    <input type="hidden" name="accion" value="1">
-                                    {{-- Id de producto --}}
-                                    <input type="hidden" name="id_producto" value="{{$c->id}}">
-                                    {{-- Precio --}}
-                                    <input type="hidden" name="precio_unitario" value="{{$c->precio_unitario}}" disabled>
-                                    <b>{{$loop->iteration}}</b>
-                                    {{-- Miniatura de imagen --}}
-                                    <a href="{{$rutaP = route('productos', [$c->alias(), $c->id])}}" class="min-img">
-                                        <img src="{{route('mostrar-img', [$c->getTable(), $c->id])}}" alt="{{config('app.name') ." " . $c->alias()}}">
-                                    </a>
-                                    {{-- Información --}}
-                                    <div class="w-100">
-                                        <a href="{{$rutaP}}">{{$c->titulo}}</a> ({{formatos('n', $c->precio_unitario, true)}})
-                                        {{-- Cantidad --}}
-                                        <input type="number" name="cantidad" class="form-control w-25" min="1" value="{{$c->cantidad}}" onkeypress="soloNumeros(event ,5)" onchange="listaCompras(this)">
-                                        <b class="subtotal">{{formatos('n', $c->precio_unitario * $c->cantidad, true)}}</b>
-                                    </div>
-                                    <label class="btn btn-danger fas fa-times">
-                                        <input type="checkbox" name="accion" class="d-none" value="2" onchange="listaCompras(this)">
-                                    </label>
-                                </form>
-                            @endforeach
-                        </div>
-                        <a href="{{route('orden-compra')}}" class="modal-footer justify-content-center text-center btn btn-primary">
-                            <div>
-                                {{__('textos.botones.confirmar')}}
-                                <br>
-                                <b id="precioTotal"></b>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Buscador --}}
-            <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="GET" class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Buscar</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-
-                            {{-- Busqueda --}}
-                            <div class="fila-form">
-                                <div>
-                                    <input type="text" class="form-control" name="busqueda" required>
-                                </div>
-                            </div>
-
-                            {{-- Filtro --}}
-                            {{-- @foreach (App\FiltroArts::campos("tipo") as $url => $filtro)
-                                <div class="fila-form">
-                                    <div>
-                                        {{$filtro}}
-                                        <select name="{{$url}}" class="form-control">
-                                            <option value="" selected disabled>Elegir</option>
-                                            @foreach (App\FiltroArts::where("tipo",$filtro)->pluck("titulo")->toArray() as $titulo)
-                                                <option value="{{$titulo}}">{{$titulo}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            @endforeach --}}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary">Buscar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
 
         {{-- Pie de página --}}
         <div class="pie-pagina">
             <div class="container">
                 Pie de página
+            </div>
+        </div>
+
+        {{-- Botones flotantes --}}
+        {{-- Whatsapp --}}
+
+        {{-- Lista de compras --}}
+        <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
+            <span class="n-compras"></span>
+        </div>
+        {{-- Ventanas modales --}}
+        {{-- Lista de compras --}}
+        <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{__('textos.titulos.lista_compras')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($listaCompras as $c)
+                            <form action="{{route('lista-compras')}}" method="POST" class="producto-lista-compras">
+                                {{-- Acción --}}
+                                <input type="hidden" name="accion" value="1">
+                                {{-- Id de producto --}}
+                                <input type="hidden" name="id_producto" value="{{$c->id}}">
+                                {{-- Precio --}}
+                                <input type="hidden" name="precio_unitario" value="{{$c->precio_unitario}}" disabled>
+                                <b>{{$loop->iteration}}</b>
+                                {{-- Miniatura de imagen --}}
+                                <a href="{{$rutaP = route('productos', [$c->alias(), $c->id])}}" class="min-img">
+                                    <img src="{{route('mostrar-img', [$c->getTable(), $c->id])}}" alt="{{config('app.name') ." " . $c->alias()}}">
+                                </a>
+                                {{-- Información --}}
+                                <div class="w-100">
+                                    <a href="{{$rutaP}}">{{$c->titulo}}</a> ({{formatos('n', $c->precio_unitario, true)}})
+                                    {{-- Cantidad --}}
+                                    <input type="number" name="cantidad" class="form-control w-25" min="1" value="{{$c->cantidad}}" onkeypress="soloNumeros(event ,5)" onchange="listaCompras(this)">
+                                    <b class="subtotal">{{formatos('n', $c->precio_unitario * $c->cantidad, true)}}</b>
+                                </div>
+                                <label class="btn btn-danger fas fa-times">
+                                    <input type="checkbox" name="accion" class="d-none" value="2" onchange="listaCompras(this)">
+                                </label>
+                            </form>
+                        @endforeach
+                    </div>
+                    <a href="{{route('orden-compra')}}" class="modal-footer justify-content-center text-center btn btn-primary">
+                        <div>
+                            {{__('textos.botones.confirmar')}}
+                            <br>
+                            <b id="precioTotal"></b>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{-- Buscador --}}
+        <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="GET" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Buscar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+
+                        {{-- Busqueda --}}
+                        <div class="fila-form">
+                            <div>
+                                <input type="text" class="form-control" name="busqueda" required>
+                            </div>
+                        </div>
+
+                        {{-- Filtro --}}
+                        {{-- @foreach (App\FiltroArts::campos("tipo") as $url => $filtro)
+                            <div class="fila-form">
+                                <div>
+                                    {{$filtro}}
+                                    <select name="{{$url}}" class="form-control">
+                                        <option value="" selected disabled>Elegir</option>
+                                        @foreach (App\FiltroArts::where("tipo",$filtro)->pluck("titulo")->toArray() as $titulo)
+                                            <option value="{{$titulo}}">{{$titulo}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endforeach --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-primary">Buscar</button>
+                    </div>
+                </form>
             </div>
         </div>
 

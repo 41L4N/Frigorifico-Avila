@@ -116,7 +116,7 @@
             {{-- Precios --}}
             {{-- Al detal --}}
             <div>
-                <div class="subtitulo">{{__('textos.subtitulos.compra_detal')}}</div>
+                <div class="subtitulo">{{__('textos.titulos.compra_detal')}}</div>
                 <div>
                     <div class="precio-oferta">
                         @if ($p->oferta)
@@ -134,7 +134,7 @@
             {{-- Al mayor --}}
             @if ($p->pedido_min_mayor && $p->precio_mayor)
                 <div>
-                    <div class="subtitulo">{{__('textos.subtitulos.compra_mayor')}}</div>
+                    <div class="subtitulo">{{__('textos.titulos.compra_mayor')}}</div>
                     <div class="precio-oferta">{{formatos('n', $p->precio_mayor, true)}}</div>
                     <b>{{__('textos.campos.pedido_min')}}:</b> {{$p->pedido_min_mayor}}
                 </div>
