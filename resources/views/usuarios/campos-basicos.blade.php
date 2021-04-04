@@ -6,7 +6,7 @@
 {{-- Datos personales --}}
 {{-- Subtitulo --}}
 @if (in_array("subtitulos",$campos))
-    <h4 class="subtitulo-form">{{__('textos.subtitulos.datos_personales')}}</h4>
+    <div class="subtitulo-form">{{__('textos.subtitulos.datos_personales')}}</div>
 @endif
 {{-- Nombre y apellido --}}
 <div class="fila-form">
@@ -39,7 +39,7 @@
 {{-- Seguridad --}}
 {{-- Subtitulo --}}
 @if (in_array("subtitulos",$campos))
-    <h4 class="subtitulo-form">{{__('textos.subtitulos.seguridad')}}</h4>
+    <div class="subtitulo-form">{{__('textos.subtitulos.seguridad')}}</div>
 @endif
 {{-- Contraseñas --}}
 @if (in_array("contraseñas",$campos))

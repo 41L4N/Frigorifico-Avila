@@ -5,6 +5,9 @@
 }
 
 /* Subtitulos */
+.subtitulo-form {
+    font-size: 22.5px;
+}
 .subtitulo-form:not(:first-of-type) {
     margin-top: 50px;
 }

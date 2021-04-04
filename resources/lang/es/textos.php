@@ -109,7 +109,7 @@ return [
         'precio_mayor'          => "Precio al mayor",
         'descripcion'           => "Descripción",
         'actualizar_img'        => "Actualizar Imagen",
-        'precio_venta'          => "Precio de venta",
+        'precio_unitario'       => "Precio Unitario",
         'cantidad'              => "Cantidad",
         'subtotal'              => "Subtotal"
     ],
@@ -132,6 +132,7 @@ return [
 
     // Parrafos
     'parrafos' => [
-        'confirmacion' => "¿Seguro que desea realizar esta acción?"
+        'confirmacion' => "¿Seguro que desea realizar esta acción?",
+        
     ]
 ];
