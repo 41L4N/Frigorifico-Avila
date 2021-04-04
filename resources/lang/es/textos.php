@@ -110,13 +110,14 @@ return [
         'precio_mayor'          => "Precio al mayor",
         'descripcion'           => "Descripción",
         'actualizar_img'        => "Actualizar Imagen",
-        
+
         // Lista de compras
         'precio_unitario'       => "Precio Unitario",
         'subtotal'              => "Subtotal",
-        
+
         // Orden de compra
         'cantidad'              => "Cantidad",
+        'direccion_diferente'   => "¿Enviar a una dirección diferente?",
         'nombre_empresa'        => "Nombre de empresa",
         'calle'                 => "Calle",
         'n_puerta'              => "Número, Piso, Unidad",

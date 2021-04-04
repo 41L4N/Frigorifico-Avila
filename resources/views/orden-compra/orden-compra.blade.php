@@ -9,7 +9,15 @@
 {{-- Estilos --}}
 @section('estilos')
     <style>
-
+        /* Dirección de envío */
+        #direccionEnvio {
+            max-height: 1000px;
+            transition: .5s;
+        }
+        #direccionEnvio:disabled {
+            max-height: 0px;
+            overflow: hidden;
+        }
     </style>
 @endsection
 
@@ -30,14 +38,14 @@
         {{-- Check --}}
         <div class="fila-form">
             <div>
-                <label><input type="checkbox" name="direccion_envio" onchange="">{{__('textos.campos.direccion_diferente')}}</label>
+                <label><input type="checkbox" name="direccion_envio" onchange="direccionEnvio.disabled = !direccionEnvio.disabled">{{__('textos.campos.direccion_diferente')}}</label>
             </div>
         </div>
         {{-- Campos --}}
-        <div id="camposDireccionEnvio">
+        <fieldset id="direccionEnvio" disabled>
             @php($cPadre='direccion_envio')
             @include('orden-compra.campos-informacion-facturacion')
-        </div>
+        </fieldset>
         {{-- Notas --}}
         <div class="fila-form">
             <div>
@@ -48,7 +56,7 @@
 
         {{-- Lista de compras --}}
         {{-- Título --}}
-        <div class="subtitulo-form">{{__('textos.titulos.lista_compras')}}</div>
+        <div class="subtitulo-form">{{__('textos.titulos.lista_compras')}} (X)</div>
         {{-- Compras --}}
         <table class="tb-resultados">
             <tr>
@@ -68,8 +76,8 @@
                             <img src="{{route('mostrar-img',[$c->getTable(), $c->id])}}" alt="{{config('app.name') . "  " . $c->titulo}}">
                         </a>
                     </td>
-                    <td>{{$c->cantidad}}</td>
-                    <td>{{formatos('n', $c->precio_unitario, true)}}</td>
+                    <td class="cantidad-orden-compra">{{$c->cantidad}}</td>
+                    <td class="subtotal-orden-compra">{{formatos('n', $c->precio_unitario, true)}}</td>
                     <td>{{formatos('n', $c->cantidad * $c->precio_unitario, true)}}</td>
                 </tr>
             @endforeach

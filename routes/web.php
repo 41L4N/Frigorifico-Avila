@@ -41,6 +41,7 @@ Route::post('/renovacion-contraseña', [UsuarioCtrl::class,'renovacionContraseñ
 Route::get('/productos/{filtro?}/{id?}', [ProductoCtrl::class,'productos'])->name('productos');
 Route::post('/lista-compras', [OrdenCompraCtrl::class,'listaCompras'])->name('lista-compras');
 Route::view('/orden-compra', 'orden-compra.orden-compra')->name('orden-compra');
+Route::post('/orden-compra',[OrdenCompraCtrl::class,'ordenCompra']);
 
 // Rutas protegidas
 Route::middleware('auth')->group(function(){

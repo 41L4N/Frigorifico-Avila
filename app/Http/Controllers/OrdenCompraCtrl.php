@@ -77,21 +77,7 @@ class OrdenCompraCtrl extends Controller
     // Orden
     public function ordenCompra(Request $rq){
 
-        // Actualizar listado
-        if ($rq->method() == "POST") {
-            $listaCompras = [];
-            foreach ($rq->ids as $i => $id) {
-                array_push($listaCompras, [
-                    'id_producto'        => $rq->ids[$i],
-                    'cantidad'  => $rq->cantidades[$i]
-                ]);
-            }
-            Cache::put('lista-compras', $listaCompras);
-            return redirect()->route('orden-compra');
-        }
 
-        // Respuesta
-        return view('orden-compra');
     }
 
     // Confirmar

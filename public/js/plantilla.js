@@ -34,18 +34,32 @@ function listaCompras(btn=null) {
 
     var total = 0,
         nCompras = 0;
-    document.querySelectorAll('.producto-lista-compras').forEach(formulario => {
+    document.querySelectorAll('.producto-lista-compras').forEach((formulario, iFormulario) => {
+
+        // Cantidad
+        if (typeof (celdaCantidad = document.querySelectorAll('.cantidad-orden-compra')[iFormulario]) != 'undefined') {
+            celdaCantidad.innerHTML = (cantidad = formulario.querySelector('[name="cantidad"]').value);
+        }
 
         // Subtotal
-        subtotal = formulario.querySelector('[name="cantidad"]').value * formulario.querySelector('[name="precio_unitario"]').value;
-        formulario.querySelector('.subtotal').innerHTML = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        subtotal =  cantidad * formulario.querySelector('[name="precio_unitario"]').value;
+        formulario.querySelector('.subtotal').innerHTML = (subtotalTexto = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
+        if (typeof (celdaSubtotal = document.querySelectorAll('.subtotal-orden-compra')[iFormulario]) != 'undefined') {
+            celdaSubtotal.innerHTML = subtotalTexto;
+        }
 
         // Total
         total = total + subtotal;
         precioTotal.innerHTML = "$" + total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        // if (condition) {
+            
+        // }
 
         // Numero de compras
-        document.querySelector('.btn-compras span').innerHTML = (nCompras = nCompras + parseInt(formulario.querySelector('[name="cantidad"]').value) )
+        document.querySelector('.btn-compras span').innerHTML = (nCompras = nCompras + parseInt(cantidad) )
+        // if (condition) {
+            
+        // }
     });
 }
 
