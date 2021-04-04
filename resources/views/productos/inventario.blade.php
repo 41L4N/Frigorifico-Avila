@@ -182,7 +182,7 @@
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='precio_mayor')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" onkeypress="soloNumeros(event)">
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 

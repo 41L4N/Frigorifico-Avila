@@ -10,26 +10,30 @@ function listaCompras(btn=null) {
         }
 
         // Validacion
-        formulario.querySelectorAll('input').forEach(input => {
+        (camposF = formulario.querySelectorAll('input')).forEach(input => {
             if (!input.checkValidity()) {
                 return;
             }
         });
 
-        return;
+        // Datos de la compra
+        var datosC = new FormData();
+        camposF.forEach(campo => {
+            datosC.set(campo.name, campo.value);
+        });
 
         // Envio
         $.ajax({
             type: "POST",
-            url: formulario.action,
+            url: '/lista-compras',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('[name="csrf-token"]').content
             },
-            data: datosC = new FormData(formulario),
+            data: datosC,
             processData: false,
             contentType: false,
-            success: function (r) {
-                if (r == 2) {
+            success: function () {
+                if (datosC.get('accion') == 2) {
                     formulario.remove();
                 }
             }
@@ -38,15 +42,10 @@ function listaCompras(btn=null) {
 
     var total = 0,
         nCompras = 0;
-    document.querySelectorAll('.producto-lista-compras').forEach((formulario, iFormulario) => {
-
-        // Cantidad
-        var cantidad = formulario.querySelector('[name="cantidad"]').value;
-        if (celdaCantidad = document.querySelectorAll('.cantidad-orden-compra')[iFormulario]) {
-            celdaCantidad.innerHTML = cantidad;
-        }
-
+    document.querySelectorAll('#vtnCompras .producto-lista-compras').forEach((formulario, iFormulario) => {
+        
         // Subtotal
+        var cantidad = formulario.querySelector('[name="cantidad"]').value;
         subtotal =  cantidad * formulario.querySelector('[name="precio_unitario"]').value;
         formulario.querySelector('.subtotal').innerHTML = (subtotalTexto = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
         if (typeof (celdaSubtotal = document.querySelectorAll('.subtotal-orden-compra')[iFormulario]) != 'undefined') {
@@ -61,10 +60,11 @@ function listaCompras(btn=null) {
         // }
 
         // Numero de compras
-        document.querySelector('.n-compras').innerHTML = (nCompras = nCompras + parseInt(cantidad) )
-        // if (condition) {
-            
-        // }
+        nCompras = nCompras + parseInt(cantidad);
+        document.querySelectorAll('.n-compras').forEach(campoNCompras => {
+            console.log(nCompras);
+            campoNCompras.innerHTML = nCompras;
+        });
     });
 }
 

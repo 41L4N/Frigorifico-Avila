@@ -1,5 +1,5 @@
 @foreach ($listaCompras as $c)
-    <div action="{{route('lista-compras')}}" method="POST" class="producto-lista-compras">
+    <div class="producto-lista-compras">
         {{-- Acción --}}
         <input type="hidden" name="accion" value="1">
         {{-- Id de producto --}}
@@ -15,11 +15,11 @@
         <div class="w-100">
             <a href="{{$rutaP}}">{{$c->titulo}}</a> ({{formatos('n', $c->precio_unitario, true)}})
             {{-- Cantidad --}}
-            <input type="number" name="cantidad" class="form-control w-25" min="{{$min=1}}" max="99999" value="{{$min}}" value="{{$c->cantidad}}" onkeypress="soloNumeros(event)" onchange="listaCompras(this)">
+            <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" value="{{$c->cantidad}}" onkeypress="soloNumeros(event)" onchange="listaCompras(this)" required>
             <b class="subtotal">{{formatos('n', $c->precio_unitario * $c->cantidad, true)}}</b>
         </div>
         <label class="btn btn-danger fas fa-times">
-            <input type="checkbox" name="accion" class="d-none" value="2" onchange="listaCompras(this)">
+            <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; listaCompras(this);">
         </label>
     </div>
 @endforeach

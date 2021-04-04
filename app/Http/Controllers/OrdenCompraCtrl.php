@@ -63,7 +63,7 @@ class OrdenCompraCtrl extends Controller
 
         // Respuesta
         if ($rq->ajax()) {
-            return response($rq->accion);
+            return true;
         }
         else {
             return back()->with([
