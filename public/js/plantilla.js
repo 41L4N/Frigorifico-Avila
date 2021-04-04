@@ -42,29 +42,20 @@ function listaCompras(btn=null) {
 
     var total = 0,
         nCompras = 0;
-    document.querySelectorAll('#vtnCompras .producto-lista-compras').forEach((formulario, iFormulario) => {
-        
+    document.querySelectorAll('.producto-lista-compras').forEach(formulario => {
+
+        // Cantidad
+        cantidad = parseInt(formulario.querySelector('[name="cantidad"]').value);
+
         // Subtotal
-        var cantidad = formulario.querySelector('[name="cantidad"]').value;
-        subtotal =  cantidad * formulario.querySelector('[name="precio_unitario"]').value;
+        subtotal = cantidad * parseFloat(formulario.querySelector('[name="precio_unitario"]').value);
         formulario.querySelector('.subtotal').innerHTML = (subtotalTexto = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
-        if (typeof (celdaSubtotal = document.querySelectorAll('.subtotal-orden-compra')[iFormulario]) != 'undefined') {
-            celdaSubtotal.innerHTML = subtotalTexto;
-        }
 
         // Total
-        total = total + subtotal;
-        precioTotal.innerHTML = "$" + total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-        // if (condition) {
-            
-        // }
+        document.querySelector('.precio-total').innerHTML = "$" + (total = total + subtotal).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 
         // Numero de compras
-        nCompras = nCompras + parseInt(cantidad);
-        document.querySelectorAll('.n-compras').forEach(campoNCompras => {
-            console.log(nCompras);
-            campoNCompras.innerHTML = nCompras;
-        });
+        document.querySelector('.n-compras').innerHTML = (nCompras = nCompras + parseInt(cantidad));
     });
 }
 

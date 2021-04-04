@@ -76,8 +76,7 @@ class OrdenCompraCtrl extends Controller
 
     // Orden
     public function ordenCompra(Request $rq){
-
-
+        dd($rq);
     }
 
     // Confirmar

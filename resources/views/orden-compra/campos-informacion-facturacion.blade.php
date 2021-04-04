@@ -88,13 +88,13 @@
 <div class="fila-form">
     <div>
         <label>{{__('textos.campos.' . $n='email')}}</label>
-        <input name="{{ ($cPadre) ? $cPadre . "[direccion][$n]" : "direccion[$n]" }}" class="form-control" maxlength="75" required>
+        <input name="{{ ($cPadre) ? $cPadre . "[$n]" : "$n" }}" class="form-control" maxlength="75" required>
     </div>
     <div>
         <label>{{__('textos.campos.' . $n='telf')}}</label>
         <div class="d-flex">
-            <input name="{{$n}}[codigo]" class="form-control w-25" placeholder="58" minlength="2" maxlength="4" onkeypress="soloNumeros(event)" required>
-            <input name="{{$n}}[numero]" class="form-control" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
+            <input name="{{ ($cPadre) ? $cPadre . "[$n]" : $n }}[codigo]" class="form-control w-25" placeholder="58" minlength="2" maxlength="4" onkeypress="soloNumeros(event)" required>
+            <input name="{{ ($cPadre) ? $cPadre . "[$n]" : $n }}[numero]" class="form-control" placeholder="1234567890" minlength="7" maxlength="12" onkeypress="soloNumeros(event)" required>
         </div>
     </div>
 </div>

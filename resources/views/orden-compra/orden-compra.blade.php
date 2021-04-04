@@ -24,6 +24,7 @@
 {{-- Contenido --}}
 @section('contenido')
     <form method="POST">
+        @csrf
 
         {{-- Información de facturación --}}
         {{-- Título --}}
@@ -48,7 +49,7 @@
         <div class="fila-form">
             <div>
                 <label>{{__('textos.campos.notas_pedido')}}</label>
-                <textarea name="informacion_envio" class="form-control" maxlength="500"></textarea>
+                <textarea name="notas_envio" class="form-control" maxlength="500"></textarea>
             </div>
         </div>
 
@@ -57,9 +58,28 @@
         <div class="subtitulo-form">{{__('textos.titulos.lista_compras')}} (<span class="n-compras"></span>)</div>
         {{-- Compras --}}
         @include('plantillas.lista-compras')
+        {{-- Total --}}
+        <div class="text-center">
+            Total
+            <br>
+            <b class="precio-total"></b>
+        </div>
 
         {{-- Lista de compras --}}
         {{-- Título --}}
         <div class="subtitulo-form">{{__('textos.titulos.forma_pago')}}</div>
+        {{-- Campos --}}
+        {{-- Cupon --}}
+        <div class="fila-form">
+            <div>
+                <label>{{__('textos.campos.cupon')}}</label>
+                <input type="text" name="cupon" class="form-control" maxlength="25">
+            </div>
+        </div>
+
+        {{-- Botones --}}
+        <div class="btns-form">
+            <button class="btn btn-primary">{{__('textos.botones.confirmar')}}</button>
+        </div>
     </form>
 @endsection

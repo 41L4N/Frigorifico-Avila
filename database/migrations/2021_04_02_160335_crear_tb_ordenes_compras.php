@@ -23,8 +23,8 @@ class CrearTbOrdenesCompras extends Migration
             $tb->string('telf');
             $tb->text('direccion_envio')->nullable();
             $tb->text('articulos');
+            $tb->string('total');
             $tb->string('cupon');
-            $tb->text('total');
             $tb->timestamps();
         });
     }

@@ -132,37 +132,39 @@
             </div>
         </div>
 
+        {{-- Lista de compras --}}
+        @if (Route::currentRouteName() != "orden-compra")
+            {{-- Boton --}}
+            <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
+                <span class="n-compras"></span>
+            </div>
+            {{-- Ventana --}}
+            <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{__('textos.titulos.lista_compras')}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            @include('plantillas.lista-compras')
+                        </div>
+                        {{-- Total --}}
+                        <a href="{{route('orden-compra')}}" class="modal-footer flex-column justify-content-center text-center btn btn-primary">
+                            {{__('textos.botones.confirmar')}}
+                            <b class="precio-total"></b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         {{-- Botones flotantes --}}
         {{-- Whatsapp --}}
 
-        {{-- Lista de compras --}}
-        <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
-            <span class="n-compras"></span>
-        </div>
         {{-- Ventanas modales --}}
         {{-- Lista de compras --}}
-        <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{__('textos.titulos.lista_compras')}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        @include('plantillas.lista-compras')
-                    </div>
-                    <a href="{{route('orden-compra')}}" class="modal-footer justify-content-center text-center btn btn-primary">
-                        <div>
-                            {{__('textos.botones.confirmar')}}
-                            <br>
-                            <b id="precioTotal"></b>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
         {{-- Buscador --}}
         <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
