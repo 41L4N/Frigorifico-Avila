@@ -1,6 +1,16 @@
 // Solo numeros y longitud maxima opcional
-function soloNumeros(tecla, longitud=null) {
-    if (tecla.keyCode < 47 || tecla.keyCode > 58 || (longitud) ? tecla.target.value.length > longitud : null ) {
+function soloNumeros(tecla) {
+    var nuevoValor = tecla.target.value + tecla.key;
+    if (
+        // Valores permitidos
+        tecla.keyCode < 47 || tecla.keyCode > 58
+        // Cantidad de digitos
+        || ( nuevoValor.length < tecla.target.min.length )
+        || ( (tecla.target.max) ? nuevoValor.length > tecla.target.max.length : false )
+        // Rango del valor
+        || ( (tecla.target.min) ? nuevoValor < tecla.target.min : false )
+        || ( (tecla.target.max) ? nuevoValor > tecla.target.max : false )
+    ) {
         tecla.returnValue = false;
     }
 }

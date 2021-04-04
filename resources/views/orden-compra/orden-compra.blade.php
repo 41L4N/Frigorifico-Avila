@@ -29,8 +29,7 @@
         {{-- Título --}}
         <div class="subtitulo-form">{{__('textos.titulos.informacion_facturacion')}}</div>
         {{-- Campos --}}
-        @php($cPadre="")
-        @include('orden-compra.campos-informacion-facturacion')
+        @include('orden-compra.campos-informacion-facturacion', ['cPadre'=>''])
 
         {{-- Información de envio --}}
         {{-- Título --}}
@@ -43,8 +42,7 @@
         </div>
         {{-- Campos --}}
         <fieldset id="direccionEnvio" disabled>
-            @php($cPadre='direccion_envio')
-            @include('orden-compra.campos-informacion-facturacion')
+            @include('orden-compra.campos-informacion-facturacion', ['cPadre'=>'direccion_envio'])
         </fieldset>
         {{-- Notas --}}
         <div class="fila-form">
@@ -56,32 +54,9 @@
 
         {{-- Lista de compras --}}
         {{-- Título --}}
-        <div class="subtitulo-form">{{__('textos.titulos.lista_compras')}} (X)</div>
+        <div class="subtitulo-form">{{__('textos.titulos.lista_compras')}} (<span class="n-compras"></span>)</div>
         {{-- Compras --}}
-        <table class="tb-resultados">
-            <tr>
-                <th>#</th>
-                <th>{{__('textos.campos.producto')}}</th>
-                <th>{{__('textos.campos.cantidad')}}</th>
-                <th>{{__('textos.campos.precio_unitario')}}</th>
-                <th>{{__('textos.campos.subtotal')}}</th>
-            </tr>
-            @foreach ($listaCompras as $c)
-                <tr>
-                    <th>{{$loop->iteration}}</th>
-                    <td>
-                        <a href="{{$rutaP = route('productos', [$c->alias(), $c->id])}}">{{$c->titulo}}</a>
-                        <br>
-                        <a href="{{$rutaP}}" class="min-img">
-                            <img src="{{route('mostrar-img',[$c->getTable(), $c->id])}}" alt="{{config('app.name') . "  " . $c->titulo}}">
-                        </a>
-                    </td>
-                    <td class="cantidad-orden-compra">{{$c->cantidad}}</td>
-                    <td class="subtotal-orden-compra">{{formatos('n', $c->precio_unitario, true)}}</td>
-                    <td>{{formatos('n', $c->cantidad * $c->precio_unitario, true)}}</td>
-                </tr>
-            @endforeach
-        </table>
+        @include('plantillas.lista-compras')
 
         {{-- Lista de compras --}}
         {{-- Título --}}

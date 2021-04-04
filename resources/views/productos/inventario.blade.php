@@ -162,15 +162,15 @@
                         {{-- Pedido mínimo --}}
                         <div>
                             <label>{{__('textos.campos.' . $n='pedido_min_detal')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" value="{{$min}}" onkeypress="soloNumeros(event,5)" required>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="999" minlength="1" maxlength="6" value="{{$min}}" onkeypress="soloNumeros(event)" required>
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" value="{{$min}}" onkeypress="soloNumeros(event,5)" required>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" value="{{$min}}" onkeypress="soloNumeros(event)" required>
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event,5)">
+                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 
@@ -178,11 +178,11 @@
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.' . $n='pedido_min_mayor')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event,5)">
+                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event)">
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='precio_mayor')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event,5)">
+                            <input type="number" class="form-control" name="{{$n}}" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 

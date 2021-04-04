@@ -5,14 +5,18 @@ function listaCompras(btn=null) {
     if (btn) {
 
         var formulario = btn;
-        while (formulario.tagName != 'FORM') {
+        while (!formulario.classList.contains('producto-lista-compras')) {
             formulario = formulario.parentNode;
         }
 
         // Validacion
-        if (!formulario.checkValidity()) {
-            return;
-        }
+        formulario.querySelectorAll('input').forEach(input => {
+            if (!input.checkValidity()) {
+                return;
+            }
+        });
+
+        return;
 
         // Envio
         $.ajax({
@@ -37,8 +41,9 @@ function listaCompras(btn=null) {
     document.querySelectorAll('.producto-lista-compras').forEach((formulario, iFormulario) => {
 
         // Cantidad
-        if (typeof (celdaCantidad = document.querySelectorAll('.cantidad-orden-compra')[iFormulario]) != 'undefined') {
-            celdaCantidad.innerHTML = (cantidad = formulario.querySelector('[name="cantidad"]').value);
+        var cantidad = formulario.querySelector('[name="cantidad"]').value;
+        if (celdaCantidad = document.querySelectorAll('.cantidad-orden-compra')[iFormulario]) {
+            celdaCantidad.innerHTML = cantidad;
         }
 
         // Subtotal
@@ -56,7 +61,7 @@ function listaCompras(btn=null) {
         // }
 
         // Numero de compras
-        document.querySelector('.btn-compras span').innerHTML = (nCompras = nCompras + parseInt(cantidad) )
+        document.querySelector('.n-compras').innerHTML = (nCompras = nCompras + parseInt(cantidad) )
         // if (condition) {
             
         // }
