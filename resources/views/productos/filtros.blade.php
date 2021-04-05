@@ -119,7 +119,7 @@
 @section('js')
     <script>
 
-        var registros       = @json($filtros),
+        var registrosP      = @json($filtros),
             registroA       = null,
             mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );

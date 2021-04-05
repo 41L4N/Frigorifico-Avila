@@ -6,6 +6,29 @@
     $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
+{{-- Estilos --}}
+@section('estilos')
+    <style>
+        .opcion-rol {
+            width: 100%;
+            padding: 7.5px 12.5px;
+            box-shadow: 0px 0px 2.5px black;
+            cursor: pointer;
+            margin-bottom: 12.5px !important;
+            border: solid transparent 2.5px;
+        }
+        .opcion-rol input { margin-right: 5px; }
+        .opcion-rol:hover {
+            border: solid var(--c-plantilla) 2.5px;
+            box-shadow: 0px 0px 1.5px var(--c-plantilla);
+        }
+        .opcion-rol.activa {
+            border: solid var(--c-plantilla) 2.5px;
+            box-shadow: 0px 0px 1.5px var(--c-plantilla);
+        }
+    </style>
+@endsection
+
 {{-- Contenido --}}
 @section('contenido')
 
@@ -22,7 +45,7 @@
         </div>
 
         {{-- Resultados --}}
-        @if ($usuarios->count())
+        @if (($registrosP = $cupones)->count())
 
             {{-- Tabla de resultados --}}
             <table class="tb-resultados">
@@ -31,22 +54,22 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
-                    <th>{{__('textos.campos.nombre') ." y ". __('textos.campos.apellido')}}</th>
-                    <th>{{__('textos.campos.email')}}</th>
-                    <th>{{__('textos.campos.telf')}}</th>
-                    <th>{{__('textos.campos.rol')}}</th>
+                    <th>{{__('textos.campos.titulo')}}</th>
+                    <th>{{__('textos.campos.codigo')}}</th>
+                    <th>{{__('textos.campos.oferta')}}</th>
+                    <th>{{__('textos.campos.fecha_vencimiento')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
-                {{-- Registros --}}
-                @foreach ($usuarios as $u)
+                {{-- Registros principales --}}
+                @foreach ($registrosP as $regP)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$u->id}}"></th>
-                        <td>{{"$u->nombre $u->apellido"}}</td>
-                        <td>{{$u->email}}</td>
-                        <td>{{formatos('t', $u->telf, true)}}</td>
-                        <td>{{$u->rolP()}}</td>
+                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$regP->id}}"></th>
+                        <td>{{$regP->titulo}}</td>
+                        <td>{{$regP->codigo}}</td>
+                        <td>{{$regP->oferta}}</td>
+                        <td>{{$regP->fecha_vencimiento}}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -68,11 +91,30 @@
                     <h5 class="modal-title">{{$tituloMD}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                {{-- Campos --}}
                 <div class="modal-body">
-                    {{-- Id de ventana --}}
-                    <input type="hidden" name="id_vtn" value="{{$idVtn}}">
-                    @include('usuarios.campos-basicos', $campos=['id','telf'])
+
+                    {{-- Ids --}}
+                    <input type="hidden" name="{{$idVtn}}">
+                    <input name="id" class="d-none">
+
+                    {{-- Titulo --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n = 'titulo')}}</label>
+                            <input type="text" class="form-control" name="{{$n}}" maxlength="75" required>
+                        </div>
+                    </div>
+                    {{-- Oferta y fecha de vencimiento --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n = 'oferta')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" min="1" max="100" onkeypress="soloNumeros(event)" required>
+                        </div>
+                        <div>
+                            <label>{{__('textos.campos.' . $n = 'fecha_vencimiento')}}</label>
+                            <input type="date" class="form-control" name="{{$n}}" min="{{today()->format('Y-m-d')}}" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -88,8 +130,7 @@
 {{-- JavaScript --}}
 @section('js')
     <script>
-
-        var registrosP      = @json($usuarios),
+        var registrosP      = @json($registrosP),
             registroA       = null,
             mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );
@@ -99,14 +140,12 @@
 
             // Llenar
             if (llenar) {
+                
+            }
 
-                // Teléfono
-                var telf = (typeof registroA.telf === 'string') ? JSON.parse( registroA.telf ) : registroA.telf;
-                Object.keys( telf ).forEach(clave => {
-                    if ( campo = document.querySelector(contFormulario + ' [name="telf[' + clave + ']"]') ) {
-                        campo.value = telf[clave];
-                    }
-                });
+            // Vaciar
+            else {
+                
             }
         }
     </script>

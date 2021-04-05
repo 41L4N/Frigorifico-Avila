@@ -170,7 +170,7 @@
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="100" onkeypress="soloNumeros(event)">
+                            <input type="number" class="form-control" name="{{$n}}" min="0" max="100" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 
@@ -218,7 +218,7 @@
 {{-- JavaScript --}}
 @section('js')
     <script>
-        var registros       = @json($productos),
+        var registrosP      = @json($productos),
             registroA       = null,
             mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );

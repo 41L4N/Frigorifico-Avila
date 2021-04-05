@@ -19,7 +19,7 @@
     <div class="cont-mins align-content-center">
 
         {{-- Rutas --}}
-        @foreach (['roles', 'usuarios', 'filtros-productos', 'inventario'] as $r)
+        @foreach (['roles', 'usuarios', 'filtros-productos', 'inventario', 'cupones'] as $r)
             <a href="{{route($r)}}" class="min">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>

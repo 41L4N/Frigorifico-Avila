@@ -12,9 +12,10 @@ return [
         'usuarios'              => "Usuarios",
         'filtros_productos'     => "Filtros de productos",
         'inventario'            => "Inventario",
-        'ordenes_compras'       => "Ordenes de compras",
-        'ofertas'               => "Ofertas",
+        'cupones'               => "Cupones",
         'combos'                => "Combos",
+        'ordenes_compras'       => "Ordenes de compras",
+        'productos'             => "Productos",
         // Usuario
         'usuario'               => "Usuario",
         'salir'                 => "Salir"
@@ -82,6 +83,10 @@ return [
     // Campos
     'campos' => [
 
+        // Lista de compras
+        'precio_unitario'       => "Precio Unitario",
+        'subtotal'              => "Subtotal",
+
         // Usuario
         'nombre'                => "Nombre",
         'apellido'              => "Apellido",
@@ -111,9 +116,8 @@ return [
         'descripcion'           => "Descripción",
         'actualizar_img'        => "Actualizar Imagen",
 
-        // Lista de compras
-        'precio_unitario'       => "Precio Unitario",
-        'subtotal'              => "Subtotal",
+        // Cupones
+        'fecha_vencimiento'     => "Fecha de vencimiento",
 
         // Orden de compra
         'cantidad'              => "Cantidad",

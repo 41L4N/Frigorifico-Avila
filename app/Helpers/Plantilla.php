@@ -58,7 +58,8 @@ function iconos($i){
         'roles'             =>  "fas fa-user-lock",
         'usuarios'          =>  "fas fa-users",
         'filtros-productos' =>  "fas fa-filter",
-        'inventario'        =>  "fas fa-boxes"
+        'inventario'        =>  "fas fa-boxes",
+        'cupones'           =>  "fas fa-ticket-alt"
     ];
 
     // Respuesta

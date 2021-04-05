@@ -5,11 +5,11 @@ function soloNumeros(tecla) {
         // Valores permitidos
         tecla.keyCode < 47 || tecla.keyCode > 58
         // Cantidad de digitos
-        || ( nuevoValor.length < tecla.target.min.length )
-        || ( (tecla.target.max) ? nuevoValor.length > tecla.target.max.length : false )
+        || ( parseInt(nuevoValor.length) < parseInt(tecla.target.min.length) )
+        || ( (tecla.target.max) ? parseInt(nuevoValor.length) > parseInt(tecla.target.max.length) : false )
         // Rango del valor
-        || ( (tecla.target.min) ? nuevoValor < tecla.target.min : false )
-        || ( (tecla.target.max) ? nuevoValor > tecla.target.max : false )
+        || ( (tecla.target.min) ? parseInt(nuevoValor) < parseInt(tecla.target.min) : false )
+        || ( (tecla.target.max) ? parseInt(nuevoValor) > parseInt(tecla.target.max) : false )
     ) {
         tecla.returnValue = false;
     }
@@ -47,7 +47,7 @@ function llenarFormulario(clave=null, contFormulario) {
     });
 
     // Registro actual
-    registroA = (clave===null) ? valoresErrores : registros[clave];
+    registroA = (clave===null) ? valoresErrores : registrosP[clave];
 
     // Campos directos
     Object.keys(registroA).forEach(clave => {

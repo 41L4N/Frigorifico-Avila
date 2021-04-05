@@ -96,6 +96,11 @@ Route::middleware('auth')->group(function(){
         // Combos
 
         // Cupones
+        Route::prefix($n='cupones')->name($n)->group(function (){
+            Route::get('/', [CuponCtrl::class,'cupones'])->name('');
+            Route::post('/', [CuponCtrl::class,'guardar']);
+            Route::post('/eliminar', [CuponCtrl::class,'eliminar'])->name('-eliminar');
+        });
 
         // Ordenes de compra
 
