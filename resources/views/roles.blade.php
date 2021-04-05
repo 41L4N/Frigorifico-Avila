@@ -6,29 +6,6 @@
     $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
-{{-- Estilos --}}
-@section('estilos')
-    <style>
-        .opcion-rol {
-            width: 100%;
-            padding: 7.5px 12.5px;
-            box-shadow: 0px 0px 2.5px black;
-            cursor: pointer;
-            margin-bottom: 12.5px !important;
-            border: solid transparent 2.5px;
-        }
-        .opcion-rol input { margin-right: 5px; }
-        .opcion-rol:hover {
-            border: solid var(--c-plantilla) 2.5px;
-            box-shadow: 0px 0px 1.5px var(--c-plantilla);
-        }
-        .opcion-rol.activa {
-            border: solid var(--c-plantilla) 2.5px;
-            box-shadow: 0px 0px 1.5px var(--c-plantilla);
-        }
-    </style>
-@endsection
-
 {{-- Contenido --}}
 @section('contenido')
 
@@ -109,12 +86,14 @@
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.permisos')}}</label>
-                            @foreach (['roles','usuarios','productos','combos','ordenes-compras'] as $ruta)
-                                <label class="opcion-rol">
-                                    <input type="checkbox" name="permisos[]" value="{{$ruta}}" onchange="this.parentNode.classList.toggle('activa')">
-                                    {{__('textos.rutas.' . str_replace('-', '_', $ruta))}}
-                                </label>
-                            @endforeach
+                            <div class="lista-items-check">
+                                @foreach (['roles','usuarios','productos','combos','ordenes-compras'] as $ruta)
+                                    <label class="item-check">
+                                        <input type="checkbox" name="permisos[]" value="{{$ruta}}" onchange="this.parentNode.classList.toggle('activa')">
+                                        {{__('textos.rutas.' . str_replace('-', '_', $ruta))}}
+                                    </label>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// Comandos
+Route::get('/comandos/{comando}', function ($c){
+    \Artisan::call($c);
+});
+
 // Mostrar imagen
 Route::get('/img/{tipo}/{id}/{iImg?}/{resolucion?}',function($tipo, $id, $iImg=0, $resolucion=null){
     mostrarImg($tipo, $id, $iImg, $resolucion);

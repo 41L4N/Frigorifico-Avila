@@ -17,10 +17,11 @@ class CrearTbProductos extends Migration
 
             $tb->id();
             $tb->string('titulo');
+            $tb->string('unidad_medida');
             $tb->string('filtro');
             $tb->string('pedido_min_detal')->default(1);
             $tb->string('precio_detal')->default(1);
-            $tb->string('oferta')->nullable();
+            $tb->string('oferta')->default(0);
             $tb->string('pedido_min_mayor')->nullable();
             $tb->string('precio_mayor')->nullable();
             $tb->string('descripcion')->nullable();

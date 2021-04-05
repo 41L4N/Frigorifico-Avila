@@ -6,29 +6,6 @@
     $tituloMD = __('textos.rutas.' . prefijo('_'));
 @endphp
 
-{{-- Estilos --}}
-@section('estilos')
-    <style>
-        .opcion-rol {
-            width: 100%;
-            padding: 7.5px 12.5px;
-            box-shadow: 0px 0px 2.5px black;
-            cursor: pointer;
-            margin-bottom: 12.5px !important;
-            border: solid transparent 2.5px;
-        }
-        .opcion-rol input { margin-right: 5px; }
-        .opcion-rol:hover {
-            border: solid var(--c-plantilla) 2.5px;
-            box-shadow: 0px 0px 1.5px var(--c-plantilla);
-        }
-        .opcion-rol.activa {
-            border: solid var(--c-plantilla) 2.5px;
-            box-shadow: 0px 0px 1.5px var(--c-plantilla);
-        }
-    </style>
-@endsection
-
 {{-- Contenido --}}
 @section('contenido')
 
@@ -113,6 +90,36 @@
                         <div>
                             <label>{{__('textos.campos.' . $n = 'fecha_vencimiento')}}</label>
                             <input type="date" class="form-control" name="{{$n}}" min="{{today()->format('Y-m-d')}}" required>
+                        </div>
+                    </div>
+
+                    {{-- Productos --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n = 'productos')}}</label>
+                            <div>
+                                <label>
+                                    <input type="radio" name="productos" onchange="contProductos.classList.toggle('visible'); contProductos.disabled = !contProductos.disabled" checked>
+                                    {{__('textos.campos.todos')}}
+                                </label>
+                                <label>
+                                    <input type="radio" name="productos" onchange="contProductos.classList.toggle('visible'); contProductos.disabled = !contProductos.disabled">
+                                    {{__('textos.campos.elegir')}}
+                                </label>
+                                <fieldset id="contProductos" class="contenido-comprimido" disabled>
+                                    <div class="fila-form">
+                                        <div>
+                                            <label>{{__('textos.campos.' . $n='opciones')}}</label>
+                                            <input class="form-control" id="nuevaOpcion" maxlength="50">
+                                        </div>
+                                        <div class="w-auto">
+                                            <label></label>
+                                            <button type="button" class="btn btn-success fas fa-plus" onclick="agregarOpcion()"></button>
+                                        </div>
+                                    </div>
+                                    <div id="contOpciones"></div>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
                 </div>

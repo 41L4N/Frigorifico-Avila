@@ -43,20 +43,36 @@
     margin: 0px;
 }
 
-/* Input numerico sin flechitas feas */
-/* input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type=number] {
-  -moz-appearance: textfield;
-} */
-
 /* Textarea */
 .fila-form textarea {
     min-height: 100px;
     max-height: 250px;
+}
+
+/* Lista de checks */
+.lista-items-check {
+    max-height: 250px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+.item-check {
+    box-sizing: border-box;
+
+    width: 100%;
+    padding: 7.5px 12.5px;
+    box-shadow: 0px 0px 2.5px black;
+    cursor: pointer;
+    margin-bottom: 12.5px !important;
+    border: solid transparent 2.5px;
+}
+.item-check input { margin-right: 5px; }
+.item-check:hover {
+    border: solid var(--c-plantilla) 2.5px;
+    box-shadow: 0px 0px 1.5px var(--c-plantilla);
+}
+.item-check.activa {
+    border: solid var(--c-plantilla) 2.5px;
+    box-shadow: 0px 0px 1.5px var(--c-plantilla);
 }
 
 /* Botones */

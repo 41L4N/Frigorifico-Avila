@@ -107,6 +107,7 @@ return [
         // Productos
         'producto'              => "Producto",
         'filtro'                => "Filtro",
+        'unidad_medida'         => "Unidad de medida",
         'pedido_min'            => "Pedido mínimo",
         'pedido_min_detal'      => "Pedido mínimo al detal",
         'precio_detal'          => "Precio al detal",
@@ -118,6 +119,7 @@ return [
 
         // Cupones
         'fecha_vencimiento'     => "Fecha de vencimiento",
+        'productos'             => "Productos",
 
         // Orden de compra
         'cantidad'              => "Cantidad",

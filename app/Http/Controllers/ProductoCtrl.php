@@ -25,6 +25,7 @@ class ProductoCtrl extends Controller
         $rq->validate([
             'titulo'            => 'required|between:1,50',
             'filtro'            => 'required|integer',
+            'unidad_medida'     => 'required',
             'pedido_min_detal'  => 'required|digits_between:1,5',
             'precio_detal'      => 'required|digits_between:1,5',
             'oferta'            => 'nullable|digits_between:1,5',

@@ -155,6 +155,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            <label>{{__('textos.campos.' . $n='unidad_medida')}}</label>
+                            <select name="{{$n}}" class="form-control" required>
+                                <option value="" selected required>{{__('textos.placeholders.select')}}</option>
+                                @foreach (['Kg','Unidad'] as $item)
+                                    <option value="{{$item}}">{{$item}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     {{-- Compra al detal --}}
@@ -170,7 +179,7 @@
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="0" max="100" onkeypress="soloNumeros(event)">
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="100" value="{{$min}}" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 
