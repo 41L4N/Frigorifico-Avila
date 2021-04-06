@@ -1,13 +1,9 @@
 {{-- Plantilla --}}
 @extends('plantillas.plantilla')
 
-{{-- Metadatos --}}
-@php
-
-@endphp
-
 {{-- Estilos --}}
 @section('estilos')
+    <link rel="stylesheet" href="{{asset('/css/miniaturas.css')}}">
     <style>
 
     </style>
@@ -15,12 +11,16 @@
 
 {{-- Contenido --}}
 @section('contenido')
+    <div class="d-flex">
+
+        Filtros
+
+        <div class="cont-mins align-content-center">
     
-@endsection
-
-{{-- JavaScript --}}
-@section('js')
-    <script>
-
-    </script>
+            {{-- Rutas --}}
+            @foreach ($productos as $p)
+                @include('productos.miniatura')
+            @endforeach
+        </div>
+    </div>
 @endsection
