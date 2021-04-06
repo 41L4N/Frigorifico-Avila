@@ -1,13 +1,9 @@
 {{-- Contenido --}}
-<a href="{{route('productos', [$p->alias(), $p->id])}}" class="min">
+<a href="{{route('productos', [$p->alias(), $p->id])}}" class="min @if($p->oferta) oferta @endif">
 
     {{-- Etiquetas --}}
     <div class="cont-etiquetas-min">
-        @foreach (['oferta', 'precio_mayor'] as $item)
-            @if ($p->$item)
-                <div class="etiqueta-min">{{ $p->$item }}</div>
-            @endif
-        @endforeach
+        
     </div>
 
     {{-- Imagen --}}
@@ -19,15 +15,24 @@
         {{-- Título --}}
         <div class="titulo-min">{{$p->titulo}}</div>
 
-        {{-- Precio --}}
-        <div class="precio-oferta-min {{($p->oferta) ? "oferta ": null}}">
+        {{-- Precios --}}
+        {{-- Al detal --}}
+        <div class="precio-oferta-min">
             @if ($p->oferta)
                 <del>{{$p->precioOfertaP()['precio']}}</del>
-                <div>{{$p->precioOfertaP()['oferta']}}</div>
+                <br>
+                <b>{{$p->precioOfertaP()['oferta']}}</b>
             @else
-                <div>{{$p->precioOfertaP()['precio']}}</div>
+                <b>{{$p->precioOfertaP()['precio']}}</b>
+            @endif
+
+            {{-- Al mayor --}}
+            @if ($p->precio_mayor)
+                <br>
+                {{$p->precioMayorP()}} (Al mayor)
             @endif
         </div>
+
     </div>
 
     {{-- Boton de comprar --}}
