@@ -40,6 +40,8 @@ return [
     // Contenido
     'contenido' => [
         'sin_resultados' => "Sin resultados",
+
+        
     ],
 
     // Pie de página

@@ -23,7 +23,7 @@
             <a href="{{route($r)}}" class="min">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>
-                    <div class="titulo-min">{{__('textos.rutas.' . str_replace('-', '_', $r) )}}</div>
+                    <div>{{__('textos.rutas.' . str_replace('-', '_', $r) )}}</div>
                 </div>
             </a>
         @endforeach

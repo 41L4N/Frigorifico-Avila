@@ -13,26 +13,63 @@
 
 /* Miniatura */
 .min {
-    display: block;
+    position: relative;
     width: 100%;
-    min-width: 300px;
-    max-width: calc(100% / 3.5);
+    min-width: 200px;
+    max-width: calc(100% / 5.5);
     box-shadow: 0px 0px 2.5px black;
     text-align: center;
     color: black;
+    border: solid var(--c-plantilla) 2px;
 }
 .min:hover {
+    text-decoration: none;
     box-shadow: 0px 0px 2.5px var(--c-plantilla);
     color: var(--c-plantilla);
 }
+
+/* Etiqueta */
+.cont-etiquetas-min {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.etiqueta-min {
+    font-size: 12.5px;
+    padding: 5px;
+    background: var(--c-plantilla);
+    color: var(--c-l-plantilla);
+}
+.etiqueta-min:not(:last-of-type) {
+    margin-bottom: 5px;
+}
+
+/* Imagen */
+.img-min {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
 /* Contenido */
 .contenido-min {
-    padding: 15px;
+    padding: 7.5px;
 }
+
 /* Titulo */
 .titulo-min {
-    font-size: 27.5px;
-    margin-top: 15px;
+    font-weight: bolder;
+}
+
+/* Precio yoferta */
+.precio-oferta-min {
+    color: var(--c-plantilla);
+}
+.precio-oferta-min.oferta {
+    color: blue;
+}
+.precio-oferta-min del {
+    color: grey;
+    font: 12.5px;
 }
 
 /* Paginación */

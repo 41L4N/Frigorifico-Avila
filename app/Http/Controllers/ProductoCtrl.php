@@ -81,19 +81,19 @@ class ProductoCtrl extends Controller
     }
 
     // Productos
-    public function productos($filtro=null,$id=null){
+    public function productos($filtro=null, $id=null){
+
+        // Producto individual
+        if ($p = Producto::find($id)) {
+            $p->n_visitas = $p->n_visitas + 1;
+            $p->save();
+            return view('productos.producto')->with([
+                'producto'  => $p
+            ]);
+        }
 
         // Según el filtro
         switch ($filtro){
-
-            // Producto individual
-            case (($p = Producto::find($id)) != ""):
-                $p->n_visitas = $p->n_visitas + 1;
-                $p->save();
-                return view('productos.producto')->with([
-                    'producto'  => $p
-                ]);
-            break;
 
             // Todos
             case null:
@@ -118,7 +118,7 @@ class ProductoCtrl extends Controller
 
         // Respuesta
         return view('productos.productos')->with([
-            'productos' => $ps
+            'productos' => $ps->orderBy('titulo', 'ASC')->get()
         ]);
     }
 }

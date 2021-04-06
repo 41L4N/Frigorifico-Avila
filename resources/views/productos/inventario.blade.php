@@ -89,7 +89,7 @@
                         <td>
                             <a href="{{$rutaP = route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
                             <br>
-                            <a href="{{$rutaP}}" class="min-img">
+                            <a href="{{$rutaP}}" class="cont-img-min">
                                 <img src="{{route('mostrar-img',[$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
                             </a>
                         </td>
