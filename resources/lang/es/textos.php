@@ -4,6 +4,9 @@ return [
 
     // Rutas
     'rutas' => [
+        // Inicio
+        'inicio'                => "Inicio",
+        'ofertas'               => "Ofertas",
         // Formularios
         'recuperar_contraseña'  => "Recuperar contraseña",
         // Administrador
@@ -40,8 +43,6 @@ return [
     // Contenido
     'contenido' => [
         'sin_resultados' => "Sin resultados",
-
-        
     ],
 
     // Pie de página
@@ -51,6 +52,10 @@ return [
 
     // Titulos
     'titulos'   =>  [
+
+        // Inicio
+        'mas_visitados'             => "Mas visitados",
+        'mas_nuevos'                => "Mas nuevos",
 
         // Sesion
         'registro'                  => "Registro",

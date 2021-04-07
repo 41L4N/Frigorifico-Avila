@@ -13,7 +13,7 @@
 
 {{-- Contenido --}}
 @section('contenido')
-    <div class="cont-mins align-content-center">
+    <div class="cont-mins">
 
         {{-- Rutas --}}
         @foreach ($productos as $p)

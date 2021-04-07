@@ -12,7 +12,10 @@ class InicioCtrl extends Controller
     // Inicio
     public function inicio(){
         return view("inicio")->with([
-            'productos' => Producto::all(),
+            'productos' => [
+                'mas_visitados' => Producto::orderBy('n_visitas', 'DESC')->limit(6)->get(),
+                'mas_nuevos'    => Producto::orderBy('created_at', 'DESC')->limit(6)->get()
+            ],
             'filtros'   => FiltroProducto::all()
         ]);
     }

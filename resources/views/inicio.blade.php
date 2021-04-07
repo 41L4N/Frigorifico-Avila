@@ -4,23 +4,28 @@
 {{-- Estilos --}}
 @section('estilos')
     <link rel="stylesheet" href="{{asset('/css/miniaturas.css')}}">
-    <style>
-
-    </style>
 @endsection
 
 {{-- Contenido --}}
 @section('contenido')
+
+    {{-- Contenedor principal --}}
     <div class="d-flex">
 
-        Filtros
-
-        <div class="cont-mins align-content-center">
-    
-            {{-- Rutas --}}
-            @foreach ($productos as $p)
-                @include('productos.miniatura')
+        {{-- Productos --}}
+        <div>
+            @foreach ($productos as $tipo => $ps)
+                <div class="titulo-form">{{__('textos.titulos.' . $tipo)}}</div>
+                <div class="cont-mins">
+                    @foreach ($ps as $p)
+                        @include('productos.miniatura')
+                    @endforeach
+                </div>
             @endforeach
         </div>
+
+        {{-- Panel lateral --}}
+
+
     </div>
 @endsection

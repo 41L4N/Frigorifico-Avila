@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Producto;
 use App\Models\FiltroProducto;
+use App\Models\Producto;
+use App\Models\Combo;
 
 class ProductoCtrl extends Controller
 {
@@ -110,9 +111,14 @@ class ProductoCtrl extends Controller
                 // Precio
             break;
 
+            // Combos
+            case 'combos':
+                $ps = Combo::select('*');
+            break;
+
             // Ofertas
             case 'ofertas':
-                
+                $ps = Producto::where('oferta', '>', 0);
             break;
         }
 

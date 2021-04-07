@@ -73,14 +73,17 @@
 
                     {{-- Lado central --}}
                     <div class="centro-menu-s" id="menuR">
-                        
+
                         {{-- Boton de menú responsive --}}
                         <div class="cont-icono-menu-s">
                             <i class="fas fa-times icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
                         </div>
 
                         {{-- Opciones --}}
-                        
+                        <a href="{{route('inicio')}}" class="opcion-menu-s">{{__('textos.rutas.inicio')}}</a>
+                        <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
+                        <a href="{{route('productos', 'combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
+                        <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
                     </div>
 
                     {{-- Lado derecho --}}
