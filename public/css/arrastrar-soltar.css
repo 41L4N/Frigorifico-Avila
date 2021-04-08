@@ -1,0 +1,4 @@
+/* Arrastrar y soltar */
+[draggable="true"] {
+    cursor: grab;
+}

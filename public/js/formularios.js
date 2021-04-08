@@ -15,6 +15,13 @@ function soloNumeros(tecla) {
     }
 }
 
+function vistaPreviaImg(imgVP, datosImg=null) {
+    while (imgVP.tagName != 'IMG') {
+        imgVP = imgVP.parentNode.querySelector('img');
+    }
+    imgVP.src = (typeof datosImg == 'string') ? datosImg : (window.URL || window.webkitURL).createObjectURL(datosImg.files[0]);
+}
+
 // Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase ".tb-resultados"
 var checks = document.querySelectorAll('.tb-resultados [name^="resultado"]');
 function clickTodos(){ checks.forEach(check => { check.checked = checkPrincipal.checked; }); }

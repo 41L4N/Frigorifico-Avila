@@ -17,46 +17,6 @@
     --c-l-t-c-plantilla: var(--c-l-t-c-1);
 }
 
-/* Generales */
-/* Miniatura de imagen */
-.cont-min-img {
-    display: block;
-    text-align: center;
-    margin: 0px auto;
-    width: 100px;
-    min-width: 100px;
-    /* max-width: 100px; */
-    height: 100px;
-    min-height: 100px;
-    /* max-width: 100px; */
-}
-.cont-min-img img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.producto-lista-compras {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    margin-bottom: 12.5px;
-    padding-bottom: 12.5px;
-    border-bottom: solid rgba(0,0,0,.1) 1px;
-}
-.producto-lista-compras .cont-min-img {
-    margin: 0px 12.5px;
-}
-
-/* Contenido comprimido */
-.contenido-comprimido {
-    overflow: hidden;
-    max-height: 0px;
-    transition: .5s;
-}
-.contenido-comprimido.visible {
-    max-height: 1000px;
-}
-
 /* Menú superior */
 .menu-s {
     position: sticky;

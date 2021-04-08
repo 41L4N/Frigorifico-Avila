@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="{{asset("/css/normalize.css")}}">
         <link rel="stylesheet" href="{{asset("/css/bootstrap/bootstrap.min.css")}}">
         <link rel="stylesheet" href="{{asset("/css/plantilla.css")}}">
+        <link rel="stylesheet" href="{{asset("/css/uso-general.css")}}">
         <link rel="stylesheet" href="{{asset('/css/formularios.css')}}">
         @yield('estilos')
 

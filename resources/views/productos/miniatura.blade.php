@@ -1,10 +1,16 @@
 {{-- Estilos --}}
 @once
-
+    @section('estilos')
+        <style>
+            .min-p {
+                max-width: calc(100% / 5.5);
+            }
+        </style>
+    @append
 @endonce
 
 {{-- Contenido --}}
-<a href="{{route('productos', [$p->alias(), $p->id])}}" class="min @if($p->oferta) oferta @endif">
+<a href="{{route('productos', [$p->alias(), $p->id])}}" class="min @if($p->oferta) oferta @endif min-p">
 
     {{-- Etiquetas --}}
     <div class="cont-etiquetas-min">
