@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Lista de compras
     listaCompras();
-    
+
     // Mostrar errores
     if (typeof mensajesErrores !='undefined' && typeof valoresErrores != 'undefined') {
         if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {

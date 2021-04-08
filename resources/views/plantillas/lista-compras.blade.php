@@ -8,7 +8,7 @@
         <input type="hidden" name="precio_unitario" value="{{$c->precio_unitario}}" disabled>
         <b>{{$loop->iteration}}</b>
         {{-- Miniatura de imagen --}}
-        <a href="{{$rutaP = route('productos', [$c->alias(), $c->id])}}" class="cont-img-min">
+        <a href="{{$rutaP = route('productos', [$c->alias(), $c->id])}}" class="cont-min-img">
             <img src="{{route('mostrar-img', [$c->getTable(), $c->id])}}" alt="{{config('app.name') ." " . $c->alias()}}">
         </a>
         {{-- Información --}}

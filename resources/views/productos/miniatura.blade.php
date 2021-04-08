@@ -1,3 +1,8 @@
+{{-- Estilos --}}
+@once
+
+@endonce
+
 {{-- Contenido --}}
 <a href="{{route('productos', [$p->alias(), $p->id])}}" class="min @if($p->oferta) oferta @endif">
 
@@ -7,7 +12,9 @@
     </div>
 
     {{-- Imagen --}}
-    <img src="{{route('mostrar-img', [$p->getTable(), $p->id])}}" alt="{{config('app.name') . " " . $p->titulo}}" class="img-min">
+    <div class="cont-img-min">
+        <img src="{{route('mostrar-img', [$p->getTable(), $p->id])}}" alt="{{config('app.name') . " " . $p->titulo}}">
+    </div>
 
     {{-- Información --}}
     <div class="contenido-min">
@@ -32,7 +39,6 @@
                 {{$p->precioMayorP()}} (Al mayor)
             @endif
         </div>
-
     </div>
 
     {{-- Boton de comprar --}}

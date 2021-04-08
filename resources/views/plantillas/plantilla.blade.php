@@ -84,11 +84,6 @@
                         <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
                         <a href="{{route('productos', 'combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
                         <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
-                    </div>
-
-                    {{-- Lado derecho --}}
-                    {{-- Opciones de usuario --}}
-                    <div class="derecha-menu-s">
                         @auth
                             {{-- Lista de menú --}}
                             <div class="lista-menu-s">
@@ -106,8 +101,14 @@
                                 </div>
                             </div>
                         @else
-                            <a class="fas fa-user opcion-menu-s icono-menu-s" href="{{route('sesion','ingreso')}}"></a>
+                            <a href="{{route('sesion', 'ingreso')}}" class="opcion-menu-s">{{__('textos.rutas.ingreso')}}</a>
                         @endauth
+                    </div>
+
+                    {{-- Lado derecho --}}
+                    {{-- Opciones de usuario --}}
+                    <div class="derecha-menu-s">
+                        <i class="fas fa-search opcion-menu-s icono-menu-s" data-toggle="modal" data-target="#vtnBuscador"></i>
                     </div>
                 </div>
             </div>
@@ -167,9 +168,8 @@
         {{-- Whatsapp --}}
 
         {{-- Ventanas modales --}}
-        {{-- Lista de compras --}}
         {{-- Buscador --}}
-        <div class="modal fade" id="vtnBuscar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="vtnBuscador" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <form method="GET" class="modal-content">
                     <div class="modal-header">
@@ -209,8 +209,8 @@
         </div>
 
         {{-- JavaScript --}}
-        <script src="{{asset('/js/formularios.js')}}"></script>
         <script src="{{asset('/js/plantilla.js')}}"></script>
+        <script src="{{asset('/js/formularios.js')}}"></script>
         @yield('js')
     </body>
 </html>

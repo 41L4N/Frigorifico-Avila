@@ -10,7 +10,12 @@
 @section('estilos')
     <link rel="stylesheet" href="{{asset('/css/miniaturas.css')}}">
     <style>
-        .min i { font-size: 50px }
+        .cont-mins {
+            flex: 1;
+        }
+        .min i {
+            font-size: 50px;
+        }
     </style>
 @endsection
 
@@ -19,7 +24,7 @@
     <div class="cont-mins align-content-center">
 
         {{-- Rutas --}}
-        @foreach (['roles', 'usuarios', 'filtros-productos', 'inventario', 'cupones'] as $r)
+        @foreach (['carrusel', 'roles', 'usuarios', 'filtros-productos', 'inventario', 'cupones'] as $r)
             <a href="{{route($r)}}" class="min">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>

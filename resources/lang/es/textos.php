@@ -7,10 +7,13 @@ return [
         // Inicio
         'inicio'                => "Inicio",
         'ofertas'               => "Ofertas",
+        // Sesion
+        'ingreso'               => "Ingreso",
         // Formularios
         'recuperar_contraseña'  => "Recuperar contraseña",
         // Administrador
         'panel_administrador'   => "Panel de administrador",
+        'carrusel'              => "Carrusel",
         'roles'                 => "Roles",
         'usuarios'              => "Usuarios",
         'filtros_productos'     => "Filtros de productos",

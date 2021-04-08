@@ -58,9 +58,8 @@ function convertirImg($tipo, $img, $resolucion=null){
 // Guardar
 function guardarImg($tipo, $img, $id){
     if ($base64 = convertirImg($tipo, $img)) {
-        $almacen = almacenImg();
         $ruta = $tipo."_$id.json";
-        $almacen->put($ruta, $base64);
+        almacenImg()->put($ruta, $base64);
     }
 }
 

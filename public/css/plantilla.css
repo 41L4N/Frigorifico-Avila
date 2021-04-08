@@ -18,8 +18,8 @@
 }
 
 /* Generales */
-/* Imágen en miniatura */
-.cont-img-min {
+/* Miniatura de imagen */
+.cont-min-img {
     display: block;
     text-align: center;
     margin: 0px auto;
@@ -30,7 +30,7 @@
     min-height: 100px;
     /* max-width: 100px; */
 }
-.cont-img-min img {
+.cont-min-img img {
     max-width: 100%;
     max-height: 100%;
 }
@@ -43,7 +43,7 @@
     padding-bottom: 12.5px;
     border-bottom: solid rgba(0,0,0,.1) 1px;
 }
-.producto-lista-compras .cont-img-min {
+.producto-lista-compras .cont-min-img {
     margin: 0px 12.5px;
 }
 

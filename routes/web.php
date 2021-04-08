@@ -67,6 +67,10 @@ Route::middleware('auth')->group(function(){
     // Administrador
     Route::prefix($n='panel-administrador')->middleware('permisos')->group(function(){
 
+        // Carrusel
+        Route::view('carrusel', 'carrusel')->name('carrusel');
+        Route::post('carrusel', [InicioCtrl::class,'carrusel']);
+
         // Panel de administrador
         Route::view('/','panel-administrador')->name('panel-administrador');
 

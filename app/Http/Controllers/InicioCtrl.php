@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\FiltroProducto;
 use App\Models\Producto;
 
@@ -18,5 +19,10 @@ class InicioCtrl extends Controller
             ],
             'filtros'   => FiltroProducto::all()
         ]);
+    }
+
+    // Carrusel
+    public function carrusel(Request $rq){
+        
     }
 }
