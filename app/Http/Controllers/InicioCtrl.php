@@ -29,12 +29,26 @@ class InicioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'imgs_carrusel' => 'array'
+            'is_imgs_carrusel'  => 'array',
+            'imgs_carrusel'     => 'array'
         ]);
 
         // Imágenes
-        foreach (($imgs = $rq->imgs_carrusel) ? $imgs : [] as $iImg => $img) {
-            guardarImg('carrusel', $img, $iImg);
+        foreach ($rq->is_imgs_carrusel as $iImg) {
+            if ( isset($rq->imgs_carrusel[$iImg]) ) {
+                guardarImg('carrusel', $rq->imgs_carrusel[$iImg], $iImg++);
+            }
+        }
+
+        $nuevas = [];
+        foreach ($rq->is_imgs_carrusel as $iImg) {
+            if ( almacenImgs()->exists($ruta = "carrusel_$iImg.json") ) {
+                array_push($nuevas, almacenImgs()->get($ruta) );
+                almacenImgs()->delete($ruta);
+            }
+        }
+        foreach ($nuevas as $iN => $n) {
+            almacenImgs()->put("carrusel_$iN.json", $n);
         }
 
         // Respuesta

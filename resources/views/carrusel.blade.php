@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-
+    $tituloMD = "Carrusel";
 @endphp
 
 {{-- Estilos --}}
@@ -29,6 +29,7 @@
             @for ($i = 0; $i < 5; $i++)
                 <label class="min btn-actualizar-img arrastrar-soltar vp-img-carrusel" draggable="true">
                     <input type="file" name="imgs_carrusel[]" accept="image/jpeg,image/jpg,image/png" onchange="vistaPreviaImg(this, this)">
+                    <input type="hidden" name="is_imgs_carrusel[]" value="{{$i}}">
                     <img src='{{ (almacenImgs()->exists("carrusel_$i.json")) ? route('mostrar-img', ["carrusel", $i, 0, 750]) : "" }}'>
                 </label>
             @endfor
