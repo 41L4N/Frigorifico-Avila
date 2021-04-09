@@ -1,5 +1,5 @@
 @foreach ($listaCompras as $c)
-    <div class="producto-lista-compras">
+    <div class="producto-lista-productos">
         {{-- Acción --}}
         <input type="hidden" name="accion" value="1">
         {{-- Id de producto --}}

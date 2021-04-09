@@ -14,7 +14,7 @@
 }
 
 /* Lista de compras */
-.producto-lista-compras {
+.producto-lista-productos {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -23,17 +23,17 @@
     padding-bottom: 12.5px;
     border-bottom: solid rgba(0,0,0,.1) 1px;
 }
-.producto-lista-compras .cont-min-img {
+.producto-lista-productos .cont-min-img {
     margin: 0px 12.5px;
 }
 
 /* Contenido desplegable */
-.contenido-comprimido {
+.contenido-desplegable {
     overflow: hidden;
     max-height: 0px;
     transition: .5s;
 }
-.contenido-comprimido.visible {
+.contenido-desplegable.visible {
     max-height: 1000px;
 }
 

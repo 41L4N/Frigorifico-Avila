@@ -5,7 +5,7 @@ function listaCompras(btn=null) {
     if (btn) {
 
         var formulario = btn;
-        while (!formulario.classList.contains('producto-lista-compras')) {
+        while (!formulario.classList.contains('producto-lista-productos')) {
             formulario = formulario.parentNode;
         }
 
@@ -42,7 +42,7 @@ function listaCompras(btn=null) {
 
     var total = 0,
         nCompras = 0;
-    document.querySelectorAll('.producto-lista-compras').forEach(formulario => {
+    document.querySelectorAll('.producto-lista-productos').forEach(formulario => {
 
         // Cantidad
         cantidad = parseInt(formulario.querySelector('[name="cantidad"]').value);

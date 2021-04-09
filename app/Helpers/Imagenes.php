@@ -1,6 +1,6 @@
 <?php
 
-function almacenImg(){
+function almacenImgs(){
     return Storage::disk('public');
 }
 
@@ -60,7 +60,7 @@ function convertirImg($tipo, $img, $resolucion=null){
 function guardarImg($tipo, $img, $id){
     if ($base64 = convertirImg($tipo, $img)) {
         $ruta = $tipo."_$id.json";
-        almacenImg()->put($ruta, $base64);
+        almacenImgs()->put($ruta, $base64);
     }
 }
 
@@ -68,7 +68,7 @@ function guardarImg($tipo, $img, $id){
 function mostrarImg($tipo, $id, $iImg=0, $resolucion=null){
     header('Content-Type: image/webp;');
     header('Content-Disposition: inline; filename="'.$id.$iImg.'.webp"');
-    $base64 = almacenImg()->get($tipo."_$id.json");
+    $base64 = almacenImgs()->get($tipo."_$id.json");
     if ($resolucion) {
         $base64 = convertirImg($tipo, $base64, $resolucion);
     }

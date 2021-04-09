@@ -67,8 +67,8 @@ class ProductoCtrl extends Controller
     public function eliminar(Request $rq){
 
         foreach ($rq->resultados as $id) {
-            if (almacenImg()->exists($ruta = (new Producto)->getTable() . "_$id.json")) {
-                almacenImg()->delete($ruta);
+            if (almacenImgs()->exists($ruta = (new Producto)->getTable() . "_$id.json")) {
+                almacenImgs()->delete($ruta);
             }
             Producto::find($id)->delete();
         }

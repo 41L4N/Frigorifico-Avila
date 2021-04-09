@@ -106,7 +106,7 @@
                                     <input type="radio" name="productos" onchange="contProductos.classList.toggle('visible'); contProductos.disabled = !contProductos.disabled">
                                     {{__('textos.campos.elegir')}}
                                 </label>
-                                <fieldset id="contProductos" class="contenido-comprimido" disabled>
+                                <fieldset id="contProductos" class="contenido-desplegable" disabled>
                                     <div class="fila-form">
                                         <div>
                                             <label>{{__('textos.campos.' . $n='opciones')}}</label>

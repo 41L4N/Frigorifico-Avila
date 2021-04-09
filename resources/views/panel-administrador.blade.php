@@ -10,12 +10,9 @@
 @section('estilos')
     <link rel="stylesheet" href="{{asset('/css/miniaturas.css')}}">
     <style>
-        .cont-mins {
-            flex: 1;
-        }
-        .min i {
-            font-size: 50px;
-        }
+        .cont-mins { flex: 1; }
+        .btn-administrador { max-width: calc(100% / 3.5) }
+        .min i { font-size: 50px; }
     </style>
 @endsection
 
@@ -25,7 +22,7 @@
 
         {{-- Rutas --}}
         @foreach (['carrusel', 'roles', 'usuarios', 'filtros-productos', 'inventario', 'cupones'] as $r)
-            <a href="{{route($r)}}" class="min">
+            <a href="{{route($r)}}" class="min btn-administrador">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>
                     <div>{{__('textos.rutas.' . str_replace('-', '_', $r) )}}</div>
