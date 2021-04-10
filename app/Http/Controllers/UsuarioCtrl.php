@@ -45,30 +45,30 @@ class UsuarioCtrl extends Controller
         ]);
 
         // Registro
-        if (!$u = Usuario::find($rq->id)) {
-            $u = new Usuario;
+        if (!$reg = Usuario::find($rq->id)) {
+            $reg = new Usuario;
         }
         // Campos directos
         foreach (Schema::getColumnListing( (new Usuario)->getTable() ) as $campo) {
             if ($rq->exists($campo)) {
-                $u->$campo = $rq->$campo;
+                $reg->$campo = $rq->$campo;
             }
         }
         // Campos adicionales
         // Teléfono
-        $u->telf = json_encode($rq->telf);
+        $reg->telf = json_encode($rq->telf);
         // Contraseña
         if ($rq->exists('password')) {
-            $u->password = bcrypt($rq->password);
+            $reg->password = bcrypt($rq->password);
         }
-        $u->save();
+        $reg->save();
 
         // Correo de invitación - Si no hay password es porque lo guardo el administrador
-        if (!$u->password) {
+        if (!$reg->password) {
 
             // Asigno un código de recuperación
-            $u->codigo_acceso = ($codigo = uniqid());
-            $u->save();
+            $reg->codigo_acceso = ($codigo = uniqid());
+            $reg->save();
 
             // Correo
             Mail::send("correos.invitacion",[
@@ -97,8 +97,8 @@ class UsuarioCtrl extends Controller
     public function eliminar(Request $rq){
 
         // Eliminar
-        Usuario::whereIn('id', $rq->resultados)->delete();
-        
+        Usuario::whereIn('id', $rq->registros)->delete();
+
         // Respuesta
         return back()->with([
             'alerta' => [
@@ -190,15 +190,15 @@ class UsuarioCtrl extends Controller
         );
     }
 
-    // Usuario
-    public function usuario(){
+    // Registro
+    public function registro(){
         return view("usuarios.usuario")->with([
             'usuario' => Auth::user()
         ]);
     }
 
-    // Usuarios
-    public function usuarios(){
+    // Registros
+    public function registros(){
         return view('usuarios.usuarios')->with([
             'usuarios' => Usuario::whereNull('administrador')->get()
         ]);

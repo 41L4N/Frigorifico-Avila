@@ -26,7 +26,7 @@ function formatos($tipo,$dato,$parametroAdicional=null){
 
         // Fecha
         case 'f':
-            
+            $r = date('d-m-Y', strtotime($dato));
         break;
 
         // Numérico
@@ -60,7 +60,8 @@ function iconos($i){
         'usuarios'          => "fas fa-users",
         'filtros-productos' => "fas fa-filter",
         'inventario'        => "fas fa-boxes",
-        'cupones'           => "fas fa-ticket-alt"
+        'combos'            => "fas fa-gifts",
+        'cupones'           => "fas fa-money-check-alt"
     ];
 
     // Respuesta

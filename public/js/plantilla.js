@@ -76,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.contenido .modal').forEach(contFormulario => {
         $('#'+contFormulario.id).on('hide.bs.modal', function () {
             // Campos
-            contFormulario.querySelector('form').reset();
+            if (formulario = contFormulario.querySelector('form')) {
+                formulario.reset();
+            }
             // Campos adicionales
             if (typeof camposAdicionales !== 'undefined') {
                 camposAdicionales(false, contFormulario)

@@ -21,7 +21,7 @@
     <div class="cont-mins align-content-center">
 
         {{-- Rutas --}}
-        @foreach (['carrusel', 'roles', 'usuarios', 'filtros-productos', 'inventario', 'cupones'] as $r)
+        @foreach (['carrusel', 'roles', 'usuarios', 'filtros-productos', 'inventario', 'combos', 'cupones'] as $r)
             <a href="{{route($r)}}" class="min btn-administrador">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>

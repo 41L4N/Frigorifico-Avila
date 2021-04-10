@@ -89,7 +89,7 @@
                             {{-- Lista de menú --}}
                             <div class="lista-menu-s">
                                 {{-- Titulo --}}
-                                <div class="titulo-lista-menu-s">
+                                <div class="opcion-menu-s">
                                     {{Auth::user()->nombre}} <i class="fas fa-caret-down"></i>
                                 </div>
                                 {{-- Opciones --}}

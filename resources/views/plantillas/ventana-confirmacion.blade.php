@@ -6,7 +6,7 @@
                 <h5 class="modal-title">{{__('textos.titulos.confirmacion')}}</h5>
                 <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true">&times;</span> </button>
             </div>
-            <div class="modal-body">{{__('textos.parrafosconfirmacion')}}</div>
+            <div class="modal-body">{{__('textos.parrafos.confirmacion')}}</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
                 <button type="button" class="btn btn-primary" onclick="document.querySelector('.form-resultados').submit()">{{__('textos.botones.confirmar')}}</button>

@@ -22,15 +22,15 @@ function vistaPreviaImg(imgVP, datosImg=null) {
     imgVP.src = (typeof datosImg == 'string') ? datosImg : (window.URL || window.webkitURL).createObjectURL(datosImg.files[0]);
 }
 
-// Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase ".tb-resultados"
-var checks = document.querySelectorAll('.tb-resultados [name^="resultado"]');
+// Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase ".tb-registros"
+var checks = document.querySelectorAll('.tb-registros [name^="registros"]');
 function clickTodos(){ checks.forEach(check => { check.checked = checkPrincipal.checked; }); }
 
 // Contar checks
 function contarChecks(){
 
     // Activar/Desactivar el check principal
-    var numChecksActivos = document.querySelectorAll('.tb-resultados [name^="resultado"]:checked').length;
+    var numChecksActivos = document.querySelectorAll('.tb-registros [name^="registros"]:checked').length;
     if(numChecksActivos == checks.length){ checkPrincipal.checked = true; }
     else { checkPrincipal.checked = false; }
 

@@ -1,8 +1,6 @@
 /* Contenedor de miniaturas */
 .cont-mins {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;

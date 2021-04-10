@@ -18,9 +18,7 @@
 
 /* Fila */
 .fila-form {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     width: 100%;
 }
 .fila-form:not(:last-of-type) {
@@ -88,9 +86,7 @@
 
 /* Submenu */
 .submenu-resultados {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 25px;
@@ -99,23 +95,23 @@
 }
 
 /* Tabla de resultados */
-.tb-resultados {
+.tb-registros {
     width: 100%;
     text-align: center;
 }
-.tb-resultados tr:first-of-type th {
+.tb-registros tr:first-of-type th {
     background: var(--c-plantilla);
     color: white;
 }
-.tb-resultados tr:first-of-type th:not(:last-child) {
+.tb-registros tr:first-of-type th:not(:last-child) {
     border-right: solid var(--c-l-plantilla) 1px;
 }
-.tb-resultados th:first-of-type, .tb-resultados .columna-corta { width: 25px; }
-.tb-resultados th, .tb-resultados td {
+.tb-registros th:first-of-type, .tb-registros .columna-corta { width: 25px; }
+.tb-registros th, .tb-registros td {
     padding: 2.5px;
     border: solid var(--c-plantilla) 1px;
 }
-.tb-resultados tr:nth-child(odd) {
+.tb-registros tr:nth-child(odd) {
     background: rgba(0,0,0,0.1);
 }
 

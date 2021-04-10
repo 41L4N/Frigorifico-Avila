@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 use App\Models\Rol;
 
 class RolesCtrl extends Controller
 {
 
-    // Roles
-    public function roles(){
+    // Registros
+    public function registros(){
         return view('roles')
         ->with([
             'roles' => Rol::all()
@@ -26,12 +27,12 @@ class RolesCtrl extends Controller
         ]);
 
         // Registro
-        if (!$r = Rol::find($rq->id)) {
-            $r = new Rol;
+        if (!$reg = Rol::find($rq->id)) {
+            $reg = new Rol;
         }
-        $r->titulo = $rq->titulo;
-        $r->permisos = json_encode($rq->permisos);
-        $r->save();
+        $reg->titulo = $rq->titulo;
+        $reg->permisos = json_encode($rq->permisos);
+        $reg->save();
 
         // Respuesta
         return back()->with([
@@ -44,14 +45,11 @@ class RolesCtrl extends Controller
     // Eliminar
     public function eliminar(Request $rq){
 
-        // Eliminar
-        foreach (Rol::whereIn('id',$rq->resultados)->get(['id']) as $rol) {
-            foreach (Usuario::where('rol',$rol->id) as $u) {
-                $u->rol = null;
-                $u->save();
-            }
-            $rol->delete();
-        }
+        // Usuarios relacionados
+        Usuario::whereIn('rol', $rq->registros)->update(['rol' => null]);
+
+        // Registros
+        Rol::whereIn('id', $rq->registros)->delete();
 
         // Respuesta
         return back()->with([

@@ -7,8 +7,8 @@ use App\Models\FiltroProducto;
 
 class FiltroProductoCtrl extends Controller
 {
-    // Filtros
-    public function filtros(){
+    // Registros
+    public function registros(){
         return view('productos.filtros')->with([
             'filtros' => FiltroProducto::lista()
         ]);
@@ -24,15 +24,15 @@ class FiltroProductoCtrl extends Controller
         ]);
 
         // Registro
-        if (!$fp = FiltroProducto::find($rq->id)) {
-            $fp = new FiltroProducto;
+        if (!$reg = FiltroProducto::find($rq->id)) {
+            $reg = new FiltroProducto;
         }
-        $fp->titulo = $rq->titulo;
-        $fp->save();
+        $reg->titulo = $rq->titulo;
+        $reg->save();
 
         // Opciones
         // Actualizo
-        foreach (FiltroProducto::where('relacion', $fp->id)->get(['id']) as $opcion) {
+        foreach (FiltroProducto::where('relacion', $reg->id)->get(['id']) as $opcion) {
             if ( isset( $rq->opciones[$opcion->id] ) ) {
                 $opcion->titulo = $rq->opciones[$opcion->id];
                 $opcion->save();
@@ -46,7 +46,7 @@ class FiltroProductoCtrl extends Controller
             foreach ($rq->opciones['nuevas'] as $id => $o) {
                 $opcion = new FiltroProducto;
                 $opcion->titulo = $o;
-                $opcion->relacion = $fp->id;
+                $opcion->relacion = $reg->id;
                 $opcion->save();
             }
         }
@@ -61,11 +61,13 @@ class FiltroProductoCtrl extends Controller
 
     // Eliminar
     public function eliminar(Request $rq){
-        foreach ($rq->resultados as $id) {
-            // Posibles opciones
-            FiltroProducto::where('relacion', $id)->delete();
-            FiltroProducto::find($id)->delete();
-        }
+
+        // Filtros
+        FiltroProducto::whereIn('id', $rq->registros)->delete();
+
+        // Posibles opciones relacionadas
+        FiltroProducto::whereIn('relacion', $rq->registros)->delete();
+        
         // Respuesta
         return back()->with([
             'alerta' => [

@@ -31,9 +31,7 @@
 /* Generales */
 /* Contenido del menú superior */
 .contenido-menu-s > * {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     align-items: center;
 }
 /* Iconos */
@@ -48,18 +46,15 @@
 /* Listas */
 .lista-menu-s {
     position: relative;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
 }
 /* Titulo */
 /* Opciones */
 .lista-menu-s:hover .opciones-lista-menu-s {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
 }
 .opcion-menu-s, .opcion-menu-s:hover {
+    white-space: nowrap;
     margin: 0px 5%;
     color: var(--c-plantilla);
 }
@@ -106,9 +101,7 @@
 /* Alertas */
 .cont-alerta {
     position: fixed;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     justify-content: flex-end;
     top: 12.5%;
     left: 0px;

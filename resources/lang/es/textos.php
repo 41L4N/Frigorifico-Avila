@@ -128,8 +128,8 @@ return [
         'actualizar_img'        => "Actualizar Imagen",
 
         // Cupones
+        'codigo'                => "Código",
         'fecha_vencimiento'     => "Fecha de vencimiento",
-        'productos'             => "Productos",
 
         // Orden de compra
         'cantidad'              => "Cantidad",

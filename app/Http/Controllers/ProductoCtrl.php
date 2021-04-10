@@ -11,8 +11,8 @@ use App\Models\Combo;
 class ProductoCtrl extends Controller
 {
 
-    // Inventario
-    public function inventario(){
+    // Registros
+    public function registros(){
         return view('productos.inventario')->with([
             'filtros'   => FiltroProducto::lista(),
             'productos' => Producto::all()
@@ -36,23 +36,23 @@ class ProductoCtrl extends Controller
             'img'               => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
 
-        // Registro
-        if (!$p = Producto::find($rq->id)) {
-            $p = new Producto;
+        // Registro principal
+        if (!$reg = Producto::find($rq->id)) {
+            $reg = new Producto;
         }
         // Campos directos
         foreach (Schema::getColumnListing( (new Producto)->getTable() ) as $campo) {
             if ($rq->exists($campo)) {
-                $p->$campo = $rq->$campo;
+                $reg->$campo = $rq->$campo;
             }
         }
         // Guardar
-        $p->save();
+        $reg->save();
 
         // Campos adicionales
         // Imagen
         if ($rq->img) {
-            guardarImg((new Producto)->getTable(), $rq->img, $p->id);
+            guardarImg((new Producto)->getTable(), $rq->img, $reg->id);
         }
 
         // Respuesta
@@ -66,12 +66,15 @@ class ProductoCtrl extends Controller
     // Eliminar
     public function eliminar(Request $rq){
 
-        foreach ($rq->resultados as $id) {
+        // Imágenes relacionadas
+        foreach ($rq->registros as $id) {
             if (almacenImgs()->exists($ruta = (new Producto)->getTable() . "_$id.json")) {
                 almacenImgs()->delete($ruta);
             }
-            Producto::find($id)->delete();
         }
+
+        // Registros
+        Producto::whereIn('id', $rq->registros)->delete();
 
         // Respuesta
         return back()->with([

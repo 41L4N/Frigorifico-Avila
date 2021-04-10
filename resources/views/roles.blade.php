@@ -21,11 +21,11 @@
             </div>
         </div>
 
-        {{-- Resultados --}}
+        {{-- Registros --}}
         @if ($roles->count())
 
             {{-- Tabla de resultados --}}
-            <table class="tb-resultados">
+            <table class="tb-registros">
 
                 {{-- Titulos --}}
                 <tr>
@@ -40,7 +40,7 @@
                 @foreach ($roles as $r)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$r->id}}"></th>
+                        <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$r->id}}"></th>
                         <td>{{$r->titulo}}</td>
                         <td>
                             @foreach (json_decode($r->permisos) as $p)

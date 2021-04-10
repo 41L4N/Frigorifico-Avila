@@ -65,11 +65,11 @@
             </div>
         </div>
 
-        {{-- Resultados --}}
+        {{-- Registros --}}
         @if ($productos->count())
 
             {{-- Tabla de resultados --}}
-            <table class="tb-resultados">
+            <table class="tb-registros">
 
                 {{-- Titulos --}}
                 <tr>
@@ -85,7 +85,7 @@
                 @foreach ($productos as $p)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$p->id}}"></th>
+                        <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$p->id}}"></th>
                         <td>
                             <a href="{{$rutaP = route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
                             <br>

@@ -21,13 +21,13 @@
             </div>
         </div>
 
-        {{-- Resultados --}}
-        @if (($registrosP = $cupones)->count())
+        {{-- Registros --}}
+        @if (($registros = $cupones)->count())
 
             {{-- Tabla de resultados --}}
-            <table class="tb-resultados">
+            <table class="tb-registros">
 
-                {{-- Titulos --}}
+                {{-- Campos --}}
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
@@ -38,15 +38,15 @@
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
-                {{-- Registros principales --}}
-                @foreach ($registrosP as $regP)
+                {{-- Registros --}}
+                @foreach ($registros as $reg)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$regP->id}}"></th>
-                        <td>{{$regP->titulo}}</td>
-                        <td>{{$regP->codigo}}</td>
-                        <td>{{$regP->oferta}}</td>
-                        <td>{{$regP->fecha_vencimiento}}</td>
+                        <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$reg->id}}"></th>
+                        <td>{{$reg->titulo}}</td>
+                        <td>{{$reg->codigo}}</td>
+                        <td>{{$reg->oferta}}</td>
+                        <td>{{formatos('f', $reg->fecha_vencimiento)}}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -71,7 +71,7 @@
                 <div class="modal-body">
 
                     {{-- Ids --}}
-                    <input type="hidden" name="{{$idVtn}}">
+                    <input type="hidden" name="id_vtn" value="{{$idVtn}}">
                     <input name="id" class="d-none">
 
                     {{-- Titulo --}}
@@ -92,36 +92,6 @@
                             <input type="date" class="form-control" name="{{$n}}" min="{{today()->format('Y-m-d')}}" required>
                         </div>
                     </div>
-
-                    {{-- Productos --}}
-                    <div class="fila-form">
-                        <div>
-                            <label>{{__('textos.campos.' . $n = 'productos')}}</label>
-                            <div>
-                                <label>
-                                    <input type="radio" name="productos" onchange="contProductos.classList.toggle('visible'); contProductos.disabled = !contProductos.disabled" checked>
-                                    {{__('textos.campos.todos')}}
-                                </label>
-                                <label>
-                                    <input type="radio" name="productos" onchange="contProductos.classList.toggle('visible'); contProductos.disabled = !contProductos.disabled">
-                                    {{__('textos.campos.elegir')}}
-                                </label>
-                                <fieldset id="contProductos" class="contenido-desplegable" disabled>
-                                    <div class="fila-form">
-                                        <div>
-                                            <label>{{__('textos.campos.' . $n='opciones')}}</label>
-                                            <input class="form-control" id="nuevaOpcion" maxlength="50">
-                                        </div>
-                                        <div class="w-auto">
-                                            <label></label>
-                                            <button type="button" class="btn btn-success fas fa-plus" onclick="agregarOpcion()"></button>
-                                        </div>
-                                    </div>
-                                    <div id="contOpciones"></div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -137,7 +107,7 @@
 {{-- JavaScript --}}
 @section('js')
     <script>
-        var registrosP      = @json($registrosP),
+        var registrosP      = @json($registros),
             registroA       = null,
             mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );

@@ -15,9 +15,7 @@
 
 /* Lista de compras */
 .producto-lista-productos {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     align-items: center;
     margin-bottom: 12.5px;
     padding-bottom: 12.5px;
@@ -40,9 +38,7 @@
 /* Boton de actualizar imagen */
 .btn-actualizar-img {
     position: relative;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;

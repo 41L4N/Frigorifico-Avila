@@ -21,11 +21,11 @@
             </div>
         </div>
 
-        {{-- Resultados --}}
+        {{-- Registros --}}
         @if ($filtros->count())
 
             {{-- Tabla de resultados --}}
-            <table class="tb-resultados">
+            <table class="tb-registros">
 
                 {{-- Titulos --}}
                 <tr>
@@ -40,7 +40,7 @@
                 @foreach ($filtros as $registro)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <th><input type="checkbox" name="resultados[]" onclick='contarChecks()' value="{{$registro->id}}"></th>
+                        <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$registro->id}}"></th>
                         <td>{{$registro->titulo}}</td>
                         <td>
                             @forelse (($registro->opciones) ? $registro->opciones : [] as $subregistro)
