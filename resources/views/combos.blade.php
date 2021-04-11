@@ -83,7 +83,7 @@
 
                     {{-- Lista de productos --}}
                     <div class="subtitulo-form">{{__('textos.campos.productos')}}</div>
-                    <div class="fila-form">
+                    <div class="fila-form" id="">
                         <div>
                             <label>{{__('textos.campos.producto')}}</label>
                             <select name="productos[]" class="form-control">

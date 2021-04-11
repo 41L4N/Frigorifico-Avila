@@ -157,7 +157,6 @@
 
             // Validacion
             if (idOpcion === null && valorOpcion === null) {
-                console.log({idOpcion,valorOpcion});
                 nuevaOpcion.required = true;
                 if (!nuevaOpcion.reportValidity()) {
                     nuevaOpcion.required = false;
