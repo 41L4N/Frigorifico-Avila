@@ -127,6 +127,10 @@ return [
         'descripcion'           => "Descripción",
         'actualizar_img'        => "Actualizar Imagen",
 
+        // Combos
+        'precio'                => "Precio",
+        'productos'             => "Productos",
+
         // Cupones
         'codigo'                => "Código",
         'fecha_vencimiento'     => "Fecha de vencimiento",

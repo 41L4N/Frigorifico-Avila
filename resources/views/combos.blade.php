@@ -31,7 +31,8 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
-                    
+                    <th>{{__('textos.campos.productos')}}</th>
+                    <th>{{__('textos.campos.precio')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
 
@@ -67,7 +68,40 @@
                     {{-- Ids --}}
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
                     <input name="id" class="d-none">
-                    
+
+                    {{-- Título y precio --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n='titulo')}}</label>
+                            <input type="text" name="{{$n}}" class="form-control" maxlength="75" required>
+                        </div>
+                        <div>
+                            <label>{{__('textos.campos.' . $n='precio')}}</label>
+                            <input type="number" name="{{$n}}" class="form-control" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)" required>
+                        </div>
+                    </div>
+
+                    {{-- Lista de productos --}}
+                    <div class="subtitulo-form">{{__('textos.campos.productos')}}</div>
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.producto')}}</label>
+                            <select name="productos[]" class="form-control">
+                                <option value="" selected disabled>{{__('textos.placeholders.select')}}</option>
+                                @foreach ($productos as $p)
+                                    <option value="{{$p->id}}">{{$p->titulo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label>{{__('textos.campos.cantidad')}}</label>
+                            <input type="number" class="form-control" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
+                        </div>
+                        <div class="w-auto">
+                            <label></label>
+                            <button type="button" class="btn btn-success fas fa-plus" onclick="agregarProducto()"></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -100,6 +134,12 @@
             else {
                 
             }
+        }
+
+        // Agregar producto
+        function agregarProducto(idOpcion=null,valorOpcion=null) {
+
+            
         }
     </script>
 @endsection
