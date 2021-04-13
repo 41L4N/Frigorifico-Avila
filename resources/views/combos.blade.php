@@ -83,10 +83,10 @@
 
                     {{-- Lista de productos --}}
                     <div class="subtitulo-form">{{__('textos.campos.productos')}}</div>
-                    <div class="fila-form" id="">
+                    <div class="fila-form" id="nuevoElemento">
                         <div>
                             <label>{{__('textos.campos.producto')}}</label>
-                            <select name="productos[]" class="form-control">
+                            <select name="producto[][id]" class="form-control">
                                 <option value="" selected disabled>{{__('textos.placeholders.select')}}</option>
                                 @foreach ($productos as $p)
                                     <option value="{{$p->id}}">{{$p->titulo}}</option>
@@ -95,13 +95,14 @@
                         </div>
                         <div>
                             <label>{{__('textos.campos.cantidad')}}</label>
-                            <input type="number" class="form-control" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
+                            <input type="number" name="producto[][cantidad]" class="form-control" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
                         </div>
                         <div class="w-auto">
                             <label></label>
-                            <button type="button" class="btn btn-success fas fa-plus" onclick="agregarProducto()"></button>
+                            <button type="button" class="btn btn-success fas fa-plus" onclick="agregarElemento()"></button>
                         </div>
                     </div>
+                    <div id="contElementos"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -137,9 +138,42 @@
         }
 
         // Agregar producto
-        function agregarProducto(idOpcion=null,valorOpcion=null) {
+        function agregarElemento(datos=null) {
 
-            
+            // Campos
+            var campos = nuevoElemento.querySelectorAll('input, select');
+
+            // Validación
+            if (!datos) {
+                var validacion = true;
+                campos.forEach(campo => {
+                    campo.required = true;
+                    if (!campo.reportValidity()) {
+                        validacion = false;
+                    }
+                    campo.required = false;
+                });
+                if (!validacion) {
+                    return;
+                }
+            }
+
+            // Nuevo elemento
+            var clon = nuevoElemento.cloneNode(true);
+            clon.removeAttribute('id')
+            clon.querySelectorAll('label').forEach(label => {
+                label.remove()
+            });
+            ().forEach((campo, iCampo) => {
+                var c = clon.querySelectorAll(campo.tagName)[iCampo]
+                c.required = true
+                c.value = campo.value
+                campo.value = null
+            });
+            clon.querySelector('button').classList.replace('btn-success', 'btn-danger')
+            clon.querySelector('button').classList.replace('fa-plus', 'fa-times')
+            clon.querySelector('button').setAttribute('onclick', 'this.parentNode.parentNode.remove()')
+            contElementos.insertAdjacentElement('beforeend', clon)
         }
     </script>
 @endsection
