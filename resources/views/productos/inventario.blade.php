@@ -6,13 +6,6 @@
     $tituloMD = __('textos.rutas.' . str_replace('-', '_', $nRuta = Route::currentRouteName()) );
 @endphp
 
-{{-- Estilos --}}
-@section('estilos')
-    <style>
-        
-    </style>
-@endsection
-
 {{-- Contenido --}}
 @section('contenido')
 
@@ -166,13 +159,11 @@
                         </div>
                     </div>
 
-                    {{-- Foto --}}
+                    {{-- Imagen --}}
                     <div class="fila-form justify-content-center">
-                        <label class="vista-previa-img">
-                            <input type="file" id="inputImg" name="img" accept="image/jpg,image/jpeg,image/png" onchange="vistaPrevia()" required>
-                            <i class="position-absolute fas fa-image"></i>
-                            <img class="position-relative d-none">
-                            <div>{{__('textos.campos.actualizar_img')}}</div>
+                        <label class="btn-actualizar-img">
+                            <input type="file" name="img" accept="image/jpg,image/jpeg,image/png" onchange="vistaPreviaImg(this, this)" required>
+                            <img>
                         </label>
                     </div>
                 </div>
@@ -196,28 +187,20 @@
             valoresErrores  = new Object( @json( request()->old() ) );
 
         // Campos adicionales
+        var inputImg = document.querySelector('[name="img"]')
         function camposAdicionales(llenar, contFormulario) {
 
             // Llenar
             if (llenar) {
-                vistaPrevia('/img/productos/' + registroA.id);
-                inputImg.required = false;
+                vistaPreviaImg(inputImg, '/img/productos/' + registroA.id)
+                inputImg.required = false
             }
 
             // Vaciar
             else {
-                img.removeAttribute('src');
-                img.classList.add('d-none');
-                inputImg.required = true;
+                document.querySelector('.btn-actualizar-img img').removeAttribute('src')
+                inputImg.required = true
             }
-        }
-
-        // Vista previa de imagen
-        var img = document.querySelector('.vista-previa-img img');
-        function vistaPrevia(ruta=null) {
-            var archivo = inputImg.files[0];
-            img.src = (ruta) ? ruta : (window.URL || window.webkitURL).createObjectURL(archivo);
-            img.classList.remove('d-none');
         }
     </script>
 @endsection

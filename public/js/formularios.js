@@ -15,6 +15,7 @@ function soloNumeros(tecla) {
     }
 }
 
+// Vista previa de imagen
 function vistaPreviaImg(imgVP, datosImg=null) {
     while (imgVP.tagName != 'IMG') {
         imgVP = imgVP.parentNode.querySelector('img');
