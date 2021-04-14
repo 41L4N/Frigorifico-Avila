@@ -31,6 +31,7 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
+                    <th>{{__('textos.campos.titulo')}}</th>
                     <th>{{__('textos.campos.productos')}}</th>
                     <th>{{__('textos.campos.precio')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
@@ -41,7 +42,13 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$reg->id}}"></th>
-                        
+                        <td>{{$reg->titulo}}</td>
+                        <td>
+                            @foreach ($reg->titulos_productos as $p)
+                                {{$p->titulo}}
+                            @endforeach
+                        </td>
+                        <td>{{formatos('n', $reg->precio, true)}}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -83,10 +90,10 @@
 
                     {{-- Lista de productos --}}
                     <div class="subtitulo-form">{{__('textos.campos.productos')}}</div>
-                    <div class="fila-form" id="nuevoElemento">
+                    <div class="fila-form" id="camposNuevoElemento">
                         <div>
                             <label>{{__('textos.campos.producto')}}</label>
-                            <select name="producto[][id]" class="form-control">
+                            <select class="form-control">
                                 <option value="" selected disabled>{{__('textos.placeholders.select')}}</option>
                                 @foreach ($productos as $p)
                                     <option value="{{$p->id}}">{{$p->titulo}}</option>
@@ -95,7 +102,7 @@
                         </div>
                         <div>
                             <label>{{__('textos.campos.cantidad')}}</label>
-                            <input type="number" name="producto[][cantidad]" class="form-control" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
+                            <input type="number" class="form-control" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
                         </div>
                         <div class="w-auto">
                             <label></label>
@@ -111,8 +118,21 @@
             </form>
         </div>
     </div>
+
     {{-- Confirmación --}}
     @include('plantillas.ventana-confirmacion')
+
+    {{-- Ejemplo de opcion --}}
+    <div class="d-none fila-form" id="ejemploNuevoElemento">
+        <select name="productos[iElemento][id]" class="form-control">
+            <option value="" selected disabled>{{__('textos.placeholders.select')}}</option>
+            @foreach ($productos as $p)
+                <option value="{{$p->id}}">{{$p->titulo}}</option>
+            @endforeach
+        </select>
+        <input type="number" name="productos[iElemento][cantidad]" class="form-control" min="{{$min=1}}" max="99999" onkeypress="soloNumeros(event)">
+        <button type="button" class="btn btn-danger w-auto fas fa-times" onclick="this.parentNode.remove()"></button>
+    </div>
 @endsection
 
 {{-- JavaScript --}}
@@ -128,25 +148,31 @@
 
             // Llenar
             if (llenar) {
-                
+                if (elementos = JSON.parse(registroA.productos)) {
+                    elementos.forEach(element => {
+                        agregarElemento(element)
+                    });
+                }
             }
 
             // Vaciar
             else {
-                
+                contElementos.innerHTML = ''
             }
         }
 
         // Agregar producto
+        var camposNuevoElemento = document.querySelector('#camposNuevoElemento').innerHTML;
+        var iElemento = 0;
         function agregarElemento(datos=null) {
 
-            // Campos
-            var campos = nuevoElemento.querySelectorAll('input, select');
+            var campos = 'input, select'
+            var datosNuevoElemento = document.querySelector('#camposNuevoElemento').querySelectorAll(campos)
 
             // Validación
             if (!datos) {
                 var validacion = true;
-                campos.forEach(campo => {
+                datosNuevoElemento.forEach(campo => {
                     campo.required = true;
                     if (!campo.reportValidity()) {
                         validacion = false;
@@ -158,22 +184,24 @@
                 }
             }
 
+            // Datos
+            if (datos) {
+                Object.keys(datos).forEach((clave,iDato) => {
+                    datosNuevoElemento[iDato].value = datos[clave]
+                });
+            }
+
             // Nuevo elemento
-            var clon = nuevoElemento.cloneNode(true);
-            clon.removeAttribute('id')
-            clon.querySelectorAll('label').forEach(label => {
-                label.remove()
+            nuevoElemento = ejemploNuevoElemento.cloneNode(true)
+            nuevoElemento.removeAttribute('id')
+            nuevoElemento.querySelectorAll(campos).forEach((campo, iCampo) => {
+                campo.value = datosNuevoElemento[iCampo].value
+                campo.name = campo.name.replace('iElemento', iElemento)
             });
-            ().forEach((campo, iCampo) => {
-                var c = clon.querySelectorAll(campo.tagName)[iCampo]
-                c.required = true
-                c.value = campo.value
-                campo.value = null
-            });
-            clon.querySelector('button').classList.replace('btn-success', 'btn-danger')
-            clon.querySelector('button').classList.replace('fa-plus', 'fa-times')
-            clon.querySelector('button').setAttribute('onclick', 'this.parentNode.parentNode.remove()')
-            contElementos.insertAdjacentElement('beforeend', clon)
+            iElemento++
+            nuevoElemento.classList.remove('d-none')
+            contElementos.insertAdjacentElement('beforeend', nuevoElemento)
+            document.querySelector('#camposNuevoElemento').innerHTML = camposNuevoElemento
         }
     </script>
 @endsection

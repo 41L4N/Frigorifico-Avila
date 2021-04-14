@@ -24,7 +24,7 @@ class ProductoCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'            => 'required|between:1,50',
+            'titulo'            => 'required|between:1,75',
             'filtro'            => 'required|integer',
             'unidad_medida'     => 'required',
             'pedido_min_detal'  => 'required|digits_between:1,5',
@@ -36,7 +36,7 @@ class ProductoCtrl extends Controller
             'img'               => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
 
-        // Registro principal
+        // Registro
         if (!$reg = Producto::find($rq->id)) {
             $reg = new Producto;
         }
