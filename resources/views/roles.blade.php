@@ -3,17 +3,17 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.' . prefijo('_'));
+    $tituloMD = __('textos.rutas.' . str_replace('-', '_', $nRuta = Route::currentRouteName()) );
 @endphp
 
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo() . '-eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(Route::currentRouteName() . '.eliminar')}}" method="POST" class="form-registros">
         @csrf
 
         {{-- Submenu --}}
-        <div class="submenu-resultados">
+        <div class="submenu-registros">
             <div>{{$tituloMD}}</div>
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>

@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.' . prefijo("_"));
+    $tituloMD = __('textos.rutas.' . Route::currentRouteName());
 @endphp
 
 {{-- Estilos --}}
@@ -21,11 +21,11 @@
     <div class="cont-mins align-content-center">
 
         {{-- Rutas --}}
-        @foreach (['carrusel', 'roles', 'usuarios', 'filtros-productos', 'inventario', 'combos', 'cupones'] as $r)
-            <a href="{{route($r)}}" class="min btn-administrador">
+        @foreach (['carrusel', 'roles', 'usuarios', 'filtros-productos', 'productos', 'combos', 'cupones'] as $r)
+            <a href="{{route("administrador.$r")}}" class="min btn-administrador">
                 <div class="contenido-min">
                     <i class="{{iconos($r)}}"></i>
-                    <div>{{__('textos.rutas.' . str_replace('-', '_', $r) )}}</div>
+                    <div>{{__('textos.rutas.administrador.' . str_replace('-', '_', $r) )}}</div>
                 </div>
             </a>
         @endforeach

@@ -1,14 +1,5 @@
 <?php
 
-// Prefijo
-function prefijo($espacio=null){
-    $prefijo = explode("/", Request::route()->getPrefix());
-    if ($espacio) {
-        $prefijo = str_replace('-', $espacio, $prefijo);
-    }
-    return end($prefijo);
-}
-
 // Formatos
 function formatos($tipo,$dato,$parametroAdicional=null){
     switch ($tipo) {
@@ -59,7 +50,7 @@ function iconos($i){
         'roles'             => "fas fa-user-lock",
         'usuarios'          => "fas fa-users",
         'filtros-productos' => "fas fa-filter",
-        'inventario'        => "fas fa-boxes",
+        'productos'         => "fas fa-boxes",
         'combos'            => "fas fa-gifts",
         'cupones'           => "fas fa-money-check-alt"
     ];

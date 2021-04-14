@@ -52,7 +52,7 @@ class ProductoCtrl extends Controller
         // Campos adicionales
         // Imagen
         if ($rq->img) {
-            guardarImg((new Producto)->getTable(), $rq->img, $reg->id);
+            guardarImg($reg->getTable(), $rq->img, $reg->id);
         }
 
         // Respuesta
@@ -114,14 +114,14 @@ class ProductoCtrl extends Controller
                 // Precio
             break;
 
-            // Combos
-            case 'combos':
-                $ps = Combo::select('*');
-            break;
-
             // Ofertas
             case 'ofertas':
                 $ps = Producto::where('oferta', '>', 0);
+            break;
+
+            // Sin coincidencia
+            default:
+                return redirect()->route('productos');
             break;
         }
 

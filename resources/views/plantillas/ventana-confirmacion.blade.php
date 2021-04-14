@@ -9,7 +9,7 @@
             <div class="modal-body">{{__('textos.parrafos.confirmacion')}}</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
-                <button type="button" class="btn btn-primary" onclick="document.querySelector('.form-resultados').submit()">{{__('textos.botones.confirmar')}}</button>
+                <button type="button" class="btn btn-primary" onclick="document.querySelector('.form-registros').submit()">{{__('textos.botones.confirmar')}}</button>
             </div>
         </div>
     </div>

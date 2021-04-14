@@ -18,7 +18,8 @@ function convertirImg($tipo, $img, $resolucion=null){
     // Relación de aspecto - Alto y ancho
     $relacionAspecto = ($resolucion) ? $resolucion : [
         'carrusel'  => 1500,
-        "productos" => 500
+        'productos' => 500,
+        'combos'    => 500
     ][$tipo];
 
     // Relación de aspecto

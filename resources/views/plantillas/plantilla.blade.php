@@ -83,8 +83,8 @@
                         {{-- Opciones --}}
                         <a href="{{route('inicio')}}" class="opcion-menu-s">{{__('textos.rutas.inicio')}}</a>
                         <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
-                        <a href="{{route('productos', 'combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
                         <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
+                        <a href="{{route('combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
                         @auth
                             {{-- Lista de menú --}}
                             <div class="lista-menu-s">
@@ -95,10 +95,10 @@
                                 {{-- Opciones --}}
                                 <div class="opciones-lista-menu-s">
                                     @if (Auth::user()->administrador)
-                                        <a class="opcion-menu-s" href="{{route('panel-administrador')}}">{{__('textos.rutas.panel_administrador')}}</a>
+                                        <a class="opcion-menu-s" href="{{route('administrador.panel')}}">{{__('textos.rutas.administrador.panel')}}</a>
                                     @endif
-                                    <a class="opcion-menu-s" href="{{route('usuario-perfil')}}">{{__('textos.rutas.usuario')}}</a>
-                                    <a class="opcion-menu-s" href="{{route('usuario-salir')}}">{{__('textos.rutas.salir')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
+                                    <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>
                                 </div>
                             </div>
                         @else

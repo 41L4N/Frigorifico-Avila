@@ -25,7 +25,7 @@ class Permisos
             return $next($request);
         }
         else {
-            return redirect()->route("perfil");
+            return back();
         }
     }
 }

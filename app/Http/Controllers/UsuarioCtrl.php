@@ -18,7 +18,7 @@ class UsuarioCtrl extends Controller
 
         // Si ya hay autenticación
         if(Auth::check()){
-            return redirect()->route('usuario-perfil');
+            return redirect()->route('usuario.perfil');
         }
 
         // Si hay código de acceso pero no coincide

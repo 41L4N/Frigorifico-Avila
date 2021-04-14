@@ -3,17 +3,17 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.' . prefijo('_'));
+    $tituloMD = __('textos.rutas.' . str_replace('-', '_', $nRuta = Route::currentRouteName()) );
 @endphp
 
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo() . '-eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(Route::currentRouteName() . '.eliminar')}}" method="POST" class="form-registros">
         @csrf
 
         {{-- Submenu --}}
-        <div class="submenu-resultados">
+        <div class="submenu-registros">
             <div>{{$tituloMD}}</div>
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
@@ -42,10 +42,16 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$reg->id}}"></th>
-                        <td>{{$reg->titulo}}</td>
                         <td>
-                            @foreach ($reg->titulos_productos as $p)
-                                {{$p->titulo}}
+                            <a href="{{$ruta=route('combos', [$reg->alias(), $reg->id])}}">{{$reg->titulo}}</a>
+                            <br>
+                            <a href="" class="cont-min-img">
+                                <img src="{{route('mostrar-img',[$reg->getTable(), $reg->id])}}" alt="{{config('app.name') . "  " . $reg->titulo}}">
+                            </a>
+                        </td>
+                        <td>
+                            @foreach ($reg->datos_productos as $p)
+                                {{$p->titulo}} <br>
                             @endforeach
                         </td>
                         <td>{{formatos('n', $reg->precio, true)}}</td>
@@ -64,7 +70,7 @@
     {{-- Agregar --}}
     <div class="modal fade" id="{{$idVtn="vtnGuardar"}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form class="modal-content" method="POST">
+            <form class="modal-content" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">{{$tituloMD}}</h5>
@@ -89,7 +95,6 @@
                     </div>
 
                     {{-- Lista de productos --}}
-                    <div class="subtitulo-form">{{__('textos.campos.productos')}}</div>
                     <div class="fila-form" id="camposNuevoElemento">
                         <div>
                             <label>{{__('textos.campos.producto')}}</label>
@@ -109,7 +114,13 @@
                             <button type="button" class="btn btn-success fas fa-plus" onclick="agregarElemento()"></button>
                         </div>
                     </div>
-                    <div id="contElementos"></div>
+                    <div id="contElementos" class="lista-elementos"></div>
+
+                    {{-- Imagen --}}
+                    <label class="btn-actualizar-img">
+                        <input type="file" name="img" accept="image/jpg,image/jpeg,image/png" onchange="vistaPreviaImg(this, this)" required>
+                        <img>
+                    </label>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -144,26 +155,37 @@
             valoresErrores  = new Object( @json( request()->old() ) );
 
         // Campos adicionales
+        var inputImg = document.querySelector('[name="img"]')
         function camposAdicionales(llenar, contFormulario) {
 
             // Llenar
             if (llenar) {
-                if (elementos = JSON.parse(registroA.productos)) {
+
+                // Productos
+                if (elementos = (typeof registroA.productos == 'string') ? JSON.parse(registroA.productos) : registroA.productos ) {
                     elementos.forEach(element => {
                         agregarElemento(element)
                     });
                 }
+
+                // Imagen
+                if (registroA.id) {
+                    vistaPreviaImg(inputImg, '/img/combos/' + registroA.id)
+                }
+                inputImg.required = false
             }
 
             // Vaciar
             else {
                 contElementos.innerHTML = ''
+                document.querySelector('.btn-actualizar-img img').removeAttribute('src')
+                inputImg.required = true
             }
         }
 
         // Agregar producto
-        var camposNuevoElemento = document.querySelector('#camposNuevoElemento').innerHTML;
-        var iElemento = 0;
+        var camposNuevoElemento = document.querySelector('#camposNuevoElemento').innerHTML
+        var iElemento = 0
         function agregarElemento(datos=null) {
 
             var campos = 'input, select'

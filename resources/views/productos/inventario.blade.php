@@ -3,61 +3,24 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.' . prefijo('_'));
+    $tituloMD = __('textos.rutas.' . str_replace('-', '_', $nRuta = Route::currentRouteName()) );
 @endphp
 
 {{-- Estilos --}}
 @section('estilos')
     <style>
-        /* Vista previa */
-        .vista-previa {
-            position: relative;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 250px;
-            border: solid var(--c-plantilla) 2.5px;
-            aspect-ratio: 1 / 1;
-            cursor: pointer;
-            color: grey;
-        }
-        #inputImg {
-            position: absolute;
-            opacity: 0;
-        }
-        .vista-previa i {font-size: 50px;}
-        .vista-previa div {
-            position: absolute;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            color: var(--c-l-t-c-plantilla);
-            background: var(--t-c-plantilla);
-            font-size: 20px;
-        }
-        .vista-previa:hover div { display: flex; }
-        .vista-previa img {
-            max-width: 100%;
-            max-height: 100%;
-        }
+        
     </style>
 @endsection
 
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route(prefijo() . '-eliminar')}}" method="POST" class="form-resultados">
+    <form action="{{route(Route::currentRouteName() . '.eliminar')}}" method="POST" class="form-registros">
         @csrf
 
         {{-- Submenu --}}
-        <div class="submenu-resultados">
+        <div class="submenu-registros">
             <div>{{$tituloMD}}</div>
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vtnGuardar">{{__('textos.botones.agregar')}}</button>
@@ -205,7 +168,7 @@
 
                     {{-- Foto --}}
                     <div class="fila-form justify-content-center">
-                        <label class="vista-previa">
+                        <label class="vista-previa-img">
                             <input type="file" id="inputImg" name="img" accept="image/jpg,image/jpeg,image/png" onchange="vistaPrevia()" required>
                             <i class="position-absolute fas fa-image"></i>
                             <img class="position-relative d-none">
@@ -250,7 +213,7 @@
         }
 
         // Vista previa de imagen
-        var img = document.querySelector('.vista-previa img');
+        var img = document.querySelector('.vista-previa-img img');
         function vistaPrevia(ruta=null) {
             var archivo = inputImg.files[0];
             img.src = (ruta) ? ruta : (window.URL || window.webkitURL).createObjectURL(archivo);

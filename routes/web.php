@@ -44,7 +44,14 @@ Route::post('/renovacion-contraseña', [UsuarioCtrl::class,'renovacionContraseñ
 
 // Productos
 Route::get('/productos/{filtro?}/{id?}', [ProductoCtrl::class,'productos'])->name('productos');
+
+// Combos
+Route::get('/combos/{filtro?}/{id?}', [ComboCtrl::class, 'combos'])->name('combos');
+
+// Lista de compras
 Route::post('/lista-compras', [OrdenCompraCtrl::class,'listaCompras'])->name('lista-compras');
+
+// Orden de compra
 Route::view('/orden-compra', 'orden-compra.orden-compra')->name('orden-compra');
 Route::post('/orden-compra',[OrdenCompraCtrl::class,'ordenCompra']);
 
@@ -52,68 +59,68 @@ Route::post('/orden-compra',[OrdenCompraCtrl::class,'ordenCompra']);
 Route::middleware('auth')->group(function(){
 
     // Usuario
-    Route::prefix($n='usuario')->name($n)->group(function(){
+    Route::prefix($n='usuario')->name("$n.")->group(function(){
 
         // Perfil
-        Route::get('/', [UsuarioCtrl::class,'registro'])->name('-perfil');
+        Route::get('/', [UsuarioCtrl::class,'registro'])->name('perfil');
 
         // Salir
         Route::get("/salir", function (){
             Auth::logout();
             return redirect()->route("inicio");
-        })->name('-salir');
+        })->name('salir');
     });
 
     // Administrador
-    Route::prefix($n='panel-administrador')->middleware('permisos')->group(function(){
+    Route::prefix($n='administrador')->name("$n.")->middleware('permisos')->group(function(){
+
+        // Panel de administrador
+        Route::view('/','panel-administrador')->name('panel');
 
         // Carrusel
         Route::view('carrusel', 'carrusel')->name('carrusel');
         Route::post('carrusel', [InicioCtrl::class,'carrusel']);
 
-        // Panel de administrador
-        Route::view('/','panel-administrador')->name('panel-administrador');
-
         // Roles
         Route::prefix($n='roles')->name($n)->group(function (){
             Route::get('/', [RolesCtrl::class,'registros'])->name('');
             Route::post('/', [RolesCtrl::class,'guardar']);
-            Route::post('/eliminar', [RolesCtrl::class,'eliminar'])->name('-eliminar');
+            Route::post('/eliminar', [RolesCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Usuarios
         Route::prefix($n='usuarios')->name($n)->group(function (){
             Route::get('/', [UsuarioCtrl::class,'registros'])->name('');
             Route::post('/', [UsuarioCtrl::class,'guardar']);
-            Route::post('/eliminar', [UsuarioCtrl::class,'eliminar'])->name('-eliminar');
+            Route::post('/eliminar', [UsuarioCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Filtros
         Route::prefix($n='filtros-productos')->name($n)->group(function (){
             Route::get('/', [FiltroProductoCtrl::class,'registros'])->name('');
             Route::post('/', [FiltroProductoCtrl::class,'guardar']);
-            Route::post('/eliminar', [FiltroProductoCtrl::class,'eliminar'])->name('-eliminar');
+            Route::post('/eliminar', [FiltroProductoCtrl::class,'eliminar'])->name('.eliminar');
         });
 
-        // Inventario
-        Route::prefix($n='inventario')->name($n)->group(function (){
+        // Productos
+        Route::prefix($n='productos')->name($n)->group(function (){
             Route::get('/', [ProductoCtrl::class,'registros'])->name('');
             Route::post('/', [ProductoCtrl::class,'guardar']);
-            Route::post('/eliminar', [ProductoCtrl::class,'eliminar'])->name('-eliminar');
+            Route::post('/eliminar', [ProductoCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Combos
         Route::prefix($n='combos')->name($n)->group(function (){
             Route::get('/', [ComboCtrl::class,'registros'])->name('');
             Route::post('/', [ComboCtrl::class,'guardar']);
-            Route::post('/eliminar', [ComboCtrl::class,'eliminar'])->name('-eliminar');
+            Route::post('/eliminar', [ComboCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Cupones
         Route::prefix($n='cupones')->name($n)->group(function (){
             Route::get('/', [CuponCtrl::class,'registros'])->name('');
             Route::post('/', [CuponCtrl::class,'guardar']);
-            Route::post('/eliminar', [CuponCtrl::class,'eliminar'])->name('-eliminar');
+            Route::post('/eliminar', [CuponCtrl::class,'eliminar'])->name('.eliminar');
         });
 
         // Ordenes de compra

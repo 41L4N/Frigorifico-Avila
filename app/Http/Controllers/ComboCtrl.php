@@ -13,11 +13,11 @@ class ComboCtrl extends Controller
     public function registros(){
         return view('combos')->with([
             'combos'    => Combo::all()->map(function($c){
-                $c->titulos_productos = Producto::whereIn('id',
+                $c->datos_productos = Producto::whereIn('id',
                     array_map(function ($p){
                         return $p['id'];
                     }, json_decode($c->productos, true))
-                )->get(['titulo']);
+                )->get(['id', 'titulo']);
                 return $c;
             }),
             'productos' => Producto::get(['id', 'titulo'])
@@ -30,9 +30,10 @@ class ComboCtrl extends Controller
         // Validación
         $rq->validate([
             'id'        => 'nullable|numeric|integer',
-            'titulo'    => 'required|between:1,75',
+            'titulo'    => 'required|unique:' . (new Combo)->getTable() . ',titulo,' . $rq->id . '|between:1,75',
             'precio'    => 'required|digits_between:1,5',
-            'productos' => 'array'
+            'productos' => 'required|array',
+            'img'       => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
 
         // Registro
@@ -50,6 +51,12 @@ class ComboCtrl extends Controller
 
         // Guardar
         $reg->save();
+
+        // Campos adicionales
+        // Imagen
+        if ($rq->img) {
+            guardarImg($reg->getTable(), $rq->img, $reg->id);
+        }
 
         // Respuesta
         return back()->with([
@@ -71,5 +78,10 @@ class ComboCtrl extends Controller
                 'tipo' => 'success'
             ]
         ]);
+    }
+
+    // Combos
+    public function combos(){
+        # code...
     }
 }

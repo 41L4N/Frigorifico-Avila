@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Combo extends Model
 {
     use HasFactory;
+
+    // Alias
+    function alias(){
+        return formatos('tb', $this->titulo, '-');
+    }
 }

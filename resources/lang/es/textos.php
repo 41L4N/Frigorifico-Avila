@@ -6,25 +6,28 @@ return [
     'rutas' => [
         // Inicio
         'inicio'                => "Inicio",
+        'productos'             => "Productos",
+        'combos'                => "Combos",
         'ofertas'               => "Ofertas",
         // Sesion
         'ingreso'               => "Ingreso",
-        // Formularios
         'recuperar_contraseña'  => "Recuperar contraseña",
-        // Administrador
-        'panel_administrador'   => "Panel de administrador",
-        'carrusel'              => "Carrusel",
-        'roles'                 => "Roles",
-        'usuarios'              => "Usuarios",
-        'filtros_productos'     => "Filtros de productos",
-        'inventario'            => "Inventario",
-        'cupones'               => "Cupones",
-        'combos'                => "Combos",
-        'ordenes_compras'       => "Ordenes de compras",
-        'productos'             => "Productos",
         // Usuario
         'usuario'               => "Usuario",
-        'salir'                 => "Salir"
+        'salir'                 => "Salir",
+        // Administrador
+        'administrador'         => [
+            'panel'             => "Panel de administrador",
+            'carrusel'          => "Carrusel",
+            'roles'             => "Roles",
+            'usuarios'          => "Usuarios",
+            'filtros_productos' => "Filtros de productos",
+            'productos'         => "Productos",
+            'cupones'           => "Cupones",
+            'combos'            => "Combos",
+            'ordenes_compras'   => "Ordenes de compras",
+            'productos'         => "Productos",
+        ],
     ],
 
     // Alertas
