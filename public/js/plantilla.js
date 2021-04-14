@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     listaCompras();
 
     // Mostrar errores
-    if (typeof mensajesErrores !='undefined' && typeof valoresErrores != 'undefined') {
+    if (typeof mensajesErrores == 'object' && mensajesErrores && typeof valoresErrores == 'object' && valoresErrores) {
         if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
             llenarFormulario(null, (typeof valoresErrores.id_vtn === 'undefined') ? "" : '#' + valoresErrores.id_vtn);
         }
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Limpiar formulario
     document.querySelectorAll('.contenido .modal').forEach(contFormulario => {
         $('#'+contFormulario.id).on('hide.bs.modal', function () {
+
             // Campos
             if (formulario = contFormulario.querySelector('form')) {
                 formulario.reset();
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             // Alertas
             contFormulario.querySelectorAll('.alert').forEach(alerta => {
-                alerta.parentNode.removeChild(alerta);
+                alerta.remove();
             });
         });
     });

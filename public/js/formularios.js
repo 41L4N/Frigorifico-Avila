@@ -49,24 +49,22 @@ function contarChecks(){
 function llenarFormulario(clave=null, contFormulario) {
 
     // Posibles errores
-    if (mensajesErrores) {
-        Object.keys(mensajesErrores).forEach(clave => {
-            if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) {
-                // Estilos
-                campo.classList.add('is-invalid');
-                // Mensaje
-                campo.insertAdjacentHTML('afterend', '<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
-            }
-        });
-        mensajesErrores = null;
-    }
+    Object.keys(mensajesErrores).forEach(clave => {
+        if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) {
+            // Estilos
+            campo.classList.add('is-invalid');
+            // Mensaje
+            campo.insertAdjacentHTML('afterend', '<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
+        }
+    });
+    mensajesErrores = null;
 
     // Registro actual
     registroA = (clave===null) ? valoresErrores : registrosP[clave];
-
+    
     // Campos directos
     Object.keys(registroA).forEach(clave => {
-        if ( (campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) && (clave != 'confirmacion_password') ) {
+        if (campo = document.querySelector(contFormulario + ' [name=' + clave + ']') ) {
 
             // Según el tipo de campo
             if (['checkbox','ratio'].includes(campo.type)) {
@@ -84,5 +82,7 @@ function llenarFormulario(clave=null, contFormulario) {
     }
 
     // Ventana
-    $(contFormulario).modal('show');
+    if (document.querySelector(contFormulario).classList.contains('modal')) {
+        $(contFormulario).modal('show');
+    }
 }
