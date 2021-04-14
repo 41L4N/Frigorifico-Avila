@@ -60,7 +60,7 @@
 
                     {{-- Registro --}}
                     @case('registro')
-                        @include('usuarios.campos-basicos',$campos=["contraseñas"])
+                        @include('usuarios.campos-basicos',$campos=['contraseñas'])
                     @break
 
                     {{-- Ingreso --}}
@@ -86,6 +86,8 @@
                         <div class="fila-form">
                             <div>
                                 <a href="" data-toggle="modal" data-target="#vtnRecuperar">{{__('textos.rutas.recuperar_contraseña')}}</a>
+                                <br>
+                                <a href="{{route('sesion', 'registro')}}">{{__('textos.rutas.registro')}}</a>
                             </div>
                         </div>
                     @break

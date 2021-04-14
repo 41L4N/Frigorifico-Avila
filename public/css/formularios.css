@@ -1,3 +1,10 @@
+/* Tamaños */
+.form-corto {
+    width: 100%;
+    max-width: 500px;
+    margin: 0px auto;
+}
+
 /* Titulos */
 .titulo-form {
     font-size: 27.5px;

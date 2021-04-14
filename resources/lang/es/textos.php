@@ -11,6 +11,7 @@ return [
         'ofertas'               => "Ofertas",
         // Sesion
         'ingreso'               => "Ingreso",
+        'registro'              => "Registro",
         'recuperar_contraseña'  => "Recuperar contraseña",
         // Usuario
         'usuario'               => "Usuario",

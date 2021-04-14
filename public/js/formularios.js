@@ -25,7 +25,11 @@ function vistaPreviaImg(imgVP, datosImg=null) {
 
 // Funcion de activar todos los checks dentro de la tabla donde fue activado el check principal ubicada por la clase ".tb-registros"
 var checks = document.querySelectorAll('.tb-registros [name^="registros"]');
-function clickTodos(){ checks.forEach(check => { check.checked = checkPrincipal.checked; }); }
+function clickTodos(){
+    checks.forEach(check => {
+        check.checked = checkPrincipal.checked;
+    });
+}
 
 // Contar checks
 function contarChecks(){
@@ -47,7 +51,7 @@ function llenarFormulario(clave=null, contFormulario) {
     // Posibles errores
     if (mensajesErrores) {
         Object.keys(mensajesErrores).forEach(clave => {
-            if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']') ) {
+            if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) {
                 // Estilos
                 campo.classList.add('is-invalid');
                 // Mensaje
@@ -62,7 +66,7 @@ function llenarFormulario(clave=null, contFormulario) {
 
     // Campos directos
     Object.keys(registroA).forEach(clave => {
-        if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']') ) {
+        if ( (campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) && (clave != 'confirmacion_password') ) {
 
             // Según el tipo de campo
             if (['checkbox','ratio'].includes(campo.type)) {

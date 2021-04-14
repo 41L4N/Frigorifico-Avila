@@ -36,6 +36,9 @@
     @endif
 </div>
 
+{{-- Redes sociales --}}
+
+
 {{-- Seguridad --}}
 {{-- Subtitulo --}}
 @if (in_array("subtitulos",$campos))
@@ -48,7 +51,7 @@
             {{__('textos.campos.cambiar_contraseña')}}
         </label>
     @endif
-    <fieldset id="contraseñas" @if (in_array('cambiar-contraseñas', $campos)) disabled @endif>
+    <fieldset id="contraseñas" @if (in_array('cambiar_contraseñas', $campos)) disabled @endif>
         <div class="fila-form">
             <div>
                 <label>{{__('textos.campos.contraseña')}}</label>

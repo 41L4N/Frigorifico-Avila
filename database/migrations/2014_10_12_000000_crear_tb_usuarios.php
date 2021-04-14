@@ -23,6 +23,8 @@ class CrearTbUsUarios extends Migration
             // Contacto
             $tb->string('email')->unique();
             $tb->string('telf');
+            // Redes sociales
+            $tb->string('twitter')->nullable();
             // Boletin
             $tb->boolean('notificaciones')->nullable();
             // Acceso
