@@ -57,7 +57,9 @@ class UsuarioCtrl extends Controller
         }
         // Campos adicionales
         // Teléfono
-        $reg->telf = json_encode($rq->telf);
+        if ($rq->telf) {
+            $reg->telf = json_encode($rq->telf);
+        }
         // Contraseña
         if ($rq->exists('password')) {
             $reg->password = bcrypt($rq->password);

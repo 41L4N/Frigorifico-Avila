@@ -31,7 +31,7 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
-                    <th>{{__('textos.campos.nombre') ." y ". __('textos.campos.apellido')}}</th>
+                    <th>{{__('textos.campos.nombre_appellido')}}</th>
                     <th>{{__('textos.campos.email')}}</th>
                     <th>{{__('textos.campos.telf')}}</th>
                     <th>{{__('textos.campos.rol')}}</th>
@@ -45,7 +45,7 @@
                         <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$u->id}}"></th>
                         <td>{{"$u->nombre $u->apellido"}}</td>
                         <td>{{$u->email}}</td>
-                        <td>{{formatos('t', $u->telf, true)}}</td>
+                        <td>{{ ($u->telf) ? formatos('t', $u->telf, true) : "-" }}</td>
                         <td>{{$u->rolP()}}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
@@ -72,7 +72,7 @@
                 <div class="modal-body">
                     {{-- Id de ventana --}}
                     <input type="hidden" name="id_vtn" value="{{$idVtn}}">
-                    @include('usuarios.campos-basicos', $campos=['id','telf'])
+                    @include('usuarios.campos-basicos', $campos=['id'])
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('textos.botones.cancelar')}}</button>
@@ -101,12 +101,12 @@
             if (llenar) {
 
                 // Teléfono
-                var telf = (typeof registroA.telf === 'string') ? JSON.parse( registroA.telf ) : registroA.telf;
-                Object.keys( telf ).forEach(clave => {
-                    if ( campo = document.querySelector(contFormulario + ' [name="telf[' + clave + ']"]') ) {
-                        campo.value = telf[clave];
-                    }
-                });
+                // var telf = (typeof registroA.telf === 'string') ? JSON.parse( registroA.telf ) : registroA.telf;
+                // Object.keys( telf ).forEach(clave => {
+                //     if ( campo = document.querySelector(contFormulario + ' [name="telf[' + clave + ']"]') ) {
+                //         campo.value = telf[clave];
+                //     }
+                // });
             }
         }
     </script>

@@ -111,6 +111,9 @@ return [
         'contraseña'            => "Contraseña",
         'confirmar_contraseña'  => "Confirmar contraseña",
 
+        // Usuarios
+        'nombre_apellido'       => "Nombre y apellido",
+
         // Roles
         'titulo'                => "Titulo",
         'permisos'              => "Permisos",
@@ -149,7 +152,8 @@ return [
         'estado'                => "Región / Provincia",
         'ciudad'                => "Ciudad",
         'pais'                  => "País",
-        'notas_pedido'          => "Notas de pedido"
+        'notas_pedido'          => "Notas de pedido",
+        'cupon'                 => "Cupón"
     ],
 
     // Placesholder

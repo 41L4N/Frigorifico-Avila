@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
         $u->nombre = "Alimentos";
         $u->apellido = "Ávila";
         $u->email = "desarrollo@alimentosavila.com";
-        $u->telf = json_encode([
-            'codigo' => '58',
-            'numero' => '4169227441'
-        ]);
+        // $u->telf = json_encode([
+        //     'codigo' => '58',
+        //     'numero' => '4169227441'
+        // ]);
         $u->administrador = true;
         $u->password = bcrypt("000000000000000");
         $u->save();
