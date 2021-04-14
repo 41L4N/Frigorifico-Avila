@@ -81,7 +81,20 @@ class ComboCtrl extends Controller
     }
 
     // Combos
-    public function combos(){
-        # code...
+    public function combos($alias=null, $id=null){
+
+        // Combo individual
+        if ($p = Combo::find($id)) {
+            return view('productos.producto')->with([
+                'producto' => $p
+            ]);
+        }
+
+        // Todos
+        else {
+            return view('productos.productos')->with([
+                'productos' => Combo::orderBy('titulo', 'ASC')->get()
+            ]);
+        }
     }
 }

@@ -13,4 +13,13 @@ class Combo extends Model
     function alias(){
         return formatos('tb', $this->titulo, '-');
     }
+
+    // Precio y oferta
+    function precioOfertaP(){
+        return [
+            'precio' => formatos('n', $p = $this->precio, true),
+            'oferta' => formatos('n', round($p - $this->oferta * $p / 100), true) . " (-$this->oferta %)"
+        ];
+        return $r;
+    }
 }

@@ -28,7 +28,7 @@ class Producto extends Model
         return null;
     }
 
-    // Oferta
+    // Precio y oferta
     function precioOfertaP(){
         return [
             'precio' => formatos('n', $p = $this->precio_detal, true),

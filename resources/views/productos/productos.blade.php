@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = "Productos";
+    $tituloMD = __('textos.rutas.' . str_replace('-', '_', $nRuta = Route::currentRouteName()) );
 @endphp
 
 {{-- Estilos --}}

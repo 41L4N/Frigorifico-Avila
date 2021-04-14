@@ -10,7 +10,7 @@
 @endonce
 
 {{-- Contenido --}}
-<a href="{{route('productos', [$p->alias(), $p->id])}}" class="min @if($p->oferta) oferta @endif min-p">
+<a href="{{route($p->getTable(), [$p->alias(), $p->id])}}" class="min @if($p->oferta) oferta @endif min-p">
 
     {{-- Etiquetas --}}
     <div class="cont-etiquetas-min">

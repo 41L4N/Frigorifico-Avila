@@ -45,7 +45,7 @@
                         <td>
                             <a href="{{$ruta=route('combos', [$reg->alias(), $reg->id])}}">{{$reg->titulo}}</a>
                             <br>
-                            <a href="" class="cont-min-img">
+                            <a href="{{$ruta}}" class="cont-min-img">
                                 <img src="{{route('mostrar-img',[$reg->getTable(), $reg->id])}}" alt="{{config('app.name') . "  " . $reg->titulo}}">
                             </a>
                         </td>
