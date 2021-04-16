@@ -74,7 +74,6 @@ function listaCompras(){
     }
 
     // Lista productos en cache
-    $subtotal = 0;
     $total = 0;
     $nCompras = 0;
     foreach ( isset($listaCompras['productos']) ? $listaCompras['productos'] : [] as $iP => $p ) {
@@ -90,14 +89,15 @@ function listaCompras(){
         $c->tipo = $p['tipo'];
 
         // Alias
-        $c->alias = $c->titulo;
+        $c->alias = $c->titulo; 
 
         // Precio de venta según cantidad y oferta
         $c->cantidad = $p['cantidad'];
         $c->precio_unitario = ($c->precio_mayor && $c->cantidad >= $c->pedido_min_mayor) ? $c->precio_mayor : ($precioD = $c->precio_detal) - $c->oferta * $precioD / 100;
+        $c->precio_unitario_p = formatos('n', $c->precio_unitario, true);
 
         // Subtotal
-        $subtotal = $subtotal + $c->precio_unitario * $c->cantidad;
+        $subtotal = $c->precio_unitario * $c->cantidad;
         $c->subtotal = formatos('n', $subtotal, true);
 
         // Producto

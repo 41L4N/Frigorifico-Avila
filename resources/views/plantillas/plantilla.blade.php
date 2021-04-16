@@ -155,15 +155,13 @@
                         <div class="modal-body">
 
                             {{-- Ejemplo --}}
-                            <div id="ejemploProductoListaCompras" class="producto-lista-productos">
+                            <div id="ejemploProductoListaCompras" class="d-none producto-lista-productos">
                                 {{-- Acción --}}
                                 <input type="hidden" name="accion" value="1">
                                 {{-- Tipo --}}
                                 <input type="hidden" name="tipo">
                                 {{-- Id --}}
                                 <input type="hidden" name="id">
-                                {{-- Precio unitario --}}
-                                <input type="hidden" name="precio_unitario" disabled>
                                 <b class="numerador"></b>
                                 {{-- Miniatura de imagen --}}
                                 <a href="" class="cont-min-img">

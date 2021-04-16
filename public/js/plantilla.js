@@ -47,19 +47,22 @@ function actualizarListaCompras(btn=null) {
 
     else {
 
-        console.log(listaCompras);
-        // Productos
+        // Renovar productos
+        contListaCompras.innerHTML = "";
         listaCompras.productos.forEach((p, iP) => {
 
             // Nuevo producto
-            var nuevoP = ejemploProductoListaCompras;
-    
+            var nuevoP = ejemploProductoListaCompras.cloneNode(true);
+
+            // Id
+            nuevoP.removeAttribute('id');
+            // Visibilidad
+            nuevoP.classList.remove('d-none');
+
             // Tipo
             nuevoP.querySelector('[name="tipo"]').value = p.tipo;
             // ID
             nuevoP.querySelector('[name="id"]').value = p.id;
-            // Precio unitario
-            nuevoP.querySelector('[name="precio_unitario"]').value = p.precio_unitario;
             // Enlace
             nuevoP.querySelector('a.cont-min-img').href = "/"+p.tipo+"/"+p.alias+"/"+p.id;
             // Imágen
@@ -67,14 +70,14 @@ function actualizarListaCompras(btn=null) {
             // Numerador
             nuevoP.querySelector('b.numerador').innerHTML = ++iP;
             // Precio unitario
-            nuevoP.querySelector('.precio-unitario').innerHTML = p.precio_unitario;
+            nuevoP.querySelector('.precio-unitario').innerHTML = p.precio_unitario_p;
             // Titulo
             nuevoP.querySelector('.titulo').innerHTML = p.titulo;
             // Cantidad
             nuevoP.querySelector('[name="cantidad"]').value = p.cantidad;
             // Subtotal
             nuevoP.querySelector('b.subtotal').innerHTML = p.subtotal;
-    
+
             // Mostrar
             contListaCompras.insertAdjacentElement('beforeend', nuevoP);
         });
