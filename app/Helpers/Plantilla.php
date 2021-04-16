@@ -58,3 +58,64 @@ function iconos($i){
     // Respuesta
     return ( isset( $iconos[$i] ) ) ? $iconos[$i] : null;
 }
+
+// Lista de compras
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\View;
+// use Illuminate\Support\Facades\Cache;
+// use App\Models\Producto;
+function listaCompras(){
+    $listasCompras = ($lC = Cache::get('listas-compras')) ? $lC : [];
+    $listaCompras = null;
+    foreach ($listasCompras as $lC) {
+        if ($lC['ip'] == request()->ip() || ((Auth::check()) ? $lC['id_usuario'] == Auth::user()->id : null)) {
+            $listaCompras = $lC;
+        }
+    }
+
+    // Lista productos en cache
+    $subtotal = 0;
+    $total = 0;
+    $nCompras = 0;
+    foreach ( isset($listaCompras['productos']) ? $listaCompras['productos'] : [] as $iP => $p ) {
+
+        // Producto
+        // Si el producto no existe entonces se borra de la lista
+        if (!$c = DB::table($p['tipo'])->find($p['id'])) {
+            unset($listaCompras['productos'][$iC]);
+            continue;
+        }
+
+        // Tipo
+        $c->tipo = $p['tipo'];
+
+        // Alias
+        $c->alias = $c->titulo;
+
+        // Precio de venta según cantidad y oferta
+        $c->cantidad = $p['cantidad'];
+        $c->precio_unitario = ($c->precio_mayor && $c->cantidad >= $c->pedido_min_mayor) ? $c->precio_mayor : ($precioD = $c->precio_detal) - $c->oferta * $precioD / 100;
+
+        // Subtotal
+        $subtotal = $subtotal + $c->precio_unitario * $c->cantidad;
+        $c->subtotal = formatos('n', $subtotal, true);
+
+        // Producto
+        $listaCompras['productos'][$iP] = $c;
+
+        // Total
+        $total = $total + $subtotal;
+        
+        // Número de compras
+        $nCompras = $nCompras + $c->cantidad;
+    }
+
+    // Total
+    $listaCompras['total'] = formatos('n', $total ,true);
+
+    // Número de compras
+    $listaCompras['nCompras'] = $nCompras;
+
+    // Respuesta
+    return $listaCompras;
+}

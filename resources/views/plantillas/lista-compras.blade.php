@@ -15,11 +15,11 @@
         <div class="w-100">
             <a href="{{$rutaP}}">{{$c->titulo}}</a> ({{formatos('n', $c->precio_unitario, true)}})
             {{-- Cantidad --}}
-            <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" value="{{$c->cantidad}}" onkeypress="soloNumeros(event)" onchange="listaCompras(this)" required>
+            <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" value="{{$c->cantidad}}" onkeypress="soloNumeros(event)" onchange="actualizarListaCompras(this)" required>
             <b class="subtotal">{{formatos('n', $c->precio_unitario * $c->cantidad, true)}}</b>
         </div>
         <label class="btn btn-danger fas fa-times">
-            <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; listaCompras(this);">
+            <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; actualizarListaCompras(this);">
         </label>
     </div>
 @endforeach

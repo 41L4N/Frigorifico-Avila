@@ -1,5 +1,5 @@
 // Lista de compras
-function listaCompras(btn=null) {
+function actualizarListaCompras(btn=null) {
 
     // Formulario actual
     if (btn) {
@@ -32,38 +32,65 @@ function listaCompras(btn=null) {
             data: datosC,
             processData: false,
             contentType: false,
-            success: function () {
+            success: function (r) {
+
                 if (datosC.get('accion') == 2) {
                     formulario.remove();
                 }
+
+                // Actualizar información
+                listaCompras = r;
+                actualizarListaCompras();
             }
         });
     }
 
-    var total = 0,
-        nCompras = 0;
-    document.querySelectorAll('.producto-lista-productos').forEach(formulario => {
+    else {
 
-        // Cantidad
-        cantidad = parseInt(formulario.querySelector('[name="cantidad"]').value);
+        console.log(listaCompras);
+        // Productos
+        listaCompras.productos.forEach((p, iP) => {
 
-        // Subtotal
-        subtotal = cantidad * parseFloat(formulario.querySelector('[name="precio_unitario"]').value);
-        formulario.querySelector('.subtotal').innerHTML = (subtotalTexto = "$" + subtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
+            // Nuevo producto
+            var nuevoP = ejemploProductoListaCompras;
+    
+            // Tipo
+            nuevoP.querySelector('[name="tipo"]').value = p.tipo;
+            // ID
+            nuevoP.querySelector('[name="id"]').value = p.id;
+            // Precio unitario
+            nuevoP.querySelector('[name="precio_unitario"]').value = p.precio_unitario;
+            // Enlace
+            nuevoP.querySelector('a.cont-min-img').href = "/"+p.tipo+"/"+p.alias+"/"+p.id;
+            // Imágen
+            nuevoP.querySelector('a.cont-min-img img').src = "/img/"+p.tipo+"/"+p.id;
+            // Numerador
+            nuevoP.querySelector('b.numerador').innerHTML = ++iP;
+            // Precio unitario
+            nuevoP.querySelector('.precio-unitario').innerHTML = p.precio_unitario;
+            // Titulo
+            nuevoP.querySelector('.titulo').innerHTML = p.titulo;
+            // Cantidad
+            nuevoP.querySelector('[name="cantidad"]').value = p.cantidad;
+            // Subtotal
+            nuevoP.querySelector('b.subtotal').innerHTML = p.subtotal;
+    
+            // Mostrar
+            contListaCompras.insertAdjacentElement('beforeend', nuevoP);
+        });
 
         // Total
-        document.querySelector('.precio-total').innerHTML = "$" + (total = total + subtotal).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-
-        // Numero de compras
-        document.querySelector('.n-compras').innerHTML = (nCompras = nCompras + parseInt(cantidad));
-    });
+        document.querySelector('.precio-total').innerHTML = listaCompras.total;
+        // Numerador de compras
+        document.querySelector('.n-compras').innerHTML = listaCompras.nCompras;
+    }
 }
 
 // Funciones automaticas despues de cargar el archivo
 document.addEventListener('DOMContentLoaded', function() {
 
     // Lista de compras
-    listaCompras();
+    actualizarListaCompras();
 
     // Mostrar errores
     if (typeof mensajesErrores == 'object' && mensajesErrores && typeof valoresErrores == 'object' && valoresErrores) {

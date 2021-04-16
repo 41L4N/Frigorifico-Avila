@@ -49,11 +49,11 @@ Route::get('/productos/{filtro?}/{id?}', [ProductoCtrl::class,'productos'])->nam
 Route::get('/combos/{filtro?}/{id?}', [ComboCtrl::class, 'combos'])->name('combos');
 
 // Lista de compras
-Route::post('/lista-compras', [OrdenCompraCtrl::class,'listaCompras'])->name('lista-compras');
+Route::post('/lista-compras', [OrdenCompraCtrl::class,'lista'])->name('lista-compras');
 
 // Orden de compra
 Route::view('/orden-compra', 'orden-compra.orden-compra')->name('orden-compra');
-Route::post('/orden-compra',[OrdenCompraCtrl::class,'ordenCompra']);
+Route::post('/orden-compra',[OrdenCompraCtrl::class,'orden']);
 
 // Rutas protegidas
 Route::middleware('auth')->group(function(){

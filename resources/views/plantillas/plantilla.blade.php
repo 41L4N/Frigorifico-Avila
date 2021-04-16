@@ -140,11 +140,11 @@
         {{-- Lista de compras --}}
         @if (Route::currentRouteName() != "orden-compra")
             {{-- Boton --}}
-            <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnCompras">
+            <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnListaCompras">
                 <span class="n-compras"></span>
             </div>
             {{-- Ventana --}}
-            <div class="modal fade" id="vtnCompras" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="vtnListaCompras" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         @csrf
@@ -153,7 +153,36 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
-                            @include('plantillas.lista-compras')
+
+                            {{-- Ejemplo --}}
+                            <div id="ejemploProductoListaCompras" class="producto-lista-productos">
+                                {{-- Acción --}}
+                                <input type="hidden" name="accion" value="1">
+                                {{-- Tipo --}}
+                                <input type="hidden" name="tipo">
+                                {{-- Id --}}
+                                <input type="hidden" name="id">
+                                {{-- Precio unitario --}}
+                                <input type="hidden" name="precio_unitario" disabled>
+                                <b class="numerador"></b>
+                                {{-- Miniatura de imagen --}}
+                                <a href="" class="cont-min-img">
+                                    <img src="" alt="{{config('app.name')}}">
+                                </a>
+                                {{-- Información --}}
+                                <div class="w-100">
+                                    <a href="" class="titulo"></a> (<span class="precio-unitario"></span>)
+                                    {{-- Cantidad --}}
+                                    <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event)" onchange="actualizarListaCompras(this)" required>
+                                    <b class="subtotal"></b>
+                                </div>
+                                <label class="btn btn-danger fas fa-times">
+                                    <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; actualizarListaCompras(this);">
+                                </label>
+                            </div>
+
+                            {{-- Lista --}}
+                            <div id="contListaCompras"></div>
                         </div>
                         {{-- Total --}}
                         <a href="{{route('orden-compra')}}" class="modal-footer flex-column justify-content-center text-center btn btn-primary">
@@ -210,6 +239,7 @@
         </div>
 
         {{-- JavaScript --}}
+        <script> var listaCompras = @json( listaCompras() ); </script>
         <script src="{{asset('/js/plantilla.js')}}"></script>
         <script src="{{asset('/js/formularios.js')}}"></script>
         @yield('js')
