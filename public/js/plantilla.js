@@ -48,6 +48,9 @@ function actualizarListaCompras(btn=null) {
     else {
 
         // Renovar productos
+        if (typeof contListaCompras === 'undefined') {
+            return;
+        }
         contListaCompras.innerHTML = "";
         listaCompras.productos.forEach((p, iP) => {
 
@@ -64,7 +67,7 @@ function actualizarListaCompras(btn=null) {
             // ID
             nuevoP.querySelector('[name="id"]').value = p.id;
             // Enlace
-            nuevoP.querySelector('a.cont-min-img').href = "/"+p.tipo+"/"+p.alias+"/"+p.id;
+            nuevoP.querySelector('a.cont-min-img').href = ruta = "/"+p.tipo+"/"+p.alias+"/"+p.id;
             // Imágen
             nuevoP.querySelector('a.cont-min-img img').src = "/img/"+p.tipo+"/"+p.id;
             // Numerador
@@ -72,6 +75,7 @@ function actualizarListaCompras(btn=null) {
             // Precio unitario
             nuevoP.querySelector('.precio-unitario').innerHTML = p.precio_unitario_p;
             // Titulo
+            nuevoP.querySelector('.titulo').href = ruta;
             nuevoP.querySelector('.titulo').innerHTML = p.titulo;
             // Cantidad
             nuevoP.querySelector('[name="cantidad"]').value = p.cantidad;
@@ -83,9 +87,13 @@ function actualizarListaCompras(btn=null) {
         });
 
         // Total
-        document.querySelector('.precio-total').innerHTML = listaCompras.total;
+        if (contTotal = document.querySelector('.precio-total')) {
+            contTotal.innerHTML = listaCompras.total;
+        }
         // Numerador de compras
-        document.querySelector('.n-compras').innerHTML = listaCompras.nCompras;
+        if (contNCompras = document.querySelector('.n-compras')) {
+            contNCompras.innerHTML = listaCompras.nCompras;
+        }
     }
 }
 

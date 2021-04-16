@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
 
         // Administrador
         $u = new Usuario;
-        $u->nombre = "Alimentos";
-        $u->apellido = "Ávila";
-        $u->email = "desarrollo@alimentosavila.com";
+        $u->nombre = "Desarrollo";
+        $u->apellido = "Web";
+        $u->email = "desarrollo@frigorificoavila.com";
         // $u->telf = json_encode([
         //     'codigo' => '58',
         //     'numero' => '4169227441'

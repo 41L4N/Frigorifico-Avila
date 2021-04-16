@@ -16,6 +16,8 @@ return [
         // Usuario
         'usuario'               => "Usuario",
         'salir'                 => "Salir",
+        // Orden de compra
+        'orden_compra'          => "Orden de compra",
         // Administrador
         'administrador'         => [
             'panel'             => "Panel de administrador",
@@ -39,12 +41,14 @@ return [
         // Ingreso
         'ingreso'                   => "Bienvenido",
         // Recuperación
-        'recuperacion_contraseña'   => "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso",
+        'recuperacion_contraseña'   => "Se ha enviado un código a su correo, por favor revise su buzon para continuar con el proceso.",
         // Renovación
 
         // Rutas
         // Roles
         'success'                   => "Operación exitosa",
+        // Orden de compra
+        'orden_compra'              => "Su orden de compra se ha generado exitosamente, en breve recibira respuesta."
     ],
 
     // Contenido
@@ -144,7 +148,8 @@ return [
 
         // Orden de compra
         'cantidad'              => "Cantidad",
-        'direccion_diferente'   => "¿Enviar a una dirección diferente?",
+        'datos_diferentes'      => "¿Enviar con datos diferentes?",
+        'direccion_diferentes'  => "¿Enviar a una dirección diferente?",
         'nombre_empresa'        => "Nombre de empresa",
         'calle'                 => "Calle",
         'n_puerta'              => "Número, Piso, Unidad",
@@ -153,7 +158,8 @@ return [
         'ciudad'                => "Ciudad",
         'pais'                  => "País",
         'notas_pedido'          => "Notas de pedido",
-        'cupon'                 => "Cupón"
+        'cupon'                 => "Cupón",
+        'total'                 => "Total"
     ],
 
     // Placesholder
@@ -174,7 +180,18 @@ return [
 
     // Parrafos
     'parrafos' => [
-        'confirmacion' => "¿Seguro que desea realizar esta acción?",
-        
+        'confirmacion'      => "¿Seguro que desea realizar esta acción?",
+        'necesita_ingreso'  => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar"
+    ],
+
+    // Correos
+    'correos' => [
+
+        // Asuntos
+        'asuntos' => [
+            'nueva_orden_compra' => "Nueva orden de compra"
+        ],
+
+        // Parrafos
     ]
 ];

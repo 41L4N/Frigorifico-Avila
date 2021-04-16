@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class OrdenCompraCtrl extends Controller
 {
@@ -19,18 +20,6 @@ class OrdenCompraCtrl extends Controller
             'id'            => 'required|integer',
             'cantidad'      => 'required|digits_between:1,5|min:1',
         ]);
-
-        // Cache::put('listas-compras',
-        //     [
-        //         [
-        //             'ip'         => '127.0.0.1',
-        //             'id_usuario' => 1,
-        //             'productos'    => []
-        //         ],
-        //     ]
-        // );
-
-        // Cache::pull('listas-compras');
 
         // Todas las Lista
         $listasCompras = ($lC = Cache::get($n='listas-compras')) ? $lC : [];
@@ -109,7 +98,31 @@ class OrdenCompraCtrl extends Controller
 
     // Orden
     public function orden(Request $rq){
-        dd($rq);
+
+        // Validación
+        $rq->validate([
+            'datos_facturacion' => "sometimes|rquired|array",
+            'nombre_empresa'    => "nullable",
+            'direccion'         => "required|array",
+            'notas'             => "nullable",
+            'cupon'             => "nullable|exists:cupones,codigo"
+        ]);
+
+        // Notificación
+        Mail::send("correos.orden-compra", [
+            "asunto" => $asunto = __('textos.correos.asuntos.nueva_orden_compra'),
+        ], function($m) use ($rq, $asunto){
+            $m->to("desarrollo@frigorificoavila.com");
+            $m->subject($asunto);
+        });
+
+        // Respuesta
+        return back()->with([
+            'alerta' => [
+                'tipo'  => 'success',
+                'texto' => __('textos.alertas.orden_compra')
+            ]
+        ]);
     }
 
     // Confirmar

@@ -119,7 +119,7 @@
                 <div class="cont-alerta">
                     <div class="d-flex align-items-center alert alert-{{$a['tipo']}} alerta" onclick='this.parentNode.removeChild(this)'>
                         <i class="{{iconos($a['tipo'])}}"></i>
-                        <div>{{__('textos.alertas.'.( ( isset( $a['texto'] ) ) ? $a['texto'] : $a['tipo'] ) )}}</div>
+                        <div>{{ ( isset( $a['texto'] ) ) ? $a['texto'] : __('textos.alertas.') . $a['tipo'] }}</div>
                     </div>
                 </div>
             @endif
@@ -138,6 +138,30 @@
         </div>
 
         {{-- Lista de compras --}}
+        {{-- Ejemplo --}}
+        <div id="ejemploProductoListaCompras" class="d-none producto-lista-productos">
+            {{-- Acción --}}
+            <input type="hidden" name="accion" value="1">
+            {{-- Tipo --}}
+            <input type="hidden" name="tipo">
+            {{-- Id --}}
+            <input type="hidden" name="id">
+            <b class="numerador"></b>
+            {{-- Miniatura de imagen --}}
+            <a href="" class="cont-min-img">
+                <img src="" alt="{{config('app.name')}}">
+            </a>
+            {{-- Información --}}
+            <div class="w-100">
+                <a href="" class="titulo"></a> (<span class="precio-unitario"></span>)
+                {{-- Cantidad --}}
+                <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event)" onchange="actualizarListaCompras(this)" required>
+                <b class="subtotal"></b>
+            </div>
+            <label class="btn btn-danger fas fa-times">
+                <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; actualizarListaCompras(this);">
+            </label>
+        </div>
         @if (Route::currentRouteName() != "orden-compra")
             {{-- Boton --}}
             <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnListaCompras">
@@ -153,40 +177,23 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
-
-                            {{-- Ejemplo --}}
-                            <div id="ejemploProductoListaCompras" class="d-none producto-lista-productos">
-                                {{-- Acción --}}
-                                <input type="hidden" name="accion" value="1">
-                                {{-- Tipo --}}
-                                <input type="hidden" name="tipo">
-                                {{-- Id --}}
-                                <input type="hidden" name="id">
-                                <b class="numerador"></b>
-                                {{-- Miniatura de imagen --}}
-                                <a href="" class="cont-min-img">
-                                    <img src="" alt="{{config('app.name')}}">
-                                </a>
-                                {{-- Información --}}
-                                <div class="w-100">
-                                    <a href="" class="titulo"></a> (<span class="precio-unitario"></span>)
-                                    {{-- Cantidad --}}
-                                    <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event)" onchange="actualizarListaCompras(this)" required>
-                                    <b class="subtotal"></b>
-                                </div>
-                                <label class="btn btn-danger fas fa-times">
-                                    <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; actualizarListaCompras(this);">
-                                </label>
-                            </div>
-
                             {{-- Lista --}}
                             <div id="contListaCompras"></div>
                         </div>
-                        {{-- Total --}}
-                        <a href="{{route('orden-compra')}}" class="modal-footer flex-column justify-content-center text-center btn btn-primary">
-                            {{__('textos.botones.confirmar')}}
-                            <b class="precio-total"></b>
-                        </a>
+                        <div class="modal-footer">
+
+                            {{-- Total --}}
+                            @auth
+                                <a href="{{route('orden-compra')}}" class="modal-footer flex-column justify-content-center text-center btn btn-primary w-100">
+                                    {{__('textos.botones.confirmar')}}
+                                    <b class="precio-total"></b>
+                                </a>
+                            @else
+                                <div class="text-center w-100">
+                                    {!! __('textos.parrafos.necesita_ingreso') !!}
+                                </div>
+                            @endauth
+                        </div>
                     </div>
                 </div>
             </div>

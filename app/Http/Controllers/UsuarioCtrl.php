@@ -77,7 +77,7 @@ class UsuarioCtrl extends Controller
             Mail::send("correos.invitacion",[
                 "asunto"    =>  $asunto = "Invitación",
                 "ruta"      =>  route("sesion", ['renovacion-contraseña',$codigo])
-            ],function($m) use ($rq, $asunto){
+            ], function($m) use ($rq, $asunto){
                 $m->to($rq->email);
                 $m->subject($asunto);
             });
@@ -152,10 +152,10 @@ class UsuarioCtrl extends Controller
         $u->save();
 
         // Envio correo con código de recuperación
-        Mail::send("correos.recuperacion",[
+        Mail::send("correos.recuperacion", [
             "asunto"    =>  $asunto = "Recuperar contraseña",
             "ruta"      =>  route("sesion", ['renovacion-contraseña',$codigo])
-        ],function($m) use ($rq, $asunto){
+        ], function($m) use ($rq, $asunto){
             $m->to($rq->email);
             $m->subject($asunto);
         });
@@ -163,8 +163,8 @@ class UsuarioCtrl extends Controller
         // Respuesta
         return redirect()->route("inicio")->with([
             'alerta' => [
-                'tipo' => 'success',
-                'texto' => 'recuperacion-contraseña'
+                'tipo'  => 'success',
+                'texto' => __('textos.alertas.recuperacion_contraseña')
             ]
         ]);
     }

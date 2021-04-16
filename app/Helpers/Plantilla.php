@@ -60,10 +60,6 @@ function iconos($i){
 }
 
 // Lista de compras
-// use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\View;
-// use Illuminate\Support\Facades\Cache;
-// use App\Models\Producto;
 function listaCompras(){
     $listasCompras = ($lC = Cache::get('listas-compras')) ? $lC : [];
     $listaCompras = null;

@@ -122,8 +122,5 @@ Route::middleware('auth')->group(function(){
             Route::post('/', [CuponCtrl::class,'guardar']);
             Route::post('/eliminar', [CuponCtrl::class,'eliminar'])->name('.eliminar');
         });
-
-        // Ordenes de compra
-
     });
 });
