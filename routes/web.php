@@ -52,7 +52,7 @@ Route::get('/combos/{filtro?}/{id?}', [ComboCtrl::class, 'combos'])->name('combo
 Route::post('/lista-compras', [OrdenCompraCtrl::class,'lista'])->name('lista-compras');
 
 // Orden de compra
-Route::view('/orden-compra', 'orden-compra.orden-compra')->name('orden-compra');
+Route::view('/orden-compra', 'orden-compra')->name('orden-compra');
 Route::post('/orden-compra',[OrdenCompraCtrl::class,'orden']);
 
 // Rutas protegidas

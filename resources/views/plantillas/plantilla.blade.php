@@ -133,7 +133,10 @@
         {{-- Pie de página --}}
         <div class="pie-pagina">
             <div class="container">
-                Pie de página
+                <a href="{{config('app.url')}}">
+                    <img src="/imgs/plantilla/logotipo-web.png" alt="{{config('app.name')}}">
+                </a>
+                <h2><a href="{{config('app.url')}}">{{config('app.name')}}</a></h2>
             </div>
         </div>
 

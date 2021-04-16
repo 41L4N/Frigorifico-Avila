@@ -221,3 +221,11 @@
         </div>
     @endauth
 @endsection
+
+{{-- JavaScript --}}
+@section('js')
+    <script>
+        var mensajesErrores = new Object( @json( $errors->messages() ) ),
+            valoresErrores  = new Object( @json( request()->old() ) );
+    </script>
+@endsection

@@ -82,7 +82,7 @@ function llenarFormulario(clave=null, contFormulario) {
     }
 
     // Ventana
-    if (document.querySelector(contFormulario).classList.contains('modal')) {
+    if (contFormulario && document.querySelector(contFormulario).classList.contains('modal')) {
         $(contFormulario).modal('show');
     }
 }
