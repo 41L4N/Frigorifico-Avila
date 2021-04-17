@@ -49,15 +49,17 @@ function contarChecks(){
 function llenarFormulario(clave=null, contFormulario) {
 
     // Posibles errores
-    Object.keys(mensajesErrores).forEach(clave => {
-        if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) {
-            // Estilos
-            campo.classList.add('is-invalid');
-            // Mensaje
-            campo.insertAdjacentHTML('afterend', '<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
-        }
-    });
-    mensajesErrores = null;
+    if (mensajesErrores) {
+        Object.keys(mensajesErrores).forEach(clave => {
+            if ( campo = document.querySelector(contFormulario + ' [name=' + clave + ']')) {
+                // Estilos
+                campo.classList.add('is-invalid');
+                // Mensaje
+                campo.insertAdjacentHTML('afterend', '<div class="alert alert-danger m-0 mt-1">' + mensajesErrores[clave][0] + '</div>');
+            }
+        });
+        mensajesErrores = null;
+    }
 
     // Registro actual
     registroA = (clave===null) ? valoresErrores : registrosP[clave];
