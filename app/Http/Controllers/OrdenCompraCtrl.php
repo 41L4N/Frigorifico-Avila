@@ -112,7 +112,7 @@ class OrdenCompraCtrl extends Controller
         Mail::send("correos.orden-compra", [
             "asunto" => $asunto = __('textos.correos.asuntos.nueva_orden_compra'),
         ], function($m) use ($rq, $asunto){
-            $m->to("desarrollo@frigorificoavila.com");
+            $m->to("info@frigorificoavila.com");
             $m->subject($asunto);
         });
 
