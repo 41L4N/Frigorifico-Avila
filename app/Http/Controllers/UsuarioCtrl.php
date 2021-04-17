@@ -35,7 +35,7 @@ class UsuarioCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'id'            => 'sometimes|required|numeric|integer',
+            'id'            => 'sometimes|nullable|numeric|integer',
             'nombre'        => 'required|between:1,50',
             'apellido'      => 'required|between:1,50',
             'email'         => 'required|email|unique:' . (new Usuario)->getTable() . ',email,' . $rq->id . '|between:1,75',
