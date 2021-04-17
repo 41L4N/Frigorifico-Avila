@@ -57,62 +57,73 @@
         <div class="d-flex flex-column min-vh-100">
 
             {{-- Menú superior --}}
-            <div class="menu-s">
-                <div class="container d-flex align-items-center justify-content-between contenido-menu-s">
+            <div class="barra-s">
 
-                    {{-- Lado izquierdo --}}
-                    {{-- Boton de menú responsive --}}
-                    <div class="cont-icono-menu-s">
-                        <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                {{-- Anuncio --}}
+                <div class="anuncio-barra-s">
+                    <div class="container">
+                        {{__('textos.contenido.anuncio_menu_s')}}
                     </div>
+                </div>
 
-                    {{-- Logotipo --}}
-                    <div class="d-flex align-items-center izquierda-menu-s">
+                {{-- Menú superior --}}
+                <div class="container">
+                    <div class="secciones-menu-s">
 
-                        {{-- Logotipo --}}
-                        <a href="{{route("inicio")}}">
-                            <img src="/imgs/plantilla/logotipo-web.png" class="logotipo-menu-s" alt="{{config("app.name")}}">
-                        </a>
-                    </div>
-
-                    {{-- Lado central --}}
-                    <div class="centro-menu-s" id="menuR">
-
+                        {{-- Lado izquierdo --}}
                         {{-- Boton de menú responsive --}}
                         <div class="cont-icono-menu-s">
-                            <i class="fas fa-times icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                            <i class="fas fa-bars icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
                         </div>
 
-                        {{-- Opciones --}}
-                        <a href="{{route('inicio')}}" class="opcion-menu-s">{{__('textos.rutas.inicio')}}</a>
-                        <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
-                        <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
-                        <a href="{{route('combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
-                        @auth
-                            {{-- Lista de menú --}}
-                            <div class="lista-menu-s">
-                                {{-- Titulo --}}
-                                <div class="opcion-menu-s">
-                                    {{Auth::user()->nombre}} <i class="fas fa-caret-down"></i>
-                                </div>
-                                {{-- Opciones --}}
-                                <div class="opciones-lista-menu-s">
-                                    @if (Auth::user()->administrador)
-                                        <a class="opcion-menu-s" href="{{route('administrador.panel')}}">{{__('textos.rutas.administrador.panel')}}</a>
-                                    @endif
-                                    <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
-                                    <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>
-                                </div>
-                            </div>
-                        @else
-                            <a href="{{route('sesion', 'ingreso')}}" class="opcion-menu-s">{{__('textos.rutas.ingreso')}}</a>
-                        @endauth
-                    </div>
+                        {{-- Logotipo --}}
+                        <div class="d-flex align-items-center izquierda-menu-s">
 
-                    {{-- Lado derecho --}}
-                    {{-- Opciones de usuario --}}
-                    <div class="derecha-menu-s">
-                        <i class="fas fa-search opcion-menu-s icono-menu-s" data-toggle="modal" data-target="#vtnBuscador"></i>
+                            {{-- Logotipo --}}
+                            <a href="{{route("inicio")}}">
+                                <img src="/imgs/plantilla/logotipo-web.png" class="logotipo-menu-s" alt="{{config("app.name")}}">
+                            </a>
+                        </div>
+
+                        {{-- Lado central --}}
+                        <div class="centro-menu-s" id="menuR">
+
+                            {{-- Boton de menú responsive --}}
+                            <div class="cont-icono-menu-s">
+                                <i class="fas fa-times icono-menu-s" onclick="menuR.classList.toggle('centro-menu-s-visible')"></i>
+                            </div>
+
+                            {{-- Opciones --}}
+                            <a href="{{route('inicio')}}" class="opcion-menu-s">{{__('textos.rutas.inicio')}}</a>
+                            <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
+                            <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
+                            <a href="{{route('combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
+                            @auth
+                                {{-- Lista de menú --}}
+                                <div class="lista-menu-s">
+                                    {{-- Titulo --}}
+                                    <div class="opcion-menu-s">
+                                        {{Auth::user()->nombre}} <i class="fas fa-caret-down"></i>
+                                    </div>
+                                    {{-- Opciones --}}
+                                    <div class="opciones-lista-menu-s">
+                                        @if (Auth::user()->administrador)
+                                            <a class="opcion-menu-s" href="{{route('administrador.panel')}}">{{__('textos.rutas.administrador.panel')}}</a>
+                                        @endif
+                                        <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
+                                        <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>
+                                    </div>
+                                </div>
+                            @else
+                                <a href="{{route('sesion', 'ingreso')}}" class="opcion-menu-s">{{__('textos.rutas.ingreso')}}</a>
+                            @endauth
+                        </div>
+
+                        {{-- Lado derecho --}}
+                        {{-- Opciones de usuario --}}
+                        <div class="derecha-menu-s">
+                            <i class="fas fa-search opcion-menu-s icono-menu-s" data-toggle="modal" data-target="#vtnBuscador"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,10 +147,31 @@
         {{-- Pie de página --}}
         <div class="pie-pagina">
             <div class="container">
-                <a href="{{config('app.url')}}">
-                    <img src="/imgs/plantilla/logotipo-web.png" alt="{{config('app.name')}}">
-                </a>
-                <h2><a href="{{config('app.url')}}">{{config('app.name')}}</a></h2>
+
+                {{-- Secciones --}}
+                <div class="secciones-pie-pagina">
+
+                    {{-- Información --}}
+                    <div>
+                        
+                    </div>
+
+                    {{-- Empresa --}}
+                    <div>
+                        <a href="{{config('app.url')}}">
+                            <img src="/imgs/plantilla/logotipo-web.png" alt="{{config('app.name')}}">
+                        </a>
+                        <h2><a href="{{config('app.url')}}">{{config('app.name')}}</a></h2>
+                    </div>
+
+                    {{-- Redes sociales --}}
+                    <div>
+                        
+                    </div>
+                </div>
+
+                {{-- Derechos de autor --}}
+                {!! __('textos.contenido.desarrollado_por') !!}
             </div>
         </div>
 
@@ -196,7 +228,7 @@
                                 </a>
                             @else
                                 <div class="text-center w-100">
-                                    {!! __('textos.parrafos.necesita_ingreso') !!}
+                                    {!! __('textos.contenido.necesita_ingreso') !!}
                                 </div>
                             @endauth
                         </div>

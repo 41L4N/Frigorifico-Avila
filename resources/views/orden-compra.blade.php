@@ -217,7 +217,7 @@
     {{-- Si no hay usuario --}}
     @else
         <div class="text-center w-100">
-            {!! __('textos.parrafos.necesita_ingreso') !!}
+            {!! __('textos.contenido.necesita_ingreso') !!}
         </div>
     @endauth
 @endsection

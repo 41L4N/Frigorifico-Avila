@@ -53,12 +53,24 @@ return [
 
     // Contenido
     'contenido' => [
-        'sin_resultados' => "Sin resultados",
+
+        // Menú superior
+        'anuncio_menu_s'    => "¡Envío gratis si tu compra supera los $ 5.000!",
+        'sin_resultados'    => "Sin resultados",
+        'confirmacion'      => "¿Seguro que desea realizar esta acción?",
+        'necesita_ingreso'  => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
+        'desarrollado_por'  => "Desarrollado por <a href='https://openskie.com/'>OpenSkies</a>"
     ],
 
-    // Pie de página
-    'pie_pagina' => [
+    // Correos
+    'correos' => [
 
+        // Asuntos
+        'asuntos' => [
+            'nueva_orden_compra' => "Nueva orden de compra"
+        ],
+
+        // Parrafos
     ],
 
     // Titulos
@@ -177,21 +189,4 @@ return [
         'comprar'   => "Comprar",
         'confirmar' => "Confirmar",
     ],
-
-    // Parrafos
-    'parrafos' => [
-        'confirmacion'      => "¿Seguro que desea realizar esta acción?",
-        'necesita_ingreso'  => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar"
-    ],
-
-    // Correos
-    'correos' => [
-
-        // Asuntos
-        'asuntos' => [
-            'nueva_orden_compra' => "Nueva orden de compra"
-        ],
-
-        // Parrafos
-    ]
 ];

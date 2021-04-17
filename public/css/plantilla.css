@@ -17,20 +17,32 @@
     --c-l-t-c-plantilla: var(--c-l-t-c-1);
 }
 
-/* Menú superior */
-.menu-s {
+/* Barra superior */
+.barra-s {
     position: sticky;
     top: 0px;
     left: 0px;
     background: white;
     color: var(--c-plantilla);
-    padding: .75% 0px;
     box-shadow: 0px 0px 5px black;
     z-index: 1;
 }
+/* Anuncio */
+.anuncio-barra-s {
+    background: var(--c-plantilla);
+    color: var(--c-l-plantilla);
+    text-align: center;
+}
+/* Menú */
 /* Generales */
 /* Contenido del menú superior */
-.contenido-menu-s > * {
+.secciones-menu-s {
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75% 0px;
+}
+.secciones-menu-s > * {
     display: -webkit-flex; display: -ms-flexbox; display: flex;
     align-items: center;
 }
@@ -48,7 +60,6 @@
     position: relative;
     display: -webkit-flex; display: -ms-flexbox; display: flex;
 }
-/* Titulo */
 /* Opciones */
 .lista-menu-s:hover .opciones-lista-menu-s {
     display: -webkit-flex; display: -ms-flexbox; display: flex;
@@ -132,6 +143,15 @@
     text-align: center;
     padding: 25px;
 }
+.secciones-pie-pagina {
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: solid var(--c-l-plantilla) 1px;
+}
+.secciones-pie-pagina > * {
+    width: 100%;
+}
 .pie-pagina a {
     text-decoration: none;
     color: var(--c-l-plantilla);
@@ -209,5 +229,13 @@
     }
     .centro-menu-s .opcion-menu-s, .centro-menu-s .icono-menu-s {
         color: var(--c-l-plantilla);
+    }
+
+    /* Pie de página */
+    .secciones-pie-pagina {
+        flex-direction: column;
+    }
+    .secciones-pie-pagina > *:not(:last-of-type) {
+        margin-bottom: 25px;
     }
 }
