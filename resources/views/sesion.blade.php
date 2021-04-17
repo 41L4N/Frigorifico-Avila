@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.titulos.'. $seccionRuta = Request::route('seccion'));
+    $tituloMD = __('textos.titulos.' . str_replace('-', '_', $seccionRuta = Request::route('seccion')) );
 @endphp
 
 {{-- Estilos --}}
