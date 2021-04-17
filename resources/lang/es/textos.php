@@ -123,14 +123,14 @@ return [
         'subtotal'              => "Subtotal",
 
         // Usuario
-        'nombre'                => "Nombre",
-        'apellido'              => "Apellido",
-        'email'                 => "Email",
-        'telf'                  => "Teléfono",
-        'rol'                   => "Rol",
-        'cambiar_contraseña'    => "Cambiar contraseña",
-        'contraseña'            => "Contraseña",
-        'confirmar_contraseña'  => "Confirmar contraseña",
+        'nombre'                    => "Nombre",
+        'apellido'                  => "Apellido",
+        'email'                     => "Email",
+        'telf'                      => "Teléfono",
+        'rol'                       => "Rol",
+        'cambiar_contraseña'        => "Cambiar contraseña",
+        'contraseña'                => "Contraseña",
+        'confirmacion_contraseña'   => "Confirmar contraseña",
 
         // Usuarios
         'nombre_apellido'       => "Nombre y apellido",

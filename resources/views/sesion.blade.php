@@ -111,11 +111,11 @@
                         <input type="hidden" value="{{ Request::route('codigo_acceso') }}" name="codigo_acceso">
                         <div class="fila-form">
                             <div>
-                                <label>{{__('textos.campos.' . $n='contraseña')}}</label>
+                                <label>{{__('textos.campos.contraseña')}}</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="15" required>
                             </div>
                             <div>
-                                <label>{{__('textos.campos.' . $n='confirmar-contraseña')}}</label>
+                                <label>{{__('textos.campos.confirmacion_contraseña')}}</label>
                                 <input type="password" class="form-control" name="confirmacion_password" minlength="8" maxlength="15" required>
                             </div>
                         </div>
