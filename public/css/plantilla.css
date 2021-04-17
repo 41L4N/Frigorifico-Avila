@@ -152,6 +152,10 @@
 .secciones-pie-pagina > * {
     width: 100%;
 }
+.secciones-pie-pagina > *:not(:last-of-type) {
+    border-right: solid var(--c-l-plantilla) 1px;
+    padding-right: 25px;
+}
 .pie-pagina a {
     text-decoration: none;
     color: var(--c-l-plantilla);

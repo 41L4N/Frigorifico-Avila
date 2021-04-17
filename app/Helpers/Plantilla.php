@@ -52,7 +52,10 @@ function iconos($i){
         'filtros-productos' => "fas fa-filter",
         'productos'         => "fas fa-boxes",
         'combos'            => "fas fa-gifts",
-        'cupones'           => "fas fa-money-check-alt"
+        'cupones'           => "fas fa-money-check-alt",
+
+        // Redes sociales
+        'facebook'          => "fab fa-facebook-f"
     ];
 
     // Respuesta

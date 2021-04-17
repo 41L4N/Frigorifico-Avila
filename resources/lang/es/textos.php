@@ -55,11 +55,16 @@ return [
     'contenido' => [
 
         // Menú superior
-        'anuncio_menu_s'    => "¡Envío gratis si tu compra supera los $ 5.000!",
-        'sin_resultados'    => "Sin resultados",
-        'confirmacion'      => "¿Seguro que desea realizar esta acción?",
-        'necesita_ingreso'  => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
-        'desarrollado_por'  => "Desarrollado por <a href='https://openskie.com/'>OpenSkies</a>"
+        'anuncio_menu_s'            => "¡Envío gratis si tu compra supera los $ 5.000!",
+        'sin_resultados'            => "Sin resultados",
+        'confirmacion'              => "¿Seguro que desea realizar esta acción?",
+        'necesita_ingreso'          => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
+
+        // Derechos de autor
+        'derechos_autor'            => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
+
+        // Desarrollador
+        'desarrollador'             => "Desarrollado por <a href='https://openskie.com/'>OpenSkies</a>",
     ],
 
     // Correos

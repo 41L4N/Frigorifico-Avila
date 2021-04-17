@@ -153,25 +153,29 @@
 
                     {{-- Información --}}
                     <div>
-                        
+                        <h5>Envíos a domicilio</h5>                        
                     </div>
 
                     {{-- Empresa --}}
                     <div>
-                        <a href="{{config('app.url')}}">
-                            <img src="/imgs/plantilla/logotipo-web.png" alt="{{config('app.name')}}">
-                        </a>
-                        <h2><a href="{{config('app.url')}}">{{config('app.name')}}</a></h2>
+                        <h5>Contactanos</h5>
+                        info@frigorificoavila.com
+                        <br>
+                        <a href="https://wa.me/5491122558133">+54 911 22558133</a>
                     </div>
 
                     {{-- Redes sociales --}}
                     <div>
-                        
+                        <h5>Nuestras redes sociales</h5>
+                        <a href="https://www.facebook.com/Avilagrills/" class="{{iconos('facebook')}}" target="_blank" rel="noopener"></a>
                     </div>
                 </div>
 
                 {{-- Derechos de autor --}}
-                {!! __('textos.contenido.desarrollado_por') !!}
+                {!! __('textos.contenido.derechos_autor') !!}
+                <br>
+                {{-- Desarrollador --}}
+                {!! __('textos.contenido.desarrollador') !!}
             </div>
         </div>
 
