@@ -109,23 +109,6 @@ class OrdenCompraCtrl extends Controller
             'cupon'             => "nullable|exists:cupones,codigo"
         ]);
 
-        // Actualizar id de usuario
-        // Todas las Lista
-        $listasCompras = ($lC = Cache::get($n='listas-compras')) ? $lC : [];
-
-        // Lista actual
-        $iListaActual = null;
-        foreach ($listasCompras as $iLC => $lC) {
-            if ($lC['ip'] == request()->ip() || ((Auth::check()) ? $lC['id_usuario'] == Auth::user()->id : null)) {
-                $iListaActual = $iLC;
-            }
-        }
-
-        // Actualizar id de usuario
-        if ($iListaActual !== null && Auth::check() && !$listasCompras[$iListaActual]['id_usuario']) {
-            $listasCompras[$iListaActual]['id_usuario'] = Auth::user()->id;
-        }
-
         // Notificación
         Mail::send("correos.orden-compra", [
             'asunto' => $asunto = __('textos.titulos.nueva_orden_compra'),

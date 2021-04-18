@@ -66,10 +66,17 @@ function iconos($i){
 function listaCompras(){
     $listasCompras = ($lC = Cache::get('listas-compras')) ? $lC : [];
     $listaCompras = null;
-    foreach ($listasCompras as $lC) {
+    $iListaCompras = null;
+    foreach ($listasCompras as $iLC => $lC) {
         if ($lC['ip'] == request()->ip() || ((Auth::check()) ? $lC['id_usuario'] == Auth::user()->id : null)) {
+            $iListaCompras = $iLC;
             $listaCompras = $lC;
         }
+    }
+
+    // Actualizar id de usuario
+    if ($iListaCompras !== null && Auth::check() && !$listasCompras[$iListaCompras]['id_usuario']) {
+        $listasCompras[$iListaCompras]['id_usuario'] = Auth::user()->id;
     }
 
     // Lista productos en cache
