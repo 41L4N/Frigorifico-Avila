@@ -1,6 +1,6 @@
 @extends('correos.plantilla')
 @section('contenido')
-    <h3>¡Bienvenido a {{config("app.name")}}</h3>
-    <p></p>
-    <a href="{{$ruta}}">Aceptar invitación</a>
+    <h3>{{ __('textos.titulos.bienvenida_app_name') }}</h3>
+    <p> {!! nl2br( __('textos.parrafos.invitacion') ) !!}</p>
+    <a href="{{$ruta}}">{{__('textos.botones.aceptar_invitacion')}}</a>
 @endsection

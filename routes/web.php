@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Usuario;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,15 @@ use Illuminate\Support\Facades\Auth;
 // Comandos
 Route::get('/comandos/{comando}', function ($c){
     shell_exec($c);
+});
+
+// Vista previa de correos
+Route::get('/vista-previa-correos/{vista}', function($v){
+    return view('correos.' . $v)->with([
+        'asunto'        => __('textos.titulos.nueva_orden_compra'),
+        'usuario'       => Usuario::find( ($lC = listaCompras())['id_usuario'] ),
+        'listaCompras'  => $lC
+    ]);
 });
 
 // Mostrar imagen

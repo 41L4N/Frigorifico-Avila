@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Usuario;
 
 class OrdenCompraCtrl extends Controller
 {
@@ -110,9 +111,11 @@ class OrdenCompraCtrl extends Controller
 
         // Notificación
         Mail::send("correos.orden-compra", [
-            "asunto" => $asunto = __('textos.correos.asuntos.nueva_orden_compra'),
+            'asunto' => $asunto = __('textos.titulos.nueva_orden_compra'),
+            'usuario'       => Usuario::find( ($lC = listaCompras())['id_usuario'] ),
+            'listaCompras'  => $lC
         ], function($m) use ($rq, $asunto){
-            $m->to("info@frigorificoavila.com");
+            $m->to("avilafrigorifico@gmail.com");
             $m->subject($asunto);
         });
 

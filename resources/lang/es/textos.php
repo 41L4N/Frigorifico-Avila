@@ -51,33 +51,6 @@ return [
         'orden_compra'              => "Su orden de compra se ha generado exitosamente, en breve recibira respuesta."
     ],
 
-    // Contenido
-    'contenido' => [
-
-        // Menú superior
-        'anuncio_menu_s'            => "¡Envío gratis si tu compra supera los $ 5.000!",
-        'sin_resultados'            => "Sin resultados",
-        'confirmacion'              => "¿Seguro que desea realizar esta acción?",
-        'necesita_ingreso'          => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
-
-        // Derechos de autor
-        'derechos_autor'            => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
-
-        // Desarrollador
-        'desarrollador'             => "Desarrollado por <a href='https://openskie.com/'>OpenSkies</a>",
-    ],
-
-    // Correos
-    'correos' => [
-
-        // Asuntos
-        'asuntos' => [
-            'nueva_orden_compra' => "Nueva orden de compra"
-        ],
-
-        // Parrafos
-    ],
-
     // Titulos
     'titulos'   =>  [
 
@@ -92,8 +65,14 @@ return [
         'recuperacion_contraseña'   => "Recuperación de contraseña",
         'renovacion_contraseña'     => "Renovación de contraseña",
 
+        // Correos
+        'bienvenida_app_name'       => "¡Bienvenido a " . config('app.name'),
+        'nueva_orden_compra'        => "Nueva orden de compra",
+        'usuario'                   => "Usuario",
+        'lista_compras'             => "Lista de compras",
+
         // Lista de compras
-        'lista_compras'              => "Lista de compras",
+        'lista_compras'             => "Lista de compras",
 
         // Buscador
         'buscador'                  => "Buscador",
@@ -113,6 +92,26 @@ return [
         'informacion_facturacion'   => "Información de facturación",
         'informacion_envio'         => "Información de envío",
         'forma_pago'                => "Forma de pago",
+    ],
+    
+    // Parrafos
+    'parrafos' => [
+
+        // Menú superior
+        'anuncio_menu_s'            => "¡Envío gratis si tu compra supera los $ 5.000!",
+        'sin_resultados'            => "Sin resultados",
+        'confirmacion'              => "¿Seguro que desea realizar esta acción?",
+        'necesita_ingreso'          => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
+
+        // Correos
+        'bienvenida'                => "",
+        'invitacion'                => "",
+
+        // Derechos de autor
+        'derechos_autor'            => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
+
+        // Desarrollador
+        'desarrollador'             => "Desarrollado por <a href='https://openskie.com/'>OpenSkies</a>",
     ],
 
     // Campos
@@ -186,12 +185,13 @@ return [
 
     // Botones
     'botones' => [
-        'agregar'   => "Agregar",
-        'roles'     => "Roles",
-        'eliminar'  => "Eliminar",
-        'cancelar'  => "Cancelar",
-        'enviar'    => "Enviar",
-        'comprar'   => "Comprar",
-        'confirmar' => "Confirmar",
+        'aceptar_invitacion'    => "Aceptar invitación",
+        'agregar'               => "Agregar",
+        'roles'                 => "Roles",
+        'eliminar'              => "Eliminar",
+        'cancelar'              => "Cancelar",
+        'enviar'                => "Enviar",
+        'comprar'               => "Comprar",
+        'confirmar'             => "Confirmar",
     ],
 ];

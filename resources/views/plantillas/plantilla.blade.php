@@ -62,7 +62,7 @@
                 {{-- Anuncio --}}
                 <div class="anuncio-barra-s">
                     <div class="container">
-                        {{__('textos.contenido.anuncio_menu_s')}}
+                        {{__('textos.parrafos.anuncio_menu_s')}}
                     </div>
                 </div>
 
@@ -172,10 +172,10 @@
                 </div>
 
                 {{-- Derechos de autor --}}
-                {!! __('textos.contenido.derechos_autor') !!}
+                {!! __('textos.parrafos.derechos_autor') !!}
                 <br>
                 {{-- Desarrollador --}}
-                {!! __('textos.contenido.desarrollador') !!}
+                {!! __('textos.parrafos.desarrollador') !!}
             </div>
         </div>
 
@@ -232,7 +232,7 @@
                                 </a>
                             @else
                                 <div class="text-center w-100">
-                                    {!! __('textos.contenido.necesita_ingreso') !!}
+                                    {!! __('textos.parrafos.necesita_ingreso') !!}
                                 </div>
                             @endauth
                         </div>
