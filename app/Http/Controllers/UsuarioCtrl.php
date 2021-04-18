@@ -66,6 +66,9 @@ class UsuarioCtrl extends Controller
         }
         $reg->save();
 
+        // Correo de bienvenida
+        
+
         // Correo de invitación - Si no hay password es porque lo guardo el administrador
         if (!$reg->password) {
 
