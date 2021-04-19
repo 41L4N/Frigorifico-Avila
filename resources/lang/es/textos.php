@@ -129,6 +129,7 @@ return [
         'apellido'                  => "Apellido",
         'email'                     => "Email",
         'telf'                      => "Teléfono",
+        'twitter'                   => "Twitter",
         'rol'                       => "Rol",
         'cambiar_contraseña'        => "Cambiar contraseña",
         'contraseña'                => "Contraseña",

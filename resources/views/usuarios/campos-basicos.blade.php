@@ -37,7 +37,12 @@
 </div>
 
 {{-- Redes sociales --}}
-
+<div class="fila-form">
+    <div>
+        <label>{{__('textos.campos.twitter')}}</label>
+        <input type="text" name="twitter" class="form-control" maxlength="75">
+    </div>
+</div>
 
 {{-- Seguridad --}}
 {{-- Subtitulo --}}

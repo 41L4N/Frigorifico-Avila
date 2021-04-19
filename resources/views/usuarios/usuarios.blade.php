@@ -34,6 +34,7 @@
                     <th>{{__('textos.campos.nombre_apellido')}}</th>
                     <th>{{__('textos.campos.email')}}</th>
                     {{-- <th>{{__('textos.campos.telf')}}</th> --}}
+                    <th>{{__('textos.campos.twitter')}}</th>
                     <th>{{__('textos.campos.rol')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
                 </tr>
@@ -46,6 +47,7 @@
                         <td>{{"$u->nombre $u->apellido"}}</td>
                         <td>{{$u->email}}</td>
                         {{-- <td>{{ ($u->telf) ? formatos('t', $u->telf, true) : "-" }}</td> --}}
+                        <td>{{$u->twitter}}</td>
                         <td>{{$u->rolP()}}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
