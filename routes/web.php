@@ -61,10 +61,6 @@ Route::get('/combos/{filtro?}/{id?}', [ComboCtrl::class, 'combos'])->name('combo
 // Lista de compras
 Route::post('/lista-compras', [OrdenCompraCtrl::class,'lista'])->name('lista-compras');
 
-// Orden de compra
-Route::view('/orden-compra', 'orden-compra')->name('orden-compra');
-Route::post('/orden-compra',[OrdenCompraCtrl::class,'orden']);
-
 // Rutas protegidas
 Route::middleware('auth')->group(function(){
 
@@ -73,6 +69,10 @@ Route::middleware('auth')->group(function(){
 
         // Perfil
         Route::get('/', [UsuarioCtrl::class,'registro'])->name('perfil');
+
+        // Orden de compra
+        Route::view('/orden-compra', 'orden-compra')->name('orden-compra');
+        Route::post('/orden-compra',[OrdenCompraCtrl::class,'orden']);
 
         // Salir
         Route::get("/salir", function (){

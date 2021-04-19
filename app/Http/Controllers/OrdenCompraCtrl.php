@@ -22,26 +22,14 @@ class OrdenCompraCtrl extends Controller
             'cantidad'      => 'required|digits_between:1,5|min:1',
         ]);
 
-        // Todas las Lista
-        $listasCompras = ($lC = Cache::get($n='listas-compras')) ? $lC : [];
-
         // Lista actual
-        $iListaActual = null;
-        foreach ($listasCompras as $iLC => $lC) {
-            if ($lC['ip'] == request()->ip() || ((Auth::check()) ? $lC['id_usuario'] == Auth::user()->id : null)) {
-                $iListaActual = $iLC;
-            }
-        }
-
-        // Actualizar id de usuario
-        if ($iListaActual !== null && Auth::check() && !$listasCompras[$iListaActual]['id_usuario']) {
-            $listasCompras[$iListaActual]['id_usuario'] = Auth::user()->id;
-        }
+        $listas = ($lC = Cache::get($nombreCache = 'listas-compras')) ? $lC : [];
+        $iListaActual = listaCompras()['i'];
 
         // Producto actual
         $iProductoActual = null;
         if ($iListaActual !== null) {
-            foreach ($listasCompras[$iListaActual]['productos'] as $iC => $c) {
+            foreach ($listas[$iListaActual]['productos'] as $iC => $c) {
                 if ($c['tipo'] == $rq->tipo && $c['id'] == $rq->id) {
                     $iProductoActual = $iC;
                 }
@@ -55,46 +43,46 @@ class OrdenCompraCtrl extends Controller
 
                 // Nueva lista
                 if ($iListaActual === null) {
-                    array_push($listasCompras, [
+                    array_push($listas, [
                         'ip'            => request()->ip(),
                         'id_usuario'    => (Auth::check()) ? Auth::user()->id : null,
                         'productos'     => []
                     ]);
-                    $iListaActual = array_key_last($listasCompras);
+                    $iListaActual = array_key_last($listas);
                 }
 
                 // Nuevo producto
                 if ($iProductoActual === null) {
-                    array_push($listasCompras[$iListaActual]['productos'], [
+                    array_push($listas[$iListaActual]['productos'], [
                         'tipo'      => $rq->tipo,
                         'id'        => $rq->id,
                         'cantidad'  => $rq->cantidad
                     ]);
-                    $iProductoActual = array_key_last($listasCompras[$iListaActual]['productos']);
+                    $iProductoActual = array_key_last($listas[$iListaActual]['productos']);
                 }
                 // O sumar cantidades
                 else {
-                    $cantidad = $listasCompras[$iListaActual]['productos'][$iProductoActual]['cantidad'];
-                    $listasCompras[$iListaActual]['productos'][$iProductoActual]['cantidad'] = $cantidad + $rq->cantidad;
+                    $cantidad = $listas[$iListaActual]['productos'][$iProductoActual]['cantidad'];
+                    $listas[$iListaActual]['productos'][$iProductoActual]['cantidad'] = $cantidad + $rq->cantidad;
                 }
             break;
             // Editar
             case 1:
                 if ($iProductoActual !== null) {
-                    $listasCompras[$iListaActual]['productos'][$iProductoActual]['cantidad'] = $rq->cantidad;
+                    $listas[$iListaActual]['productos'][$iProductoActual]['cantidad'] = $rq->cantidad;
                 }
             break;
             // Eliminar
             case 2:
                 if ($iProductoActual !== null) {
-                    unset($listasCompras[$iListaActual]['productos'][$iProductoActual]);
+                    unset($listas[$iListaActual]['productos'][$iProductoActual]);
                 }
             break;
         }
-        Cache::put($n, $listasCompras);
+        Cache::put($nombreCache, $listas);
 
         // Respuesta
-        return response( listaCompras() );
+        return response( listaCompras()['lista'] );
     }
 
     // Orden
@@ -110,12 +98,13 @@ class OrdenCompraCtrl extends Controller
         ]);
 
         // Notificación
+        $lista = listaCompras(true);
         Mail::send("correos.orden-compra", [
-            'asunto' => $asunto = __('textos.titulos.nueva_orden_compra'),
-            'usuario'       => Usuario::find( ($lC = listaCompras())['id_usuario'] ),
-            'listaCompras'  => $lC
+            'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+            'usuario'       => Usuario::find( $lista['lista']['id_usuario'] ),
+            'listaCompras'  => $lista['lista']
         ], function($m) use ($rq, $asunto){
-            $m->to("avilafrigorifico@gmail.com");
+            $m->to("frigorificoavila@gmail.com");
             $m->subject($asunto);
         });
 

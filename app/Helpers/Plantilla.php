@@ -63,31 +63,37 @@ function iconos($i){
 }
 
 // Lista de compras
-function listaCompras(){
-    $listasCompras = ($lC = Cache::get('listas-compras')) ? $lC : [];
-    $listaCompras = null;
-    $iListaCompras = null;
-    foreach ($listasCompras as $iLC => $lC) {
-        if ($lC['ip'] == request()->ip() || ((Auth::check()) ? $lC['id_usuario'] == Auth::user()->id : null)) {
-            $iListaCompras = $iLC;
-            $listaCompras = $lC;
+function listaCompras($actualizarId=false){
+    $listas = ($lC = Cache::get($nombreCache = 'listas-compras')) ? $lC : [];
+    $listaActual = null;
+    $iListaActual = null;
+    foreach ($listas as $iLC => $lC) {
+        if (
+            ((Auth::check()) ? $lC['id_usuario'] == Auth::user()->id || $lC['ip'] == request()->ip() && !$lC['id_usuario'] : null)
+            ||
+            ((!Auth::check()) ? $lC['ip'] == request()->ip() && !$lC['id_usuario'] : null)
+        ) {
+            $iListaActual = $iLC;
+            $listaActual = $lC;
         }
     }
 
     // Actualizar id de usuario
-    if ($iListaCompras !== null && Auth::check() && !$listasCompras[$iListaCompras]['id_usuario']) {
-        $listasCompras[$iListaCompras]['id_usuario'] = Auth::user()->id;
+    if ($actualizarId && $iListaActual !== null && Auth::check() && !$listas[$iListaActual]['id_usuario']) {
+        $listas[$iListaActual]['id_usuario'] = Auth::user()->id;
+        Cache::put($nombreCache, $listas);
+        $listaActual = $listas[$iListaActual];
     }
 
     // Lista productos en cache
     $total = 0;
     $nCompras = 0;
-    foreach ( isset($listaCompras['productos']) ? $listaCompras['productos'] : [] as $iP => $p ) {
+    foreach ( isset($listaActual['productos']) ? $listaActual['productos'] : [] as $iP => $p ) {
 
         // Producto
         // Si el producto no existe entonces se borra de la lista
         if (!$c = DB::table($p['tipo'])->find($p['id'])) {
-            unset($listaCompras['productos'][$iC]);
+            unset($listaActual['productos'][$iC]);
             continue;
         }
 
@@ -107,7 +113,7 @@ function listaCompras(){
         $c->subtotal = formatos('n', $subtotal, true);
 
         // Producto
-        $listaCompras['productos'][$iP] = $c;
+        $listaActual['productos'][$iP] = $c;
 
         // Total
         $total = $total + $subtotal;
@@ -117,11 +123,14 @@ function listaCompras(){
     }
 
     // Total
-    $listaCompras['total'] = formatos('n', $total ,true);
+    $listaActual['total'] = formatos('n', $total ,true);
 
     // Número de compras
-    $listaCompras['nCompras'] = $nCompras;
+    $listaActual['nCompras'] = $nCompras;
 
     // Respuesta
-    return $listaCompras;
+    return [
+        'i'     => $iListaActual,
+        'lista' => $listaActual
+    ];
 }

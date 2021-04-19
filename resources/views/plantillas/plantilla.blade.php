@@ -110,7 +110,7 @@
                                         @if (Auth::user()->administrador)
                                             <a class="opcion-menu-s" href="{{route('administrador.panel')}}">{{__('textos.rutas.administrador.panel')}}</a>
                                         @endif
-                                        <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.usuario')}}</a>
+                                        <a class="opcion-menu-s" href="{{route('usuario.perfil')}}">{{__('textos.rutas.perfil')}}</a>
                                         <a class="opcion-menu-s" href="{{route('usuario.salir')}}">{{__('textos.rutas.salir')}}</a>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
                 <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; actualizarListaCompras(this);">
             </label>
         </div>
-        @if (Route::currentRouteName() != "orden-compra")
+        @if (Route::currentRouteName() != "usuario.orden-compra")
             {{-- Boton --}}
             <div class="btn-compras fas fa-shopping-cart" data-toggle="modal" data-target="#vtnListaCompras">
                 <span class="n-compras"></span>
@@ -226,7 +226,7 @@
 
                             {{-- Total --}}
                             @auth
-                                <a href="{{route('orden-compra')}}" class="modal-footer flex-column justify-content-center text-center btn btn-primary w-100">
+                                <a href="{{route('usuario.orden-compra')}}" class="modal-footer flex-column justify-content-center text-center btn btn-primary w-100">
                                     {{__('textos.botones.confirmar')}}
                                     <b class="precio-total"></b>
                                 </a>
@@ -286,7 +286,7 @@
         </div>
 
         {{-- JavaScript --}}
-        <script> var listaCompras = @json( listaCompras() ); </script>
+        <script> var listaCompras = @json( listaCompras()['lista'] ); </script>
         <script src="{{asset('/js/plantilla.js')}}"></script>
         <script src="{{asset('/js/formularios.js')}}"></script>
         @yield('js')

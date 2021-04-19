@@ -3,7 +3,7 @@
 
 {{-- Metadatos --}}
 @php
-    $tituloMD = __('textos.rutas.' . str_replace('-', '_', $nRuta = Route::currentRouteName()) );
+    $tituloMD = __('textos.rutas.' . str_replace('-', '_', Route::currentRouteName()) );
 @endphp
 
 {{-- Contenido --}}

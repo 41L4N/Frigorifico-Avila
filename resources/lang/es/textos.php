@@ -14,7 +14,7 @@ return [
         'registro'              => "Registro",
         'recuperar_contraseña'  => "Recuperar contraseña",
         // Usuario
-        'usuario'               => "Usuario",
+        'perfil'                => "Perfil",
         'salir'                 => "Salir",
         // Orden de compra
         'orden_compra'          => "Orden de compra",
@@ -31,6 +31,9 @@ return [
             'ordenes_compras'   => "Ordenes de compras",
             'productos'         => "Productos",
         ],
+        'usuario'               => [
+            'orden_compra' => "Orden de compra"
+        ]
     ],
 
     // Alertas
