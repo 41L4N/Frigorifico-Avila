@@ -105,10 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Lista de compras
     actualizarListaCompras();
 
-    console.log(
-        listaCompras
-    );
-
     // Mostrar errores
     if (typeof mensajesErrores == 'object' && mensajesErrores && typeof valoresErrores == 'object' && valoresErrores) {
         if ( Object.keys(mensajesErrores).length || Object.keys(valoresErrores).length ) {
