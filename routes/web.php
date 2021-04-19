@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function(){
 
         // Perfil
         Route::get('/', [UsuarioCtrl::class,'registro'])->name('perfil');
+        Route::post('/', [UsuarioCtrl::class,'guardar']);
 
         // Orden de compra
         Route::view('/orden-compra', 'orden-compra')->name('orden-compra');

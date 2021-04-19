@@ -8,9 +8,17 @@
 
 {{-- Contenido --}}
 @section('contenido')
-    <div class="form-corto" id="formUsuario">
+    <form action="" method="POST" class="form-corto" id="formUsuario">
+        @csrf
+
+        {{-- Campos --}}
         @include('usuarios.campos-basicos',$campos=['subtitulos', 'id', 'cambiar_contraseñas', 'contraseñas'])
-    </div>
+
+        {{-- Botones --}}
+        <div class="btns-form">
+            <button class="btn btn-primary">{{__('textos.botones.enviar')}}</button>
+        </div>
+    </form>
 @endsection
 
 {{-- JavaScript --}}

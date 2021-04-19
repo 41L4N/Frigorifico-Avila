@@ -39,8 +39,8 @@ class UsuarioCtrl extends Controller
             'nombre'        => 'required|between:1,50',
             'apellido'      => 'required|between:1,50',
             'email'         => 'required|email|unique:' . (new Usuario)->getTable() . ',email,' . $rq->id . '|between:1,75',
-            'telf.codigo'   => 'sometimes|required|numeric|between:1,4',
-            'telf.numero'   => 'sometimes|required|numeric|between:10,14',
+            // 'telf.codigo'   => 'sometimes|required|numeric|between:1,4',
+            // 'telf.numero'   => 'sometimes|required|numeric|between:10,14',
             'rol'           => 'sometimes|required',
             'password'      => 'sometimes|required|min:8|max:15|required_with:confirmacion_password|same:confirmacion_password',
         ]);
