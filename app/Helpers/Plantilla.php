@@ -54,6 +54,9 @@ function iconos($i){
         'combos'            => "fas fa-gifts",
         'cupones'           => "fas fa-money-check-alt",
 
+        // Contactos
+        'whatsapp'          => "fab fa-whatsapp",
+
         // Redes sociales
         'facebook'          => "fab fa-facebook-f",
         'twitter'           => "fab fa-twitter",

@@ -180,9 +180,9 @@
                     {{-- Redes sociales --}}
                     <div>
                         <h5>Nuestras redes sociales</h5>
+                        <a href="https://www.instagram.com/frigorifico_avila/?hl=es-la" class="{{iconos('instagram')}}" target="_blank" rel="noopener"></a>
                         <a href="https://www.facebook.com/Avilafrigorifico/" class="{{iconos('facebook')}}" target="_blank" rel="noopener"></a>
                         <a href="https://twitter.com/Avilafrigor" class="{{iconos('twitter')}}" target="_blank" rel="noopener"></a>
-                        <a href="https://www.instagram.com/frigorifico_avila/?hl=es-la" class="{{iconos('instagram')}}" target="_blank" rel="noopener"></a>
                     </div>
                 </div>
 
@@ -258,6 +258,7 @@
 
         {{-- Botones flotantes --}}
         {{-- Whatsapp --}}
+        <a href="https://wa.me/5491122558133" target="_blank" class="fab fa-whatsapp-square btn-whatsapp"></a>
 
         {{-- Ventanas modales --}}
         {{-- Buscador --}}

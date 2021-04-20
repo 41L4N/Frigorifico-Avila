@@ -96,7 +96,7 @@ return [
         'informacion_envio'         => "Información de envío",
         'forma_pago'                => "Forma de pago",
     ],
-    
+
     // Parrafos
     'parrafos' => [
 

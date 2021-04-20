@@ -160,14 +160,20 @@
 
 /* Botones flotantes */
 /* Whatsapp */
-.btn-whatsapp {
-
+.btn-whatsapp, .btn-whatsapp:hover {
+    position: fixed;
+    bottom: 25px;
+    left: 12.5px;
+    font-size: 50px;
+    color: green;
+    text-decoration: none;
+    background: white;
 }
 /* Compras */
 .btn-compras {
     position: fixed;
     bottom: 25px;
-    right: 25px;
+    right: 12.5px;
     padding: 17.5px;
     font-size: 25px;
     box-shadow: 0px 0px 2.5px black;
