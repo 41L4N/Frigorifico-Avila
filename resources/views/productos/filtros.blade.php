@@ -9,7 +9,7 @@
 {{-- Contenido --}}
 @section('contenido')
 
-    <form action="{{route($nRuta . '.eliminar')}}" method="POST" class="form-registros">
+    <form action="{{route(Route::currentRouteName() . '.eliminar')}}" method="POST" class="form-registros">
         @csrf
 
         {{-- Submenu --}}

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $u = new Usuario;
         $u->nombre = "Desarrollo";
         $u->apellido = "Web";
-        $u->email = "desarrollo@frigorificoavila.com";
+        $u->email = "desarrolloweb@openskie.com";
         // $u->telf = json_encode([
         //     'codigo' => '58',
         //     'numero' => '4169227441'
