@@ -55,7 +55,12 @@ function iconos($i){
         'cupones'           => "fas fa-money-check-alt",
 
         // Redes sociales
-        'facebook'          => "fab fa-facebook-f"
+        'facebook'          => "fab fa-facebook-f",
+        'twitter'           => "fab fa-twitter",
+        'instagram'         => "fab fa-instagram",
+
+        // Envíos
+        'envios'            => "fas fa-truck"
     ];
 
     // Respuesta

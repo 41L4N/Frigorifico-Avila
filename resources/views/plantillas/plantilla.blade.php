@@ -157,7 +157,16 @@
 
                     {{-- Información --}}
                     <div>
-                        <h5>Envíos a domicilio</h5>                        
+                        <h5>Dirección</h5>
+                        Castro Barros 1684, boedo, CABA
+                    </div>
+
+                    {{-- Envíos a domicilio --}}
+                    <div>
+                        <h5>Envíos a domicilio</h5>
+                        CABA: {{formatos('n', 200, true)}}
+                        <br>
+                        Provincia: {{formatos('n', 400, true)}}
                     </div>
 
                     {{-- Empresa --}}
@@ -165,13 +174,15 @@
                         <h5>Contactanos</h5>
                         info@frigorificoavila.com
                         <br>
-                        <a href="https://wa.me/5491122558133">+54 911 22558133</a>
+                        <a href="https://wa.me/5491122558133" target="_blank">+54 911 22558133</a>
                     </div>
 
                     {{-- Redes sociales --}}
                     <div>
                         <h5>Nuestras redes sociales</h5>
-                        <a href="https://www.facebook.com/Avilagrills/" class="{{iconos('facebook')}}" target="_blank" rel="noopener"></a>
+                        <a href="https://www.facebook.com/Avilafrigorifico/" class="{{iconos('facebook')}}" target="_blank" rel="noopener"></a>
+                        <a href="https://twitter.com/Avilafrigor" class="{{iconos('twitter')}}" target="_blank" rel="noopener"></a>
+                        <a href="https://www.instagram.com/frigorifico_avila/?hl=es-la" class="{{iconos('instagram')}}" target="_blank" rel="noopener"></a>
                     </div>
                 </div>
 

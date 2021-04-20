@@ -85,13 +85,6 @@
     margin: 0px;
 }
 /* Lados */
-.izquierda-menu-s, .derecha-menu-s {
-    /* width: 15%; */
-}
-/* Izquierda */
-.izquierda-menu-s {
-
-}
 /* Logotipo */
 .logotipo-menu-s {
     width: 100%;
@@ -151,10 +144,10 @@
 }
 .secciones-pie-pagina > * {
     width: 100%;
+    padding: 0px 25px;
 }
 .secciones-pie-pagina > *:not(:last-of-type) {
     border-right: solid var(--c-l-plantilla) 1px;
-    padding-right: 25px;
 }
 .pie-pagina a {
     text-decoration: none;
@@ -240,6 +233,7 @@
         flex-direction: column;
     }
     .secciones-pie-pagina > *:not(:last-of-type) {
+        border-right: none;
         margin-bottom: 25px;
     }
 }

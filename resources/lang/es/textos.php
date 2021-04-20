@@ -101,7 +101,7 @@ return [
     'parrafos' => [
 
         // Menú superior
-        'anuncio_menu_s'            => "¡Envío gratis si tu compra supera los $ 5.000!",
+        'anuncio_menu_s'            => "¡Envío gratis si tu compra supera los $ 5.000 (CABA) y $8.000 (Provincia)!",
         'sin_resultados'            => "Sin resultados",
         'confirmacion'              => "¿Seguro que desea realizar esta acción?",
         'necesita_ingreso'          => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
@@ -114,7 +114,7 @@ return [
         'derechos_autor'            => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
 
         // Desarrollador
-        'desarrollador'             => "Desarrollado por <a href='https://openskie.com/'>OpenSkies</a>",
+        'desarrollador'             => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
     ],
 
     // Campos
