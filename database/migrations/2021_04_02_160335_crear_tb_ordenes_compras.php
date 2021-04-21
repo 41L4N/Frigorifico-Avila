@@ -15,16 +15,12 @@ class CrearTbOrdenesCompras extends Migration
     {
         Schema::create('ordenes_compras', function (Blueprint $tb) {
             $tb->id();
-            $tb->string('nombre');
-            $tb->string('apellido');
-            $tb->string('nombre_empresa');
-            $tb->text('direccion');
-            $tb->string('email');
-            $tb->string('telf');
+            $tb->string('codigo');
+            $tb->integer('id_usuario');
+            $tb->text('datos_facturacion')->nullable();
             $tb->text('direccion_envio')->nullable();
             $tb->text('articulos');
             $tb->string('total');
-            $tb->string('cupon');
             $tb->timestamps();
         });
     }

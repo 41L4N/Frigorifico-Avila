@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/', [UsuarioCtrl::class,'guardar']);
 
         // Orden de compra
-        Route::view('/orden-compra', 'orden-compra')->name('orden-compra');
+        Route::view('/orden-compra', 'ordenes-compras.orden-compra')->name('orden-compra');
         Route::post('/orden-compra',[OrdenCompraCtrl::class,'orden']);
 
         // Salir
@@ -132,6 +132,11 @@ Route::middleware('auth')->group(function(){
             Route::get('/', [CuponCtrl::class,'registros'])->name('');
             Route::post('/', [CuponCtrl::class,'guardar']);
             Route::post('/eliminar', [CuponCtrl::class,'eliminar'])->name('.eliminar');
+        });
+
+        // Ordenes de compras
+        Route::prefix($n='ordenes-compras')->name($n)->group(function (){
+            Route::get('/{id?}', [OrdenCompraCtrl::class,'registros'])->name(''); 
         });
     });
 });

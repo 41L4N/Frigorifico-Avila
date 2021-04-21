@@ -53,6 +53,7 @@ function iconos($i){
         'productos'         => "fas fa-boxes",
         'combos'            => "fas fa-gifts",
         'cupones'           => "fas fa-money-check-alt",
+        'ordenes-compras'   => "fas fa-clipboard-list",
 
         // Contactos
         'whatsapp'          => "fab fa-whatsapp",
@@ -131,7 +132,10 @@ function listaCompras($actualizarId=false){
     }
 
     // Total
-    $listaActual['total'] = formatos('n', $total ,true);
+    $listaActual['total'] = [
+        'texto'     => formatos('n', $total ,true),
+        'numero'    => $total
+    ];
 
     // Número de compras
     $listaActual['nCompras'] = $nCompras;

@@ -92,8 +92,8 @@ return [
         'compra_mayor'              => "Compra al mayor",
 
         // Orden de compra
-        'informacion_facturacion'   => "Información de facturación",
-        'informacion_envio'         => "Información de envío",
+        'datos_facturacion'         => "Datos de facturación",
+        'tipo_entrega'              => "Tipo de entrega",
         'forma_pago'                => "Forma de pago",
     ],
 
@@ -121,9 +121,8 @@ return [
     'campos' => [
 
         // Lista de compras
-        'precio_unitario'       => "Precio Unitario",
-        'subtotal'              => "Subtotal",
-
+        'precio_unitario'           => "Precio Unitario",
+        'subtotal'                  => "Subtotal",
         // Usuario
         'nombre'                    => "Nombre",
         'apellido'                  => "Apellido",
@@ -134,52 +133,45 @@ return [
         'cambiar_contraseña'        => "Cambiar contraseña",
         'contraseña'                => "Contraseña",
         'confirmacion_contraseña'   => "Confirmar contraseña",
-
         // Usuarios
-        'nombre_apellido'       => "Nombre y apellido",
-
+        'nombre_apellido'           => "Nombre y apellido",
         // Roles
-        'titulo'                => "Titulo",
-        'permisos'              => "Permisos",
-
+        'titulo'                    => "Titulo",
+        'permisos'                  => "Permisos",
         // Filtros
-        'opciones'              => "Opciones",
-
+        'opciones'                  => "Opciones",
         // Productos
-        'producto'              => "Producto",
-        'filtro'                => "Filtro",
-        'unidad_medida'         => "Unidad de medida",
-        'pedido_min'            => "Pedido mínimo",
-        'pedido_min_detal'      => "Pedido mínimo al detal",
-        'precio_detal'          => "Precio al detal",
-        'oferta'                => "Oferta (%)",
-        'pedido_min_mayor'      => "Pedido mínimo al mayor",
-        'precio_mayor'          => "Precio al mayor",
-        'descripcion'           => "Descripción",
-        'actualizar_img'        => "Actualizar Imagen",
-
+        'producto'                  => "Producto",
+        'filtro'                    => "Filtro",
+        'unidad_medida'             => "Unidad de medida",
+        'pedido_min'                => "Pedido mínimo",
+        'pedido_min_detal'          => "Pedido mínimo al detal",
+        'precio_detal'              => "Precio al detal",
+        'oferta'                    => "Oferta (%)",
+        'pedido_min_mayor'          => "Pedido mínimo al mayor",
+        'precio_mayor'              => "Precio al mayor",
+        'descripcion'               => "Descripción",
+        'actualizar_img'            => "Actualizar Imagen",
         // Combos
-        'precio'                => "Precio",
-        'productos'             => "Productos",
-
+        'precio'                    => "Precio",
+        'productos'                 => "Productos",
+        'cantidad'                  => "Cantidad",
         // Cupones
-        'codigo'                => "Código",
-        'fecha_vencimiento'     => "Fecha de vencimiento",
-
+        'codigo'                    => "Código",
+        'fecha_vencimiento'         => "Fecha de vencimiento",
         // Orden de compra
-        'cantidad'              => "Cantidad",
-        'datos_diferentes'      => "¿Enviar con datos diferentes?",
-        'direccion_diferentes'  => "¿Enviar a una dirección diferente?",
-        'nombre_empresa'        => "Nombre de empresa",
-        'calle'                 => "Calle",
-        'n_puerta'              => "Número, Piso, Unidad",
-        'codigo_postal'         => "Código postal",
-        'estado'                => "Región / Provincia",
-        'ciudad'                => "Ciudad",
-        'pais'                  => "País",
-        'notas_pedido'          => "Notas de pedido",
-        'cupon'                 => "Cupón",
-        'total'                 => "Total"
+        'datos_diferentes'          => "¿Usar datos diferentes?",
+        'direccion_envio'           => "Entrega por envío a domicilio",
+        'calle'                     => "Calle",
+        'codigo_puerta'             => "Número, Piso, Unidad",
+        'codigo_postal'             => "Código postal",
+        'estado'                    => "Región / Provincia",
+        'ciudad'                    => "Ciudad",
+        'pais'                      => "País",
+        'notas'                     => "Notas",
+        'total'                     => "Total",
+        // Ordenes de compras
+        'fecha'                     => "Fecha"
     ],
 
     // Placesholder

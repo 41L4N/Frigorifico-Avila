@@ -6,10 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
-use App\Models\Usuario;
+use App\Models\OrdenCompra;
 
 class OrdenCompraCtrl extends Controller
 {
+
+    // Registros
+    public function registros($id=null){
+
+        // Vista en PDF
+        if ($id) {
+            return "";
+        }
+
+        // Lista de registros
+        return view('ordenes-compras.ordenes-compras')->with([
+            'ordenesCompras' => OrdenCompra::all()
+        ]);
+    }
 
     // Lista de compras
     public function lista(Request $rq){
@@ -90,19 +104,31 @@ class OrdenCompraCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'datos_facturacion' => "sometimes|rquired|array",
-            'nombre_empresa'    => "nullable",
-            'direccion'         => "required|array",
+            'cantidad'          => 'required|digits_between:1,5|min:1',
+            'datos_facturacion' => "sometimes|array",
+            'direccion_envio'   => "sometimes|array",
             'notas'             => "nullable",
-            'cupon'             => "nullable|exists:cupones,codigo"
+            // 'cupon'             => "nullable|exists:cupones,codigo"
         ]);
 
+        // Lista
+        $listaActual = listaCompras(true);
+
+        // Registro
+        $reg = new OrdenCompra;
+        $reg->id_usuario = Auth::user()->id;
+        $reg->codigo = uniqid();
+        $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
+        $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
+        $reg->articulos = json_encode($listaActual['lista']['productos']);
+        $reg->total = $listaActual['lista']['total']['numero'];
+        $reg->save();
+
         // Notificación
-        $lista = listaCompras(true);
         Mail::send("correos.orden-compra", [
             'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-            'usuario'       => Usuario::find( $lista['lista']['id_usuario'] ),
-            'listaCompras'  => $lista['lista']
+            'usuario'       => Auth::user(),
+            'listaCompras'  => $listaActual['lista']
         ], function($m) use ($rq, $asunto){
             $m->to("frigorificoavila@gmail.com");
             $m->subject($asunto);

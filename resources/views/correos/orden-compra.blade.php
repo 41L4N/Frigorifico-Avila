@@ -36,7 +36,7 @@
             </tr>
         @endforeach
         <tr>
-            <th colspan="100%">{{$listaCompras['total']}}</th>
+            <th colspan="100%">{{$listaCompras['total']['texto']}}</th>
         </tr>
     </table>
 @endsection

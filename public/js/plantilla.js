@@ -90,7 +90,7 @@ function actualizarListaCompras(btn=null) {
 
         // Total
         if (contTotal = document.querySelector('.precio-total')) {
-            contTotal.innerHTML = listaCompras.total;
+            contTotal.innerHTML = listaCompras.total.texto;
         }
         // Numerador de compras
         if (contNCompras = document.querySelector('.n-compras')) {
