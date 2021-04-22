@@ -70,7 +70,7 @@
         {{-- Datos diferentes --}}
         {{-- Check --}}
         <div class="fila-form">
-            <label class="w-auto c-pointer"> <input type="checkbox" onchange="datosFacturacion.disabled = !datosFacturacion.disabled"> {{__('textos.campos.datos_diferentes')}} </label>
+            <label class="w-auto c-pointer"> <input type="checkbox" onchange="datosFacturacion.disabled = !datosFacturacion.disabled"> {{__('textos.campos.datos_facturacion')}} </label>
         </div>
         {{-- Campos --}}
         <fieldset id="datosFacturacion" disabled>

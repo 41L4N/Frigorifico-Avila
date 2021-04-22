@@ -120,7 +120,7 @@ class OrdenCompraCtrl extends Controller
         $reg->codigo = uniqid();
         $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
         $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
-        $reg->articulos = json_encode($listaActual['lista']['productos']);
+        $reg->productos = json_encode($listaActual['lista']['productos']);
         $reg->total = $listaActual['lista']['total']['numero'];
         $reg->save();
 
@@ -128,9 +128,9 @@ class OrdenCompraCtrl extends Controller
         Mail::send("correos.orden-compra", [
             'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
             'usuario'       => Auth::user(),
-            'listaCompras'  => $listaActual['lista']
+            'ordenCompra'   => $reg
         ], function($m) use ($rq, $asunto){
-            $m->to("frigorificoavila@gmail.com");
+            $m->to("jeka.gomezb@gmail.com");
             $m->subject($asunto);
         });
 

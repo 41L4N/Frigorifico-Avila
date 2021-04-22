@@ -19,8 +19,9 @@ class CrearTbOrdenesCompras extends Migration
             $tb->integer('id_usuario');
             $tb->text('datos_facturacion')->nullable();
             $tb->text('direccion_envio')->nullable();
-            $tb->text('articulos');
+            $tb->text('productos');
             $tb->string('total');
+            $tb->text('notas')->nullable();
             $tb->timestamps();
         });
     }

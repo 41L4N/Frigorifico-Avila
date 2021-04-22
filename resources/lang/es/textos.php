@@ -160,7 +160,7 @@ return [
         'codigo'                    => "Código",
         'fecha_vencimiento'         => "Fecha de vencimiento",
         // Orden de compra
-        'datos_diferentes'          => "¿Usar datos diferentes?",
+        'datos_facturacion'         => "Datos de facturación",
         'direccion_envio'           => "Entrega por envío a domicilio",
         'calle'                     => "Calle",
         'codigo_puerta'             => "Número, Piso, Unidad",
