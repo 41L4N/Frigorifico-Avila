@@ -147,6 +147,7 @@ return [
         'pedido_min'                => "Pedido mínimo",
         'pedido_min_detal'          => "Pedido mínimo al detal",
         'precio_detal'              => "Precio al detal",
+        'pedido_min_oferta'         => "Pedido mínimo de oferta",
         'oferta'                    => "Oferta (%)",
         'pedido_min_mayor'          => "Pedido mínimo al mayor",
         'precio_mayor'              => "Precio al mayor",

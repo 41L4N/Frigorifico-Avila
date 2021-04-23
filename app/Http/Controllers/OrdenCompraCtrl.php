@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Usuario;
 use App\Models\OrdenCompra;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class OrdenCompraCtrl extends Controller
 {
@@ -15,8 +17,13 @@ class OrdenCompraCtrl extends Controller
     public function registros($id=null){
 
         // Vista en PDF
-        if ($id) {
-            return "";
+        if ($id && $oC = OrdenCompra::find($id)) {
+            $pdf = PDF::loadView('correos.orden-compra', [
+                'asunto'        => __('textos.titulos.nueva_orden_compra'),
+                'usuario'       => Usuario::find($oC->id_usuario),
+                'ordenCompra'   => $oC
+            ]);
+            return $pdf->stream("orden_compra_$oC->codigo.pdf");
         }
 
         // Lista de registros

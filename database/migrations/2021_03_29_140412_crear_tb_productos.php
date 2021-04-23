@@ -21,6 +21,7 @@ class CrearTbProductos extends Migration
             $tb->string('filtro');
             $tb->string('pedido_min_detal')->default(1);
             $tb->string('precio_detal')->default(1);
+            $tb->string('pedido_min_oferta')->default(0);
             $tb->string('oferta')->default(0);
             $tb->string('pedido_min_mayor')->nullable();
             $tb->string('precio_mayor')->nullable();

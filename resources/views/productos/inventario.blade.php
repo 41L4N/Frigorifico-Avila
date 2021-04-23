@@ -115,7 +115,7 @@
                             <label>{{__('textos.campos.' . $n='unidad_medida')}}</label>
                             <select name="{{$n}}" class="form-control" required>
                                 <option value="" selected required>{{__('textos.placeholders.select')}}</option>
-                                @foreach (['Kg','Unidad'] as $item)
+                                @foreach (['Kg','Unidad', 'Gramo'] as $item)
                                     <option value="{{$item}}">{{$item}}</option>
                                 @endforeach
                             </select>
@@ -124,7 +124,6 @@
 
                     {{-- Compra al detal --}}
                     <div class="fila-form">
-                        {{-- Pedido mínimo --}}
                         <div>
                             <label>{{__('textos.campos.' . $n='pedido_min_detal')}}</label>
                             <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)" required>
@@ -132,6 +131,14 @@
                         <div>
                             <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
                             <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)" required>
+                        </div>
+                    </div>
+
+                    {{-- Oferta --}}
+                    <div class="fila-form">
+                        <div>
+                            <label>{{__('textos.campos.' . $n='pedido_min_oferta')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
