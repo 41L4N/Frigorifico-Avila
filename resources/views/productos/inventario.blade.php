@@ -31,7 +31,7 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(), contarChecks()'></th>
-                    @foreach (['producto', 'filtro', 'precio_detal', 'precio_mayor'] as $campo)
+                    @foreach (['producto', 'filtro', 'precio_detal', 'oferta','precio_mayor'] as $campo)
                         <th>{!! __('textos.campos.' . $campo) !!}</th>
                     @endforeach
                     <th><i class="fas fa-cogs"></i></th>
@@ -46,19 +46,12 @@
                             <a href="{{$rutaP = route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a>
                             <br>
                             <a href="{{$rutaP}}" class="cont-min-img">
-                                <img src="{{route('mostrar-img',[$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
+                                <img src="{{route('mostrar-img', [$p->getTable(), $p->id])}}" alt="{{config('app.name') . "  " . $p->titulo}}">
                             </a>
                         </td>
                         <td>{{$p->filtroP()}}</td>
-                        <td>
-                            @if ($p->oferta)
-                                <del>{{ ( $precio = $p->precioOfertaP() )['precio'] }}</del>
-                                <br>
-                                {{$precio['oferta']}}
-                            @else
-                                {{ formatos('n', $p->precio_detal, true) }}
-                            @endif
-                        </td>
+                        <td>{{formatos('n', $p->precio_detal, true)}}</td>
+                        <td>{{ ($p->oferta) ? $p->precioOfertaP()['oferta'] : "-" }}</td>
                         <td>{{ ($p->precio_mayor) ? $p->precioMayorP() : "-" }}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>

@@ -110,12 +110,17 @@ function listaCompras($actualizarId=false){
         $c->tipo = $p['tipo'];
 
         // Alias
-        $c->alias = $c->titulo; 
+        $c->alias = $c->titulo;
 
-        // Precio de venta según cantidad y oferta
+        // Cantidad
         $c->cantidad = $p['cantidad'];
-        $c->precio_unitario = ($c->precio_mayor && $c->cantidad >= $c->pedido_min_mayor) ? $c->precio_mayor : ($precioD = $c->precio_detal) - $c->oferta * $precioD / 100;
+        // Oferta
+        $c->precio_unitario = ($c->oferta &&  $c->cantidad >= $c->pedido_min_oferta) ? $c->precio_detal - ($c->oferta * $c->precio_detal / 100) : $c->precio_detal;
+        // Precio al mayor
+        $c->precio_unitario = ($c->precio_mayor && $c->cantidad >= $c->pedido_min_mayor) ? $c->precio_mayor : $c->precio_unitario;
 
+        // Precio unitario público
+        $c->precio_unitario_p = formatos('n', $c->precio_unitario, true);
         // Subtotal
         $subtotal = $c->precio_unitario * $c->cantidad;
         $c->subtotal = formatos('n', $subtotal, true);
@@ -125,7 +130,7 @@ function listaCompras($actualizarId=false){
 
         // Total
         $total = $total + $subtotal;
-        
+
         // Número de compras
         $nCompras = $nCompras + $c->cantidad;
     }

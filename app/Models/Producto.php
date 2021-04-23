@@ -32,7 +32,7 @@ class Producto extends Model
     function precioOfertaP(){
         return [
             'precio' => formatos('n', $p = $this->precio_detal, true),
-            'oferta' => formatos('n', round($p - $this->oferta * $p / 100), true) . " (-$this->oferta %)"
+            'oferta' => formatos('n', ($p - $this->oferta * $p / 100), true) . " (-$this->oferta %)"
         ];
         return $r;
     }
