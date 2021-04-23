@@ -115,21 +115,23 @@
 
             {{-- Precios --}}
             {{-- Al detal --}}
-            <div>
-                <div class="subtitulo">{{__('textos.titulos.compra_detal')}}</div>
+            @if ($p->precio_detal)
                 <div>
-                    <div class="precio-oferta">
-                        @if ($p->oferta)
-                            <del>{{ ( $precio = $p->precioOfertaP() )['precio'] }}</del>
-                            <br>
-                            {{$precio['oferta']}}
-                        @else
-                            {{ formatos('n', $p->precio_detal, true) }}
-                        @endif
+                    <div class="subtitulo">{{__('textos.titulos.compra_detal')}}</div>
+                    <div>
+                        <div class="precio-oferta">
+                            @if ($p->oferta)
+                                <del>{{ ( $precio = $p->precioOfertaP() )['precio'] }}</del>
+                                <br>
+                                {{$precio['oferta']}}
+                            @else
+                                {{ formatos('n', $p->precio_detal, true) }}
+                            @endif
+                        </div>
+                        <b>{{__('textos.campos.pedido_min')}}:</b> {{$p->pedido_min_detal}}
                     </div>
-                    <b>{{__('textos.campos.pedido_min')}}:</b> {{$p->pedido_min_detal}}
                 </div>
-            </div>
+            @endif
 
             {{-- Al mayor --}}
             @if ($p->pedido_min_mayor && $p->precio_mayor)
@@ -137,6 +139,24 @@
                     <div class="subtitulo">{{__('textos.titulos.compra_mayor')}}</div>
                     <div class="precio-oferta">{{formatos('n', $p->precio_mayor, true)}}</div>
                     <b>{{__('textos.campos.pedido_min')}}:</b> {{$p->pedido_min_mayor}}
+                </div>
+            @endif
+
+            {{-- Precio --}}
+            @if ($p->precio)
+                <div>
+                    <div class="subtitulo">{{__('textos.campos.precio')}}</div>
+                    <div class="precio-oferta">{{formatos('n', $p->precio, true)}}</div>
+                </div>
+            @endif
+
+            {{-- Lista de productos --}}
+            @if ($p->productos)
+                <div>
+                    <div class="subtitulo">{{__('textos.campos.productos')}}</div>
+                    @foreach ($p->productos as $p)
+                        <a href="{{route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a> <br>
+                    @endforeach
                 </div>
             @endif
 

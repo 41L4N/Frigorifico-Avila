@@ -85,6 +85,12 @@ class ComboCtrl extends Controller
 
         // Combo individual
         if ($p = Combo::find($id)) {
+            $productos = [];
+            foreach (json_decode($p->productos) as $iProducto => $producto) {
+                $productos[$iProducto] = Producto::find($producto->id);
+                $productos[$iProducto]->cantidad = $producto->cantidad;
+            }
+            $p->productos = $productos;
             return view('productos.producto')->with([
                 'producto' => $p
             ]);
