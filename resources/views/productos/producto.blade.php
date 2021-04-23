@@ -155,7 +155,8 @@
                 <div>
                     <div class="subtitulo">{{__('textos.campos.productos')}}</div>
                     @foreach ($p->productos as $producto)
-                        <a href="{{route('productos', [$producto->alias(), $producto->id])}}">{{$producto->titulo}}</a> <br>
+                        <a href="{{route('productos', [$producto->alias(), $producto->id])}}">{{$producto->titulo}}</a>
+                        ({{"$producto->cantidad $producto->unidad_medida"}}) <br>
                     @endforeach
                 </div>
             @endif
