@@ -283,7 +283,7 @@
         {{-- Buscador --}}
         <div class="modal fade" id="vtnBuscador" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <form method="GET" class="modal-content">
+                <form method="GET" action="{{route('productos', ['buscar'])}}" class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Buscar</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

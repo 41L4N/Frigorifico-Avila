@@ -85,7 +85,7 @@ class ProductoCtrl extends Controller
     }
 
     // Productos
-    public function productos($filtro=null, $id=null, $id2=null){
+    public function productos($filtro=null, $id=null, $id2=null, Request $rq){
 
         // Producto individual
         if ($p = Producto::find($id)) {
@@ -108,10 +108,9 @@ class ProductoCtrl extends Controller
             case 'buscar':
 
                 // Titulo
-                if($rq->consulta != ""){
-                    $ps = Producto::where("titulo","LIKE","%$rq->consulta%");
+                if($rq->busqueda != ""){
+                    $ps = Producto::where("titulo", "LIKE", "%$rq->busqueda%");
                 }
-                // Precio
             break;
 
             // Filtros

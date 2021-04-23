@@ -128,7 +128,7 @@
                                 {{ formatos('n', $p->precio_detal, true) }}
                             @endif
                         </div>
-                        <b>{{__('textos.campos.pedido_min')}}:</b> {{$p->pedido_min_detal}}
+                        <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_detal $p->unidad_medida"}}
                     </div>
                 </div>
             @endif
