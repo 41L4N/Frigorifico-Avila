@@ -193,8 +193,8 @@
         {{-- Notas --}}
         <div class="fila-form">
             <div>
-                <label>{{__('textos.campos.notas')}}</label>
-                <textarea name="notas" class="form-control" maxlength="500"></textarea>
+                <label>{{__('textos.campos.' . $n='notas')}}</label>
+                <textarea name="{{$n}}" class="form-control" maxlength="500"></textarea>
             </div>
         </div>
 

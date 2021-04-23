@@ -122,6 +122,7 @@ class OrdenCompraCtrl extends Controller
         $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
         $reg->productos = json_encode($listaActual['lista']['productos']);
         $reg->total = $listaActual['lista']['total']['numero'];
+        $reg->notas = $rq->notas;
         $reg->save();
 
         // Notificación
@@ -130,7 +131,7 @@ class OrdenCompraCtrl extends Controller
             'usuario'       => Auth::user(),
             'ordenCompra'   => $reg
         ], function($m) use ($rq, $asunto){
-            $m->to("jeka.gomezb@gmail.com");
+            $m->to("ailanruiz1994@gmail.com");
             $m->subject($asunto);
         });
 
