@@ -119,7 +119,7 @@
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.' . $n='pedido_min_detal')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)" required>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" step="0.01" value="{{$min}}" onkeypress="soloNumeros(event, true)" required>
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
@@ -131,7 +131,7 @@
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.' . $n='pedido_min_oferta')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)">
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" step="0.01" value="{{$min}}" onkeypress="soloNumeros(event, true)">
                         </div>
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>

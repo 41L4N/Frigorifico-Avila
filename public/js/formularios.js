@@ -1,9 +1,9 @@
 // Solo numeros y longitud maxima opcional
-function soloNumeros(tecla) {
+function soloNumeros(tecla, decimales=false) {
     var nuevoValor = tecla.target.value + tecla.key;
     if (
         // Valores permitidos
-        tecla.keyCode < 47 || tecla.keyCode > 58
+        tecla.keyCode < ( (decimales) ? 46 : 47 ) || tecla.keyCode > 58
         // Cantidad de digitos
         || ( parseInt(nuevoValor.length) < parseInt(tecla.target.min.length) )
         || ( (tecla.target.max) ? parseInt(nuevoValor.length) > parseInt(tecla.target.max.length) : false )
