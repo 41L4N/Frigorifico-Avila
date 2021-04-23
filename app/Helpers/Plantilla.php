@@ -115,7 +115,6 @@ function listaCompras($actualizarId=false){
         // Precio de venta según cantidad y oferta
         $c->cantidad = $p['cantidad'];
         $c->precio_unitario = ($c->precio_mayor && $c->cantidad >= $c->pedido_min_mayor) ? $c->precio_mayor : ($precioD = $c->precio_detal) - $c->oferta * $precioD / 100;
-        $c->precio_unitario_p = formatos('n', $c->precio_unitario, true);
 
         // Subtotal
         $subtotal = $c->precio_unitario * $c->cantidad;
