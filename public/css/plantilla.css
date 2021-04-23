@@ -59,6 +59,7 @@
 .lista-menu-s {
     position: relative;
     display: -webkit-flex; display: -ms-flexbox; display: flex;
+    justify-content: center;
 }
 /* Opciones */
 .lista-menu-s:hover .opciones-lista-menu-s {
@@ -73,7 +74,6 @@
     position: absolute;
     display: none;
     top: 100%;
-    right: 0px;
     min-width: 100%;
     flex-direction: column;
     background: var(--c-plantilla);

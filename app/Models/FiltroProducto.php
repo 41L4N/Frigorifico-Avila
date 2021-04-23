@@ -11,6 +11,11 @@ class FiltroProducto extends Model
 
     protected $table = 'filtros_productos';
 
+    // Alias
+    function alias(){
+        return formatos('tb', $this->titulo, '-');
+    }
+
     // Lista
     static function lista(){
         foreach ($filtros = FiltroProducto::whereNull('relacion')->orderBy('titulo', 'ASC')->get(['id', 'titulo']) as $f) {

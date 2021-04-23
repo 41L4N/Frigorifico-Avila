@@ -54,7 +54,7 @@ Route::post('/recuperacion-contraseña', [UsuarioCtrl::class,'recuperacionContra
 Route::post('/renovacion-contraseña', [UsuarioCtrl::class,'renovacionContraseña']);
 
 // Productos
-Route::get('/productos/{filtro?}/{id?}', [ProductoCtrl::class,'productos'])->name('productos');
+Route::get('/productos/{filtro?}/{id?}/{id2?}', [ProductoCtrl::class,'productos'])->name('productos');
 
 // Combos
 Route::get('/combos/{filtro?}/{id?}', [ComboCtrl::class, 'combos'])->name('combos');

@@ -106,7 +106,19 @@
 
                             {{-- Opciones --}}
                             <a href="{{route('inicio')}}" class="opcion-menu-s">{{__('textos.rutas.inicio')}}</a>
-                            <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
+                            <div class="lista-menu-s">
+                                {{-- Titulo --}}
+                                <div class="opcion-menu-s">
+                                    <a href="{{route('productos')}}" class="opcion-menu-s">{{__('textos.rutas.productos')}}</a>
+                                </div>
+                                {{-- Opciones --}}
+                                <div class="opciones-lista-menu-s">
+                                    @foreach (App\Models\FiltroProducto::lista() as $f)
+                                        <a href="{{route('productos', ['filtros', $f->alias(), $f->id])}}" class="opcion-menu-s">{{$f->titulo}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                            
                             <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
                             <a href="{{route('combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
                             @auth
