@@ -154,8 +154,8 @@
             @if ($p->productos)
                 <div>
                     <div class="subtitulo">{{__('textos.campos.productos')}}</div>
-                    @foreach ($p->productos as $p)
-                        <a href="{{route('productos', [$p->alias(), $p->id])}}">{{$p->titulo}}</a> <br>
+                    @foreach ($p->productos as $producto)
+                        <a href="{{route('productos', [$producto->alias(), $producto->id])}}">{{$producto->titulo}}</a> <br>
                     @endforeach
                 </div>
             @endif
