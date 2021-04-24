@@ -32,8 +32,8 @@
                     <th>{{$loop->iteration}}</th>
                     <td>
                         {{$p->titulo}}
-                        <br>
-                        <img src="{{route('mostrar-img', [$p->tipo, $p->id])}}" alt="{{$p->alias}}" style="width: 75px;">
+                        {{-- <br>
+                        <img src="{{route('mostrar-img', [$p->tipo, $p->id])}}" alt="{{$p->alias}}" style="width: 75px;"> --}}
                     </td>
                     <td>
                         @if (!$p->oferta)
