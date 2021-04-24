@@ -33,7 +33,7 @@
                     <td>
                         {{$p->titulo}}
                         <br>
-                        <img src="{{route('mostrar-img', [$p->tipo, $p->id])}}" alt="{{$p->alias}}" style="width: 75px;">
+                        {{-- <img src="{{route('mostrar-img', [$p->tipo, $p->id])}}" alt="{{$p->alias}}" style="width: 75px;"> --}}
                     </td>
                     <td>
                         @if (!$p->oferta)
@@ -49,7 +49,7 @@
                 </tr>
             @endforeach
             <tr>
-                <th colspan="100%"><h2>{{formatos('n', $ordenCompra->total, true)}}</h2></th>
+                <th colspan="5"><h2>{{formatos('n', $ordenCompra->total, true)}}</h2></th>
             </tr>
         </table>
         @if ($direccionE = $ordenCompra->direccion_envio)
