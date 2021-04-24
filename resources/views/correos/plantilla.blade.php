@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$asunto}}</title>
+    <style>
+        * {
+            page-break-inside: avoid;
+        }
+    </style>
 </head>
 <body>
-    <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center; page-break-inside: avoid;">
+    <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center;">
         <tr>
             <td style="text-align: center; padding: 12.5px;">
                 <a href="{{route("inicio")}}">
