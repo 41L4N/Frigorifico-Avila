@@ -7,7 +7,7 @@
     <title>{{$asunto}}</title>
 </head>
 <body>
-    <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center;">
+    <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center; page-break-inside: avoid;">
         <tr>
             <td style="text-align: center; padding: 12.5px;">
                 <a href="{{route("inicio")}}">
