@@ -21,11 +21,11 @@
         <h3 style="background: rgb(148, 2, 2); color: white; padding: 5px;">{{__('textos.titulos.lista_compras')}}</h3>
         <table style="width: 100%; text-align: center;">
             <tr style="background: var(--c-plantilla); color: var(--c-l-plantilla); ">
-                <th>#</th>
-                <th>{{__('textos.campos.producto')}}</th>
-                <th>{{__('textos.campos.precio')}}</th>
-                <th>{{__('textos.campos.cantidad')}}</th>
-                <th>{{__('textos.campos.subtotal')}}</th>
+                <td><b>#</b></td>
+                <td><b>{{__('textos.campos.producto')}}</b></td>
+                <td><b>{{__('textos.campos.precio')}}</b></td>
+                <td><b>{{__('textos.campos.cantidad')}}</b></td>
+                <td><b>{{__('textos.campos.subtotal')}}</b></td>
             </tr>
             @foreach (json_decode($ordenCompra->productos) as $p)
                 <tr>
