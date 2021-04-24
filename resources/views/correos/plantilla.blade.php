@@ -10,8 +10,8 @@
     <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center;">
         <tr>
             <td style="text-align: center; padding: 12.5px;">
+                <img src="{{asset("/imgs/plantilla/logotipo-web.png")}}" style="250px;" alt="{{config("app.name")}}">
                 <a href="{{route("inicio")}}">
-                    {{-- <img src="{{asset("/imgs/plantilla/logotipo-web.png")}}" style="width: 100%; max-width: 250px;" alt="{{config("app.name")}}"> --}}
                 </a>
             </td>
         </tr>
