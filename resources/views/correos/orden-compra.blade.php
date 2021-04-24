@@ -1,6 +1,6 @@
 @extends('correos.plantilla')
 @section('contenido')
-    <div style="text-align: left">
+    
         <h3 style="text-align: center">{{__('textos.titulos.nueva_orden_compra')}}</h3>
         <b>{{__('textos.campos.codigo')}}: </b>{{$ordenCompra->codigo}}
         <br>
@@ -65,5 +65,5 @@
             <h4 style="background: rgb(148, 2, 2); color: white; padding: 5px;">{{__('textos.campos.notas')}}</h4>
             {!! nl2br($notas) !!}
         @endif
-    </div>
+    
 @endsection
