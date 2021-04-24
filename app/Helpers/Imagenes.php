@@ -49,7 +49,7 @@ function convertirImg($tipo, $img, $resolucion=null){
 
     // Convertir a base64
     ob_start();
-    imagewebp($nuevaImg, null, 100);
+    imagepng($nuevaImg, null, 100);
     $base64 = base64_encode(ob_get_clean());
     imagedestroy($nuevaImg);
 
@@ -67,8 +67,8 @@ function guardarImg($tipo, $img, $id){
 
 // Mostrar
 function mostrarImg($tipo, $id, $iImg=0, $resolucion=null){
-    header('Content-Type: image/webp;');
-    header('Content-Disposition: inline; filename="'.$id.$iImg.'.webp"');
+    header('Content-Type: image/png;');
+    header('Content-Disposition: inline; filename="'.$id.$iImg.'.png"');
     $base64 = almacenImgs()->get($tipo."_$id.json");
     if ($resolucion) {
         $base64 = convertirImg($tipo, $base64, $resolucion);
