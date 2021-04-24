@@ -9,19 +9,19 @@
 <body>
     <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center;">
         <tr>
-            <td style="text-align: center; padding: 12.5px;">
+            <td style="text-align: center; padding: 7.5px;">
                 <a href="{{route("inicio")}}" style="display: block;">
                     <img src="{{asset("/imgs/plantilla/logotipo-web.png")}}" style="width: 250px;" alt="{{config("app.name")}}">
                 </a>
             </td>
         </tr>
         <tr>
-            <td style="padding: 12.5px;">
+            <td style="padding: 7.5px;">
                 @yield('contenido')
             </td>
         </tr>
         <tr>
-            <td style="text-align: center; padding: 12.5px;">
+            <td style="text-align: center; padding: 7.5px;">
                 <h2 style="margin-bottom:25px;"><a href="{{config("app.url")}}">{{config("app.name")}}</a></h2>
                 {{-- @foreach ([
                     config("app.url")                                           => "l",
