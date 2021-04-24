@@ -10,13 +10,13 @@
     <table style="width: 100%; max-width: 750px; margin: 0px auto; text-align: center;">
         <tr>
             <td style="text-align: center; padding: 12.5px;">
-                <a href="{{route("inicio")}}">
+                <a href="{{route("inicio")}}" style="display: block;">
                     <img src="{{asset("/imgs/plantilla/logotipo-web.png")}}" style="width: 250px;" alt="{{config("app.name")}}">
                 </a>
             </td>
         </tr>
         <tr>
-            <td style="font-size: 17.5px; padding: 12.5px;">
+            <td style="padding: 12.5px;">
                 @yield('contenido')
             </td>
         </tr>
