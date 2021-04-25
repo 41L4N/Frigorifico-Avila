@@ -190,6 +190,14 @@
             <b class="precio-total"></b>
         </div>
 
+        {{-- Cupon --}}
+        <div class="fila-form">
+            <div>
+                <label>{{__('textos.campos.' . $n="cupon")}}</label>
+                <input name="{{$n}}" class="form-control" maxlength="25">
+            </div>
+        </div>
+
         {{-- Notas --}}
         <div class="fila-form">
             <div>

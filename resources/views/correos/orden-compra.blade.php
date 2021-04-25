@@ -36,12 +36,12 @@
                         <img src="{{route('mostrar-img', [$p->tipo, $p->id])}}" alt="{{$p->alias}}" style="width: 75px;"> --}}
                     </td>
                     <td>
-                        @if (!$p->oferta)
-                            {{ formatos('n', $p->precio_unitario, true) }}
-                        @else
+                        @if (isset($p->oferta) && $p->oferta)
                             <del>{{ formatos('n', $p->precio_detal, true) }}</del>
                             <br>
                             {{ formatos('n', $p->precio_unitario, true) }} (- {{ $p->oferta }} )
+                        @else
+                            {{ formatos('n', $p->precio_unitario, true) }}
                         @endif
                     </td>
                     <td>{{$p->cantidad}}</td>
@@ -49,7 +49,19 @@
                 </tr>
             @endforeach
             <tr>
-                <th colspan="5"><h2>{{formatos('n', $ordenCompra->total, true)}}</h2></th>
+                <th colspan="3"></th>
+                <th style="text-align: right;">{{__('textos.campos.subtotal')}}</th>
+                <th>{{formatos('n', $ordenCompra->total, true)}}</th>
+            </tr>
+            <tr>
+                <th colspan="3"></th>
+                <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
+                <th>{{ ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) ) ? $cupon->oferta . "% ($cupon->codigo)" : "-" }}</th>
+            </tr>
+            <tr>
+                <th colspan="3"></th>
+                <th style="text-align: right;">{{__('textos.campos.total')}}</th>
+                <th>{{formatos('n', $ordenCompra->total - ( ($cupon) ? $cupon->oferta * $ordenCompra->total / 100 : 0 ), true)}}</th>
             </tr>
         </table>
         @if ($direccionE = $ordenCompra->direccion_envio)

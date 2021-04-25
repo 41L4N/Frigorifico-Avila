@@ -10,4 +10,6 @@ class Cupon extends Model
     use HasFactory;
 
     protected $table = 'cupones';
+
+    protected $fillable = ['estatus'];
 }

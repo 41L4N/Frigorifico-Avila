@@ -10,6 +10,11 @@
 @section('contenido')
     @if (($registros = $ordenesCompras)->count())
 
+        {{-- Submenu --}}
+        <div class="submenu-registros">
+            <div>{{$tituloMD}}</div>
+        </div>
+
         {{-- Tabla de resultados --}}
         <table class="tb-registros">
 

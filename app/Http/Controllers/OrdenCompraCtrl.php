@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Usuario;
 use App\Models\OrdenCompra;
+use App\Models\Cupon;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class OrdenCompraCtrl extends Controller
@@ -115,8 +116,18 @@ class OrdenCompraCtrl extends Controller
             'datos_facturacion' => "sometimes|array",
             'direccion_envio'   => "sometimes|array",
             'notas'             => "nullable",
-            // 'cupon'             => "nullable|exists:cupones,codigo"
+            'cupon'             => "nullable|exists:cupones,codigo"
         ]);
+
+        // Validacion del cupon
+        if ( ( $cupon = Cupon::where('codigo', $rq->cupon)->where('estatus', true)->first() ) && $cupon->fecha_vencimiento < today()->toDateString()) {
+            return back()->with([
+                'alerta' => [
+                    'tipo'  => 'danger',
+                    'texto' => __('textos.alertas.cupon_vencido')
+                ]
+            ]);
+        }
 
         // Lista
         $listaActual = listaCompras(true);
@@ -128,9 +139,14 @@ class OrdenCompraCtrl extends Controller
         $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
         $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
         $reg->productos = json_encode($listaActual['lista']['productos']);
-        $reg->total = $listaActual['lista']['total']['numero'];
+        $reg->cupon = ($cupon) ? json_encode($cupon) : null;
+        $total = $listaActual['lista']['total']['numero'];
+        $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
         $reg->notas = $rq->notas;
         $reg->save();
+        if ($cupon) {
+            $cupon->update(['estatus' => false]);
+        }
 
         // Notificación
         Mail::send("correos.orden-compra", [
@@ -150,8 +166,4 @@ class OrdenCompraCtrl extends Controller
             ]
         ]);
     }
-
-    // Confirmar
-
-    // Verificar
 }

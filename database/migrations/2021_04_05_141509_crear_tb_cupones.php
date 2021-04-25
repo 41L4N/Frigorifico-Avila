@@ -19,6 +19,7 @@ class CrearTbCupones extends Migration
             $tb->string('codigo');
             $tb->string('oferta');
             $tb->string('fecha_vencimiento');
+            $tb->boolean('estatus')->default(true);
             $tb->timestamps();
         });
     }

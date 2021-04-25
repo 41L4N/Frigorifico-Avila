@@ -51,7 +51,8 @@ return [
         // Roles
         'success'                   => "Operación exitosa",
         // Orden de compra
-        'orden_compra'              => "Su orden de compra se ha generado exitosamente, en breve recibira respuesta."
+        'orden_compra'              => "Su orden de compra se ha generado exitosamente, en breve recibira respuesta.",
+        'cupon_vencido'             => "El cupón que esta usando ya expiró"
     ],
 
     // Titulos
@@ -168,8 +169,8 @@ return [
         'codigo_postal'             => "Código postal",
         'estado'                    => "Región / Provincia",
         'ciudad'                    => "Ciudad",
-        'pais'                      => "País",
         'notas'                     => "Notas",
+        'cupon'                     => "Cupón",
         'total'                     => "Total",
         // Ordenes de compras
         'fecha'                     => "Fecha"
