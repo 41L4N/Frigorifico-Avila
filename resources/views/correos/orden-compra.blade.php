@@ -61,7 +61,7 @@
             <tr>
                 <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.total')}}</th>
-                <th>{{formatos('n', $ordenCompra->total - ( (isset($cupon)) ? $cupon->oferta * $ordenCompra->total / 100 : 0 ), true)}}</th>
+                <th>{{formatos('n', $ordenCompra->total - ( (isset( $cupon )) ? $cupon->oferta * $ordenCompra->total / 100 : 0 ), true)}}</th>
             </tr>
         </table>
         @if ($direccionE = $ordenCompra->direccion_envio)
