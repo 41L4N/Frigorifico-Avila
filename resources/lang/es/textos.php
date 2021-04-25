@@ -89,8 +89,8 @@ return [
         'seguridad'                 => "Seguridad",
 
         // Productos
-        'compra_detal'              => "Compra al detal",
-        'compra_mayor'              => "Compra al mayor",
+        'compra_detal'              => "Compra minorista",
+        'compra_mayor'              => "Compra mayorista",
 
         // Orden de compra
         'datos_facturacion'         => "Datos de facturación",
@@ -146,12 +146,12 @@ return [
         'filtro'                    => "Filtro",
         'unidad_medida'             => "Unidad de medida",
         'pedido_min'                => "Pedido mínimo",
-        'pedido_min_detal'          => "Pedido mínimo al detal",
-        'precio_detal'              => "Precio al detal",
+        'pedido_min_detal'          => "Pedido mínimo minorista",
+        'precio_detal'              => "Precio minorista",
         'pedido_min_oferta'         => "Pedido mínimo de oferta",
         'oferta'                    => "Oferta (%)",
-        'pedido_min_mayor'          => "Pedido mínimo al mayor",
-        'precio_mayor'              => "Precio al mayor",
+        'pedido_min_mayor'          => "Pedido mínimo mayorista",
+        'precio_mayor'              => "Precio mayorista",
         'descripcion'               => "Descripción",
         'actualizar_img'            => "Actualizar Imagen",
         // Combos

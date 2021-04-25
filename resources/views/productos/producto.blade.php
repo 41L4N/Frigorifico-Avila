@@ -129,6 +129,10 @@
                             @endif
                         </div>
                         <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_detal $p->unidad_medida"}}
+                        @if ($p->pedido_min_detal_oferta)
+                            <br>
+                            <b>{{__('textos.campos.pedido_min_oferta')}}:</b> {{"$p->pedido_min_detal_oferta $p->unidad_medida"}}
+                        @endif
                     </div>
                 </div>
             @endif
