@@ -193,7 +193,7 @@
                         <h5>Contactanos</h5>
                         info@frigorificoavila.com
                         <br>
-                        <a href="https://wa.me/5491122558133" target="_blank">+54 911 22558133</a>
+                        <a href="https://wa.me/541173662160" target="_blank">+54 117 3662160</a>
                     </div>
 
                     {{-- Redes sociales --}}
@@ -277,7 +277,7 @@
 
         {{-- Botones flotantes --}}
         {{-- Whatsapp --}}
-        <a href="https://wa.me/5491122558133" target="_blank" class="fab fa-whatsapp-square btn-whatsapp"></a>
+        <a href="https://wa.me/541173662160" target="_blank" class="fab fa-whatsapp-square btn-whatsapp"></a>
 
         {{-- Ventanas modales --}}
         {{-- Buscador --}}
