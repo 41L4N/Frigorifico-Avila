@@ -33,9 +33,17 @@ function actualizarListaCompras(btn=null) {
             processData: false,
             contentType: false,
             success: function (r) {
+                switch (datosC.get('accion')) {
 
-                if (datosC.get('accion') == 2) {
-                    formulario.remove();
+                    // Agregar
+                    case "0":
+                        $('#vtnListaCompras').modal('show');
+                    break;
+
+                    // Eliminar
+                    case "2":
+                        formulario.remove();
+                    break;
                 }
 
                 // Actualizar información

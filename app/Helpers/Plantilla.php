@@ -102,7 +102,7 @@ function listaCompras($actualizarId=false){
         // Producto
         // Si el producto no existe entonces se borra de la lista
         if (!$c = DB::table($p['tipo'])->find($p['id'])) {
-            unset($listaActual['productos'][$iC]);
+            unset($listaActual['productos'][$iP]);
             continue;
         }
 
