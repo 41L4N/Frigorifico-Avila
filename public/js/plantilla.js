@@ -61,8 +61,11 @@ function actualizarListaCompras(btn=null) {
         }
         if (typeof listaCompras.productos !== 'undefined') {
             contListaCompras.innerHTML = "";
+            console.log(
+                listaCompras.productos
+            );
             listaCompras.productos.forEach((p, iP) => {
-    
+
                 // Nuevo producto
                 var nuevoP = ejemploProductoListaCompras.cloneNode(true);
     
@@ -70,7 +73,7 @@ function actualizarListaCompras(btn=null) {
                 nuevoP.removeAttribute('id');
                 // Visibilidad
                 nuevoP.classList.remove('d-none');
-    
+
                 // Tipo
                 nuevoP.querySelector('[name="tipo"]').value = p.tipo;
                 // ID
@@ -90,7 +93,7 @@ function actualizarListaCompras(btn=null) {
                 nuevoP.querySelector('[name="cantidad"]').value = p.cantidad;
                 // Subtotal
                 nuevoP.querySelector('b.subtotal').innerHTML = p.subtotal;
-    
+
                 // Mostrar
                 contListaCompras.insertAdjacentElement('beforeend', nuevoP);
             });

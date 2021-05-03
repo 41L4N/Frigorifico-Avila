@@ -231,7 +231,7 @@
             <div class="w-100">
                 <a href="" class="titulo"></a> (<span class="precio-unitario"></span>)
                 {{-- Cantidad --}}
-                <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event)" onchange="actualizarListaCompras(this)" required>
+                <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event, true)" onchange="actualizarListaCompras(this)" required>
                 <b class="subtotal"></b>
             </div>
             <label class="btn btn-danger fas fa-times">
