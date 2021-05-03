@@ -61,7 +61,7 @@ function actualizarListaCompras(btn=null) {
         }
         if (typeof listaCompras.productos !== 'undefined') {
             contListaCompras.innerHTML = "";
-            listaCompras.productos.forEach((p, iP) => {
+            Object.values(listaCompras.productos).forEach((p, iP) => {
 
                 // Nuevo producto
                 var nuevoP = ejemploProductoListaCompras.cloneNode(true);
