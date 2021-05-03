@@ -41,7 +41,7 @@ class OrdenCompraCtrl extends Controller
             'accion'        => 'required|digits:1|digits_between:0,2',
             'tipo'          => 'required|string',
             'id'            => 'required|integer',
-            'cantidad'      => 'required|digits_between:1,5|min:1',
+            'cantidad'      => 'required|min:1',
         ]);
 
         // Lista actual
