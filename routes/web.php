@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Usuario;
 use App\Models\OrdenCompra;
 
@@ -23,6 +24,10 @@ Route::get('/comandos/{comando}', function ($c){
     shell_exec($c);
 });
 
+Route::get('/limpio', function (){
+    Cache::pull('listas-compras');
+});
+
 // Vista previa de correos
 Route::get('/vista-previa-correos/{vista}', function($v){
     return view('correos.' . $v)->with([
@@ -33,7 +38,7 @@ Route::get('/vista-previa-correos/{vista}', function($v){
 });
 
 // Mostrar imagen
-Route::get('/img/{tipo}/{id}/{iImg?}/{resolucion?}',function($tipo, $id, $iImg=0, $resolucion=null){
+Route::get('/img/{tipo}/{id}/{iImg?}/{resolucion?}', function($tipo, $id, $iImg=0, $resolucion=null){
     mostrarImg($tipo, $id, $iImg, $resolucion);
 })->name('mostrar-img');
 
