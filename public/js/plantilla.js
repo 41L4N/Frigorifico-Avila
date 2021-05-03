@@ -61,9 +61,6 @@ function actualizarListaCompras(btn=null) {
         }
         if (typeof listaCompras.productos !== 'undefined') {
             contListaCompras.innerHTML = "";
-            console.log(
-                listaCompras.productos
-            );
             listaCompras.productos.forEach((p, iP) => {
 
                 // Nuevo producto

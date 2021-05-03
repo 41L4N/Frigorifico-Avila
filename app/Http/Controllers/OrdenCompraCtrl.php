@@ -98,6 +98,7 @@ class OrdenCompraCtrl extends Controller
             case 2:
                 if ($iProductoActual !== null) {
                     unset($listas[$iListaActual]['productos'][$iProductoActual]);
+                    $listas[$iListaActual]['productos'] = array_values($listas[$iListaActual]['productos']);
                 }
             break;
         }
