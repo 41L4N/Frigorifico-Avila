@@ -155,7 +155,7 @@ class OrdenCompraCtrl extends Controller
             'usuario'       => Auth::user(),
             'ordenCompra'   => $reg
         ], function($m) use ($rq, $asunto){
-            $m->to("frigorificoavila@gmail.com");
+            $m->to("avilafrigorifico@gmail.com");
             $m->subject($asunto);
         });
 
