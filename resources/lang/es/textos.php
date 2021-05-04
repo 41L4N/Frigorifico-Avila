@@ -7,6 +7,7 @@ return [
         // Inicio
         'inicio'                => "Inicio",
         'productos'             => "Productos",
+        'mayoristas'            => "Mayoristas",
         'combos'                => "Combos",
         'ofertas'               => "Ofertas",
         // Sesion

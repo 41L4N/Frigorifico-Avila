@@ -118,6 +118,11 @@ class ProductoCtrl extends Controller
                 $ps = Producto::where('filtro', $id2);
             break;
 
+            // Mayoristas
+            case 'mayoristas':
+                $ps = Producto::whereNotNull('pedido_min_mayor')->whereNotNull('precio_mayor');
+            break;
+
             // Ofertas
             case 'ofertas':
                 $ps = Producto::where('oferta', '>', 0);
