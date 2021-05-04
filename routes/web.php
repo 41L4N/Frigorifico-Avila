@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use App\Models\Usuario;
 use App\Models\OrdenCompra;
 
 /*
@@ -18,15 +16,6 @@ use App\Models\OrdenCompra;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Comandos
-Route::get('/comandos/{comando}', function ($c){
-    shell_exec($c);
-});
-
-Route::get('/limpio', function (){
-    Cache::pull('listas-compras');
-});
 
 // Vista previa de correos
 Route::get('/vista-previa-correos/{vista}', function($v){
@@ -78,8 +67,9 @@ Route::middleware('auth')->group(function(){
         Route::post('/', [UsuarioCtrl::class,'guardar']);
 
         // Orden de compra
-        Route::view('/orden-compra', 'ordenes-compras.orden-compra')->name('orden-compra');
-        Route::post('/orden-compra',[OrdenCompraCtrl::class,'orden']);
+        Route::get('/orden-compra/{id?}', [OrdenCompraCtrl::class,'orden'])->name('orden-compra');
+        Route::get('/orden-compra-pdf/{id}', [OrdenCompraCtrl::class,'registros'])->name('orden-compra-pdf');
+        Route::post('/orden-compra', [OrdenCompraCtrl::class,'guardar']);
 
         // Salir
         Route::get("/salir", function (){

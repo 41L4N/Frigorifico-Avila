@@ -19,6 +19,9 @@ class OrdenCompraCtrl extends Controller
 
         // Vista en PDF
         if ($id && $oC = OrdenCompra::find($id)) {
+            if (!Auth::user()->administrador || $oC->id_usuario != Auth::user()->id) {
+                return back();
+            }
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('correos.orden-compra', [
                 'asunto'        => __('textos.titulos.nueva_orden_compra'),
                 'usuario'       => Usuario::find($oC->id_usuario),
@@ -109,7 +112,17 @@ class OrdenCompraCtrl extends Controller
     }
 
     // Orden
-    public function orden(Request $rq){
+    public function orden($id=null){
+        if ($id && !ordenCompra::find($id)) {
+            return back();
+        }
+        return view('ordenes-compras.orden-compra')->with([
+            'idOrdenCompra' => $id
+        ]);
+    }
+
+    // Guardar
+    public function guardar(Request $rq){
 
         // Validación
         $rq->validate([
@@ -160,11 +173,6 @@ class OrdenCompraCtrl extends Controller
         });
 
         // Respuesta
-        return back()->with([
-            'alerta' => [
-                'tipo'  => 'success',
-                'texto' => __('textos.alertas.orden_compra')
-            ]
-        ]);
+        return redirect()->route('usuario.orden-compra', $reg->id);
     }
 }

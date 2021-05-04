@@ -94,8 +94,7 @@ return [
 
         // Orden de compra
         'datos_facturacion'         => "Datos de facturación",
-        'tipo_entrega'              => "Tipo de entrega",
-        'forma_pago'                => "Forma de pago",
+        'gracias_compra'            => "Gracias por su compra"
     ],
 
     // Parrafos
@@ -116,6 +115,13 @@ return [
 
         // Desarrollador
         'desarrollador'             => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
+
+        // Orden de compra
+        'orden_compra'              => "
+                                            Su compra ya ha sido procesada exitosamente, en breve se comunicaran con usted.
+                                            <br>
+                                            Puede ver su <a href=" . route('usuario.orden-compra-pdf', ":idOrdenCompra") . ">orden de compra en PDF</a> ó puede <a href=" . route('productos') . ">ver más productos</a>.
+                                        "
     ],
 
     // Campos
