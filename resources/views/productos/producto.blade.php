@@ -118,7 +118,6 @@
             @if ($p->precio_detal)
                 <div>
                     <div class="subtitulo">{{__('textos.titulos.compra_detal')}}</div>
-                    <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_detal $p->unidad_medida"}}
                     <div>
                         <div class="precio-oferta">
                             @if ($p->oferta)
@@ -129,7 +128,9 @@
                                 {{ formatos('n', $p->precio_detal, true) }}
                             @endif
                         </div>
+                        <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_detal $p->unidad_medida"}}
                         @if ($p->pedido_min_oferta)
+                            <br>
                             <b>{{__('textos.campos.pedido_min_oferta')}}:</b> {{"$p->pedido_min_oferta $p->unidad_medida"}}
                         @endif
                     </div>
@@ -140,8 +141,8 @@
             @if ($p->pedido_min_mayor && $p->precio_mayor)
                 <div>
                     <div class="subtitulo">{{__('textos.titulos.compra_mayor')}}</div>
-                    <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_mayor $p->unidad_medida"}}
                     <div class="precio-oferta">{{formatos('n', $p->precio_mayor, true)}}</div>
+                    <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_mayor $p->unidad_medida"}}
                 </div>
             @endif
 
