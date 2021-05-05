@@ -39,7 +39,7 @@ class Producto extends Model
 
     // Precio al mayor
     function precioMayorP(){
-        $r = formatos('n', $this->precio_mayor, true) . " (x $this->pedido_min_mayor)";
+        $r = formatos('n', $this->precio_mayor, true) . " (x $this->pedido_min_mayor $this->unidad_medida)";
         return $r;
     }
 }
