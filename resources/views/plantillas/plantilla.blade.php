@@ -228,10 +228,13 @@
             </a>
             {{-- Información --}}
             <div class="w-100">
-                <a href="" class="titulo"></a> (<span class="precio-unitario"></span>)
+                {{-- Titulo --}}
+                <a href="" class="titulo"></a> <br>
+                {{-- Tipo de compra --}}
+                <b id="tipoCompra"></b>: <span class="precio-unitario"></span>
                 {{-- Cantidad --}}
                 <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event, true)" onchange="actualizarListaCompras(this)" required>
-                <b class="subtotal"></b>
+                <b>{{__('textos.campos.subtotal')}}</b>: <span class="subtotal"></span>
             </div>
             <label class="btn btn-danger fas fa-times">
                 <input type="checkbox" class="d-none" value="2" onchange="this.name='accion'; actualizarListaCompras(this);">

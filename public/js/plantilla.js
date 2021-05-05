@@ -86,10 +86,12 @@ function actualizarListaCompras(btn=null) {
                 // Titulo
                 nuevoP.querySelector('.titulo').href = ruta;
                 nuevoP.querySelector('.titulo').innerHTML = p.titulo;
+                // Tipo de compra
+                nuevoP.querySelector('#tipoCompra').innerHTML = p.tipoCompra;
                 // Cantidad
                 nuevoP.querySelector('[name="cantidad"]').value = p.cantidad;
                 // Subtotal
-                nuevoP.querySelector('b.subtotal').innerHTML = p.subtotal;
+                nuevoP.querySelector('.subtotal').innerHTML = p.subtotal;
 
                 // Mostrar
                 contListaCompras.insertAdjacentElement('beforeend', nuevoP);

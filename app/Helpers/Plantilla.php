@@ -125,6 +125,9 @@ function listaCompras($actualizarId=false){
             $c->precio_unitario = $c->precio;
         }
 
+        // Tipo de compra
+        $c->tipoCompra = __('textos.campos.precio_' . (($c->pedido_min_mayor && $c->cantidad >= $c->pedido_min_mayor) ? 'mayor' : 'detal') );
+
         // Precio unitario público
         $c->precio_unitario_p = formatos('n', $c->precio_unitario, true);
         // Subtotal
