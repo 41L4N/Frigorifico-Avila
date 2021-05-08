@@ -139,8 +139,9 @@
 }
 .secciones-pie-pagina {
     display: -webkit-flex; display: -ms-flexbox; display: flex;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
+    padding: 25px 0px;
+    margin: 25px 0px;
+    border-top: solid var(--c-l-plantilla) 1px;
     border-bottom: solid var(--c-l-plantilla) 1px;
 }
 .secciones-pie-pagina > * {

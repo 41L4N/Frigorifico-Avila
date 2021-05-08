@@ -172,6 +172,9 @@
         <div class="pie-pagina">
             <div class="container">
 
+                {{-- Precios mayoristas --}}
+                <div>{{__('textos.parrafos.disfruta_precios_mayoristas')}}</div>
+
                 {{-- Secciones --}}
                 <div class="secciones-pie-pagina">
 
