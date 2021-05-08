@@ -72,7 +72,9 @@
                 {{-- Anuncio --}}
                 <div class="anuncio-barra-s">
                     <div class="container">
-                        {{__('textos.parrafos.anuncio_menu_s')}}
+                        {{__('textos.parrafos.envio_gratis')}}
+                        <br>
+                        {{__('textos.parrafos.disfruta_precios_mayoristas')}}
                     </div>
                 </div>
 
@@ -229,9 +231,7 @@
             {{-- Información --}}
             <div class="w-100">
                 {{-- Titulo --}}
-                <a href="" class="titulo"></a> <br>
-                {{-- Tipo de compra --}}
-                <b id="tipoCompra"></b>: <span class="precio-unitario"></span>
+                <a href="" class="titulo"></a> (<span class="precio-unitario"></span>)
                 {{-- Cantidad --}}
                 <input type="number" name="cantidad" class="form-control w-25" min="1" max="999" onkeypress="soloNumeros(event, true)" onchange="actualizarListaCompras(this)" required>
                 <b>{{__('textos.campos.subtotal')}}</b>: <span class="subtotal"></span>

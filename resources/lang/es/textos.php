@@ -102,23 +102,24 @@ return [
     'parrafos' => [
 
         // Menú superior
-        'anuncio_menu_s'            => "¡Envío gratis si tu compra supera los $ 5.000 (CABA) y $8.000 (Provincia)!",
-        'sin_resultados'            => "Sin resultados",
-        'confirmacion'              => "¿Seguro que desea realizar esta acción?",
-        'necesita_ingreso'          => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
+        'envio_gratis'                  => "¡Envío gratis si tu compra supera los $ 5.000 (CABA) y $8.000 (Provincia)!",
+        'disfruta_precios_mayoristas'   => "Disfruta de nuestros precios mayoristas si tu compra supera los 20Kg",
+        'sin_resultados'                => "Sin resultados",
+        'confirmacion'                  => "¿Seguro que desea realizar esta acción?",
+        'necesita_ingreso'              => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
 
         // Correos
-        'bienvenida'                => "",
-        'invitacion'                => "",
+        'bienvenida'                    => "",
+        'invitacion'                    => "",
 
         // Derechos de autor
-        'derechos_autor'            => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
+        'derechos_autor'                => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
 
         // Desarrollador
-        'desarrollador'             => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
+        'desarrollador'                 => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
 
         // Orden de compra
-        'orden_compra'              => "
+        'orden_compra'                  => "
                                             Su compra ya ha sido procesada exitosamente, en breve se comunicaran con usted.
                                             <br>
                                             Puede ver su <a href=" . route('usuario.orden-compra-pdf', ":idOrdenCompra") . ">orden de compra en PDF</a> ó puede <a href=" . route('productos') . ">ver más productos</a>.

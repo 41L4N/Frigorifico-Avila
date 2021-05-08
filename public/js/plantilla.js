@@ -86,8 +86,6 @@ function actualizarListaCompras(btn=null) {
                 // Titulo
                 nuevoP.querySelector('.titulo').href = ruta;
                 nuevoP.querySelector('.titulo').innerHTML = p.titulo;
-                // Tipo de compra
-                nuevoP.querySelector('#tipoCompra').innerHTML = p.tipoCompra;
                 // Cantidad
                 nuevoP.querySelector('[name="cantidad"]').value = p.cantidad;
                 // Subtotal
