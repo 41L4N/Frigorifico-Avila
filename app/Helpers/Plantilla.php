@@ -135,7 +135,7 @@ function listaCompras($actualizarId=false){
             // Oferta
             $c->precio_unitario = ($c->oferta && $c->cantidad >= $c->pedido_min_oferta) ? $c->precio_minorista - ($c->oferta * $c->precio_minorista / 100) : $c->precio_minorista;
             // Precio al mayor
-            $c->precio_unitario = ($listaActual['nCompras'] >= 20) ? $c->precio_mayorista : $c->precio_unitario;
+            $c->precio_unitario = ($listaActual['nCompras'] >= 20 && $c->precio_mayorista) ? $c->precio_mayorista : $c->precio_unitario;
         }
         else {
             $c->precio_unitario = $c->precio;
