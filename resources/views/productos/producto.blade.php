@@ -133,15 +133,12 @@
                             <br>
                             <b>{{__('textos.campos.pedido_min_oferta')}}:</b> {{"$p->pedido_min_oferta $p->unidad_medida"}}
                         @endif
+                        {{-- Mayorista --}}
+                        @if ($p->precio_mayorista)
+                            <br>
+                            <b >{{__('textos.campos.precio_mayorista')}}:</b> {{formatos('n', $p->precio_mayorista, true)}}
+                        @endif
                     </div>
-                </div>
-            @endif
-
-            {{-- Mayorista --}}
-            @if ($p->precio_mayorista)
-                <div>
-                    <div class="subtitulo">{{__('textos.titulos.compra_mayorista')}}</div>
-                    <div class="precio-oferta">{{formatos('n', $p->precio_mayorista, true)}}</div>
                 </div>
             @endif
 
