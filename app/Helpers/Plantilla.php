@@ -94,9 +94,25 @@ function listaCompras($actualizarId=false){
         $listaActual = $listas[$iListaActual];
     }
 
+    // Número de compras
+    $nCompras = 0;
+    foreach ( isset($listaActual['productos']) ? $listaActual['productos'] : [] as $iP => $p ) {
+
+        // Producto
+        // Si el producto no existe entonces se borra de la lista
+        if (!$c = DB::table($p['tipo'])->find($p['id'])) {
+            unset($listaActual['productos'][$iP]);
+            $listaActual['productos'] = array_values($listaActual['productos']);
+            continue;
+        }
+
+        $nCompras = $nCompras + $p['cantidad'];
+    }
+    // Número de compras
+    $listaActual['nCompras'] = $nCompras;
+
     // Lista productos en cache
     $total = 0;
-    $nCompras = 0;
     foreach ( isset($listaActual['productos']) ? $listaActual['productos'] : [] as $iP => $p ) {
 
         // Producto
@@ -117,9 +133,9 @@ function listaCompras($actualizarId=false){
         $c->cantidad = $p['cantidad'];
         if ($c->tipo == 'productos') {
             // Oferta
-            $c->precio_unitario = ($c->oferta && $c->cantidad >= $c->pedido_min_oferta) ? $c->precio_detal - ($c->oferta * $c->precio_detal / 100) : $c->precio_detal;
+            $c->precio_unitario = ($c->oferta && $c->cantidad >= $c->pedido_min_oferta) ? $c->precio_minorista - ($c->oferta * $c->precio_minorista / 100) : $c->precio_minorista;
             // Precio al mayor
-            $c->precio_unitario = ($c->precio_mayor && $c->cantidad >= $c->pedido_min_mayor) ? $c->precio_mayor : $c->precio_unitario;
+            $c->precio_unitario = ($listaActual['nCompras'] >= 20) ? $c->precio_mayorista : $c->precio_unitario;
         }
         else {
             $c->precio_unitario = $c->precio;
@@ -136,9 +152,6 @@ function listaCompras($actualizarId=false){
 
         // Total
         $total = $total + $subtotal;
-
-        // Número de compras
-        $nCompras = $nCompras + $c->cantidad;
     }
 
     // Total
@@ -146,9 +159,6 @@ function listaCompras($actualizarId=false){
         'texto'     => formatos('n', $total ,true),
         'numero'    => $total
     ];
-
-    // Número de compras
-    $listaActual['nCompras'] = $nCompras;
 
     // Respuesta
     return [

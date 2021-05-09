@@ -114,10 +114,10 @@
             </div>
 
             {{-- Precios --}}
-            {{-- Al detal --}}
-            @if ($p->precio_detal)
+            {{-- Minorista --}}
+            @if ($p->precio_minorista)
                 <div>
-                    <div class="subtitulo">{{__('textos.titulos.compra_detal')}}</div>
+                    <div class="subtitulo">{{__('textos.titulos.compra_minorista')}}</div>
                     <div>
                         <div class="precio-oferta">
                             @if ($p->oferta)
@@ -125,10 +125,10 @@
                                 <br>
                                 {{$precio['oferta']}}
                             @else
-                                {{ formatos('n', $p->precio_detal, true) }}
+                                {{ formatos('n', $p->precio_minorista, true) }}
                             @endif
                         </div>
-                        <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_detal $p->unidad_medida"}}
+                        <b>{{__('textos.campos.pedido_min_minorista')}}:</b> {{"$p->pedido_min_minorista $p->unidad_medida"}}
                         @if ($p->pedido_min_oferta)
                             <br>
                             <b>{{__('textos.campos.pedido_min_oferta')}}:</b> {{"$p->pedido_min_oferta $p->unidad_medida"}}
@@ -137,12 +137,11 @@
                 </div>
             @endif
 
-            {{-- Al mayor --}}
-            @if ($p->pedido_min_mayor && $p->precio_mayor)
+            {{-- Mayorista --}}
+            @if ($p->precio_mayorista)
                 <div>
-                    <div class="subtitulo">{{__('textos.titulos.compra_mayor')}}</div>
-                    <div class="precio-oferta">{{formatos('n', $p->precio_mayor, true)}}</div>
-                    <b>{{__('textos.campos.pedido_min')}}:</b> {{"$p->pedido_min_mayor $p->unidad_medida"}}
+                    <div class="subtitulo">{{__('textos.titulos.compra_mayorista')}}</div>
+                    <div class="precio-oferta">{{formatos('n', $p->precio_mayorista, true)}}</div>
                 </div>
             @endif
 

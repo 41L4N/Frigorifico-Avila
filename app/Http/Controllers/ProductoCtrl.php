@@ -27,11 +27,10 @@ class ProductoCtrl extends Controller
             'titulo'            => 'required|between:1,75',
             'filtro'            => 'required|integer',
             'unidad_medida'     => 'required',
-            'pedido_min_detal'  => 'required',
-            'precio_detal'      => 'required|digits_between:1,5',
+            'pedido_min_minorista'  => 'required',
+            'precio_minorista'      => 'required|digits_between:1,5',
             'oferta'            => 'nullable|digits_between:1,5',
-            'pedido_min_mayor'  => 'nullable',
-            'precio_mayor'      => 'nullable|digits_between:1,5',
+            'precio_mayorista'      => 'nullable|digits_between:1,5',
             'descripcion'       => 'nullable|max:500',
             'img'               => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
@@ -120,7 +119,7 @@ class ProductoCtrl extends Controller
 
             // Mayoristas
             case 'mayoristas':
-                $ps = Producto::whereNotNull('pedido_min_mayor')->whereNotNull('precio_mayor');
+                $ps = Producto::whereNotNull('pedido_min_mayorista')->whereNotNull('precio_mayorista');
             break;
 
             // Ofertas

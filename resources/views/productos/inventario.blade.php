@@ -31,7 +31,7 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(), contarChecks()'></th>
-                    @foreach (['producto', 'filtro', 'precio_detal', 'oferta','precio_mayor'] as $campo)
+                    @foreach (['producto', 'filtro', 'precio_minorista', 'oferta','precio_mayorista'] as $campo)
                         <th>{!! __('textos.campos.' . $campo) !!}</th>
                     @endforeach
                     <th><i class="fas fa-cogs"></i></th>
@@ -50,9 +50,9 @@
                             </a>
                         </td>
                         <td>{{$p->filtroP()}}</td>
-                        <td>{{formatos('n', $p->precio_detal, true)}}</td>
+                        <td>{{formatos('n', $p->precio_minorista, true)}}</td>
                         <td>{{ ($p->oferta) ? $p->precioOfertaP()['oferta'] : "-" }}</td>
-                        <td>{{ ($p->precio_mayor) ? $p->precioMayorP() : "-" }}</td>
+                        <td>{{ ($p->precio_mayorista) ? $p->precioMayorP() : "-" }}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -115,15 +115,19 @@
                         </div>
                     </div>
 
-                    {{-- Compra al detal --}}
+                    {{-- Compra al minorista --}}
                     <div class="fila-form">
                         <div>
-                            <label>{{__('textos.campos.' . $n='pedido_min_detal')}}</label>
+                            <label>{{__('textos.campos.' . $n='pedido_min_minorista')}}</label>
                             <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" step="0.1" value="{{$min}}" onkeypress="soloNumeros(event, true)" required>
                         </div>
                         <div>
-                            <label>{{__('textos.campos.' . $n='precio_detal')}}</label>
+                            <label>{{__('textos.campos.' . $n='precio_minorista')}}</label>
                             <input type="number" class="form-control" name="{{$n}}" min="{{$min=1}}" max="99999" value="{{$min}}" onkeypress="soloNumeros(event)" required>
+                        </div>
+                        <div>
+                            <label>{{__('textos.campos.' . $n='precio_mayorista')}}</label>
+                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 
@@ -136,18 +140,6 @@
                         <div>
                             <label>{{__('textos.campos.' . $n='oferta')}}</label>
                             <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="100" value="{{$min}}" onkeypress="soloNumeros(event)">
-                        </div>
-                    </div>
-
-                    {{-- Compra al mayor --}}
-                    <div class="fila-form">
-                        <div>
-                            <label>{{__('textos.campos.' . $n='pedido_min_mayor')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" onkeypress="soloNumeros(event)">
-                        </div>
-                        <div>
-                            <label>{{__('textos.campos.' . $n='precio_mayor')}}</label>
-                            <input type="number" class="form-control" name="{{$n}}" min="{{$min=0}}" max="99999" onkeypress="soloNumeros(event)">
                         </div>
                     </div>
 

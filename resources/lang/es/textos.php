@@ -90,8 +90,8 @@ return [
         'seguridad'                 => "Seguridad",
 
         // Productos
-        'compra_detal'              => "Compra minorista",
-        'compra_mayor'              => "Compra mayorista",
+        'compra_minorista'          => "Compra minorista",
+        'compra_mayorista'              => "Compra mayorista",
 
         // Orden de compra
         'datos_facturacion'         => "Datos de facturación",
@@ -103,7 +103,7 @@ return [
 
         // Menú superior
         'envio_gratis'                  => "¡Envío gratis si tu compra supera los $ 5.000 (CABA) y $8.000 (Provincia)!",
-        'disfruta_precios_mayoristas'   => "Disfruta de nuestros precios mayoristas si tu compra supera los 20Kg",
+        'disfruta_precios_mayoristaistas'   => "Disfruta de nuestros precios mayoristas si tu compra supera los 20Kg",
         'sin_resultados'                => "Sin resultados",
         'confirmacion'                  => "¿Seguro que desea realizar esta acción?",
         'necesita_ingreso'              => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
@@ -153,13 +153,13 @@ return [
         'producto'                  => "Producto",
         'filtro'                    => "Filtro",
         'unidad_medida'             => "Unidad de medida",
-        'pedido_min'                => "Pedido mínimo",
-        'pedido_min_detal'          => "Pedido mínimo minorista",
-        'precio_detal'              => "Precio minorista",
+        'pedido_min_minorista'                => "Pedido mínimo",
+        'pedido_min_minorista'                => "Pedido mínimo minorista",
+        'precio_minorista'          => "Precio minorista",
         'pedido_min_oferta'         => "Pedido mínimo de oferta",
         'oferta'                    => "Oferta (%)",
-        'pedido_min_mayor'          => "Pedido mínimo mayorista",
-        'precio_mayor'              => "Precio mayorista",
+        'pedido_min_mayorista'          => "Pedido mínimo mayorista",
+        'precio_mayorista'              => "Precio mayorista",
         'descripcion'               => "Descripción",
         'actualizar_img'            => "Actualizar Imagen",
         // Combos

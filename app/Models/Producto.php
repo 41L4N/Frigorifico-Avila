@@ -31,7 +31,7 @@ class Producto extends Model
     // Precio y oferta
     function precioOfertaP(){
         return [
-            'precio' => formatos('n', $p = $this->precio_detal, true),
+            'precio' => formatos('n', $p = $this->precio_minorista, true),
             'oferta' => formatos('n', ($p - $this->oferta * $p / 100), true) . " (-$this->oferta %)"
         ];
         return $r;
@@ -39,7 +39,7 @@ class Producto extends Model
 
     // Precio al mayor
     function precioMayorP(){
-        $r = formatos('n', $this->precio_mayor, true) . " (x $this->pedido_min_mayor $this->unidad_medida)";
+        $r = formatos('n', $this->precio_mayorista, true) . " (x $this->pedido_min_mayorista $this->unidad_medida)";
         return $r;
     }
 }

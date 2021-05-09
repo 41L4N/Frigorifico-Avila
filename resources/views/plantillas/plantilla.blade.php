@@ -74,7 +74,7 @@
                     <div class="container">
                         {{__('textos.parrafos.envio_gratis')}}
                         <br>
-                        {{__('textos.parrafos.disfruta_precios_mayoristas')}}
+                        {{__('textos.parrafos.disfruta_precios_mayoristaistas')}}
                     </div>
                 </div>
 
@@ -173,7 +173,7 @@
             <div class="container">
 
                 {{-- Precios mayoristas --}}
-                <div>{{__('textos.parrafos.disfruta_precios_mayoristas')}}</div>
+                <div>{{__('textos.parrafos.disfruta_precios_mayoristaistas')}}</div>
 
                 {{-- Secciones --}}
                 <div class="secciones-pie-pagina">

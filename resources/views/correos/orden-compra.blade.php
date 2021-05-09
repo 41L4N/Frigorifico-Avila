@@ -37,7 +37,7 @@
                     </td>
                     <td>
                         @if (isset($p->oferta) && $p->oferta)
-                            <del>{{ formatos('n', $p->precio_detal, true) }}</del>
+                            <del>{{ formatos('n', $p->precio_minorista, true) }}</del>
                             <br>
                             {{ formatos('n', $p->precio_unitario, true) }} (- {{ $p->oferta }} )
                         @else
