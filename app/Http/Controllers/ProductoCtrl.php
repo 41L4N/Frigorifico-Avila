@@ -119,7 +119,7 @@ class ProductoCtrl extends Controller
 
             // Mayoristas
             case 'mayoristas':
-                $ps = Producto::whereNotNull('pedido_min_mayorista')->whereNotNull('precio_mayorista');
+                $ps = Producto::whereNotNull('precio_mayorista');
             break;
 
             // Ofertas
