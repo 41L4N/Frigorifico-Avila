@@ -52,7 +52,7 @@
                         <td>{{$p->filtroP()}}</td>
                         <td>{{formatos('n', $p->precio_minorista, true)}}</td>
                         <td>{{ ($p->oferta) ? $p->precioOfertaP()['oferta'] : "-" }}</td>
-                        <td>{{ ($p->precio_mayorista) ? $p->precioMayorP() : "-" }}</td>
+                        <td>{{ ($p->precio_mayorista) ? formatos('n', $p->precio_mayorista, true) : "-" }}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -115,7 +115,7 @@
                         </div>
                     </div>
 
-                    {{-- Compra al minorista --}}
+                    {{-- Compra minorista --}}
                     <div class="fila-form">
                         <div>
                             <label>{{__('textos.campos.' . $n='pedido_min_minorista')}}</label>

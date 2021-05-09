@@ -29,7 +29,7 @@
         <div class="titulo-min">{{$p->titulo}}</div>
 
         {{-- Precios --}}
-        {{-- Al minorista --}}
+        {{-- Minorista --}}
         <div class="precio-oferta-min">
             @if ($p->oferta)
                 <del>{{$p->precioOfertaP()['precio']}}</del>
@@ -42,7 +42,7 @@
             {{-- Al mayor --}}
             @if ($p->precio_mayorista)
                 <br>
-                {{$p->precioMayorP()}} (Al mayor)
+                {{formatos('n', $p->precio_mayorista, true)}} ({{ __('textos.campos.precio_mayorista') }})
             @endif
         </div>
     </div>
