@@ -114,10 +114,8 @@
             </div>
 
             {{-- Precios --}}
-            {{-- Minorista --}}
             @if ($p->precio_minorista)
                 <div>
-                    <div class="subtitulo">{{__('textos.titulos.compra_minorista')}}</div>
                     <div>
                         <div class="precio-oferta">
                             @if ($p->oferta)
@@ -133,7 +131,6 @@
                             <br>
                             <b>{{__('textos.campos.pedido_min_oferta')}}:</b> {{"$p->pedido_min_oferta $p->unidad_medida"}}
                         @endif
-                        {{-- Mayorista --}}
                         @if ($p->precio_mayorista)
                             <br>
                             <b >{{__('textos.campos.precio_mayorista')}}:</b> {{formatos('n', $p->precio_mayorista, true)}}
