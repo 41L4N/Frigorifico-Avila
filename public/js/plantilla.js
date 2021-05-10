@@ -55,15 +55,15 @@ function actualizarListaCompras(btn=null) {
 
     else {
 
+        // Alerta
+        document.querySelector('#vtnListaCompras .alert').innerHTML = listaCompras.msjAlerta;
+
         // Renovar productos
         if (typeof contListaCompras === 'undefined') {
             return;
         }
         if (typeof listaCompras.productos !== 'undefined') {
             contListaCompras.innerHTML = "";
-
-            // Alerta
-            document.querySelector('#vtnListaCompras .alert').innerHTML = listaCompras.msjAlerta;
 
             // Lista de productos
             listaCompras.productos.forEach((p, iP) => {
