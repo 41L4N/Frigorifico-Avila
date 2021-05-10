@@ -51,6 +51,9 @@ return [
         // Rutas
         // Roles
         'success'                   => "Operación exitosa",
+        // Lista de compras
+        'compras_minoristas'        => "Te invitamos a aprovechar nuestros precios mayoristas si tu compra alcanza un mínimo de 20Kg",
+        'compras_mayoristas'        => "¡Felicidades! Estas disfrutando de nuestros precios mayoristas",
         // Orden de compra
         'orden_compra'              => "Su orden de compra se ha generado exitosamente, en breve recibira respuesta.",
         'cupon_vencido'             => "El cupón que esta usando ya expiró"

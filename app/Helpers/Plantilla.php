@@ -111,6 +111,9 @@ function listaCompras($actualizarId=false){
     // Número de compras
     $listaActual['nCompras'] = $nCompras;
 
+    // Alerta
+    $listaActual['msjAlerta'] = __('textos.alertas.compras_' . (($nCompras < 20) ? "minoristas" : "mayoristas") );
+
     // Lista productos en cache
     $total = 0;
     foreach ( isset($listaActual['productos']) ? $listaActual['productos'] : [] as $iP => $p ) {
