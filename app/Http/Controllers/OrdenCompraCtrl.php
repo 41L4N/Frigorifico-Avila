@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\MercadoPago;
 use App\Models\Usuario;
 use App\Models\OrdenCompra;
 use App\Models\Cupon;
@@ -162,17 +163,27 @@ class OrdenCompraCtrl extends Controller
             $cupon->update(['estatus' => false]);
         }
 
-        // Notificación
-        Mail::send("correos.orden-compra", [
-            'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-            'usuario'       => Auth::user(),
-            'ordenCompra'   => $reg
-        ], function($m) use ($rq, $asunto){
-            $m->to("avilafrigorifico@gmail.com");
-            $m->subject($asunto);
+        MercadoPago::begin(function($mp){
+            $mp->addItem([
+                'id'        => uniqid(), // ID DEL PRODUCTO (PARA CONTROL INTERNO DE SU APLICACIÓN)
+                // 'title'     => 'Prueba', // Titulo del item
+                'qtty'      => 1,        // Cantidad del item
+                'price'     => $reg->total, // Precio unitario
+                'currency'  => 'ARP', // MONEDA USADA PARA PAGAR
+            ]);
         });
 
+        // Notificación
+        // Mail::send("correos.orden-compra", [
+        //     'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+        //     'usuario'       => Auth::user(),
+        //     'ordenCompra'   => $reg
+        // ], function($m) use ($rq, $asunto){
+        //     $m->to("avilafrigorifico@gmail.com");
+        //     $m->subject($asunto);
+        // });
+
         // Respuesta
-        return redirect()->route('usuario.orden-compra', $reg->id);
+        // return redirect()->route('usuario.orden-compra', $reg->id);
     }
 }

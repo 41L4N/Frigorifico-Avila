@@ -56,7 +56,9 @@ function actualizarListaCompras(btn=null) {
     else {
 
         // Alerta
-        document.querySelector('#vtnListaCompras .alert').innerHTML = listaCompras.msjAlerta;
+        if (alerta = document.querySelector('#vtnListaCompras .alert')) {
+            alerta.innerHTML = listaCompras.msjAlerta;
+        }
 
         // Renovar productos
         if (typeof contListaCompras === 'undefined') {
