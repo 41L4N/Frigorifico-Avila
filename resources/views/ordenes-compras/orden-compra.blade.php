@@ -10,21 +10,12 @@
 @section('estilos')
     <style>
         /* Dirección de envío */
-        #datosFacturacion {
+        #datosFacturacion, #direccionEnvio, #mercadoPago {
             max-height: 1000px;
             transition: .5s;
+            margin-bottom: 12.5px;
         }
-        #datosFacturacion:disabled {
-            max-height: 0px;
-            overflow: hidden;
-        }
-
-        /* Envío a domicilio */
-        #direccionEnvio {
-            max-height: 1000px;
-            transition: .5s;
-        }
-        #direccionEnvio:disabled {
+        #datosFacturacion:disabled, #direccionEnvio:disabled, #mercadoPago:disabled {
             max-height: 0px;
             overflow: hidden;
         }
@@ -102,9 +93,6 @@
                         </div>
                     </div> --}}
                 </div>
-
-                {{-- Uno adicional para el margencito XD --}}
-                <div class="fila-form"></div>
             </fieldset>
 
             {{-- Dirección de envio --}}
@@ -176,14 +164,13 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- Uno adicional para el margencito XD --}}
-                <div class="fila-form"></div>
             </fieldset>
 
             {{-- Lista de compras --}}
             {{-- Título --}}
             <div class="subtitulo-form">{{__('textos.titulos.lista_compras')}} (<span class="n-compras"></span>)</div>
+            {{-- Alerta --}}
+            <div class="alert alert-success text-center" id="alertaListaCompras"></div>
             {{-- Compras --}}
             <div id="contListaCompras"></div>
             {{-- Total --}}
@@ -192,6 +179,16 @@
                 <br>
                 <b class="precio-total"></b>
             </div>
+
+            {{-- Mercado pago --}}
+            {{-- Check --}}
+            {{-- <div class="fila-form">
+                <label class="w-auto c-pointer"> <input type="checkbox" onchange="mercadoPago.disabled = !mercadoPago.disabled"> {{__('textos.campos.mercado_pago')}} </label>
+            </div> --}}
+            {{-- Campos --}}
+            {{-- <fieldset id="mercadoPago" disabled>
+                <div class="cont-btn-mercado-pago"></div>
+            </fieldset> --}}
 
             {{-- Cupon --}}
             <div class="fila-form">
@@ -214,7 +211,6 @@
                 <button class="btn btn-primary">{{__('textos.botones.confirmar')}}</button>
             </div>
         </form>
-
     {{-- Constancia --}}
     @else
         <div class="alert alert-success text-center">
@@ -230,4 +226,22 @@
         var mensajesErrores = new Object( @json( $errors->messages() ) ),
             valoresErrores  = new Object( @json( request()->old() ) );
     </script>
+    {{-- <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script>
+        // Agrega credenciales de SDK
+          const mp = new MercadoPago('APP_USR-6e3c1e89-560a-40d4-bfe1-c987d43e9779', {
+                locale: 'es-AR'
+          });
+        
+          // Inicializa el checkout
+          mp.checkout({
+              preference: {
+                  id: 'YOUR_PREFERENCE_ID'
+              },
+              render: {
+                    container: '.cont-btn-mercado-pago', // Indica dónde se mostrará el botón de pago
+                    label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+              }
+        });
+    </script> --}}
 @endsection

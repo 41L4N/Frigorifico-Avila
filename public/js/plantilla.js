@@ -56,7 +56,7 @@ function actualizarListaCompras(btn=null) {
     else {
 
         // Alerta
-        if (alerta = document.querySelector('#vtnListaCompras .alert')) {
+        if (alerta = document.querySelector('#alertaListaCompras')) {
             alerta.innerHTML = listaCompras.msjAlerta;
         }
 

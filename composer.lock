@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a435bfafff2bd67b3ed5fa2620f6154",
+    "content-hash": "52faafb87aeac20d1d63e52e720f1c04",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -186,32 +186,30 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.4.0",
+            "version": "1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
-                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b17c5014ef81d212ac539f07a1001832df1b6d3b",
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
-                "php": "^5.6 || ^7.0"
+                "ext-tokenizer": "*",
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^5.7"
+                "doctrine/coding-standard": "^6.0 || ^8.1",
+                "phpstan/phpstan": "^0.12.20",
+                "phpunit/phpunit": "^7.5 || ^9.1.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
@@ -223,16 +221,16 @@
             ],
             "authors": [
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
                 },
                 {
                     "name": "Jonathan Wage",
@@ -244,7 +242,7 @@
                 }
             ],
             "description": "Docblock Annotations Parser",
-            "homepage": "http://www.doctrine-project.org",
+            "homepage": "https://www.doctrine-project.org/projects/annotations.html",
             "keywords": [
                 "annotations",
                 "docblock",
@@ -252,9 +250,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/v1.4.0"
+                "source": "https://github.com/doctrine/annotations/tree/1.12.1"
             },
-            "time": "2017-02-24T16:22:25+00:00"
+            "time": "2021-02-21T21:00:45+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -1317,56 +1315,6 @@
             "time": "2021-04-26T11:24:25+00:00"
         },
         {
-            "name": "gjae/laravel-mercadopago",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gjae/laravel-mercadopago.git",
-                "reference": "94f476512200c1d1242a4294aa2eda63878d374e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gjae/laravel-mercadopago/zipball/94f476512200c1d1242a4294aa2eda63878d374e",
-                "reference": "94f476512200c1d1242a4294aa2eda63878d374e",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=5.5",
-                "mercadopago/dx-php": "1.5.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Gjae\\MercadoPago\\MPServiceProvider"
-                    ],
-                    "aliases": {
-                        "MercadoPago": "Gjae\\MercadoPago\\Facade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Gjae\\MercadoPago\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Giovanny Avila",
-                    "email": "gjavilae@gmail.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/gjae/laravel-mercadopago/issues",
-                "source": "https://github.com/gjae/laravel-mercadopago/tree/master"
-            },
-            "time": "2020-05-12T17:43:35+00:00"
-        },
-        {
             "name": "graham-campbell/result-type",
             "version": "v1.0.1",
             "source": {
@@ -1667,16 +1615,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.40.0",
+            "version": "v8.41.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4"
+                "reference": "05417155d886df8710e55c84e12622b52d83c47c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a654897ad7f97aea9d7ef292803939798c4a02a4",
-                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/05417155d886df8710e55c84e12622b52d83c47c",
+                "reference": "05417155d886df8710e55c84e12622b52d83c47c",
                 "shasum": ""
             },
             "require": {
@@ -1784,7 +1732,7 @@
                 "phpunit/phpunit": "Required to use assertions and run tests (^8.5.8|^9.3.3).",
                 "predis/predis": "Required to use the predis connector (^1.1.2).",
                 "psr/http-message": "Required to allow Storage::put to accept a StreamInterface (^1.0).",
-                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0).",
+                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0|^6.0).",
                 "symfony/cache": "Required to PSR-6 cache bridge (^5.1.4).",
                 "symfony/filesystem": "Required to enable support for relative symbolic links (^5.1.4).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
@@ -1831,7 +1779,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-04-28T14:38:56+00:00"
+            "time": "2021-05-11T14:00:02+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2155,25 +2103,26 @@
         },
         {
             "name": "mercadopago/dx-php",
-            "version": "1.5.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mercadopago/dx-php.git",
-                "reference": "e8764a9a09badcbdfe6dafcd440ac38713a77502"
+                "reference": "2ea4d51f6b29d568b3a06d430114467fc2ab6b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mercadopago/dx-php/zipball/e8764a9a09badcbdfe6dafcd440ac38713a77502",
-                "reference": "e8764a9a09badcbdfe6dafcd440ac38713a77502",
+                "url": "https://api.github.com/repos/mercadopago/dx-php/zipball/2ea4d51f6b29d568b3a06d430114467fc2ab6b90",
+                "reference": "2ea4d51f6b29d568b3a06d430114467fc2ab6b90",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "1.4",
-                "doctrine/common": "~2.6",
-                "php": ">=5.5.0"
+                "doctrine/annotations": "^1.8",
+                "doctrine/common": "^2.6",
+                "php": ">=7.1.0"
             },
             "require-dev": {
                 "doctrine/orm": "~2.3",
+                "phpdocumentor/phpdocumentor": "^2.0",
                 "phpmd/phpmd": "@stable",
                 "phpunit/phpunit": "^5",
                 "sebastian/phpcpd": "*",
@@ -2209,12 +2158,12 @@
                     "role": "Developer"
                 }
             ],
+            "description": "Mercado Pago PHP SDK",
             "homepage": "https://github.com/mercadopago/dx-php",
             "support": {
-                "issues": "https://github.com/mercadopago/dx-php/issues",
-                "source": "https://github.com/mercadopago/dx-php/tree/1.5.0"
+                "source": "https://github.com/mercadopago/dx-php/tree/2.2.1"
             },
-            "time": "2019-09-23T14:58:36+00:00"
+            "time": "2020-11-13T21:50:52+00:00"
         },
         {
             "name": "monolog/monolog",

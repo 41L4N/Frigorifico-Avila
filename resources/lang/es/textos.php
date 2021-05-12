@@ -184,7 +184,8 @@ return [
         'cupon'                     => "Cupón",
         'total'                     => "Total",
         // Ordenes de compras
-        'fecha'                     => "Fecha"
+        'fecha'                     => "Fecha",
+        'mercado_pago'              => "Mercado Pago"
     ],
 
     // Placesholder

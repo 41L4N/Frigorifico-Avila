@@ -36,6 +36,19 @@
         <meta name="copyright" content="{{config('app.name')}}">
         <meta name="keywords" content="{{$descripcionMD}}">
 
+        <meta name="google-site-verification" content="7-6aQ-DlXE2TjolObjA9gCIRArLi5fJ85F2PvDlMdAY" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-745FLYKBYH"></script>
+        <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-745FLYKBYH');</script>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-TKWKCVH');</script>
+        
+        {{-- Pixel de facebook --}}
+        <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '282322586771934');fbq('track', 'PageView');</script>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=282322586771934&ev=PageView&noscript=1"/></noscript>
+        <!-- End Facebook Pixel Code -->
+        <meta name="facebook-domain-verification" content="jvplf5oa48zys36lmjlel4slsjbr44" />
+
         {{-- Iconos --}}
         <link rel="stylesheet" href="{{asset("/iconos/css/all.min.css")}}">
 
@@ -50,16 +63,6 @@
         {{-- JavaScript --}}
         <script src="{{asset("/js/jquery.j")}}s"></script>
         <script src="{{asset("/js/bootstrap/bootstrap.min.js")}}"></script>
-
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-745FLYKBYH"></script>
-        <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-745FLYKBYH');</script>
-
-        {{-- Pixel de facebook --}}
-        <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '282322586771934');fbq('track', 'PageView');</script>
-        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=282322586771934&ev=PageView&noscript=1"/></noscript>
-        <!-- End Facebook Pixel Code -->
-        <meta name="facebook-domain-verification" content="jvplf5oa48zys36lmjlel4slsjbr44" />
     </head>
     <body>
 
@@ -260,7 +263,7 @@
                         <div class="modal-body">
 
                             {{-- Alerta --}}
-                            <div class="alert alert-success text-center"></div>
+                            <div class="alert alert-success text-center" id="alertaListaCompras"></div>
 
                             {{-- Lista --}}
                             <div id="contListaCompras"></div>

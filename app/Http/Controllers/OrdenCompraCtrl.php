@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\MercadoPago;
 use App\Models\Usuario;
 use App\Models\OrdenCompra;
 use App\Models\Cupon;
@@ -148,30 +147,30 @@ class OrdenCompraCtrl extends Controller
         $listaActual = listaCompras(true);
 
         // Registro
-        $reg = new OrdenCompra;
-        $reg->id_usuario = Auth::user()->id;
-        $reg->codigo = uniqid();
-        $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
-        $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
-        $reg->productos = json_encode($listaActual['lista']['productos']);
-        $reg->cupon = ($cupon) ? json_encode($cupon) : null;
-        $total = $listaActual['lista']['total']['numero'];
-        $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
-        $reg->notas = $rq->notas;
-        $reg->save();
-        if ($cupon) {
-            $cupon->update(['estatus' => false]);
-        }
+        // $reg = new OrdenCompra;
+        // $reg->id_usuario = Auth::user()->id;
+        // $reg->codigo = uniqid();
+        // $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
+        // $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
+        // $reg->productos = json_encode($listaActual['lista']['productos']);
+        // $reg->cupon = ($cupon) ? json_encode($cupon) : null;
+        // $total = $listaActual['lista']['total']['numero'];
+        // $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
+        // $reg->notas = $rq->notas;
+        // $reg->save();
+        // if ($cupon) {
+        //     $cupon->update(['estatus' => false]);
+        // }
 
-        MercadoPago::begin(function($mp){
-            $mp->addItem([
-                'id'        => uniqid(), // ID DEL PRODUCTO (PARA CONTROL INTERNO DE SU APLICACIÓN)
-                // 'title'     => 'Prueba', // Titulo del item
-                'qtty'      => 1,        // Cantidad del item
-                'price'     => $reg->total, // Precio unitario
-                'currency'  => 'ARP', // MONEDA USADA PARA PAGAR
-            ]);
-        });
+        MercadoPago\SDK::setAccessToken("APP_USR-4700521719044381-073017-63279c70399d5f740ea1a6c9fc2207cc-377450564");
+        $preference = new MercadoPago\Preference();
+        // Crea un ítem en la preferencia
+        $item = new MercadoPago\Item();
+        $item->title = 'Mi producto';
+        $item->quantity = 1;
+        $item->unit_price = 75.56;
+        $preference->items = array($item);
+        $preference->save();
 
         // Notificación
         // Mail::send("correos.orden-compra", [
