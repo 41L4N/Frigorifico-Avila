@@ -158,7 +158,7 @@ class OrdenCompraCtrl extends Controller
         $total = $listaActual['lista']['total']['numero'];
         $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
         $reg->notas = $rq->notas;
-        // $reg->save();
+        $reg->save();
         if ($cupon) {
             $cupon->update(['estatus' => false]);
         }
@@ -172,6 +172,7 @@ class OrdenCompraCtrl extends Controller
             $payment->installments = (int)$_POST['installments'];
             $payment->payment_method_id = $_POST['paymentMethodId'];
             $payment->issuer_id = (int)$_POST['issuer'];
+
             $payer = new \MercadoPago\Payer();
             $payer->email = $_POST['email'];
             $payer->identification = array(
@@ -183,16 +184,16 @@ class OrdenCompraCtrl extends Controller
         }
 
         // Notificación
-        // Mail::send("correos.orden-compra", [
-        //     'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-        //     'usuario'       => Auth::user(),
-        //     'ordenCompra'   => $reg
-        // ], function($m) use ($rq, $asunto){
-        //     $m->to("avilafrigorifico@gmail.com");
-        //     $m->subject($asunto);
-        // });
+        Mail::send("correos.orden-compra", [
+            'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+            'usuario'       => Auth::user(),
+            'ordenCompra'   => $reg
+        ], function($m) use ($rq, $asunto){
+            $m->to("avilafrigorifico@gmail.com");
+            $m->subject($asunto);
+        });
 
         // Respuesta
-        // return redirect()->route('usuario.orden-compra', $reg->id);
+        return redirect()->route('usuario.orden-compra', $reg->id);
     }
 }
