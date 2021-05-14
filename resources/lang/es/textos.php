@@ -98,6 +98,7 @@ return [
 
         // Orden de compra
         'datos_facturacion'         => "Datos de facturación",
+        'forma_pago'                => "Forma de pago",
         'gracias_compra'            => "Gracias por su compra"
     ],
 
@@ -105,28 +106,28 @@ return [
     'parrafos' => [
 
         // Menú superior
-        'envio_gratis'                  => "¡Envío gratis si tu compra supera los $ 5.000 (CABA) y $8.000 (Provincia)!",
+        'envio_gratis'                      => "¡Envío gratis si tu compra supera los $ 5.000 (CABA) y $8.000 (Provincia)!",
         'disfruta_precios_mayoristaistas'   => "Disfruta de nuestros precios mayoristas si tu compra supera los 20Kg",
-        'sin_resultados'                => "Sin resultados",
-        'confirmacion'                  => "¿Seguro que desea realizar esta acción?",
-        'necesita_ingreso'              => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
+        'sin_resultados'                    => "Sin resultados",
+        'confirmacion'                      => "¿Seguro que desea realizar esta acción?",
+        'necesita_ingreso'                  => "Necesitas <a href='". route('sesion', 'ingreso') ."'>iniciar sesion</a> ó <a href='". route('sesion', 'registro') ."'>registrarte</a> para continuar",
 
         // Correos
-        'bienvenida'                    => "",
-        'invitacion'                    => "",
+        'bienvenida'                        => "",
+        'invitacion'                        => "",
 
         // Derechos de autor
-        'derechos_autor'                => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
+        'derechos_autor'                    => "2021 &copy " . config('app.name') . ". Todos los derechos reservados",
 
         // Desarrollador
-        'desarrollador'                 => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
+        'desarrollador'                     => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
 
         // Orden de compra
-        'orden_compra'                  => "
-                                            Su compra ya ha sido procesada exitosamente, en breve se comunicaran con usted.
-                                            <br>
-                                            Puede ver su <a href=" . route('usuario.orden-compra-pdf', ":idOrdenCompra") . ">orden de compra en PDF</a> ó puede <a href=" . route('productos') . ">ver más productos</a>.
-                                        "
+        'orden_compra'                      => "
+                                                Su compra ya ha sido procesada exitosamente, en breve se comunicaran con usted.
+                                                <br>
+                                                Puede ver su <a href=" . route('usuario.orden-compra-pdf', ":idOrdenCompra") . ">orden de compra en PDF</a> ó puede <a href=" . route('productos') . ">ver más productos</a>.
+                                            "
     ],
 
     // Campos
@@ -156,13 +157,13 @@ return [
         'producto'                  => "Producto",
         'filtro'                    => "Filtro",
         'unidad_medida'             => "Unidad de medida",
-        'pedido_min_minorista'                => "Pedido mínimo",
-        'pedido_min_minorista'                => "Pedido mínimo minorista",
+        'pedido_min_minorista'      => "Pedido mínimo",
+        'pedido_min_minorista'      => "Pedido mínimo minorista",
         'precio_minorista'          => "Precio minorista",
         'pedido_min_oferta'         => "Pedido mínimo de oferta",
         'oferta'                    => "Oferta (%)",
-        'pedido_min_mayorista'          => "Pedido mínimo mayorista",
-        'precio_mayorista'              => "Precio mayorista",
+        'pedido_min_mayorista'      => "Pedido mínimo mayorista",
+        'precio_mayorista'          => "Precio mayorista",
         'descripcion'               => "Descripción",
         'actualizar_img'            => "Actualizar Imagen",
         // Combos
@@ -185,6 +186,7 @@ return [
         'total'                     => "Total",
         // Ordenes de compras
         'fecha'                     => "Fecha",
+        'efectivo'                  => "Efectivo",
         'mercado_pago'              => "Mercado Pago"
     ],
 

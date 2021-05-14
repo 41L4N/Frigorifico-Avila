@@ -129,6 +129,7 @@ class OrdenCompraCtrl extends Controller
             'cantidad'          => 'required|digits_between:1,5|min:1',
             'datos_facturacion' => "sometimes|array",
             'direccion_envio'   => "sometimes|array",
+            'forma_pago'        => "required",
             'notas'             => "nullable",
             'cupon'             => "nullable|exists:cupones,codigo"
         ]);
@@ -157,32 +158,41 @@ class OrdenCompraCtrl extends Controller
         $total = $listaActual['lista']['total']['numero'];
         $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
         $reg->notas = $rq->notas;
-        $reg->save();
+        // $reg->save();
         if ($cupon) {
             $cupon->update(['estatus' => false]);
         }
 
-        // MercadoPago\SDK::setAccessToken("APP_USR-4700521719044381-073017-63279c70399d5f740ea1a6c9fc2207cc-377450564");
-        // $preference = new MercadoPago\Preference();
-        // // Crea un ítem en la preferencia
-        // $item = new MercadoPago\Item();
-        // $item->title = 'Mi producto';
-        // $item->quantity = 1;
-        // $item->unit_price = 75.56;
-        // $preference->items = array($item);
-        // $preference->save();
+        if ($rq->forma_pago == 'Mercado Pago') {
+            \MercadoPago\SDK::setAccessToken("APP_USR-4700521719044381-073017-63279c70399d5f740ea1a6c9fc2207cc-377450564");
+            $payment = new \MercadoPago\Payment();
+            $payment->transaction_amount = (float) $reg->total;
+            $payment->token = $_POST['token'];
+            $payment->description = $reg->notas;
+            $payment->installments = (int)$_POST['installments'];
+            $payment->payment_method_id = $_POST['paymentMethodId'];
+            $payment->issuer_id = (int)$_POST['issuer'];
+            $payer = new \MercadoPago\Payer();
+            $payer->email = $_POST['email'];
+            $payer->identification = array(
+                "type" => $_POST['docType'],
+                "number" => $_POST['docNumber']
+            );
+            $payment->payer = $payer;
+            $payment->save();
+        }
 
         // Notificación
-        Mail::send("correos.orden-compra", [
-            'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-            'usuario'       => Auth::user(),
-            'ordenCompra'   => $reg
-        ], function($m) use ($rq, $asunto){
-            $m->to("avilafrigorifico@gmail.com");
-            $m->subject($asunto);
-        });
+        // Mail::send("correos.orden-compra", [
+        //     'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+        //     'usuario'       => Auth::user(),
+        //     'ordenCompra'   => $reg
+        // ], function($m) use ($rq, $asunto){
+        //     $m->to("avilafrigorifico@gmail.com");
+        //     $m->subject($asunto);
+        // });
 
         // Respuesta
-        return redirect()->route('usuario.orden-compra', $reg->id);
+        // return redirect()->route('usuario.orden-compra', $reg->id);
     }
 }
