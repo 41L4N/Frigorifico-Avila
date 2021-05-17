@@ -112,8 +112,8 @@ class OrdenCompraCtrl extends Controller
     }
 
     // Orden
-    public function orden($id=null){
-        if ($id && !ordenCompra::find($id)) {
+    public function orden($id=null, $estatus=null){
+        if ($id && !$oC = ordenCompra::find($id)) {
             return back();
         }
         return view('ordenes-compras.orden-compra')->with([
@@ -154,46 +154,102 @@ class OrdenCompraCtrl extends Controller
         $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
         $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
         $reg->productos = json_encode($listaActual['lista']['productos']);
-        $reg->cupon = ($cupon) ? json_encode($cupon) : null;
+        // $reg->forma_pago = $rq->forma_pago;
+        if ($cupon) {
+            $reg->cupon = json_encode($cupon);
+            $cupon->update(['estatus' => false]);
+        }
         $total = $listaActual['lista']['total']['numero'];
         $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
         $reg->notas = $rq->notas;
-        $reg->save();
-        if ($cupon) {
-            $cupon->update(['estatus' => false]);
+        
+        // Efectivo
+        if ($rq->forma_pago != 'mercado_pago') {
+            $reg->save();
+
+            // Notificación
+            Mail::send("correos.orden-compra", [
+                'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+                'usuario'       => Auth::user(),
+                'ordenCompra'   => $reg
+            ], function($m) use ($asunto){
+                $m->to("avilafrigorifico@gmail.com");
+                $m->subject($asunto);
+            });
+
+            // Respuesta
+            return redirect()->route('usuario.orden-compra', $reg->id);
         }
 
-        if ($rq->forma_pago == 'Mercado Pago') {
-            \MercadoPago\SDK::setAccessToken("APP_USR-4700521719044381-073017-63279c70399d5f740ea1a6c9fc2207cc-377450564");
-            $payment = new \MercadoPago\Payment();
-            $payment->transaction_amount = (float) $reg->total;
-            $payment->token = $_POST['token'];
-            $payment->description = $reg->notas;
-            $payment->installments = (int)$_POST['installments'];
-            $payment->payment_method_id = $_POST['paymentMethodId'];
-            $payment->issuer_id = (int)$_POST['issuer'];
+        // Mercado pago
+        else {
 
-            $payer = new \MercadoPago\Payer();
-            $payer->email = $_POST['email'];
-            $payer->identification = array(
-                "type" => $_POST['docType'],
-                "number" => $_POST['docNumber']
-            );
-            $payment->payer = $payer;
-            $payment->save();
+            Cache::put($reg->codigo, $reg);
+            // \MercadoPago\SDK::setAccessToken('TEST-4700521719044381-073017-aa0179eaba4a07b2f97c56997f32f0a7-377450564');
+            \MercadoPago\SDK::setAccessToken('APP_USR-4700521719044381-073017-63279c70399d5f740ea1a6c9fc2207cc-377450564');
+
+            // Crea un objeto de preferencia
+            $preference = new \MercadoPago\Preference();
+
+            $items = [];
+            foreach (listaCompras()['lista']['productos'] as $p) {
+                $item = new \MercadoPago\Item();
+                $item->title = $p->titulo;
+                $item->quantity = $p->cantidad;
+                $item->unit_price = $p->precio_unitario;
+                array_push($items, $item);
+            }
+            $preference->items = $items;
+            $preference->back_urls = [
+                'success' => route('usuario.orden-compra.mercado-pago', [$reg->codigo, true]),
+                "failure" => route('usuario.orden-compra.mercado-pago', [$reg->codigo, false]),
+            ];
+            $preference->auto_return = 'approved';
+            $preference->save();
+
+            // Pago
+            // $payment = new \MercadoPago\Payment();
+            // $payment->transaction_amount = (float) $reg->total;
+            // $payment->token = $_POST['token'];
+            // $payment->description = $reg->notas;
+            // $payment->installments = (int)$_POST['installments'];
+            // $payment->payment_method_id = $_POST['paymentMethodId'];
+            // $payment->issuer_id = (int)$_POST['issuer'];
+
+            // Pagador
+            // $payer = new \MercadoPago\Payer();
+            // $payer->email = $_POST['email'];
+            // $payer->identification = array(
+            //     "type" => $_POST['docType'],
+            //     "number" => $_POST['docNumber']
+            // );
+            // $payment->payer = $payer;
+            // $payment->save();
+
+            // Vista de checkout
+            return view('ordenes-compras.mercado-pago')->with([
+                'idPreference' => $preference->id
+            ]);
         }
+    }
 
-        // Notificación
-        Mail::send("correos.orden-compra", [
-            'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-            'usuario'       => Auth::user(),
-            'ordenCompra'   => $reg
-        ], function($m) use ($rq, $asunto){
-            $m->to("avilafrigorifico@gmail.com");
-            $m->subject($asunto);
-        });
+    // Mercado pago
+    public function mercadoPago($id, $estatus){
+        if ($estatus && $reg = Cache::get($id)) {
 
-        // Respuesta
-        return redirect()->route('usuario.orden-compra', $reg->id);
+            $reg->save();
+
+            // Notificación
+            Mail::send("correos.orden-compra", [
+                'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+                'usuario'       => Auth::user(),
+                'ordenCompra'   => $reg
+            ], function($m) use ($asunto){
+                $m->to("avilafrigorifico@gmail.com");
+                $m->subject($asunto);
+            });
+            return redirect()->route('usuario.orden-compra', $reg->id);
+        }
+        return redirect()->route('usuario.orden-compra');
     }
 }
