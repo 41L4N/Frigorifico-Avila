@@ -154,7 +154,7 @@ class OrdenCompraCtrl extends Controller
         $reg->datos_facturacion = ($dF = $rq->datos_facturacion) ? json_encode($dF) : null;
         $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
         $reg->productos = json_encode($listaActual['lista']['productos']);
-        // $reg->forma_pago = $rq->forma_pago;
+        $reg->forma_pago = $rq->forma_pago;
         if ($cupon) {
             $reg->cupon = json_encode($cupon);
             $cupon->update(['estatus' => false]);
