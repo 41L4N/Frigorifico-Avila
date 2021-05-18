@@ -193,14 +193,16 @@
                 </div>
 
                 {{-- Cuadros --}}
-                <div class="cont-mins cont-cuadros">
-                    @foreach (['ordenes-compras', 'pagos_linea', 'envios'] as $item)
-                        <div class="cuadro">
-                            <i class="{{iconos($item)}}"></i>
-                            <br>
-                            <h4>{{__('textos.titulos.' . $item)}}</h4>
-                        </div>
-                    @endforeach
+                <div class="cont-cuadros">
+                    <div class="container cont-mins">
+                        @foreach (['ordenes-compras', 'pagos_linea', 'envios'] as $item)
+                            <div class="cuadro">
+                                <i class="{{iconos($item)}}"></i>
+                                <br>
+                                <h4>{{__('textos.titulos.' . $item)}}</h4>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @endif
 
