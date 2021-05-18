@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FiltroProducto;
 use App\Models\Producto;
+use App\Models\Combo;
 
 class InicioCtrl extends Controller
 {
@@ -18,7 +19,9 @@ class InicioCtrl extends Controller
                                 }, $isCarrusel),
             'productos'         => [
                 'mas_visitados' => Producto::orderBy('n_visitas', 'DESC')->limit(6)->get(),
-                'mas_nuevos'    => Producto::orderBy('created_at', 'DESC')->limit(6)->get()
+                'mas_nuevos'    => Producto::orderBy('created_at', 'DESC')->limit(6)->get(),
+                'combos'        => Combo::orderBy('n_visitas', 'DESC')->limit(6)->get(),
+                'ofertas'       => Producto::where('oferta','>',0)->where('pedido_min_oferta','>',0)->get()
             ],
             'filtros_productos' => FiltroProducto::all()
         ]);

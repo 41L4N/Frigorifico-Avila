@@ -18,6 +18,7 @@ class CrearTbCombos extends Migration
             $tb->string('titulo');
             $tb->string('productos');
             $tb->string('precio');
+            $tb->integer('n_visitas')->default(0);
             $tb->timestamps();
         });
     }

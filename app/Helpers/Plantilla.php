@@ -64,7 +64,8 @@ function iconos($i){
         'instagram'         => "fab fa-instagram",
 
         // Envíos
-        'envios'            => "fas fa-truck"
+        'envios'            => "fas fa-truck",
+        'pagos_linea'       => "fas fa-hand-holding-usd"
     ];
 
     // Respuesta

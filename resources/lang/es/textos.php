@@ -65,6 +65,11 @@ return [
         // Inicio
         'mas_visitados'             => "Mas visitados",
         'mas_nuevos'                => "Mas nuevos",
+        'combos'                    => "Combos",
+        'ofertas'                   => "Ofertas",
+        'ordenes-compras'           => "Genera tu pedido",
+        'pagos_linea'               => "Paga en línea",
+        'envios'                    => "Enviamos tu compra",
 
         // Sesion
         'registro'                  => "Registro",
@@ -94,7 +99,7 @@ return [
 
         // Productos
         'compra_minorista'          => "Compra minorista",
-        'compra_mayorista'              => "Compra mayorista",
+        'compra_mayorista'          => "Compra mayorista",
 
         // Orden de compra
         'datos_facturacion'         => "Datos de facturación",

@@ -165,6 +165,45 @@
                 </div>
             @endif
 
+            {{-- Contenido de inicio --}}
+            @if (Route::currentRouteName() == 'inicio')
+
+                {{-- Carrusel --}}
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @foreach ($isCarrusel as $i)
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" @if ($loop->first) class="active" @endif></li>
+                        @endforeach
+                    </ol>
+                    <div class="carousel-inner">
+                        @foreach ($isCarrusel as $i)
+                            <div class="carousel-item @if($loop->first) active @endif">
+                                <img class="d-block w-100" src="{{route('mostrar-img', ['carrusel', $i])}}" alt="{{config('app.name')}}">
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                {{-- Cuadros --}}
+                <div class="cont-mins cont-cuadros">
+                    @foreach (['ordenes-compras', 'pagos_linea', 'envios'] as $item)
+                        <div class="cuadro">
+                            <i class="{{iconos($item)}}"></i>
+                            <br>
+                            <h4>{{__('textos.titulos.' . $item)}}</h4>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
             {{-- Contenido --}}
             <div class="container contenido d-flex flex-column flex-fill">
                 @yield('contenido')
