@@ -26,9 +26,7 @@
                 <th>{{__('textos.campos.precio')}}</th>
                 <th>{{__('textos.campos.cantidad')}}</th>
                 <th>{{__('textos.campos.subtotal')}}</th>
-                <th>{{__('textos.campos.total')}}</th>
             </tr>
-            @php($total = 0)
             @foreach (json_decode($ordenCompra->productos) as $p)
                 <tr>
                     <th>{{$loop->iteration}}</th>
@@ -46,16 +44,15 @@
                     </td>
                     <td>{{$p->cantidad}}</td>
                     <td>{{$p->subtotal}}</td>
-                    <td>{{$total = $total + $p->subtotal}}</td>
                 </tr>
             @endforeach
             <tr>
-                <th colspan="4"></th>
+                <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.subtotal')}}</th>
                 <th>{{formatos('n', $ordenCompra->subtotal, true)}}</th>
             </tr>
             <tr>
-                <th colspan="4"></th>
+                <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
                 <th>
                     @if ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon))
@@ -68,7 +65,7 @@
                 </th>
             </tr>
             <tr>
-                <th colspan="4"></th>
+                <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.total')}}</th>
                 <th>{{formatos('n', $ordenCompra->total, true)}}</th>
             </tr>
