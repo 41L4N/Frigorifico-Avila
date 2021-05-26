@@ -102,7 +102,7 @@ return [
         'compra_mayorista'          => "Compra mayorista",
 
         // Orden de compra
-        'datos_facturacion'         => "Datos de facturación"
+        'datos_facturacion'         => "Datos de facturación",
         'gracias_compra'            => "Gracias por su compra"
     ],
 
