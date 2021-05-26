@@ -48,7 +48,7 @@
                 </tr>
             @endforeach
             <tr>
-                <td colspan="5" style="border-bottom: solid grey 1px"><br><br></td>
+                <td colspan="6" style="border-bottom: solid grey 1px"><br><br></td>
             </tr>
             <tr>
                 <th colspan="3"></th>
@@ -76,8 +76,8 @@
             </tr>
             <tr>
                 <th colspan="3"></th>
-                <th style="text-align: right;" colspan="2">{{__('textos.campos.total')}}</th>
-                <th>{{formatos('n', $ordenCompra->total, true)}}</th>
+                <th style="text-align: right;">{{__('textos.campos.total')}}</th>
+                <th  colspan="2">{{formatos('n', $ordenCompra->total, true)}}</th>
             </tr>
         </table>
         @if ($direccionE = $ordenCompra->direccion_envio)
