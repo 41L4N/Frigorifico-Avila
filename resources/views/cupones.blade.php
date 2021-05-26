@@ -32,7 +32,6 @@
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(),contarChecks()'></th>
                     <th>{{__('textos.campos.titulo')}}</th>
-                    <th>{{__('textos.campos.codigo')}}</th>
                     <th>{{__('textos.campos.oferta')}}</th>
                     <th>{{__('textos.campos.fecha_vencimiento')}}</th>
                     <th><i class="fas fa-cogs"></i></th>
@@ -44,7 +43,6 @@
                         <th>{{$loop->iteration}}</th>
                         <th><input type="checkbox" name="registros[]" onclick='contarChecks()' value="{{$reg->id}}"></th>
                         <td>{{$reg->titulo}}</td>
-                        <td>{{$reg->codigo}}</td>
                         <td>{{$reg->oferta}}</td>
                         <td>{{formatos('f', $reg->fecha_vencimiento)}}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>

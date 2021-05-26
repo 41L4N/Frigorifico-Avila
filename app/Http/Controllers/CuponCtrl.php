@@ -28,7 +28,6 @@ class CuponCtrl extends Controller
         // Registro principal
         if (!$reg = Cupon::find($rq->id)) {
             $reg = new Cupon;
-            $reg->codigo = uniqid();
         }
         // Campos directos
         foreach (Schema::getColumnListing( (new Cupon)->getTable() ) as $campo) {

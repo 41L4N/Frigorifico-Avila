@@ -131,11 +131,11 @@ class OrdenCompraCtrl extends Controller
             'direccion_envio'   => "sometimes|array",
             'forma_pago'        => "required",
             'notas'             => "nullable",
-            'cupon'             => "nullable|exists:cupones,codigo"
+            'cupon'             => "nullable|exists:cupones,titulo"
         ]);
 
         // Validacion del cupon
-        if ( ( $cupon = Cupon::where('codigo', $rq->cupon)->where('estatus', true)->first() ) && $cupon->fecha_vencimiento < today()->toDateString()) {
+        if ( ( $cupon = Cupon::where('titulo', $rq->cupon)->where('estatus', true)->first() ) && $cupon->fecha_vencimiento < today()->toDateString()) {
             return back()->with([
                 'alerta' => [
                     'tipo'  => 'danger',
@@ -168,14 +168,14 @@ class OrdenCompraCtrl extends Controller
             $reg->save();
 
             // Notificación
-            Mail::send("correos.orden-compra", [
-                'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-                'usuario'       => Auth::user(),
-                'ordenCompra'   => $reg
-            ], function($m) use ($asunto){
-                $m->to("avilafrigorifico@gmail.com");
-                $m->subject($asunto);
-            });
+            // Mail::send("correos.orden-compra", [
+            //     'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+            //     'usuario'       => Auth::user(),
+            //     'ordenCompra'   => $reg
+            // ], function($m) use ($asunto){
+            //     $m->to("avilafrigorifico@gmail.com");
+            //     $m->subject($asunto);
+            // });
 
             // Respuesta
             return redirect()->route('usuario.orden-compra', $reg->id);

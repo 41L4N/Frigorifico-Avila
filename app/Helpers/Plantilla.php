@@ -158,6 +158,9 @@ function listaCompras($actualizarId=false){
         $total = $total + $subtotal;
     }
 
+    // Comision de mercado pago
+    $listaActual['comisionMercadoPago'] = formatos('n', 7 * $total / 100 ,true);
+
     // Total
     $listaActual['total'] = [
         'texto'     => formatos('n', $total ,true),

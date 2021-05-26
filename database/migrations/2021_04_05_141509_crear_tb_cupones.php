@@ -16,7 +16,6 @@ class CrearTbCupones extends Migration
         Schema::create('cupones', function (Blueprint $tb) {
             $tb->id();
             $tb->string('titulo');
-            $tb->string('codigo');
             $tb->string('oferta');
             $tb->string('fecha_vencimiento');
             $tb->boolean('estatus')->default(true);

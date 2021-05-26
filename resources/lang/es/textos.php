@@ -192,7 +192,8 @@ return [
         // Ordenes de compras
         'fecha'                     => "Fecha",
         'efectivo'                  => "Efectivo",
-        'mercado_pago'              => "Mercado Pago"
+        'mercado_pago'              => "Mercado Pago",
+        'comision_mercado_pago'     => "Esta forma de pago tiene un recargo del 7% (<span class='comision-mercado-pago'></span>) sobre el total de su compra por concepto de comisiones con Mercado Libre"
     ],
 
     // Placesholder

@@ -103,10 +103,16 @@ function actualizarListaCompras(btn=null) {
             });
         }
 
+        // Comision de mercado pago
+        if (contComisionMercadoPago = document.querySelector('.comision-mercado-pago')) {
+            contComisionMercadoPago.innerHTML = listaCompras.comisionMercadoPago;
+        }
+
         // Total
         if (contTotal = document.querySelector('.precio-total')) {
             contTotal.innerHTML = listaCompras.total.texto;
         }
+
         // Numerador de compras
         if (contNCompras = document.querySelector('.n-compras')) {
             contNCompras.innerHTML = listaCompras.nCompras;
