@@ -27,14 +27,14 @@
                 <th>{{__('textos.campos.total')}}</th>
             </tr>
             @php($total = 0)
-            @foreach ($productos = json_decode($ordenCompra->productos, true) as $p)
+            @foreach (json_decode($ordenCompra->productos) as $p)
                 <tr>
                     <th>{{$loop->iteration}}</th>
                     <td>
                         {{$p->titulo}}
                     </td>
                     <td>
-                        @if (isset($p->oferta) && $p->oferta && count($productos) > 20)
+                        @if (isset($p->oferta) && $p->oferta && )
                             <del>{{ formatos('n', $p->precio_minorista, true) }}</del>
                             <br>
                             {{ formatos('n', $p->precio_unitario, true) }} (- {{ $p->oferta }} )
