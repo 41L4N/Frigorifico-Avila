@@ -102,8 +102,7 @@ return [
         'compra_mayorista'          => "Compra mayorista",
 
         // Orden de compra
-        'datos_facturacion'         => "Datos de facturación",
-        'forma_pago'                => "Forma de pago",
+        'datos_facturacion'         => "Datos de facturación"
         'gracias_compra'            => "Gracias por su compra"
     ],
 
@@ -192,6 +191,7 @@ return [
         // Ordenes de compras
         'fecha'                     => "Fecha",
         'efectivo'                  => "Efectivo",
+        'forma_pago'                => "Forma de pago",
         'mercado_pago'              => "Mercado Pago",
         'comision_mercado_pago'     => "Esta forma de pago tiene un recargo del 7% (<span class='comision-mercado-pago'></span>) sobre el total de su compra por concepto de comisiones con Mercado Libre"
     ],

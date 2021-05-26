@@ -62,8 +62,14 @@
             <tr>
                 <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
-                <th>{{ ( $validacion = $ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) ) ? "$cupon->titulo ($cupon->oferta%)" : "-" }}</th>
-                <th>{{ formatos('n', ($validacion) ? $total - ($cupon->oferta * $total / 100) : $total, true) }}</th>
+                <th>
+                    @if ( $validacion = $ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) )
+                        {{ "$cupon->titulo -$cupon->oferta% (" . $oferta = ($cupon->oferta * $total / 100) . ")" }}
+                    @else
+                        -
+                    @endif
+                </th>
+                <th>{{ formatos('n', ($validacion) ? $total - $oferta : $total, true) }}</th>
             </tr>
             <tr>
                 <th colspan="3"></th>
