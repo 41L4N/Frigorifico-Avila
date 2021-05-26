@@ -56,7 +56,7 @@
             <tr>
                 <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
-                <th>{{ ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) ) ? $cupon->oferta . "% ($cupon->codigo)" : "-" }}</th>
+                <th>{{ ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) ) ? $cupon->oferta . "% ($cupon->titulo)" : "-" }}</th>
             </tr>
             <tr>
                 <th colspan="3"></th>
