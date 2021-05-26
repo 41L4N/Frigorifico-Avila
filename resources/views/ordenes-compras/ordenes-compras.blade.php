@@ -23,6 +23,7 @@
                 <th>#</th>
                 <th>{{__('textos.campos.codigo')}}</th>
                 <th>{{__('textos.campos.fecha')}}</th>
+                <th>{{__('textos.campos.forma_pago')}}</th>
                 <th>{{__('textos.campos.total')}}</th>
                 <th><i class="fas fa-cogs"></i></th>
             </tr>
@@ -33,6 +34,7 @@
                     <th>{{$loop->iteration}}</th>
                     <td>{{$reg->codigo}}</td>
                     <td>{{formatos('f', $reg->created_at)}}</td>
+                    <td>{{__('textos.campos.' . $reg->forma_pago)}}</td>
                     <td>{{formatos('n', $reg->total, true)}}</td>
                     <td><a class="fas fa-file-pdf" href="{{route('usuario.orden-compra-pdf', $reg->id)}}" target="_blank"></a></td>
                 </tr>
