@@ -168,14 +168,14 @@ class OrdenCompraCtrl extends Controller
             $reg->save();
 
             // Notificación
-            // Mail::send("correos.orden-compra", [
-            //     'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
-            //     'usuario'       => Auth::user(),
-            //     'ordenCompra'   => $reg
-            // ], function($m) use ($asunto){
-            //     $m->to("avilafrigorifico@gmail.com");
-            //     $m->subject($asunto);
-            // });
+            Mail::send("correos.orden-compra", [
+                'asunto'        => $asunto = __('textos.titulos.nueva_orden_compra'),
+                'usuario'       => Auth::user(),
+                'ordenCompra'   => $reg
+            ], function($m) use ($asunto){
+                $m->to("avilafrigorifico@gmail.com");
+                $m->subject($asunto);
+            });
 
             // Respuesta
             return redirect()->route('usuario.orden-compra', $reg->id);
