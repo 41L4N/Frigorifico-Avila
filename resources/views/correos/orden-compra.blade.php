@@ -48,6 +48,9 @@
                 </tr>
             @endforeach
             <tr>
+                <td colspan="5" style="border-bottom: solid grey 1px"><br><br></td>
+            </tr>
+            <tr>
                 <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.forma_pago')}}</th>
                 <th>
