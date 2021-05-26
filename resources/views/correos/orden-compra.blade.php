@@ -30,18 +30,8 @@
             @foreach (json_decode($ordenCompra->productos) as $p)
                 <tr>
                     <th>{{$loop->iteration}}</th>
-                    <td>
-                        {{$p->titulo}}
-                    </td>
-                    <td>
-                        @if (isset($p->oferta) && $p->oferta && count(json_decode($ordenCompra->productos, true)) > 20 )
-                            <del>{{ formatos('n', $p->precio_minorista, true) }}</del>
-                            <br>
-                            {{ formatos('n', $p->precio_unitario, true) }} (- {{ $p->oferta }} )
-                        @else
-                            {{ formatos('n', $p->precio_unitario, true) }}
-                        @endif
-                    </td>
+                    <td>{{$p->titulo}}</td>
+                    <td>{{ formatos('n', $p->precio_unitario, true) }}</td>
                     <td>{{$p->cantidad}}</td>
                     <td>{{$p->subtotal}}</td>
                     <td>{{ formatos('n', $total = $total + $p->precio_unitario * $p->cantidad, true) }}</td>
