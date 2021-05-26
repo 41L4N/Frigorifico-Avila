@@ -26,14 +26,14 @@
                 <th>{{__('textos.campos.precio')}}</th>
                 <th>{{__('textos.campos.cantidad')}}</th>
                 <th>{{__('textos.campos.subtotal')}}</th>
+                <th>{{__('textos.campos.total')}}</th>
             </tr>
+            @php($total = 0)
             @foreach (json_decode($ordenCompra->productos) as $p)
                 <tr>
                     <th>{{$loop->iteration}}</th>
                     <td>
                         {{$p->titulo}}
-                        {{-- <br>
-                        <img src="{{route('mostrar-img', [$p->tipo, $p->id])}}" alt="{{$p->alias}}" style="width: 75px;"> --}}
                     </td>
                     <td>
                         @if (isset($p->oferta) && $p->oferta)
@@ -46,22 +46,31 @@
                     </td>
                     <td>{{$p->cantidad}}</td>
                     <td>{{$p->subtotal}}</td>
+                    <td>{{$total = $total + $p->subtotal}}</td>
                 </tr>
             @endforeach
             <tr>
-                <th colspan="3"></th>
+                <th colspan="4"></th>
                 <th style="text-align: right;">{{__('textos.campos.subtotal')}}</th>
-                <th>{{formatos('n', $ordenCompra->total, true)}}</th>
+                <th>{{formatos('n', $ordenCompra->subtotal, true)}}</th>
             </tr>
             <tr>
-                <th colspan="3"></th>
+                <th colspan="4"></th>
                 <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
-                <th>{{ ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) ) ? $cupon->oferta . "% ($cupon->titulo)" : "-" }}</th>
+                <th>
+                    @if ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon))
+                        {{$cupon->titulo}}
+                        <br>
+                        {{"$cupon->oferta%" . "(" . formatos('n', $cupon->oferta * $ordenCompa->total / 100, true) . ")" }}
+                    @else
+                        -
+                    @endif
+                </th>
             </tr>
             <tr>
-                <th colspan="3"></th>
+                <th colspan="4"></th>
                 <th style="text-align: right;">{{__('textos.campos.total')}}</th>
-                <th>{{formatos('n', $ordenCompra->total - ( (isset( $cupon )) ? $cupon->oferta * $ordenCompra->total / 100 : 0 ), true)}}</th>
+                <th>{{formatos('n', $ordenCompra->total, true)}}</th>
             </tr>
         </table>
         @if ($direccionE = $ordenCompra->direccion_envio)
