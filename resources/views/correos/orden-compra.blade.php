@@ -79,6 +79,7 @@
             <tr>
                 <th colspan="3"></th>
                 <th style="text-align: right;">{{__('textos.campos.total')}}</th>
+                <th></th>
                 <th>{{formatos('n', $ordenCompra->total, true)}}</th>
             </tr>
         </table>
