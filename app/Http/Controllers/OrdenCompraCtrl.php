@@ -19,7 +19,7 @@ class OrdenCompraCtrl extends Controller
 
         // Vista en PDF
         if ($id && $oC = OrdenCompra::find($id)) {
-            if (!Auth::user()->administrador || $oC->id_usuario != Auth::user()->id) {
+            if (!Auth::user()->administrador || !Auth::user()->administrador && $oC->id_usuario != Auth::user()->id) {
                 return back();
             }
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('correos.orden-compra', [
