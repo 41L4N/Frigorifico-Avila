@@ -34,7 +34,7 @@
                         {{$p->titulo}}
                     </td>
                     <td>
-                        @if (isset($p->oferta) && $p->oferta && )
+                        @if (isset($p->oferta) && $p->oferta && count(json_decode($ordenCompra->productos, true)) > 20 )
                             <del>{{ formatos('n', $p->precio_minorista, true) }}</del>
                             <br>
                             {{ formatos('n', $p->precio_unitario, true) }} (- {{ $p->oferta }} )
