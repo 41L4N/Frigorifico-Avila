@@ -113,7 +113,7 @@ class OrdenCompraCtrl extends Controller
 
     // Orden
     public function orden($id=null, $estatus=null){
-        if ($id && !$oC = ordenCompra::find($id)) {
+        if ($id && !$oC = OrdenCompra::find($id)) {
             return back();
         }
         return view('ordenes-compras.orden-compra')->with([
