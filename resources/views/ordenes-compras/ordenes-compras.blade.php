@@ -34,7 +34,7 @@
                     <td>{{$reg->codigo}}</td>
                     <td>{{formatos('f', $reg->created_at)}}</td>
                     <td>{{formatos('n', $reg->total, true)}}</td>
-                    <td><a class="fas fa-file-pdf" href="{{route(Route::currentRouteName(), $reg->id)}}" target="_blank"></a></td>
+                    <td><a class="fas fa-file-pdf" href="{{route('usuario.orden-compra-pdf', $reg->id)}}" target="_blank"></a></td>
                 </tr>
             @endforeach
         </table>
