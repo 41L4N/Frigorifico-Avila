@@ -4,18 +4,16 @@
         <h3 style="text-align: center">{{__('textos.titulos.nueva_orden_compra')}}</h3>
         <b>{{__('textos.campos.codigo')}}: </b>{{$ordenCompra->codigo}}
         <br>
-        <b>{{__('textos.campos.fecha')}}: </b>{{formatos('f', $ordenCompra->created_at)}}        
+        <b>{{__('textos.campos.fecha')}}: </b>{{formatos('f', $ordenCompra->created_at)}}
         <h4 style="background: rgb(148, 2, 2); color: white; padding: 5px; margin: 7.5px 0px;">{{__('textos.titulos.usuario')}}</h4>
         <b>{{__('textos.campos.nombre_apellido')}}: </b>{{"$usuario->nombre $usuario->apellido"}}
         <br>
-        <b>{{__('textos.campos.email')}}: </b>{{$usuario->email}}        
+        <b>{{__('textos.campos.email')}}: </b>{{$usuario->email}}
         @if ($datosF = $ordenCompra->datos_facturacion)
             <h4 style="background: rgb(148, 2, 2); color: white; padding: 5px; margin: 7.5px 0px;">{{__('textos.titulos.datos_facturacion')}}</h4>
             @foreach (json_decode($datosF) as $clave => $valor)
                 <b>{{__('textos.campos.' . $clave)}} : </b> {{$valor}}
-                @if (!$loop->last)
-                    <br>
-                @endif
+                @if (!$loop->last) <br> @endif
             @endforeach            
         @endif
         <h4 style="background: rgb(148, 2, 2); color: white; padding: 5px; margin: 7.5px 0px;">{{__('textos.titulos.lista_compras')}}</h4>
@@ -50,21 +48,26 @@
                 </tr>
             @endforeach
             <tr>
-                <th colspan="4"></th>
-                <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
+                <th colspan="3"></th>
+                <th style="text-align: right;">{{__('textos.campos.forma_pago')}}</th>
                 <th>
-                    @if ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon))
-                        {{$cupon->titulo}}
-                        <br>
-                        {{"$cupon->oferta% (" . formatos('n', $cupon->oferta * $total / 100, true) . ")" }}
-                    @else
-                        -
+                    {{__('textos.campos.' . $ordenCompra->forma_pago)}}
+                    <br>
+                    @if ($ordenCompra->forma_pago == 'mercado_pago')
+                        {{"7% (" . $total = $total + (7 * $total / 100) . ")"}}
                     @endif
                 </th>
+                <th>{{formatos('n', $total, true)}}</th>
             </tr>
             <tr>
-                <th colspan="4"></th>
-                <th style="text-align: right;">{{__('textos.campos.total')}}</th>
+                <th colspan="3"></th>
+                <th style="text-align: right;">{{__('textos.campos.cupon')}}</th>
+                <th>{{ ( $validacion = $ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon) ) ? "$cupon->titulo ($cupon->oferta%)" : "-" }}</th>
+                <th>{{ formatos('n', ($validacion) ? $total - ($cupon->oferta * $total / 100) : $total, true) }}</th>
+            </tr>
+            <tr>
+                <th colspan="3"></th>
+                <th style="text-align: right;" colspan="2">{{__('textos.campos.total')}}</th>
                 <th>{{formatos('n', $ordenCompra->total, true)}}</th>
             </tr>
         </table>
