@@ -58,7 +58,7 @@
                     @if ($ordenCompra->cupon && $cupon = json_decode($ordenCompra->cupon))
                         {{$cupon->titulo}}
                         <br>
-                        {{"$cupon->oferta%" . "(" . formatos('n', $cupon->oferta * $ordenCompa->total / 100, true) . ")" }}
+                        {{"$cupon->oferta%" . "(" . formatos('n', $cupon->oferta * $ordenCompra->total / 100, true) . ")" }}
                     @else
                         -
                     @endif
