@@ -135,7 +135,7 @@ class OrdenCompraCtrl extends Controller
         ]);
 
         // Validacion del cupon
-        if ($rq->cupon && !$cupon = Cupon::where('titulo', $rq->cupon)->where('estatus', true)->whereDate('fecha_vencimiento', '>', today()->toDateString())->first() ) {
+        if (!$cupon = Cupon::where('titulo', $rq->cupon)->where('estatus', true)->whereDate('fecha_vencimiento', '>', today()->toDateString())->first() && $rq->cupon) {
             return back()->with([
                 'alerta' => [
                     'tipo'  => 'danger',
