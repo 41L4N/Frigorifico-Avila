@@ -135,7 +135,7 @@ class OrdenCompraCtrl extends Controller
         ]);
 
         // Validacion del cupon
-        if (!$cupon = Cupon::where('titulo', $rq->cupon)->where('estatus', true)->whereDate('fecha_vencimiento', '>', today()->toDateString())->first() && $rq->cupon) {
+        if ( $rq->cupon && ($cupon = Cupon::where('titulo', $rq->cupon)->where('estatus', true)->whereDate('fecha_vencimiento', '>', today()->toDateString())->first()) == null ) {
             return back()->with([
                 'alerta' => [
                     'tipo'  => 'danger',
@@ -155,12 +155,12 @@ class OrdenCompraCtrl extends Controller
         $reg->direccion_envio = ($dE = $rq->direccion_envio) ? json_encode($dE) : null;
         $reg->productos = json_encode($listaActual['lista']['productos']);
         $reg->forma_pago = $rq->forma_pago;
-        if ($cupon) {
+        if ($rq->cupon && $cupon) {
             $reg->cupon = json_encode($cupon);
             $cupon->update(['estatus' => false]);
         }
         $total = $listaActual['lista']['total']['numero'];
-        $reg->total = $total - ( ($cupon) ? $cupon->oferta * $total / 100 : 0 );
+        $reg->total = $total - ( ($rq->cupon && $cupon) ? $cupon->oferta * $total / 100 : 0 );
         $reg->notas = $rq->notas;
 
         // Efectivo
