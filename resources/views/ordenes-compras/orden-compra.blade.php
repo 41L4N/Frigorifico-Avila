@@ -184,8 +184,8 @@
             {{-- Título --}}
             <div class="subtitulo-form">{{__('textos.campos.forma_pago')}}</div>
             <div class="fila-form flex-column">
-                <label class="w-auto c-pointer"> <input type="radio" name="forma_pago" value="efectivo" onchange="comisionMercadoPago.classList.toggle('d-none')" checked required> {{__('textos.campos.efectivo')}} </label>
-                <label class="w-auto c-pointer"> <input type="radio" name="forma_pago" value="mercado_pago" onchange="comisionMercadoPago.classList.toggle('d-none')" required> {{__('textos.campos.mercado_pago') }} </label>
+                <label class="w-auto c-pointer"> <input type="radio" name="forma_pago" value="efectivo" checked required> {{__('textos.campos.efectivo')}} </label>
+                <label class="w-auto c-pointer"> <input type="radio" name="forma_pago" value="mercado_pago" required> {{__('textos.campos.mercado_pago') }} </label>
                 <div id="comisionMercadoPago" class="d-none alert alert-warning">  {!! __('textos.campos.comision_mercado_pago') !!} </div>
             </div>
 
