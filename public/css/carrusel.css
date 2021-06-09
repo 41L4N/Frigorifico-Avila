@@ -1,0 +1,31 @@
+/* Carrusel */
+.carrusel {
+    position: relative;
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+}
+.cont-items-carrusel {
+    display: -webkit-flex; display: -ms-flexbox; display: flex;
+    gap: 0px 25px;
+    transition: .5s;
+}
+.flecha-carrusel {
+    position: absolute;
+    font-size: 17.5px;
+    background: var(--c-plantilla);
+    color: var(--c-l-plantilla);
+    padding: 15px;
+    cursor: pointer;
+    border: solid var(--c-plantilla) 2.5px;
+    transition: 0.5s;
+    z-index: 1;
+}
+.flecha-carrusel:hover {
+    background: white;
+    color: var(--c-plantilla);
+    transition: 0s !important;
+}
+.flecha-carrusel.izquierda { left: 2.5%; }
+.flecha-carrusel.derecha { right: 2.5%; }
