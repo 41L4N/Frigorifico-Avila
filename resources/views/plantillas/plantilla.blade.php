@@ -195,7 +195,7 @@
                 {{-- Cuadros --}}
                 <div class="cont-cuadros">
                     <div class="container cont-mins">
-                        @foreach (['ordenes-compras', 'pagos_linea', 'envios'] as $item)
+                        @foreach (['ordenes-compras', 'pagos_linea', 'envios', 'descuentos'] as $item)
                             <div class="cuadro">
                                 <i class="{{iconos($item)}}"></i>
                                 <br>

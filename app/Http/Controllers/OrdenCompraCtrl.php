@@ -184,9 +184,6 @@ class OrdenCompraCtrl extends Controller
         // Mercado pago
         else {
 
-            // Comision
-            $reg->total = $total + (7 * $total / 100);
-
             Cache::put($reg->codigo, $reg);
             // \MercadoPago\SDK::setAccessToken('TEST-4700521719044381-073017-aa0179eaba4a07b2f97c56997f32f0a7-377450564');
             \MercadoPago\SDK::setAccessToken('APP_USR-4700521719044381-073017-63279c70399d5f740ea1a6c9fc2207cc-377450564');

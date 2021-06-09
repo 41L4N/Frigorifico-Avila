@@ -70,6 +70,7 @@ return [
         'ordenes-compras'           => "Genera tu pedido",
         'pagos_linea'               => "Paga en línea",
         'envios'                    => "Enviamos tu compra",
+        'descuentos'                => "Descuentos especiales visitando nuestro local",
 
         // Sesion
         'registro'                  => "Registro",
@@ -193,7 +194,6 @@ return [
         'efectivo'                  => "Efectivo",
         'forma_pago'                => "Forma de pago",
         'mercado_pago'              => "Mercado Pago",
-        'comision_mercado_pago'     => "Esta forma de pago tiene un recargo del 7% (<span class='comision-mercado-pago'></span>) sobre el total de su compra por concepto de comisiones con Mercado Libre"
     ],
 
     // Placesholder
