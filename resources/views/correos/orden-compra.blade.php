@@ -47,7 +47,7 @@
                     {{__('textos.campos.' . $ordenCompra->forma_pago)}}
                     <br>
                     @if ($ordenCompra->forma_pago == 'mercado_pago')
-                        {{"7% (" . $total = $total + (7 * $total / 100) . ")"}}
+                        {{"7% (" . ($total = $total + (7 * $total / 100)) . ")"}}
                     @endif
                 </th>
                 <th>{{formatos('n', $total, true)}}</th>
