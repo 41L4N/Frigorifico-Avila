@@ -8,8 +8,9 @@ return [
         'inicio'                => "Inicio",
         'productos'             => "Productos",
         'mayoristas'            => "Mayoristas",
-        'combos'                => "Combos",
         'ofertas'               => "Ofertas",
+        'combos'                => "Combos",
+        'contacto'              => "Contacto",
         // Sesion
         'ingreso'               => "Ingreso",
         'registro'              => "Registro",
@@ -175,6 +176,8 @@ return [
         'precio'                    => "Precio",
         'productos'                 => "Productos",
         'cantidad'                  => "Cantidad",
+        // Contacto
+        'mensaje'                   => "Mensaje",
         // Cupones
         'codigo'                    => "Código",
         'fecha_vencimiento'         => "Fecha de vencimiento",

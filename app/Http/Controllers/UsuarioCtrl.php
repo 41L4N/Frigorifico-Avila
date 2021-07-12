@@ -14,7 +14,7 @@ class UsuarioCtrl extends Controller
 {
 
     // Sesion
-    public function sesion($seccion,$codigo_acceso=null){
+    public function sesion($seccion, $codigo_acceso=null){
 
         // Si ya hay autenticación
         if(Auth::check()){
@@ -22,7 +22,7 @@ class UsuarioCtrl extends Controller
         }
 
         // Si hay código de acceso pero no coincide
-        if ($codigo_acceso && !Usuario::where("codigo_acceso",$codigo_acceso)->exists()) {
+        if ($codigo_acceso && !Usuario::where("codigo_acceso", $codigo_acceso)->exists()) {
             abort(401);
         }
 

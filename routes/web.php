@@ -53,6 +53,10 @@ Route::get('/productos/{filtro?}/{id?}/{id2?}', [ProductoCtrl::class, 'productos
 // Combos
 Route::get('/combos/{filtro?}/{id?}', [ComboCtrl::class, 'combos'])->name('combos');
 
+// Contacto
+Route::view('/contacto', 'contacto')->name('contacto');
+Route::post('/contacto', [InicioCtrl::class, 'contacto']);
+
 // Lista de compras
 Route::post('/lista-compras', [OrdenCompraCtrl::class, 'lista'])->name('lista-compras');
 

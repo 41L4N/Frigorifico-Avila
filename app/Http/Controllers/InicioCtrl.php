@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\FiltroProducto;
 use App\Models\Producto;
 use App\Models\Combo;
@@ -56,6 +57,35 @@ class InicioCtrl extends Controller
 
         // Respuesta
         return back()->with([
+            'alerta'    => [
+                'tipo' => 'success'
+            ]
+        ]);
+    }
+
+    // Contacto
+    public function contacto(Request $rq){
+
+        // Validación
+        $rq->validate([
+            'nombre'    => 'required',
+            'apellido'  => 'required',
+            'email'     => 'required',
+            'telf'      => 'required',
+            'mensaje'   => 'required'
+        ]);
+
+        // Correo
+        Mail::send('correos.contacto', [
+            'asunto'    => $asunto = __('textos.titulos.nueva_orden_compra'),
+            'datos'     => (object)$rq->all()
+        ], function ($m) use ($asunto) {
+            $m->to("avilafrigorifico@gmail.com");
+            $m->subject($asunto);
+        });
+
+        // Respuesta
+        return redirect()->route('inicio')->with([
             'alerta'    => [
                 'tipo' => 'success'
             ]

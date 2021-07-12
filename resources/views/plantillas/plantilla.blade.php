@@ -122,9 +122,9 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <a href="{{route('productos', 'mayoristas')}}" class="opcion-menu-s">{{__('textos.rutas.mayoristas')}}</a>
                             <a href="{{route('productos', 'ofertas')}}" class="opcion-menu-s">{{__('textos.rutas.ofertas')}}</a>
                             <a href="{{route('combos')}}" class="opcion-menu-s">{{__('textos.rutas.combos')}}</a>
+                            <a href="{{route('contacto')}}" class="opcion-menu-s">{{__('textos.rutas.contacto')}}</a>
                             @auth
                                 {{-- Lista de menú --}}
                                 <div class="lista-menu-s">
