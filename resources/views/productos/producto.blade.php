@@ -158,15 +158,19 @@
                 </div>
             @endif
 
-            {{-- Compras --}}
-            <form action="{{route('lista-compras')}}" method="POST" class="fila-form form-compras producto-lista-productos" onsubmit="event.preventDefault(); actualizarListaCompras(event.target)">
-                @csrf
-                <input type="hidden" name="accion" value="0">
-                <input type="hidden" name="tipo" value="{{$p->getTable()}}">
-                <input type="hidden" name="id" value="{{$p->id}}">
-                <input type="number" name="cantidad" class="form-control" min="{{$min=1}}" max="99999" step="0.1" value="{{$min}}" onkeypress="soloNumeros(event, true)" required>
-                <button class="btn btn-primary"><i class="fas fa-cart-plus mr-2"></i>{{__('textos.botones.comprar')}}</button>
-            </form>
+            {{-- Formulario de compra según disponibilidad --}}
+            @if ($p->disponibilidad)
+                <form action="{{route('lista-compras')}}" method="POST" class="fila-form form-compras producto-lista-productos" onsubmit="event.preventDefault(); actualizarListaCompras(event.target)">
+                    @csrf
+                    <input type="hidden" name="accion" value="0">
+                    <input type="hidden" name="tipo" value="{{$p->getTable()}}">
+                    <input type="hidden" name="id" value="{{$p->id}}">
+                    <input type="number" name="cantidad" class="form-control" min="{{$min=1}}" max="99999" step="0.1" value="{{$min}}" onkeypress="soloNumeros(event, true)" required>
+                    <button class="btn btn-primary"><i class="fas fa-cart-plus mr-2"></i>{{__('textos.botones.comprar')}}</button>
+                </form>
+            @else
+                <div class="alert alert-warning">{{__('textos.parrafos.disponibilidad_false')}}</div>
+            @endif
 
             {{-- Redes sociales --}}
             <div class="redes-sociales">

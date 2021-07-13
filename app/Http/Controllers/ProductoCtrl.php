@@ -24,15 +24,16 @@ class ProductoCtrl extends Controller
 
         // Validación
         $rq->validate([
-            'titulo'            => 'required|between:1,75',
-            'filtro'            => 'required|integer',
-            'unidad_medida'     => 'required',
+            'titulo'                => 'required|between:1,75',
+            'filtro'                => 'required|integer',
+            'unidad_medida'         => 'required',
+            'disponibilidad'        => 'required',
             'pedido_min_minorista'  => 'required',
             'precio_minorista'      => 'required|digits_between:1,5',
-            'oferta'            => 'nullable|digits_between:1,5',
+            'oferta'                => 'nullable|digits_between:1,5',
             'precio_mayorista'      => 'nullable|digits_between:1,5',
-            'descripcion'       => 'nullable|max:500',
-            'img'               => 'nullable|file|image|mimes:jpg,jpeg,png',
+            'descripcion'           => 'nullable|max:500',
+            'img'                   => 'nullable|file|image|mimes:jpg,jpeg,png',
         ]);
 
         // Registro

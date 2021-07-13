@@ -128,6 +128,9 @@ return [
         // Desarrollador
         'desarrollador'                     => "Desarrollado por <a href='https://openskie.com/' target='_blank'>OpenSkies</a>",
 
+        // Producto
+        'disponibilidad_false'              => "Actualmente, este producto no se encuentra disponible, visitenos pronto para revisar nuevamente.",
+
         // Orden de compra
         'orden_compra'                      => "
                                                 Su compra ya ha sido procesada exitosamente, en breve se comunicaran con usted.
@@ -163,6 +166,9 @@ return [
         'producto'                  => "Producto",
         'filtro'                    => "Filtro",
         'unidad_medida'             => "Unidad de medida",
+        'disponibilidad'            => "Disponible",
+        '0'                         => "No",
+        '1'                         => "Si",
         'pedido_min_minorista'      => "Pedido mínimo",
         'pedido_min_minorista'      => "Pedido mínimo minorista",
         'precio_minorista'          => "Precio minorista",

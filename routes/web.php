@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Models\OrdenCompra;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +14,6 @@ use App\Models\OrdenCompra;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Vista previa de correos
-Route::get('/vista-previa-correos/{vista}', function($v){
-    return view('correos.' . $v)->with([
-        'asunto'        => __('textos.titulos.nueva_orden_compra'),
-        'usuario'       => Auth::user(),
-        'ordenCompra'   => OrdenCompra::first()
-    ]);
-});
 
 // Mostrar imagen
 Route::get('/img/{tipo}/{id}/{iImg?}/{resolucion?}', function($tipo, $id, $iImg=0, $resolucion=null){

@@ -31,7 +31,7 @@
                 <tr>
                     <th>#</th>
                     <th><input type="checkbox" id="checkPrincipal" onchange='clickTodos(), contarChecks()'></th>
-                    @foreach (['producto', 'filtro', 'precio_minorista', 'oferta','precio_mayorista'] as $campo)
+                    @foreach (['producto', 'filtro', 'precio_minorista', 'oferta', 'disponibilidad'] as $campo)
                         <th>{!! __('textos.campos.' . $campo) !!}</th>
                     @endforeach
                     <th><i class="fas fa-cogs"></i></th>
@@ -52,7 +52,7 @@
                         <td>{{$p->filtroP()}}</td>
                         <td>{{formatos('n', $p->precio_minorista, true)}}</td>
                         <td>{{ ($p->oferta) ? $p->precioOfertaP()['oferta'] : "-" }}</td>
-                        <td>{{ ($p->precio_mayorista) ? formatos('n', $p->precio_mayorista, true) : "-" }}</td>
+                        <td>{{ __('textos.campos.' . $p->disponibilidad) }}</td>
                         <td><a class="fas fa-edit" href="" onclick="event.preventDefault(); llenarFormulario({{$loop->index}}, '#vtnGuardar')"></a></td>
                     </tr>
                 @endforeach
@@ -111,6 +111,14 @@
                                 @foreach (['Kg','Unidad', 'Gramo'] as $item)
                                     <option value="{{$item}}">{{$item}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label>{{__('textos.campos.' . $n="disponibilidad")}}</label>
+                            <select name="{{$n}}" class="form-control" required>
+                                <option value="" selected disabled>{{__('textos.placeholders.select')}}</option>
+                                <option value="0">{{__('textos.campos.0')}}</option>
+                                <option value="1">{{__('textos.campos.1')}}</option>
                             </select>
                         </div>
                     </div>
