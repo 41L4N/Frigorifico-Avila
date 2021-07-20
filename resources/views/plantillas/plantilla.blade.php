@@ -49,6 +49,8 @@
         <!-- End Facebook Pixel Code -->
         <meta name="facebook-domain-verification" content="jvplf5oa48zys36lmjlel4slsjbr44" />
 
+        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/e8f740b16bc50f2736050c7d2/8627172864d3acd13cea519e8.js");</script>
+
         {{-- Iconos --}}
         <link rel="stylesheet" href="{{asset("/iconos/css/all.min.css")}}">
 
