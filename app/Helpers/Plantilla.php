@@ -54,7 +54,6 @@ function iconos($i){
         'combos'            => "fas fa-gifts",
         'cupones'           => "fas fa-money-check-alt",
         'ordenes-compras'   => "fas fa-clipboard-list",
-        'descuentos'        => "fas fa-donate",
 
         // Contactos
         'whatsapp'          => "fab fa-whatsapp",

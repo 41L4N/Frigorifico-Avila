@@ -22,7 +22,7 @@
         .cuadro {
             width: 100%;
             min-width: 250px;
-            max-width: calc(100% / 4.5);
+            max-width: calc(100% / 3.5);
             text-align: center;
         }
         .cuadro i { font-size: 25px; }
