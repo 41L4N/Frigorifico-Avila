@@ -233,7 +233,7 @@
                     {{-- Envíos a domicilio --}}
                     <div>
                         <h5>Envíos a domicilio</h5>
-                        CABA: {{formatos('n', 200, true)}}
+                        CABA: {{formatos('n', 300, true)}}
                         <br>
                         Provincia: {{formatos('n', 400, true)}}
                     </div>
