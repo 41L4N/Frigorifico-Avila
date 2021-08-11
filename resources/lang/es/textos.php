@@ -71,6 +71,7 @@ return [
         'ordenes-compras'           => "Genera tu pedido",
         'pagos_linea'               => "Paga en línea",
         'envios'                    => "Enviamos tu compra",
+        'descuentos'                => "Descuentos especiales visitando nuestro local",
 
         // Sesion
         'registro'                  => "Registro",
