@@ -185,7 +185,8 @@ class OrdenCompraCtrl extends Controller
         else {
 
             // Comision
-            $reg->total = $total + (7 * $total / 100);
+            $comision = (7 * $total / 100);
+            $reg->total = $total + $comision;
 
             Cache::put($reg->codigo, $reg);
             // \MercadoPago\SDK::setAccessToken('TEST-4700521719044381-073017-aa0179eaba4a07b2f97c56997f32f0a7-377450564');
@@ -194,6 +195,7 @@ class OrdenCompraCtrl extends Controller
             // Crea un objeto de preferencia
             $preference = new \MercadoPago\Preference();
 
+            // Producto
             $items = [];
             foreach (listaCompras()['lista']['productos'] as $p) {
                 $item = new \MercadoPago\Item();
@@ -202,6 +204,15 @@ class OrdenCompraCtrl extends Controller
                 $item->unit_price = $p->precio_unitario;
                 array_push($items, $item);
             }
+
+            // Comision
+            $item = new \MercadoPago\Item();
+            $item->title = "Comision";
+            $item->quantity = 1;
+            $item->unit_price = $comision;
+            array_push($items, $item);
+
+            // Lo demás
             $preference->items = $items;
             $preference->back_urls = [
                 'success' => route('usuario.orden-compra.mercado-pago', [$reg->codigo, true]),
